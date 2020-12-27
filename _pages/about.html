@@ -1,0 +1,40 @@
+---
+layout: default
+title: "About"
+author: "tiaz"
+permalink: /about.html
+---
+<div class="tags-header">
+  <h2 class="tags-header-title">{{ page.title }}</h2>
+  <div class="tags-header-line"></div>
+</div>
+<div class="small-wrapper">
+  <div class="about-container">
+    <section class="about-header">
+      <div class="author-image-container">
+        <img src="{{site.baseurl}}/assets/img/zo.jpg" alt="{{page.author}}">
+      </div>
+      <p class="subtitle">{{site.author.about}}</p>
+    </section>
+    <section class="about-body">
+      <ul class="contact-list">
+      {% if site.email %}
+        <li class="email"><a href="mailto:{{site.email}}"><i class="fa fa-envelope-o"></i></a></li>
+      {% else %}
+        <li class="email"><a href="mailto:tiaz0128.dev@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+      {% endif %}
+      {% if site.website %}
+        <li class="website"><a href="http://{{site.website}}" target="_blank"><i class="fa fa-globe"></i></a></li>
+      {% else %}
+        <li class="website"><a href="https://tiaz0128.github.io" target="_blank"><i class="fa fa-globe" aria-hidden="true"></i></a></li>
+      {% endif %}
+
+      {% if site.github %}
+        <li class="github"><a href="http://github.com/{{site.github}}" target="_blank"><i class="fa fa-github"></i></a></li>
+      {% else %}
+        <li class="github"><a href="http://github.com/tiaz0128" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+      {% endif %}
+      </ul>
+    </section> <!-- End About Body-->
+  </div> <!-- End About Container -->
+</div> <!-- End Small Wrapper -->

@@ -1,0 +1,58 @@
+# Site settings
+title:          tiaz.dev
+description:    "밥잠코. 절절포!"
+baseurl:        ""
+url:            https://tiaz.dev
+
+
+# Google Analytics
+google_analytics: UA—XXXXXXXX-X
+
+# Author
+author:         
+  name:         tiaz
+  url:          https://tiaz.dev
+  pic:          zo.jpg
+  about:        "Eat Sleep Coding.<br/>
+                 Never Never Giveup.<br/>"
+
+# Contact links
+email: tiaz0128.dev@gmail.com # Add your Email address
+phone: # Add your Phone number
+website: tiaz.dev # Add your website, do not add http://
+linkedin: # Add your Linkedin handle
+github: tiaz0128 # Add your Github handle
+twitter:  # Add your Twitter handle
+facebook: # Add your Facebook handle
+instagram: # Add your Instagram handle
+pinterest: # Add your Pinterest handle
+
+
+
+# Build settings
+markdown:       kramdown
+highlighter:    rouge
+include:
+  - _pages
+
+# Assets
+sass:
+  sass_dir:     _sass
+  style:        compressed
+
+# Gems
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jemoji #Uncomment this to allow emoji in your post
+
+# Permalinks
+permalink:      /:year-:month-:day/:title
+paginate:       5
+
+# Excludes
+exclude: [ Gemfile, Gemfile.lock, tale.gemspec ]
+
+# Disqus (Set to your disqus id)
+disqus:         jekyll-tale

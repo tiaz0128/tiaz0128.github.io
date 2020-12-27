@@ -1,0 +1,159 @@
+.post {
+  padding: 3rem 0;
+
+  &-info {
+    color: $default-tint;
+    font-family: $serif-secondary;
+    letter-spacing: 0.5px;
+    text-align: center;
+
+    span {
+      font-style: italic;
+    }
+  }
+
+  &-title {
+    color: $default-shade;
+    font-family: $sans-serif;
+    font-size: 2.5rem;
+    margin: 1rem 0 2rem;
+    text-align: justify;
+  }
+
+  &-tags{
+    text-align: left;
+    margin-bottom: 2rem;
+
+    a{
+      background-color: steelblue;
+      border-radius: 3px;
+      color: $default-shade;
+      font-size: 85%;
+      padding: .25em .5em;
+      display: inline-block;
+      margin-top: 0.25rem;
+
+      &:hover,
+      &:focus {
+        background-color: $blue;
+      }
+    }
+  }
+
+  &-line {
+    border-top: 0.4rem solid $default-shade;
+    display: block;
+    margin: 0 auto 3rem;
+    width: 0;
+  }
+
+  .callout{
+    display: flex;
+
+    padding: 16px 16px 16px 12px;
+    border-radius: 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    background: rgba(69, 75, 78, 0.3);
+
+    .emoji{
+      display: block;
+      margin-right: 10px;
+      margin-top: 4px;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+    
+    p{
+      line-height: 2;
+      margin: 0;
+    }
+  }
+
+  p {
+    margin: 0 0 1rem;
+    text-align: justify;
+  }
+
+  ul, ol {
+    padding-left: 1.8rem;
+  }
+
+  li {
+    padding-bottom: 0.4rem;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  img {
+    margin: 1rem auto 0.5rem;
+    border-radius: 4px;
+  }
+
+  img + em {
+    color: $default-tint;
+    display: block;
+    font-family: $sans-serif;
+    font-size: 0.9rem;
+    font-style: normal;
+    text-align: center;
+  }
+
+  // 이모지
+  img.emoji {
+    display: inline-block;
+    left: 0;
+    transform: none;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: text-top;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  // post-table 테이블
+  table.post-table thead{
+    border-bottom: 2px solid rgba(100, 100, 100, .4);
+  }
+  
+  table.post-table td,
+  table.post-table th{
+    padding: 6px 13px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  table.post-table tr:nth-child(2n+1){
+    background-color: gray;
+  }
+
+  table.post-table tr:nth-child(2n){
+    background-color: dimgray;
+  }
+
+  table.post-table thead tr:nth-child(1){
+    background-color: brown;
+  }
+
+  table.post-table{
+    overflow-x: auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+  // 문자 강조
+  .yellow{
+    color: #ffdc49;
+    background-color: $default-bg;
+    border-radius: 0;
+    font-family: $serif-primary;
+    font-size: 100%;
+    padding: 0;
+  }
+}
