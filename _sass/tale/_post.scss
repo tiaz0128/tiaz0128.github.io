@@ -11,6 +11,29 @@
     span {
       font-style: italic;
     }
+    
+    .catgegory-tags{
+      display: inline-block;
+      margin: 0;
+      text-align: right;
+
+      a{
+        background-color: steelblue;
+        border-radius: 3px;
+        font-family: Ubuntu;
+        color: rgba(255,255,255,0.9);
+        font-weight: 600;
+        font-size: 85%;
+        padding: .25em .5em;
+        margin-right: 0.4rem;
+        text-decoration: none !important;
+
+        &:hover,
+        &:focus {
+          background-color: $blue;
+        }
+      }
+    }
   }
 
   &-title {
@@ -51,6 +74,7 @@
     width: 0;
   }
 
+  // 콜아웃
   .callout{
     display: flex;
 
@@ -64,7 +88,6 @@
     .emoji{
       display: block;
       margin-right: 10px;
-      margin-top: 4px;
       width: 1.2rem;
       height: 1.2rem;
     }
@@ -98,6 +121,11 @@
     border-radius: 4px;
   }
 
+  // 작은 이미지
+  .img-s{
+    width: 350px;
+  }
+
   img + em {
     color: $default-tint;
     display: block;
@@ -112,12 +140,12 @@
     display: inline-block;
     left: 0;
     transform: none;
-    width: 1rem;
-    height: 1rem;
-    vertical-align: text-top;
     padding: 0;
     margin: 0;
     border-radius: 0;
+    margin-top: 4px;
+    width: 1rem;
+    height: 1rem;
   }
 
   // post-table 테이블
@@ -152,13 +180,20 @@
     margin-top: 1rem;
   }
 
-  // 문자 강조
-  .yellow{
+/* 문자 색상 설정 */
+
+  // p 노란색
+  .y-p{
     color: #ffdc49;
     background-color: $default-bg;
     border-radius: 0;
     font-family: $serif-primary;
     font-size: 100%;
     padding: 0;
+  }
+
+  // span 노란색
+  .y-s{
+    color: #ffdc49;
   }
 }

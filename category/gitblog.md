@@ -1,5 +1,5 @@
 ---
 layout: category
-title:  gitblog
-permalink: /category/gitblog
+title:  git_blog
+permalink: /category/git_blog
 ---

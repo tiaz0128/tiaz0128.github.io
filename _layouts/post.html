@@ -4,18 +4,17 @@ layout: default
 
 <div class="post">
   <div class="post-info">
+    <div class="catgegory-tags">
+      {% for tag in page.tags %}
+      <a href="{{site.baseurl}}/category/{{tag}}" class="tag">{{ tag }}</a>
+      {% endfor %}
+    </div>
     {% if page.date %}
       <time datetime="{{ page.date }}">{{ page.date | date: "%Y-%m-%d" }}</time>
     {% endif %}
   </div>
 
   <h1 class="post-title">{{ page.title }}</h1>
-  <!-- <div class="post-tags">
-    {% for tag in page.tags %}
-    <a href="{{site.baseurl}}/tags#{{tag}}" class="tag">{{ tag }}</a>
-    {% endfor %}
-  </div>
-  <div class="post-line"></div> -->
 
     {{ content }}
 
