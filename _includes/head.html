@@ -6,11 +6,11 @@
   {% seo %}
 
   {% if page.img %}
-  <meta property="og:image" href={{ page.img }} />
-  <meta name="twitter:image" href={{ page.img }} />
+  <meta property="og:image" content={{ page.img }} />
+  <meta name="twitter:image" content={{ page.img }} />
   {% else %}
-  <meta property="og:image" href={{ site.author.pic }} />
-  <meta name="twitter:image" href={{ site.author.pic }} />
+  <meta property="og:image" content={{ site.author.pic }} />
+  <meta name="twitter:image" content={{ site.author.pic }} />
   {% endif %}
 
   <!-- CSS -->
