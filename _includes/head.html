@@ -2,16 +2,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  {% seo %}
+
   {% if page.img %}
   <meta property="og:image" href={{ page.img }} />
   <meta name="twitter:image" href={{ page.img }} />
   {% else %}
   <meta property="og:image" href={{ site.author.pic }} />
   <meta name="twitter:image" href={{ site.author.pic }} />
-
   {% endif %}
-
-  {% seo %}
 
   <!-- CSS -->
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
