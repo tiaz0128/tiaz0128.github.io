@@ -4,10 +4,6 @@ description:    "밥잠코. 절절포!"
 baseurl:        ""
 url:            https://tiaz.dev
 
-
-# Google Analytics
-google_analytics: UA—XXXXXXXX-X
-
 # Author
 author:         
   name:         tiaz
@@ -26,8 +22,6 @@ twitter:  # Add your Twitter handle
 facebook: # Add your Facebook handle
 instagram: # Add your Instagram handle
 pinterest: # Add your Pinterest handle
-
-
 
 # Build settings
 markdown:       kramdown
@@ -48,7 +42,6 @@ plugins:
   - jemoji #Uncomment this to allow emoji in your post
 
 # Permalinks
-permalink:      /:year-:month-:day/:title
 paginate:       5
 
 # Excludes

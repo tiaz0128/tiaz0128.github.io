@@ -18,7 +18,7 @@
 
   &-clouds {
     text-align: center;
-    font-family: $sans-serif;
+    font-family: $serif-secondary;
 
     a {
       display: inline-block;
@@ -93,10 +93,10 @@
       }
     }
   }
-  // @media (max-width: 485px) {
-  //   .tags-post-meta{
-  //     font-size: 0.5rem;
-  //     //display: none;
-  //   }
-  // }
+  
+  @media (max-width: 385px) {
+    .tags-post-meta{
+        display: none;
+    }
+  }
 }

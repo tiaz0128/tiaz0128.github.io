@@ -1,0 +1,32 @@
+---
+layout: default
+title: Search
+permalink: /search/
+---
+
+<div class="tags-header">
+    <h2 class="tags-header-title">{{ page.title }}</h2>
+    <div class="tags-header-line"></div>
+</div>
+  
+<!-- Html Elements for Search -->
+<div id="search-wrap">
+    <input type="text" id="search-wrap-input" placeholder="검색어를 입력해주세요.">
+    <ul id="search-wrap-result"></ul>
+</div>
+
+<!-- Script pointing to jekyll-search.js -->
+<script src="{{ '/assets/js/jekyll-search.js' | relative_url }}" type="text/javascript"></script>
+
+<script type="text/javascript">
+SimpleJekyllSearch({
+    searchInput: document.getElementById('search-wrap-input'),
+    resultsContainer: document.getElementById('search-wrap-result'),
+    json: '{{ site.baseurl }}/assets/search/search.json',
+    searchResultTemplate: '<li><span><a href="{{site.baseurl}}/category/{tags}">{tags}</a></span><a class="tags-post" href="{url}"><div><span class="tags-post-title">{title}</span><div class="tags-post-line"></div></div><span class="tags-post-meta"><time>{date}</time></span></a>',
+    noResultsText: '검색 결과가 없습니다.',
+    limit: 10,
+    fuzzy: false,
+    exclude: ['Welcome']
+})
+</script>

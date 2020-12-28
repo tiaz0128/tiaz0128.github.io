@@ -1,0 +1,52 @@
+#search-wrap {
+  width: 100%;
+  padding-top: 5rem;
+}
+
+#search-wrap-input {
+  width: 100%;
+  padding: .5em;
+  font-size: 1.7em;
+  border: none;
+  border-bottom: 1px solid #555;
+}
+
+#search-wrap-result {
+  margin: 0;
+  padding: 1em 0 2rem;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: center;
+
+    a {
+      color: $default-color;
+      width: 100%;
+      padding: 10px;
+      overflow: hidden;
+    }
+
+    span a {
+      margin: 0 0.1rem 0.2rem;
+      padding: 0.25rem 1.5rem;
+      background: steelblue;
+      border-radius: 5px;
+      color: rgba(255, 255, 255, 0.9);
+      font-family: Ubuntu;
+      font-weight: 600;
+      text-decoration: none;
+
+      &:hover,
+      &:active {
+        background: $blue;
+      }
+    }
+
+    @media (max-width: 485px) {
+      .tags-post-meta {
+        display: none;
+      }
+    }
+  }
+}

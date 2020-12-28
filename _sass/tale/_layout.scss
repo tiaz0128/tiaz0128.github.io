@@ -19,6 +19,7 @@ footer,
   background-color: steelblue;
   position: sticky;
   top: 0;
+  z-index: 9999;
 
   &-container {
     margin: 0.5rem auto;
@@ -32,6 +33,7 @@ footer,
     display: inline-block;
     margin: 0;
     padding-right: .2rem;
+    font-family: $serif-secondary;
 
     &:hover,
     &:focus {
@@ -49,6 +51,7 @@ footer,
   li {
     @include transition(all .2s ease-out);
     color: $default-color;
+    font-family: $serif-secondary;
     display: inline-block;
     opacity: .9;
     padding: 0 2rem 0 0;
