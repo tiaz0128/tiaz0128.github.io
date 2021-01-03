@@ -121,6 +121,11 @@
     border-radius: 4px;
   }
 
+  // 큰 이미지
+  .img-l{
+    width: 100%;
+  }
+
   // 작은 이미지
   .img-s{
     width: 350px;
@@ -184,7 +189,7 @@
 
   // p 노란색
   .y-p{
-    color: #ffdc49;
+    color: $yellow-color;
     background-color: $default-bg;
     border-radius: 0;
     font-family: $serif-primary;
@@ -194,6 +199,11 @@
 
   // span 노란색
   .y-s{
-    color: #ffdc49;
+    color: $yellow-color;
+  }
+
+  // span 갈색
+  .b-s{
+    color: $code-color;
   }
 }
