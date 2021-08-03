@@ -6,7 +6,7 @@ layout: default
   <div class="post-info">
     <div class="catgegory-tags">
       {% for tag in page.tags %}
-      <a href="{{site.baseurl}}/category/{{tag}}" class="tag">{{ tag }}</a>
+      <a href="{{site.baseurl}}/tags#{{tag}}" class="tag">{{ tag }}</a>
       {% endfor %}
     </div>
     {% if page.date %}
