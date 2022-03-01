@@ -1,5 +1,5 @@
 ---
 layout: category
-title:  JavaScript
-permalink: /category/JavaScript
+title:  js
+permalink: /category/js
 ---
