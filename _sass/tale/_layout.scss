@@ -78,6 +78,14 @@ footer,
       display: none;
     }
   }
+
+  .catalogue-container{
+    a{
+        img{
+            display: none;
+        }
+    }
+  }
 }
 
 @media (min-width: 600px) {
