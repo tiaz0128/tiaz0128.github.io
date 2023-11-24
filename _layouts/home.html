@@ -3,32 +3,35 @@ layout: default
 ---
 
 <div class="catalogue">
-  {% for post in paginator.posts %}
+    {% for post in paginator.posts %}
     <div class="catalogue-tags">
-      <a href="{{site.baseurl}}/category/{{post.tags[0]}}" class="tag">{{ post.tags[0] }}</a>
-      <!-- <a href="{{site.baseurl}}/tags#{{post.tags[0]}}" class="tag">{{ post.tags[0] }}</a> -->
-      <!-- <time datetime="{{ post.date }}" class="catalogue-time">{{ post.date | date: "%Y-%m-%d" }}</time> -->
+        <time datetime="{{ post.date }}" class="catalogue-time">{{ post.date | date: "%Y-%m-%d" }}</time>
     </div>
-    <a href="{{ post.url | prepend: site.baseurl }}" class="catalogue-item">
-      <div>
-        <h1 class="catalogue-title">{{ post.title }}</h1>
-        <div class="catalogue-line"></div>
-        <p>
-          {{ post.content | strip_html | truncatewords: 15 }}
-        </p>
+    <div class="catalogue-container">
+        <a href="{{site.baseurl}}/category/{{post.subject}}" class="tag">
+            <img src="{{site.baseurl}}/assets/img/title/{{post.subject}}.png" />
+        </a>
 
-      </div>
-    </a>
-  {% endfor %}
+        <a href="{{ post.url | prepend: site.baseurl }}" class="catalogue-item">
+            <div>
+                <h1 class="catalogue-title">{{ post.title }}</h1>
+                <div class="catalogue-line"></div>
+                <p>
+                    {{ post.excerpt }}
+                </p>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
 </div>
 
 <div class="pagination">
-  {% if paginator.previous_page %}
+    {% if paginator.previous_page %}
     <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="left arrow">&#8592;&nbsp;&nbsp;prev</a>
-  {% endif %}
-  {% if paginator.next_page %}
+    {% endif %}
+    {% if paginator.next_page %}
     <a href="{{ paginator.next_page_path | prepend: site.baseurl }}" class="right arrow">next&nbsp;&nbsp;&#8594;</a>
-  {% endif %}
+    {% endif %}
 
-  <span>{{ paginator.page }} / {{ paginator.total_pages }}</span>
+    <span>{{ paginator.page }} / {{ paginator.total_pages }}</span>
 </div>

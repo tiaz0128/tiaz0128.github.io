@@ -3,28 +3,31 @@ layout: default
 ---
 
 <div class="tags-header">
-  <h2 class="tags-header-title">{{ page.title }}</h2>
-  <div class="tags-header-line"></div>
+    <h2 class="tags-header-title">{{ page.title }}</h2>
+    <div class="tags-header-line"></div>
 </div>
 
 <div class="catalogue" style="padding-top:0">
-  {% for post in site.posts %}
-    {% if post.tags[0] == page.title %}
+    {% for post in site.posts %}
+    {% if post.subject == page.title %}
     <div class="catalogue-tags">
-      <a href="{{site.baseurl}}/category/{{post.tags[0]}}" class="tag">{{ post.tags[0] }}</a>
-      <!-- <a href="{{site.baseurl}}/tags#{{post.tags[0]}}" class="tag">{{ post.tags[0] }}</a> -->
-      <!-- <time datetime="{{ post.date }}" class="catalogue-time">{{ post.date | date: "%Y-%m-%d" }}</time> -->
+        <time datetime="{{ post.date }}" class="catalogue-time">{{ post.date | date: "%Y-%m-%d" }}</time>
     </div>
-    <a href="{{ post.url | prepend: site.baseurl }}" class="catalogue-item">
-      <div>
-        <h1 class="catalogue-title">{{ post.title }}</h1>
-        <div class="catalogue-line"></div>
-        <p>
-          {{ post.content | strip_html | truncatewords: 15 }}
-        </p>
+    <div class="catalogue-container">
+        <a href="{{site.baseurl}}/category/{{post.subject}}" class="tag">
+            <img src="{{site.baseurl}}/assets/img/title/{{post.subject}}.png" />
+        </a>
 
-      </div>
-    </a>
+        <a href="{{ post.url | prepend: site.baseurl }}" class="catalogue-item">
+            <div>
+                <h1 class="catalogue-title">{{ post.title }}</h1>
+                <div class="catalogue-line"></div>
+                <p>
+                    {{ post.excerpt }}
+                </p>
+            </div>
+        </a>
+    </div>
     {% endif %}
-  {% endfor %}
+    {% endfor %}
 </div>

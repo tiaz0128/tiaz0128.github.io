@@ -5,14 +5,18 @@
 Made with Jekyll using the [Tale](https://github.com/chesterhow/tale) theme.
 
 ## Usage 
+
+### Use docker
 ```bash
-$ gem install jekyll bundler
+$ docker build . -t gitblog
 ```
 
 ```bash
-$ bundle install
+$ docker run -d --rm --name gitblog -p 8080:4000 gitblog
 ```
 
 ```bash
-$ jekyll serve
+$ docker ps
+
+$ docker stop gitblog
 ```

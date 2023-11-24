@@ -5,21 +5,24 @@
     margin-top: 1rem;
     margin-bottom: 0.5rem;
 
-    a{
-      display: inline-block;
-      margin: 0 0.1rem 0.2rem;
-      padding: 0.2rem 0.5rem;
-      background: steelblue;
-      border-radius: 5px;
-      color: rgba(255,255,255,0.9);
-      font-family: $serif-secondary;
-      font-weight: 600;
-      text-decoration: none;
-      &:hover,
-      &:focus{
-        background: $blue;
-      }
-    }
+    display: flex;
+    flex-direction: row-reverse;
+
+    // a{
+    //   display: inline-block;
+    //   margin: 0 0.1rem 0.2rem;
+    //   padding: 0.2rem 0.5rem;
+    //   background: #2a3844;
+    //   border-radius: 5px;
+    //   color: rgba(255,255,255,0.9);
+    //   font-family: $serif-secondary;
+    //   font-weight: 600;
+    //   text-decoration: none;
+    //   &:hover,
+    //   &:focus{
+    //     background: $blue;
+    //   }
+    // }
   }
 
   &-item {
@@ -50,6 +53,7 @@
     color: $default-tint;
     font-family: $serif-secondary;
     letter-spacing: .5px;
+    font-size: 12px;
   }
 
   &-title {
@@ -66,5 +70,23 @@
     border-top: .2rem solid $default-shade;
     display: block;
     width: 2rem;
+  }
+  
+  &-container{
+    display: flex;
+
+    img {
+        display: inline-block;
+        height: 100px;
+        margin: 0 20px 0 0;
+        border-radius: 10px;
+    
+        cursor: pointer;
+    }
+    
+    img:hover {
+        box-shadow: 0 0 10px rgb(255 255 255 / 60%);
+    }
+
   }
 }
