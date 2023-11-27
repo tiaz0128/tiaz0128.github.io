@@ -206,4 +206,19 @@
   .b-s{
     color: $code-color;
   }
+
+  .left-right{
+    display: flex;
+
+    .book{
+        width: 30%;
+        margin: 1rem 3.5rem 0 0.5rem;
+    }
+
+    ul {
+        list-style-type: disclosure-closed;
+    }
+
+    
+  }
 }

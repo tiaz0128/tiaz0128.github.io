@@ -75,16 +75,25 @@
   &-container{
     display: flex;
 
-    img {
+    .img-container {
         display: inline-block;
         height: 100px;
+        width: 100px;
         margin: 0 20px 0 0;
         border-radius: 10px;
-    
+        background-color: #fff;
+        overflow: hidden;
         cursor: pointer;
+        text-align: center;
+
+        img {
+            display: inline-block;
+            height: 100%;
+        }
+
     }
     
-    img:hover {
+    .img-container:hover {
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
     }
 

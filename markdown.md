@@ -63,3 +63,25 @@ print code
 | 2 | text |
 {:.post-table }
 ```
+
+### 책 표지
+---
+- `{:.book}`
+
+```html
+<div class="left-right">
+    <img class="book" src="/assets/img/content/book/cover/자료구조와 알고리즘 with 파이썬.png">
+    <ul class="">
+        <li><strong>제목</strong> : 자료구조와 알고리즘 with 파이썬</li>
+        <li><strong>저자</strong> : 최영규 </li>
+        <li><strong>출판사</strong> : 생능출판사</li>
+        <li><strong>대상 독자</strong> : 파이썬 기본 문법을 공부한 사람.</li>
+        <li>
+            <strong>한줄 평</strong> : 
+            <div>
+                코딩 테스트용 문제를 다양하게 접할 수는 없지만 다음 책을 위한 준비 과정
+            </div>
+        </li>
+    </ul>
+</div>
+```
