@@ -222,3 +222,16 @@
     
   }
 }
+
+@media (max-width: 800px){
+    .left-right{
+        display: flex;
+        flex-direction: column;
+
+        .book {
+            width: 40%;
+            align-self: center;
+        }
+    }
+  }
+  
