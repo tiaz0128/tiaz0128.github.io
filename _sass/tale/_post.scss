@@ -1,230 +1,258 @@
 .post {
-  padding: 2rem 0;
+    padding: 2rem 0;
 
-  &-info {
-    color: $default-tint;
-    font-family: $serif-primary;
-    letter-spacing: 0.5px;
-    text-align: right;
-    font-size: 0.8rem;
+    &-info {
+        color: $default-tint;
+        font-family: $serif-primary;
+        letter-spacing: 0.5px;
+        text-align: right;
+        font-size: 0.8rem;
 
-    span {
-      font-style: italic;
-    }
-    
-    .catgegory-tags{
-      display: inline-block;
-      margin: 0;
-      text-align: right;
-
-      a{
-        background-color: #2a3844;
-        border-radius: 3px;
-        font-family: Ubuntu;
-        color: rgba(255,255,255,0.9);
-        font-weight: 600;
-        font-size: 85%;
-        padding: .25em .5em;
-        margin-right: 0.4rem;
-        text-decoration: none !important;
-
-        &:hover,
-        &:focus {
-          background-color: $blue;
+        span {
+            font-style: italic;
         }
-      }
-    }
-  }
 
-  &-title {
-    color: $default-shade;
-    font-family: $sans-serif;
-    font-size: 2.5rem;
-    margin: 1rem 0 2rem;
-    word-break: keep-all;
-    // text-align: justify;
-  }
+        .catgegory-tags {
+            display: inline-block;
+            margin: 0;
+            text-align: right;
 
-  &-tags{
-    text-align: left;
-    margin-bottom: 2rem;
+            a {
+                background-color: #2a3844;
+                border-radius: 3px;
+                font-family: Ubuntu;
+                color: rgba(255, 255, 255, 0.9);
+                font-weight: 600;
+                font-size: 85%;
+                padding: .25em .5em;
+                margin-right: 0.4rem;
+                text-decoration: none !important;
 
-    a{
-      background-color: #2a3844;
-      border-radius: 3px;
-      font-family: $serif-secondary;
-      color: $default-shade;
-      font-weight: 600;
-      font-size: 85%;
-      padding: .25em .5em;
-      display: inline-block;
-      margin-top: 0.25rem;
-
-      &:hover,
-      &:focus {
-        background-color: $blue;
-      }
-    }
-  }
-
-  &-line {
-    border-top: 0.4rem solid $default-shade;
-    display: block;
-    margin: 0 auto 3rem;
-    width: 0;
-  }
-
-  // 콜아웃
-  .callout{
-    display: flex;
-
-    padding: 16px 16px 16px 12px;
-    border-radius: 3px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: transparent;
-    background: rgba(69, 75, 78, 0.3);
-
-    .emoji{
-      display: block;
-      margin-right: 10px;
-      width: 1.2rem;
-      height: 1.2rem;
-    }
-    
-    p{
-      line-height: 2;
-      margin: 0;
-    }
-  }
-
-  p {
-    margin: 0 0 1rem;
-    word-break: keep-all;
-  }
-
-  ul, ol {
-    padding-left: 1.8rem;
-    word-break: keep-all;
-  }
-
-  li {
-    padding-bottom: 0.4rem;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  img {
-    margin: 1rem auto 0.5rem;
-    border-radius: 4px;
-  }
-
-  // 큰 이미지
-  .img-l{
-    width: 100%;
-  }
-
-  // 작은 이미지
-  .img-s{
-    width: 350px;
-  }
-
-  img + em {
-    color: $default-tint;
-    display: block;
-    font-family: $sans-serif;
-    font-size: 0.9rem;
-    font-style: normal;
-    text-align: center;
-  }
-
-  // 이모지
-  img.emoji {
-    display: inline-block;
-    left: 0;
-    transform: none;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    margin-top: 4px;
-    width: 1rem;
-    height: 1rem;
-  }
-
-  // post-table 테이블
-  table.post-table thead{
-    border-bottom: 2px solid rgba(100, 100, 100, .4);
-  }
-  
-  table.post-table td,
-  table.post-table th{
-    padding: 6px 13px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  
-  table.post-table tr:nth-child(2n+1){
-    background-color: gray;
-  }
-
-  table.post-table tr:nth-child(2n){
-    background-color: dimgray;
-  }
-
-  table.post-table thead tr:nth-child(1){
-    background-color: brown;
-  }
-
-  table.post-table{
-    overflow-x: auto;
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  }
-
-/* 문자 색상 설정 */
-
-  // p 노란색
-  .y-p{
-    color: $yellow-color;
-    background-color: $default-bg;
-    border-radius: 0;
-    font-family: $serif-primary;
-    font-size: 100%;
-    padding: 0;
-  }
-
-  // span 노란색
-  .y-s{
-    color: $yellow-color;
-  }
-
-  // span 갈색
-  .b-s{
-    color: $code-color;
-  }
-
-  .left-right{
-    display: flex;
-
-    .book{
-        width: 30%;
-        margin: 1rem 3.5rem 0 0.5rem;
+                &:hover,
+                &:focus {
+                    background-color: $blue;
+                }
+            }
+        }
     }
 
-    ul {
-        list-style-type: disclosure-closed;
+    &-title {
+        color: $default-shade;
+        font-family: $sans-serif;
+        font-size: 2.5rem;
+        margin: 1rem 0 2rem;
+        word-break: keep-all;
+        // text-align: justify;
     }
 
-    
-  }
+    &-tags {
+        text-align: left;
+        margin-bottom: 2rem;
+
+        a {
+            background-color: #2a3844;
+            border-radius: 3px;
+            font-family: $serif-secondary;
+            color: $default-shade;
+            font-weight: 600;
+            font-size: 85%;
+            padding: .25em .5em;
+            display: inline-block;
+            margin-top: 0.25rem;
+
+            &:hover,
+            &:focus {
+                background-color: $blue;
+            }
+        }
+    }
+
+    &-line {
+        border-top: 0.4rem solid $default-shade;
+        display: block;
+        margin: 0 auto 3rem;
+        width: 0;
+    }
+
+    // 콜아웃
+    .callout {
+        display: flex;
+
+        padding: 16px 16px 16px 12px;
+        border-radius: 3px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: transparent;
+        background: rgba(69, 75, 78, 0.3);
+
+        .emoji {
+            display: block;
+            margin-right: 10px;
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+
+        p {
+            line-height: 2;
+            margin: 0;
+        }
+    }
+
+    p {
+        margin: 0 0 1rem;
+        word-break: keep-all;
+    }
+
+    ul,
+    ol {
+        padding-left: 1.8rem;
+        word-break: keep-all;
+    }
+
+    li {
+        padding-bottom: 0.4rem;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    img {
+        margin: 1rem auto 0.5rem;
+        border-radius: 4px;
+    }
+
+    // 큰 이미지
+    .img-l {
+        width: 100%;
+    }
+
+    // 작은 이미지
+    .img-s {
+        width: 350px;
+    }
+
+    img+em {
+        color: $default-tint;
+        display: block;
+        font-family: $sans-serif;
+        font-size: 0.9rem;
+        font-style: normal;
+        text-align: center;
+    }
+
+    // 이모지
+    img.emoji {
+        display: inline-block;
+        left: 0;
+        transform: none;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+        margin-top: 4px;
+        width: 1rem;
+        height: 1rem;
+    }
+
+    // 테이블
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table th,
+    table td {
+        border: 1px solid #555;
+        padding: 8px;
+        text-align: left;
+        font-size: small;
+    }
+
+    table thead th {
+        background-color: #2c2c2c;
+        border-bottom: double #555;
+    }
+
+    table tr:nth-child(odd) {
+        background-color: $default-bg;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #2c2c2c;
+    }
+
+    /* 문자 색상 설정 */
+
+    // p 노란색
+    .y-p {
+        color: $yellow-color;
+        background-color: $default-bg;
+        border-radius: 0;
+        font-family: $serif-primary;
+        font-size: 100%;
+        padding: 0;
+    }
+
+    // span 노란색
+    .y-s {
+        color: $yellow-color;
+    }
+
+    // span 갈색
+    .b-s {
+        color: $code-color;
+    }
+
+    .left-right {
+        display: flex;
+
+        .book {
+            width: 30%;
+            margin: 1rem 3.5rem 0 0.5rem;
+        }
+
+        ul {
+            list-style-type: disclosure-closed;
+        }
+
+
+    }
+
+    // 이미지 좌우 배치
+    .img-container {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+
+        .left-3 {
+            max-width: 30%;
+            flex: 3;
+            height: auto;
+        }
+
+        .left-7 {
+            max-width: 70%;
+            flex: 7;
+            height: auto;
+        }
+
+        .right-3 {
+            max-width: 30%;
+            flex: 3;
+            height: auto;
+        }
+
+        .right-7 {
+            max-width: 70%;
+            flex: 7;
+            height: auto;
+        }
+
+    }
 }
 
-@media (max-width: 800px){
-    .left-right{
+@media (max-width: 800px) {
+    .left-right {
         display: flex;
         flex-direction: column;
 
@@ -234,5 +262,8 @@
             margin: 1rem 0 0.5rem !important;
         }
     }
-  }
-  
+
+    .img-container {
+        display: block;
+    }
+}
