@@ -1,15 +1,12 @@
-### 글자색상
+### 글자 강조 색상
 ---
-- `{:.y-p}`
-- `{:.y-s}`
-- `{:.b-s}`
+- `{:.code-color}`
+- `{:.strong-color}`
 
 ```mk
-`대상 문자열`{:class_name}
+`반드시 전역 이름과 비밀번호를 기억해자`{:.code-color}
 
-`반드시 전역 이름과 비밀번호를 기억해자`{:.y-p}
-
-**win10**{:.y-s}
+`반드시 전역 이름과 비밀번호를 기억해자`{:.strong-color}
 ```
 
 ### 링크
@@ -52,16 +49,13 @@ print code
 !["github blog"](/assets/img/content/title/python.png){:.img-l}
 ```
 
-### 표
----
-- `{:.post-table }`
+### 이미지 좌우 3:7
 
-```mk
-|head|head|
-|----|----|
-| 1 | text |
-| 2 | text |
-{:.post-table }
+```html
+<div class="img-container">
+    <img class="left-3" src="/assets/img/content/flask/002/1.png" />
+    <img class="right-7" src="/assets/img/content/flask/002/2.png" />
+</div>
 ```
 
 ### 책 표지

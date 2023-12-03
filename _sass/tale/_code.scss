@@ -9,6 +9,10 @@ code {
   color: $code-color;
   font-size: 85%;
   padding: .25em .5em;
+
+  span {
+    line-height: 1.5;
+  }
 }
 
 pre {
@@ -20,12 +24,13 @@ pre code {
   color: inherit;
   font-size: 85%;
   padding: 0;
+  line-height: normal;
 }
 
 .highlight {
   background-color: rgba(255, 255, 255, 0.03);
   border-radius: 3px;
-  line-height: 1.4;
+  line-height: normal;
   margin: 0 0 1rem;
   padding: 1rem;
 

@@ -90,6 +90,7 @@
             margin-right: 10px;
             width: 1.2rem;
             height: 1.2rem;
+            margin-top: 5px;
         }
 
         p {
@@ -169,7 +170,7 @@
     }
 
     table thead th {
-        background-color: #2c2c2c;
+        background-color: #0b0b0b;
         border-bottom: double #555;
     }
 
@@ -183,8 +184,8 @@
 
     /* 문자 색상 설정 */
 
-    // p 노란색
-    .y-p {
+    // `test`{:.code-color} 노란색
+    .code-color {
         color: $yellow-color;
         background-color: $default-bg;
         border-radius: 0;
@@ -193,16 +194,13 @@
         padding: 0;
     }
 
-    // span 노란색
-    .y-s {
-        color: $yellow-color;
-    }
-
-    // span 갈색
-    .b-s {
+    // **test**{:.code-color} 주황색
+    .strong-color {
         color: $code-color;
+        font-weight: 500;
     }
 
+    // 왼쪽 그림, 오른쪽 글
     .left-right {
         display: flex;
 
