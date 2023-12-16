@@ -60,9 +60,8 @@
   &-container{
     display: flex;
 
-    
-
-    .img-container,.img-book-container {
+    .img-container,
+    .img-book-container {
         display: inline-block;
         height: 100px;
         width: 100px;
@@ -84,7 +83,8 @@
       background-color: #fff !important;
     }
     
-    .img-container:hover {
+    .img-container:hover,
+    .img-book-container:hover {
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
     }
 
