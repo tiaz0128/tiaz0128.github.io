@@ -45,9 +45,14 @@ h1 {
 
 h2 {
   margin-top: 3.5rem;
-  color: $default-color;
+  // color: rgba(103, 143, 238, 0.81);
+  // color: rgba(255, 255, 255, 0.65);
+  color: rgb(98, 191, 255, 0.70)
 }
 
+h3 {
+  margin-top: 2rem;
+}
 
 a {
   color: $blue;
