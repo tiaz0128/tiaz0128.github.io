@@ -9,9 +9,15 @@ layout: default
     </div>
     <div class="catalogue-container">
         <a href="{{site.baseurl}}/category/{{post.catalogue}}" class="tag">
+            {% if post.catalogue == 'book'%}
+            <div class="img-book-container">
+                <img src="{{site.baseurl}}/assets/img/title/{{post.catalogue}}/{{post.subject}}.png" />
+            </div>
+            {% else %}
             <div class="img-container">
                 <img src="{{site.baseurl}}/assets/img/title/{{post.catalogue}}/{{post.subject}}.png" />
             </div>
+            {% endif %}
         </a>
 
         <a href="{{ post.url | prepend: site.baseurl }}" class="catalogue-item">

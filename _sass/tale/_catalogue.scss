@@ -60,13 +60,15 @@
   &-container{
     display: flex;
 
-    .img-container {
+    
+
+    .img-container,.img-book-container {
         display: inline-block;
         height: 100px;
         width: 100px;
         margin: 0 20px 0 0;
         border-radius: 10px;
-        background-color: #fff;
+        background-color: transparent;
         overflow: hidden;
         cursor: pointer;
         text-align: center;
@@ -76,6 +78,10 @@
             height: 100%;
         }
 
+    }
+
+    .img-book-container {
+      background-color: #fff !important;
     }
     
     .img-container:hover {
