@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Search
-permalink: /search/
+permalink: /search
 ---
 
 <div class="tags-header">
@@ -23,7 +23,7 @@ SimpleJekyllSearch({
     searchInput: document.getElementById('search-wrap-input'),
     resultsContainer: document.getElementById('search-wrap-result'),
     json: '{{ site.baseurl }}/assets/search/search.json',
-    searchResultTemplate: '<li><span><a href="{{site.baseurl}}/category/{tags}">{tags}</a></span><a class="tags-post" href="{url}"><div><span class="tags-post-title">{title}</span><div class="tags-post-line"></div></div><span class="tags-post-meta"><time>{date}</time></span></a>',
+    searchResultTemplate: '<li><a class="tags-post" href="{url}"><div><span class="tags-post-title">{title}</span><div class="tags-post-line"></div></div><span class="tags-post-meta"><time>{date}</time></span></a>',
     noResultsText: '검색 결과가 없습니다.',
     limit: 10,
     fuzzy: false,
