@@ -12,13 +12,13 @@
             font-style: italic;
         }
 
-        .catgegory-tags {
+        .category-tags {
             display: inline-block;
             margin: 0;
             text-align: right;
 
             a {
-                background-color: #2a3844;
+                background-color: $back-color;
                 border-radius: 3px;
                 font-family: Ubuntu;
                 color: rgba(255, 255, 255, 0.9);
@@ -50,7 +50,7 @@
         margin-bottom: 2rem;
 
         a {
-            background-color: #2a3844;
+            background-color: $back-color;
             border-radius: 3px;
             font-family: $serif-secondary;
             color: $default-shade;

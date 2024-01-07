@@ -16,7 +16,7 @@ footer,
 .nav {
   box-shadow: 0 2px 2px -2px $shadow-color;
   overflow: auto;
-  background-color: #2a3844;
+  background-color: $back-color;
   position: sticky;
   top: 0;
   z-index: 9999;
