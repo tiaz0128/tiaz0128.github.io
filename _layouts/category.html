@@ -11,6 +11,11 @@ layout: default
     {% for post in site.posts %}
     {% if page.title == post.catalogue %}
     <div class="catalogue-tags">
+        <span class="small-tag">
+            <a href="{{site.baseurl}}/category/{{post.catalogue}}" class="tag">
+                {{post.catalogue}}
+            </a>    
+        </span>
         <time datetime="{{ post.date }}" class="catalogue-time">{{ post.date | date: "%Y-%m-%d" }}</time>
     </div>
     <div class="catalogue-container">

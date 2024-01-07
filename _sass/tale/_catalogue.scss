@@ -6,8 +6,13 @@
     margin-bottom: 0.5rem;
 
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
+    justify-content: right;
 
+    .small-tag {
+      display: none;
+      font-size: 12px;
+    }
   }
 
   &-item {

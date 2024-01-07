@@ -5,6 +5,11 @@ layout: default
 <div class="catalogue">
     {% for post in paginator.posts %}
     <div class="catalogue-tags">
+        <span class="small-tag">
+            <a href="{{site.baseurl}}/category/{{post.catalogue}}" class="tag">
+                {{post.catalogue}}
+            </a>    
+        </span>
         <time datetime="{{ post.date }}" class="catalogue-time">{{ post.date | date: "%Y-%m-%d" }}</time>
     </div>
     <div class="catalogue-container">
