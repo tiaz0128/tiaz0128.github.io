@@ -10,12 +10,10 @@
 
     {% for page in site.pages %}
     {% if page.layout != nil %}
-    {% if page.permalink != '/404.html' and page.permalink != '/search/' %}
     {% if page.layout != 'feed' %}
     <url>
         <loc>{{ site.url }}{{ page.url | remove: 'index.html' }}</loc>
     </url>
-    {% endif %}
     {% endif %}
     {% endif %}
     {% endfor %}
