@@ -184,8 +184,8 @@
 
     /* 문자 색상 설정 */
 
-    // `test`{:.code-color} 노란색
-    .code-color {
+    // `test`{:.yellow} 노란색
+    .yellow {
         color: $yellow-color;
         background-color: $default-bg;
         border-radius: 0;
@@ -194,10 +194,36 @@
         padding: 0;
     }
 
-    // **test**{:.code-color} 주황색
-    .strong-color {
-        color: $code-color;
+    // **test**{:.yellow} 주황색
+    .orange {
+        color: $yellow;
         font-weight: 500;
+    }
+
+    .img-caption {        
+        & {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: unset;
+            margin-top: -15px;
+            color: $grey-1;
+        }
+        &-a{
+            display: block;
+            width: 100%;
+            font-size: 85%;
+            text-align: center;
+            background-color: unset;
+            margin-top: -15px;
+            color: $blue;
+        }
+    }
+
+    .youtube {
+        display: flex;
+        justify-content: center;
+        margin: 10px;
     }
 
     // 왼쪽 그림, 오른쪽 글
@@ -220,7 +246,7 @@
     .img-container {
         display: flex;
         gap: 1rem;
-        margin-bottom: 2rem;
+        margin-bottom: 0.5rem;
 
         .left-3 {
             max-width: 30%;
