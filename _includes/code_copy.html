@@ -1,0 +1,12 @@
+<script type="text/javascript">
+    window.onload = function() {
+        var script = document.createElement('script');
+        script.src = "{{ '/assets/js/code-copy.js' | relative_url }}";
+        document.body.appendChild(script);
+
+        var toc_script = document.createElement('script');
+        toc_script.src = "{{ '/assets/js/toc.js' | relative_url }}";
+        document.body.appendChild(toc_script);
+    };
+
+</script>

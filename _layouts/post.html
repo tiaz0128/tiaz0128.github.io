@@ -45,6 +45,11 @@ layout: default
   {% endfor %}
 </div>
 
+<aside class="post-toc">
+  <h2>Table of Contents</h2>
+  {% include toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=2 h_max=2 %}
+</aside>
+
 <script src="https://utteranc.es/client.js"
 repo="tiaz0128/blog-comments"
 issue-term="pathname"
@@ -52,12 +57,3 @@ theme="photon-dark"
 crossorigin="anonymous"
 async>
 </script>
-
-<!-- <div class="pagination">
-  {% if page.next.url %}
-    <a href="{{ page.next.url | prepend: site.baseurl }}" class="left arrow">&#8592;</a>
-  {% endif %}
-  {% if page.previous.url %}
-    <a href="{{ page.previous.url | prepend: site.baseurl }}" class="right arrow">&#8594;</a>
-  {% endif %}
-</div> -->
