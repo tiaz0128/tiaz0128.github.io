@@ -188,11 +188,7 @@
     // `test`{:.yellow} 노란색
     .yellow {
         color: $yellow;
-        background-color: $default-bg;
-        border-radius: 0;
-        font-family: $serif-primary;
-        font-size: 100%;
-        padding: 0;
+        font-weight: 500;
     }
 
     // **test**{:.orange} 주황색
