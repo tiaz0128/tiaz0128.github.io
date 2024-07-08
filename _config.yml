@@ -47,3 +47,7 @@ paginate:       5
 # Excludes
 exclude: [ Gemfile, Gemfile.lock, tale.gemspec ]
 
+
+host: "0.0.0.0"
+livereload: true
+reload_port: 5678

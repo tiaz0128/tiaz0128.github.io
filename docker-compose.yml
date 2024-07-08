@@ -1,0 +1,10 @@
+services:
+  dev:
+    container_name: blog
+    image: blog
+    command: ["jekyll", "serve", "-l"]
+    ports:
+      - "4000:4000"
+      - "35729:35729"
+    volumes:
+      - .:/srv/jekyll
