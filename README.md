@@ -17,20 +17,45 @@ Made with Jekyll using the [Tale](https://github.com/chesterhow/tale) theme.
 <br/>
 
 ## Use docker
-1. build image
-```bash
-$ docker build . -t gitblog
+
+- windows 환경에서는 --livereload(= -l) 옵션이 제대로 동작하지 않을수 있음
+-WSL 에서 --livereload 동작 가능
+
+### 1. Gemefile.lock 파일 생성
+
+```yml
+FROM ruby:3.0
+
+WORKDIR /srv/jekyll
+
+VOLUME /srv/jekyll
 ```
-<br/>
 
-2. Run docker server
 ```bash
-$ docker run -d --rm --name gitblog -p 8080:4000 gitblog
+$ docker run -v="./:/srv/jekyll" -it blog bundle install
 ```
 
-<br/>
+### 2. docker image build
 
-3. Stop docker
+```yml
+# Ruby 이미지를 기반으로 합니다.
+FROM ruby:3.0
+
+RUN bundle config --global frozen 1
+
+WORKDIR /srv/jekyll
+
+COPY Gemfile Gemfile.lock tale.gemspec ./
+
+RUN bundle install
+
+VOLUME /srv/jekyll
+```
+
+### 3. docker-compose up
+
 ```bash
-$ docker stop gitblog
+$ docker-compose up
+
+$ docker-compose down
 ```

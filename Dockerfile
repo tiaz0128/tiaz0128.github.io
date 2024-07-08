@@ -1,4 +1,3 @@
-# Ruby 이미지를 기반으로 합니다.
 FROM ruby:3.0
 
 RUN bundle config --global frozen 1
