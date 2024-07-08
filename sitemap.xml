@@ -5,6 +5,22 @@
     {% for post in site.posts %}
     <url>
         <loc>{{ site.url }}{{ post.url | remove: 'index.html' }}</loc>
+        <priority>1</priority>
     </url>
+    {% endfor %}
+
+    {% for page in site.pages %}
+    {% if page.layout != nil %}
+    {% if page.layout != 'feed' %}
+    {% if page.title != 'Search' %}
+    {% unless page.url contains 'page' %}
+    <url>
+        <loc>{{ site.url }}{{ page.url | remove: 'index.html' }}</loc>
+        <priority>0.5</priority>
+    </url>
+    {% endunless %}
+    {% endif %}
+    {% endif %}
+    {% endif %}
     {% endfor %}
 </urlset>
