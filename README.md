@@ -24,6 +24,8 @@ Made with Jekyll using the [Tale](https://github.com/chesterhow/tale) theme.
 ### 1. Gemefile.lock 파일 생성
 
 ```yml
+# Dockerfile.base
+
 FROM ruby:3.0
 
 WORKDIR /srv/jekyll
@@ -32,13 +34,15 @@ VOLUME /srv/jekyll
 ```
 
 ```bash
-$ docker run -v="./:/srv/jekyll" -it blog bundle install
+$ docker build . -t base -f Dockerfile.base
+
+$ docker run -v="./:/srv/jekyll" -it base bundle install
 ```
 
 ### 2. docker image build
 
 ```yml
-# Ruby 이미지를 기반으로 합니다.
+# Dockerfile
 FROM ruby:3.0
 
 RUN bundle config --global frozen 1
@@ -55,7 +59,9 @@ VOLUME /srv/jekyll
 ### 3. docker-compose up
 
 ```bash
-$ docker-compose up --build
+$ docker build . -t blog
+
+$ docker-compose up
 
 $ docker-compose down
 ```
