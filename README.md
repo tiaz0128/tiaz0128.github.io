@@ -55,7 +55,7 @@ VOLUME /srv/jekyll
 ### 3. docker-compose up
 
 ```bash
-$ docker-compose up
+$ docker-compose up --build
 
 $ docker-compose down
 ```
