@@ -23,4 +23,12 @@
     {% endif %}
     {% endif %}
     {% endfor %}
+    <url>
+        <loc>http://tiaz.dev/</loc>
+        <priority>0.1</priority>
+    </url>
+    <url>
+        <loc>http://www.tiaz.dev/</loc>
+        <priority>0.1</priority>
+    </url>
 </urlset>
