@@ -40,7 +40,17 @@ plugins:
   - jekyll-paginate
   - jekyll-seo-tag
   - jemoji #Uncomment this to allow emoji in your post
+  - jekyll-spaceship
 
+jekyll-spaceship:
+  mermaid-processor:
+    mode: pre-fetch  # 또는 'pre-fetch'
+    css:
+      class: mermaid
+    syntax:
+      code: 'mermaid!'
+    config:
+      theme: default
 # Permalinks
 paginate:       5
 

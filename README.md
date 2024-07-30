@@ -19,7 +19,7 @@ Made with Jekyll using the [Tale](https://github.com/chesterhow/tale) theme.
 ## Use docker
 
 - windows 환경에서는 --livereload(= -l) 옵션이 제대로 동작하지 않을수 있음
--WSL 에서 --livereload 동작 가능
+- WSL 에서 --livereload 동작 가능
 
 ### 1. Gemefile.lock 파일 생성
 
