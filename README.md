@@ -1,5 +1,5 @@
-
 ## Blog URL
+
 [https://tiaz.dev/](https://tiaz.dev/)
 
 Eat Sleep Coding. Never Never Giveup.
@@ -9,7 +9,6 @@ Eat Sleep Coding. Never Never Giveup.
 <img src="./assets/img/zo.jpg" width="200" height="200"/>
 
 <br/>
-
 
 ## Using Theme
 Made with Jekyll using the [Tale](https://github.com/chesterhow/tale) theme.
