@@ -37,4 +37,8 @@
         <loc>https://tiaz.dev/assets/search/search.json</loc>
         <priority>0.1</priority>
     </url>
+    <url>
+        <loc>https://tiaz.dev/feed.xml</loc>
+        <priority>0.1</priority>
+    </url>
 </urlset>
