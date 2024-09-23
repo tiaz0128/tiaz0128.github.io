@@ -22,45 +22,14 @@ Made with Jekyll using the [Tale](https://github.com/chesterhow/tale) theme.
 
 ### 1. Gemefile.lock 파일 생성
 
-```yml
-# Dockerfile.base
-
-FROM ruby:3.0
-
-WORKDIR /srv/jekyll
-
-VOLUME /srv/jekyll
+```bash
+$ docker-compose up gemfile
 ```
+
+### 2. docker-compose up
 
 ```bash
-$ docker build . -t base -f Dockerfile.base
-
-$ docker run -v="./:/srv/jekyll" -it base bundle install
-```
-
-### 2. docker image build
-
-```yml
-# Dockerfile
-FROM ruby:3.0
-
-RUN bundle config --global frozen 1
-
-WORKDIR /srv/jekyll
-
-COPY Gemfile Gemfile.lock tale.gemspec ./
-
-RUN bundle install
-
-VOLUME /srv/jekyll
-```
-
-### 3. docker-compose up
-
-```bash
-$ docker build . -t blog
-
-$ docker-compose up
+$ docker-compose up dev --build
 
 $ docker-compose down
 ```

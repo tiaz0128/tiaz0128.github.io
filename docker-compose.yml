@@ -1,7 +1,17 @@
 services:
+  gemfile:
+    working_dir: /srv/jekyll
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+    command: ["bundle", "install"]
+    volumes:
+      - .:/srv/jekyll
   dev:
     container_name: blog
-    image: blog
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: ["jekyll", "serve", "-l"]
     ports:
       - "4000:4000"

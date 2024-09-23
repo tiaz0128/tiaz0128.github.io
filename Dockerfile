@@ -7,5 +7,3 @@ WORKDIR /srv/jekyll
 COPY Gemfile Gemfile.lock tale.gemspec ./
 
 RUN bundle install
-
-VOLUME /srv/jekyll
