@@ -1,9 +1,7 @@
 services:
   gemfile:
     working_dir: /srv/jekyll
-    build:
-      context: .
-      dockerfile: Dockerfile.base
+    image: ruby:3.0
     command: ["bundle", "install"]
     volumes:
       - .:/srv/jekyll
