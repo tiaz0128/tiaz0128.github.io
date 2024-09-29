@@ -1,0 +1,20 @@
+---
+layout: post
+date: 2024-06-24
+catalogue: "AWS"
+subject: "AWS-Docker"
+title: "AWS Pipline - Docker 배포"
+excerpt: "Pipline으로 Docker 배포 해보기"
+author: tiaz
+permalink: /Docker/1
+tags: [AWS, Docker]
+---
+
+
+## CodePipeline
+
+---
+
+- code pipeline
+- code build
+- code deploy

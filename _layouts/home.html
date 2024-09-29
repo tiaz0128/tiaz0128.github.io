@@ -42,9 +42,39 @@ layout: default
     {% if paginator.previous_page %}
     <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="left arrow">&#8592;&nbsp;&nbsp;prev</a>
     {% endif %}
+    
+    <input id="pageInput" min="1" max="{{ paginator.total_pages }}" value="{{ paginator.page }}">
+
+    <span> / {{ paginator.total_pages }}</span>
+
     {% if paginator.next_page %}
     <a href="{{ paginator.next_page_path | prepend: site.baseurl }}" class="right arrow">next&nbsp;&nbsp;&#8594;</a>
     {% endif %}
-
-    <span>{{ paginator.page }} / {{ paginator.total_pages }}</span>
 </div>
+
+<script>
+    document.getElementById('pageInput').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission
+            goToPage();
+        }
+    });
+
+    function goToPage() {
+        var pageInput = document.getElementById('pageInput');
+        var pageNumber = parseInt(pageInput.value);
+        var totalPages = {{ paginator.total_pages }};
+        
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+            var baseUrl = '{{ site.baseurl }}';
+            if (pageNumber === 1) {
+                window.location.href = baseUrl + '/';
+            } else {
+                window.location.href = baseUrl + '/page' + pageNumber + '/';
+            }
+        } else {
+            alert('유효한 페이지를 입력해주세요! 1 페이지 ~ ' + totalPages);
+            pageInput.value = {{ paginator.page }}; // Reset to current page
+        }
+    }
+</script>

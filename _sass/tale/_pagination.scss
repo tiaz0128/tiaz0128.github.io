@@ -43,4 +43,20 @@
   .right {
     right: 0;
   }
+
+  input {
+    width: 4rem;
+    font-size: 1.1rem;
+    text-align: center;
+    height: 3rem;
+    border: none;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    outline: none;
+    background-color: $default-bg;
+    color: $default-color;
+    box-shadow: 
+      inset -1px -1px 3px rgba(255,255,255,0.1),
+      inset 1px 1px 14px rgba(0,0,0,0.5);
+  }
 }
