@@ -6,7 +6,7 @@ subject: "AWS-Docker"
 title: "AWS Pipline - Docker 배포"
 excerpt: "Pipline으로 Docker 배포 해보기"
 author: tiaz
-permalink: /Docker/1
+permalink: /Docker/2
 tags: [AWS, Docker]
 ---
 

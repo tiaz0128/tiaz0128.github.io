@@ -301,8 +301,23 @@
         background: unset;
     }
 
+    // mermaid
+
     .mermaid.center {
         text-align: center;
+    }
+
+    .mermaid text.messageText {
+        fill: $default-color !important;
+        stroke: none !important;
+        font-family: 'trebuchet ms', verdana, arial !important;
+        font-size: 14px !important;
+    }
+
+    .mermaid [class^="messageLine"] {
+        stroke-width: 3.5 !important;
+        // stroke-dasharray: '2 2' !important;
+        stroke: $grey-1 !important;
     }
 }
 
