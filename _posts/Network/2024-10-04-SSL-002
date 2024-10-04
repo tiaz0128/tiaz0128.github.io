@@ -1,0 +1,83 @@
+
+## Let's Encrypt : certbot 활용
+
+---
+
+Let's Encrypt는 무료로 SSL/TLS 인증서를 제공하는 인증 기관입니다. Let's Encrypt를 사용하여 인증서를 발급받는 가장 일반적인 방법은 Certbot이라는 도구를 사용하는 것입니다. 여기에 그 과정을 단계별로 설명하겠습니다.
+
+### 1. Certbot 설치
+
+```bash
+sudo yum install certbot
+```
+
+2. 인증서 발급:
+
+Certbot은 여러 가지 플러그인을 제공하여 다양한 웹 서버와 통합할 수 있습니다. 여기서는 Nginx를 예로 들겠습니다.
+
+```bash
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+```
+
+이 명령어는 다음 작업을 수행합니다:
+- Let's Encrypt에서 인증서를 발급받습니다.
+- Nginx 설정을 자동으로 업데이트하여 SSL을 활성화합니다.
+- HTTP에서 HTTPS로의 리다이렉션을 설정합니다 (선택 사항).
+
+만약 Apache를 사용한다면, `--nginx` 대신 `--apache` 옵션을 사용하면 됩니다.
+
+3. 독립 실행 모드:
+
+웹 서버가 없거나 수동으로 설정하고 싶다면, 독립 실행 모드를 사용할 수 있습니다:
+
+```bash
+sudo certbot certonly --standalone -d yourdomain.com -d www.yourdomain.com
+
+```
+
+이 모드에서는 Certbot이 일시적으로 자체 웹 서버를 실행하여 인증 과정을 진행합니다.
+
+4. 자동 갱신 설정:
+
+Let's Encrypt 인증서는 90일 후에 만료되므로 정기적인 갱신이 필요합니다. Certbot은 자동 갱신 기능을 제공합니다.
+
+대부분의 시스템에서 Certbot 설치 시 자동으로 갱신 크론 작업이 설정됩니다. 확인하려면:
+
+```bash
+sudo systemctl list-timers | grep certbot
+
+# 또는
+
+ls -l /etc/cron.*/ | grep certbot
+
+```
+
+수동으로 갱신을 테스트하려면:
+
+```bash
+sudo certbot renew --dry-run
+
+```
+
+5. 인증서 정보 확인:
+
+발급받은 인증서의 정보를 확인하려면:
+
+```bash
+sudo certbot certificates
+
+```
+
+주의사항 및 팁:
+
+1. 포트 개방: Certbot이 작동하려면 80번(HTTP)과 443번(HTTPS) 포트가 외부에서 접근 가능해야 합니다.
+
+2. 테스트 환경: Let's Encrypt는 테스트용 서버도 제공합니다. `--test-cert` 옵션을 사용하여 테스트 인증서를 발급받을 수 있습니다.
+
+3. 속도 제한: Let's Encrypt에는 속도 제한이 있어서, 짧은 시간 동안 너무 많은 인증서를 요청하면 일시적으로 차단될 수 있습니다.
+
+4. 와일드카드 인증서: DNS 챌린지를 통해 와일드카드 인증서를 발급받을 수 있지만, 과정이 좀 더 복잡합니다.
+
+5. 웹 서버 재시작: 인증서 갱신 후 웹 서버를 재시작해야 할 수 있습니다. Certbot의 갱신 후크를 사용하여 이 과정을 자동화할 수 있습니다.
+
+Let's Encrypt와 Certbot을 사용하면 무료로 쉽게 SSL/TLS 인증서를 발급받고 관리할 수 있습니다. 이는 웹사이트의 보안을 향상시키고 HTTPS를 구현하는 데 매우 유용한 도구입니다./
