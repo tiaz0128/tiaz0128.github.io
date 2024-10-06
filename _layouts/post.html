@@ -84,6 +84,11 @@ mermaid.registerIconPacks([
     loader: () =>
     fetch('https://unpkg.com/azureiconkento@1.1.1/azureicons/allicons.json').then((res) => res.json()),
   },
+  {
+    name: 'custom',
+    loader: () =>
+    fetch('/assets/json/icons.json').then((res) => res.json()),
+  },
 ]);
 
 </script>
