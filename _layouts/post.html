@@ -59,7 +59,10 @@ async>
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({
+<script>
+// mermaid configuration
+
+mermaid.initialize({
   startOnLoad:true, 
   sequence: { showSequenceNumbers: false }, 
   themeVariables: {
@@ -68,4 +71,19 @@ async>
     primaryBorderColor: "#fff",
     tertiaryColor: "#fff"
   }
-});</script>
+});
+
+mermaid.registerIconPacks([
+  {
+    name: 'logos',
+    loader: () =>
+      fetch('https://unpkg.com/@iconify-json/logos/icons.json').then((res) => res.json()),
+  },
+  {
+    name: 'azure',
+    loader: () =>
+    fetch('https://unpkg.com/azureiconkento@1.1.1/azureicons/allicons.json').then((res) => res.json()),
+  },
+]);
+
+</script>

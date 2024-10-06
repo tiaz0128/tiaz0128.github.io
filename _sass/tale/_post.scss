@@ -323,6 +323,25 @@
     .mermaid [class^="activation"] {
         fill: $grey-1 !important;
     }
+    
+    // architecture
+
+    .mermaid [class^="architecture-"] .text-inner-tspan {
+        fill: $default-color !important;
+    }
+
+    .mermaid .architecture-edges .edge {
+        stroke: $orange !important;
+    }
+
+    .mermaid .architecture-edges .arrow {   
+        fill: $orange !important;
+    }
+    
+    .mermaid .architecture-groups .node-bkg {
+        stroke: $grey-1 !important;
+        stroke-dasharray: none !important;
+    }
 }
 
 
