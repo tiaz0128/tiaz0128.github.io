@@ -307,6 +307,11 @@
         text-align: center;
     }
 
+    .mermaid.size-s{
+        width: 320px;
+        margin: 0 auto;
+    }
+
     .mermaid text.messageText {
         fill: $default-color !important;
         stroke: none !important;
