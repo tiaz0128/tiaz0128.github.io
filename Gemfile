@@ -1,7 +1,7 @@
-# frozen_string_literal: true
+source "https://rubygems.org"
+
+gemspec
+
 gem 'jekyll'
 gem 'jemoji'
 gem 'jekyll-spaceship', group: :jekyll_plugins
-
-source "https://rubygems.org"
-gemspec
