@@ -124,6 +124,11 @@
         border-radius: 4px;
     }
 
+    div.math-center {
+        margin: 1rem auto 1rem;
+        text-align: center;
+    }
+
     // 큰 이미지
     .img-l {
         width: 100%;
@@ -170,6 +175,7 @@
     table {
         width: 100%;
         border-collapse: collapse;
+        margin: 1rem auto;
     }
 
     table th,
@@ -309,6 +315,11 @@
 
     .mermaid.size-s{
         width: 320px;
+        margin: 0 auto;
+    }
+
+    .mermaid.size-m{
+        width: 480px;
         margin: 0 auto;
     }
 
