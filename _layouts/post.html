@@ -74,20 +74,25 @@ mermaid.initialize({
 });
 
 mermaid.registerIconPacks([
+  // {
+  //   name: 'logos',
+  //   loader: () =>
+  //     fetch('https://unpkg.com/@iconify-json/logos/icons.json').then((res) => res.json()),
+  // },
+  // {
+  //   name: 'azure',
+  //   loader: () =>
+  //   fetch('https://unpkg.com/azureiconkento@1.1.1/azureicons/allicons.json').then((res) => res.json()),
+  // },
   {
-    name: 'logos',
+    name: 'aws',
     loader: () =>
-      fetch('https://unpkg.com/@iconify-json/logos/icons.json').then((res) => res.json()),
-  },
-  {
-    name: 'azure',
-    loader: () =>
-    fetch('https://unpkg.com/azureiconkento@1.1.1/azureicons/allicons.json').then((res) => res.json()),
+    fetch('/assets/json/icons/aws.json').then((res) => res.json()),
   },
   {
     name: 'custom',
     loader: () =>
-    fetch('/assets/json/icons.json').then((res) => res.json()),
+    fetch('/assets/json/icons/custom.json').then((res) => res.json()),
   },
 ]);
 
