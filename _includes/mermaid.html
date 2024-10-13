@@ -1,0 +1,40 @@
+
+{% if page.mermaid %}
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+// mermaid configuration
+mermaid.initialize({
+  startOnLoad:true, 
+  sequence: { showSequenceNumbers: false }, 
+  themeVariables: {
+    primaryColor: "#2a3844",
+    primaryTextColor: "#fff",
+    primaryBorderColor: "#fff",
+    tertiaryColor: "#fff"
+  }
+});
+
+mermaid.registerIconPacks([
+  // {
+  //   name: 'logos',
+  //   loader: () =>
+  //     fetch('https://unpkg.com/@iconify-json/logos/icons.json').then((res) => res.json()),
+  // },
+  // {
+  //   name: 'azure',
+  //   loader: () =>
+  //   fetch('https://unpkg.com/azureiconkento@1.1.1/azureicons/allicons.json').then((res) => res.json()),
+  // },
+  {
+    name: 'aws',
+    loader: () =>
+    fetch('/assets/json/icons/aws.json').then((res) => res.json()),
+  },
+  {
+    name: 'custom',
+    loader: () =>
+    fetch('/assets/json/icons/custom.json').then((res) => res.json()),
+  },
+]);
+</script>
+{% endif %}

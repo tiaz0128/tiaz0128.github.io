@@ -9,8 +9,9 @@ author:
   name:         tiaz
   url:          https://tiaz.dev
   pic:          /assets/img/zo.jpg
-  about:        "Eat Sleep Coding.<br/>
-                 Never Never Giveup.<br/>"
+  about:        <p class="saying">Eat Sleep Coding.</p>
+                <p class="saying">Never Never Giveup.</p>
+                <p>💫 Python &nbsp;|&nbsp; BackEnd &nbsp;|&nbsp; Cloud Architect &nbsp;|&nbsp; DevOps </p>
 
 # Contact links
 email: tiaz0128.dev@gmail.com # Add your Email address
@@ -20,7 +21,7 @@ linkedin: # Add your Linkedin handle
 github: tiaz0128 # Add your Github handle
 twitter:  # Add your Twitter handle
 facebook: # Add your Facebook handle
-instagram: # Add your Instagram handle
+instagram: tiaz.dev
 pinterest: # Add your Pinterest handle
 
 # Build settings

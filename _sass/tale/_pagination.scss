@@ -5,6 +5,12 @@
   position: relative;
   text-align: center;
 
+  #pageInput::-webkit-outer-spin-button,
+  #pageInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   span {
     color: $default-shade;
     font-size: 1.1rem;

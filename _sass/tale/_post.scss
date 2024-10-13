@@ -188,7 +188,7 @@
     }
 
     table thead th {
-        background-color: #2a3844;
+        background-color: $back-color;
         border-bottom: double #555;
     }
 
@@ -361,7 +361,6 @@
     }
 }
 
-
 @media (max-width: 800px) {
     .left-right {
         display: flex;
@@ -393,8 +392,8 @@
         }
     
         ul {
-            list-style-type: none;
-            padding: 10px;
+            list-style-type: disclosure-closed;
+            padding: 10px 10px 10px 25px;
             border-radius: 4px;
             background-color: $grey-2;
         }
@@ -404,10 +403,19 @@
         }
 
         a.active {
-            font-weight: bold; 
-            transition: all 0.125s ease-in 0s; 
-            font-size: 0.75rem;
+            transition: all 0.125s ease-in 0s;
             color: $orange;
+        }
+
+        a.tag {
+            background-color: #2a3844;
+            border-radius: 3px;
+            font-family: Ubuntu;
+            color: rgba(255, 255, 255, .81);
+            font-size: 85%;
+            padding: .25em .5em;
+            display: inline-block;
+            margin-top: .25rem;
         }
     }
 }

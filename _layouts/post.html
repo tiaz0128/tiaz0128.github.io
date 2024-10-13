@@ -13,7 +13,7 @@ layout: default
       <time datetime="{{ page.date }}">{{ page.date | date: "%Y-%m-%d" }}</time>
     {% endif %}
   </div>
-
+  
   <h1 class="post-title">{{ page.title }}</h1>
 
     {{ content }}
@@ -45,55 +45,17 @@ layout: default
   {% endfor %}
 </div>
 
-<aside class="post-toc">
-  <h2>Table of Contents</h2>
-  {% include toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=2 h_max=2 %}
-</aside>
+<hr/>
 
-<script src="https://utteranc.es/client.js"
-repo="tiaz0128/blog-comments"
-issue-term="pathname"
-theme="photon-dark"
-crossorigin="anonymous"
-async>
-</script>
+<div class="post-author">
+  {% include about.html %}
+  {% include sns.html %}
+</div>
 
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>
-// mermaid configuration
+{% include aside.html %}
 
-mermaid.initialize({
-  startOnLoad:true, 
-  sequence: { showSequenceNumbers: false }, 
-  themeVariables: {
-    primaryColor: "#2a3844",
-    primaryTextColor: "#fff",
-    primaryBorderColor: "#fff",
-    tertiaryColor: "#fff"
-  }
-});
+<hr/>
 
-mermaid.registerIconPacks([
-  // {
-  //   name: 'logos',
-  //   loader: () =>
-  //     fetch('https://unpkg.com/@iconify-json/logos/icons.json').then((res) => res.json()),
-  // },
-  // {
-  //   name: 'azure',
-  //   loader: () =>
-  //   fetch('https://unpkg.com/azureiconkento@1.1.1/azureicons/allicons.json').then((res) => res.json()),
-  // },
-  {
-    name: 'aws',
-    loader: () =>
-    fetch('/assets/json/icons/aws.json').then((res) => res.json()),
-  },
-  {
-    name: 'custom',
-    loader: () =>
-    fetch('/assets/json/icons/custom.json').then((res) => res.json()),
-  },
-]);
+{% include utteranc.html %}
 
-</script>
+{% include mermaid.html %}

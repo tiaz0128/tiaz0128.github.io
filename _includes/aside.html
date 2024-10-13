@@ -1,0 +1,9 @@
+<aside class="post-toc">
+    <h2>Table of Contents</h2>
+    
+    {% include toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=2 h_max=2 %}
+    
+    {% for tag in page.tags %}
+    <a href="{{site.baseurl}}/tags#{{tag}}" class="tag" target="_blank">{{ tag }}</a>
+    {% endfor %}
+</aside>
