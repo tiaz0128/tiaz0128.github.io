@@ -3,21 +3,25 @@
         margin: 0;
     }
 
+    i {
+        font-size: 18px;
+    }
+
     .about-header{
         display: flex;
-        justify-content: space-evenly;
         margin-bottom: 10px;
         padding-bottom: 10px;
-
-        // &::after {
-        //     content: none;
-        // }
+        text-align: left;
+        font-size: 14px;
 
         .author-image-container{
             margin-right: 30px;
             margin-bottom: 0;
             margin-left: 0;
             border-radius: 0;
+            
+            width: 100px;
+            height: 100px;
 
             img {
                 border-radius: 50%;
@@ -30,6 +34,7 @@
     .post-author .about-header {
         flex-direction: column;
         align-items: center;
+        text-align: center;
 
         .author-image-container{
             margin-right: 0;

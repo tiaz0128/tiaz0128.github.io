@@ -29,8 +29,7 @@
       color: $default-color;
       text-decoration: none;
 
-      &:hover,
-      &:active {
+      &:hover {
         background: $blue;
       }
     }
@@ -38,8 +37,9 @@
 
   &-item {
     &-icon {
-      height: 1rem;
+      height: 20px;
       color: $blue;
+      margin-top: 5px;
     }
 
     &-label {

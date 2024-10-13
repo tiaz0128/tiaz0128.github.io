@@ -6,7 +6,7 @@ layout: default
   <div class="post-info">
     <div class="category-tags">
       {% for tag in page.tags %}
-      <a href="{{site.baseurl}}/tags#{{tag}}" class="tag">{{ tag }}</a>
+      <a href="{{site.baseurl}}/tags#{{tag}}" class="tag" target="_blank">{{ tag }}</a>
       {% endfor %}
     </div>
     {% if page.date %}
@@ -15,13 +15,18 @@ layout: default
   </div>
   
   <h1 class="post-title">{{ page.title }}</h1>
-
+  <p class="post-subtile">{{ page.subtitle }}</p>
+  <div class="post-writer">
+    <span>written by</span>
+    <img src="{{site.baseurl}}{{site.author.pic}}" alt="{{page.author}}" title="📖 {{ page.author }}">
+  </div>
+  
     {{ content }}
 
 </div>
 
 
-<div class="post-tags" style="text-align: left;">
+<div class="post-tags">
   <svg
       class="tags-item-icon"
       xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +46,7 @@ layout: default
     <line x1="7" y1="7" x2="7.01" y2="7"></line>
   </svg>
   {% for tag in page.tags %}
-  <a href="{{site.baseurl}}/tags#{{tag}}" class="tag">{{ tag }}</a>
+  <a href="{{site.baseurl}}/tags#{{tag}}" class="tag" target="_blank">{{ tag }}</a>
   {% endfor %}
 </div>
 
