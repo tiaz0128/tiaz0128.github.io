@@ -413,6 +413,10 @@
         stroke: $grey-1 !important;
         stroke-dasharray: none !important;
     }
+
+    .mermaid .flowchart-link {
+        stroke-width: 3px !important;
+    }
 }
 
 @media (max-width: 800px) {
