@@ -1,12 +1,205 @@
 ---
 layout: default
-title: "Seminar"
-permalink: /seminar
+title: "Seminars"
+permalink: /seminars
 ---
+
 <div class="tags">
     <div class="tags-header">
         <h2 class="tags-header-title">{{ page.title }}</h2>
         <div class="tags-header-line"></div>
     </div>
-    {% include seminar.html %}
-</div>    
+    <div class="seminar-container">
+        <div class="header">
+            <h1>세미나 검색</h1>
+            <input type="text" class="search-box" placeholder="세미나 검색..." id="searchInput">
+        </div>
+        <ul class="seminar-list" id="seminarList">
+            {% assign now = site.time %}
+            {% for seminar in site.seminars %}
+                {% assign seminar_date = seminar.date | date: '%Y-%m-%d' %}
+                {% assign today_date = now | date: '%Y-%m-%d' %}
+                {% if seminar_date >= today_date %}
+                <li class="seminar-item">
+                    <div class="seminar-title">
+                        <a target="_blank" href="{{seminar.link}}">{{seminar.title}}</a>
+                    </div>
+                    <div class="seminar-content">
+                        <div class="seminar-details">
+                            <p>일시: {{ seminar.date | date: '%Y년 %m월 %d일 (%a) %H:%M' }}</p>
+                            <p>장소: {{seminar.location}}</p>
+                            <div class="tags-container">
+                                {% for tag in seminar.tags %}
+                                <span class="tag">{{tag}}</span>
+                                {% endfor %}
+                            </div>
+                            {% if seminar.deadline %}
+                                {% assign now = site.time %}
+                                {% assign deadline = seminar.deadline | date: '%s' | plus: 0 %}
+                                {% assign current = now | date: '%s' | plus: 0 %}
+                                {% if deadline > current %}
+                                    <p class="deadline-info">
+                                        <span class="deadline-status">신청가능</span>
+                                        <span class="deadline-date">~ {{ seminar.deadline | date: '%Y년 %m월 %d일 %H:%M'}} 까지</span>
+                                    </p>
+                                {% else %}
+                                    <p class="deadline-info">
+                                        <span class="deadline-status closed">마감됨</span>
+                                    </p>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <div class="seminar-image-container">
+                            <div class="date-badge"></div>
+                            <img src="{{seminar.img}}" alt="seminar image" class="seminar-image">
+                        </div>
+                    </div>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 한국어 요일 매핑
+    const weekdayMap = {
+        'Mon': '월',
+        'Tue': '화',
+        'Wed': '수',
+        'Thu': '목',
+        'Fri': '금',
+        'Sat': '토',
+        'Sun': '일'
+    };
+
+    // 시간 정보가 있는 모든 p 태그를 찾습니다
+    const timeElements = document.querySelectorAll('.seminar-details p');
+    
+    timeElements.forEach(element => {
+        if (element.textContent.includes('일시:')) {
+            // 원본 시간 텍스트를 가져옵니다
+            const originalText = element.textContent;
+            
+            // 날짜 부분을 추출합니다
+            const dateMatch = originalText.match(/\d{4}년 \d{2}월 \d{2}일 \(([A-Za-z]+)\) (\d{2}:\d{2})/);
+            
+            if (dateMatch) {
+                // 요일을 한글로 변환합니다
+                const koreanWeekday = weekdayMap[dateMatch[1]];
+                
+                // 시간을 UTC+9로 변환합니다
+                const timeMatch = dateMatch[2].split(':');
+                let hours = parseInt(timeMatch[0]);
+                hours = (hours + 9) % 24;  // UTC to KST
+                
+                // 새로운 시간 문자열을 생성합니다
+                const newTimeStr = `${hours.toString().padStart(2, '0')}:${timeMatch[1]}`;
+                
+                // 전체 텍스트를 업데이트합니다
+                const newText = originalText.replace(/\([A-Za-z]+\)/, `(${koreanWeekday})`).replace(/\d{2}:\d{2}/, newTimeStr);
+                
+                element.textContent = newText;
+            }
+        }
+    });
+
+    // 날짜 차이 계산 및 배지 추가 함수
+    function updateDateBadges() {
+        const timeElements = document.querySelectorAll('.seminar-details p');
+        
+        timeElements.forEach(element => {
+            if (element.textContent.includes('일시:')) {
+                const seminarItem = element.closest('.seminar-item');
+                const dateBadge = seminarItem.querySelector('.date-badge');
+                
+                // 날짜 텍스트에서 날짜 부분만 추출
+                const dateText = element.textContent.match(/(\d{4})년 (\d{2})월 (\d{2})일/);
+                if (dateText) {
+                    const seminarDate = new Date(dateText[1], parseInt(dateText[2])-1, dateText[3]);
+                    const today = new Date();
+                    
+                    // 날짜 차이 계산 (밀리초를 일로 변환)
+                    const diffTime = seminarDate - today;
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    
+                    // 배지 텍스트 설정
+                    let badgeText = '';
+                    if (diffDays <= 0) {
+                        badgeText = '오늘';
+                    } else if (diffDays === 1) {
+                        badgeText = '내일';
+                    } else if (diffDays === 2) {
+                        badgeText = '모레';
+                    } else {
+                        badgeText = `D-${diffDays}`;
+                    }
+                    
+                    // 배지 스타일 설정
+                    let badgeColor = '';
+                    if (diffDays <= 3) {
+                        badgeColor = 'rgba(255, 87, 87, 0.9)';  // 임박한 세미나
+                    } else if (diffDays <= 7) {
+                        badgeColor = 'rgba(255, 156, 7, 0.9)';  // 이번 주 세미나
+                    } else {
+                        badgeColor = 'rgba(0, 0, 0, 0.7)';  // 나머지
+                    }
+                    
+                    dateBadge.textContent = badgeText;
+                    dateBadge.style.backgroundColor = badgeColor;
+                }
+            }
+        });
+    }
+
+    // 초기 배지 업데이트
+    updateDateBadges();
+});
+</script>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const seminarList = document.getElementById('seminarList');
+    const seminarItems = seminarList.getElementsByClassName('seminar-item');
+
+    // 검색 기능
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        
+        Array.from(seminarItems).forEach(item => {
+            const title = item.querySelector('.seminar-title').textContent.toLowerCase();
+            const info = item.querySelector('.seminar-details').textContent.toLowerCase();
+            
+            if (title.includes(searchTerm) || info.includes(searchTerm)) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+
+    // 태그 클릭 이벤트
+    document.querySelectorAll('.tag').forEach(tag => {
+        tag.style.cursor = 'pointer'; // 클릭 가능함을 표시
+        
+        // 호버 효과
+        tag.addEventListener('mouseover', function() {
+            this.style.backgroundColor = 'rgba(187, 134, 252, 0.2)';
+        });
+        
+        tag.addEventListener('mouseout', function() {
+            this.style.backgroundColor = 'rgba(187, 134, 252, 0.1)';
+        });
+        
+        // 클릭 이벤트
+        tag.addEventListener('click', function() {
+            const tagText = this.textContent;
+            searchInput.value = tagText;
+            // 검색 이벤트 트리거
+            searchInput.dispatchEvent(new Event('input'));
+            // 검색창에 포커스
+            searchInput.focus();
+        });
+    });
+</script>

@@ -1,0 +1,284 @@
+.seminar-container{    
+    $bg-primary: #121212;
+    $bg-secondary: #292929;
+    $text-primary: #ffffff;
+    $text-secondary: #b3b3b3;
+    $accent-color: #ed9d13;
+    $hover-color: #2a3844;
+    $link-color: #4a9ae1;
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    h1 {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    .seminar-item a {
+        background-position: center right;
+        background-repeat: no-repeat;
+        background-image: linear-gradient(transparent, transparent), url(/assets/img/svg/link.svg);
+        background-size: 13px;
+        background-position-y: center;
+        padding-inline-end: 16px;
+        color: $accent-color;
+    }
+    
+    .seminar-item a:hover {
+        color: $link-color;
+        text-decoration: none;
+    }
+    
+    .container {
+        padding: 0 15px;
+        width: 100%;
+    }
+    
+    .header {
+        background-color: $bg-secondary;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        margin-bottom: 20px;
+    }
+    
+    .search-box {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #333;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        background-color: $bg-primary;
+        color: $text-primary;
+        transition: border-color 0.3s ease;
+    }
+    
+    .search-box:focus {
+        outline: none;
+        border-color: $accent-color;
+    }
+    
+    .seminar-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 15px;
+    }
+    
+    .seminar-item:hover {
+        transform: translateY(-2px);
+        background-color: $hover-color;
+    }
+    
+    .seminar-info {
+        color: $text-secondary;
+        font-size: 14px;
+    }
+    
+    .seminar-info p {
+        margin-bottom: 8px;
+    }
+    
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+    }
+    
+    .tag {
+        display: inline-block;
+        background-color: rgba(187, 134, 252, 0.1);
+        color: $accent-color;
+        border-radius: 20px;
+        border: 1px solid $accent-color;
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+    
+    .tag:hover,
+    .tag:focus {
+        color: $link-color;
+        border: 1px solid $link-color;
+    }
+    
+    .seminar-item {
+        background-color: $bg-secondary;
+        border-radius: 12px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+        padding: 20px;
+    }
+    
+    .seminar-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: $accent-color;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .seminar-content {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+    }
+    
+    .seminar-details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .seminar-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 8px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+    
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+    }
+    
+    
+    .seminar-image-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        flex-shrink: 0;
+    }
+    
+    /* 날짜 배지 스타일 */
+    .date-badge {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background-color: $bg-primary;
+        color: $text-primary;
+        padding: 4px 8px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+        z-index: 1;
+        backdrop-filter: blur(4px);
+    }
+    
+    .seminar-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        object-fit: contain;
+        background: #232323;
+    }
+    
+    .deadline-info {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+    }
+    
+    .deadline-date {
+        color: $text-primary;
+    }
+    
+    .deadline-status {
+        display: inline-block;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 11px;
+        background-color: $link-color;
+        color: $text-primary;
+    }
+    
+    .deadline-status.closed {
+        color: $bg-secondary;
+        background-color: $text-secondary;
+    }
+
+
+    /* 반응형 디자인 */
+    @media (max-width: 600px) {
+        .container {
+            padding: 0 10px;
+        }
+    
+        .header {
+            padding: 15px;
+        }
+    
+        .header h1 {
+            font-size: 20px;
+        }
+    
+        .search-box {
+            padding: 10px;
+            font-size: 14px;
+        }
+    
+        .seminar-item {
+            padding: 15px;
+        }
+    
+        .seminar-title {
+            font-size: 16px;
+        }
+    
+        .seminar-info {
+            font-size: 13px;
+        }
+    
+        .seminar-image-container {
+            width: 100%;
+            height: 200px;
+            order: -1;
+        }
+    
+        .date-badge {
+            top: 12px;
+            right: 12px;
+            font-size: 12px;
+            padding: 5px 10px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .header h1 {
+            font-size: 18px;
+        }
+    }
+    
+    @media (max-width: 600px) {
+        .seminar-content {
+            flex-direction: column;
+        }
+    
+        .seminar-image {
+            width: 100%;
+            height: 200px;
+            order: -1;
+            background: #232323;
+        }
+        
+        .seminar-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+        }
+    }
+    
+}

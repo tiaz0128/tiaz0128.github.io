@@ -12,7 +12,7 @@ author:
   about:        <p class="saying">Eat Sleep Coding. </p>
                 <p class="saying">Never Never Giveup.</p>
                 <p>💫 Python &nbsp;|&nbsp; BackEnd &nbsp;|&nbsp; Cloud Architect &nbsp;|&nbsp; DevOps </p>
-
+    
 # Contact links
 email: tiaz0128.dev@gmail.com # Add your Email address
 phone: # Add your Phone number
@@ -30,6 +30,11 @@ highlighter:    rouge
 lsi: false
 excerpt_separator: "\n\n"
 incremental: false
+
+# 추가 포스트 설정
+collections:
+  seminars:
+    output: true
 
 include:
   - _pages
