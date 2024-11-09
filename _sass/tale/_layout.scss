@@ -11,6 +11,12 @@ footer,
   margin: 0 auto;
   max-width: 708px;
   width: 80%;
+
+  @media (max-width: 600px) {
+    #about{
+      display: none;
+    }
+  }
 }
 
 .nav {
