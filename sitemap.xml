@@ -26,6 +26,10 @@
     {% endif %}
     {% endfor %}
     <url>
+        <loc>https://tiaz.dev/seminars</loc>
+        <priority>0.1</priority>
+    </url>
+    <url>
         <loc>http://tiaz.dev/</loc>
         <priority>0.1</priority>
     </url>
