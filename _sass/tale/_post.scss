@@ -154,6 +154,12 @@
         }
     }
 
+    p.flex {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
     p {
         margin: 0 0 1rem;
         word-break: keep-all;
@@ -291,16 +297,17 @@
             margin-top: -15px;
             color: $grey-1;
         }
+
         &-a{
-            display: block;
-            width: 100%;
+            display: inline-block;
+            // width: 100%;
             font-size: 85%;
             text-align: center;
             background-color: unset;
             margin-top: -15px;
             color: $blue;
-            background-image: none !important;
-            padding-inline-end: 0px !important;
+            // background-image: none !important;
+            // padding-inline-end: 0px !important;
         }
     }
 
