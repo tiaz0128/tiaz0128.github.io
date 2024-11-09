@@ -194,6 +194,11 @@
     
     .deadline-date {
         color: $text-primary;
+        font-size: 12px;
+
+        a {
+            color: $text-secondary
+        }
     }
     
     .deadline-status {

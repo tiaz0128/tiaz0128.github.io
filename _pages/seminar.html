@@ -22,7 +22,7 @@ permalink: /seminars
                 {% if seminar_date >= today_date %}
                 <li class="seminar-item">
                     <div class="seminar-title">
-                        <a target="_blank" href="{{seminar.link}}">{{seminar.title}}</a>
+                        <a target="_blank" href="{{seminar.url}}">{{seminar.title}}</a>
                     </div>
                     <div class="seminar-content">
                         <div class="seminar-details">
@@ -40,7 +40,7 @@ permalink: /seminars
                                 {% if deadline > current %}
                                     <p class="deadline-info">
                                         <span class="deadline-status">신청가능</span>
-                                        <span class="deadline-date">~ {{ seminar.deadline | date: '%Y년 %m월 %d일 %H:%M'}} 까지</span>
+                                        <span class="deadline-date"><a target="_blank" href="{{seminar.link}}">~ {{ seminar.deadline | date: '%Y년 %m월 %d일 %H:%M'}} 까지</a></span>
                                     </p>
                                 {% else %}
                                     <p class="deadline-info">
