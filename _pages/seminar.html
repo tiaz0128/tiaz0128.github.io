@@ -130,10 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     let badgeText = '';
                     if (diffDays <= 0) {
                         badgeText = '오늘';
-                    } else if (diffDays === 1) {
-                        badgeText = '내일';
-                    } else if (diffDays === 2) {
-                        badgeText = '모레';
                     } else {
                         badgeText = `D-${diffDays}`;
                     }
