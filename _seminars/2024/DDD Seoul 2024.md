@@ -7,5 +7,5 @@ img: "https://eventusstorage.blob.core.windows.net/evs/Image/dddseoul/95037/Proj
 deadline: 2024-12-06 19:00:00 +0900
 link: "https://event-us.kr/dddseoul/event/95037?utm_source=eventus&utm_medium=organic&utm_campaign=channel-event"
 tags:
-  - 오픈소스
+  - 밋업
 ---
