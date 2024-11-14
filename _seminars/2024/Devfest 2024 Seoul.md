@@ -7,5 +7,5 @@ img: "https://cf.festa.io/img/2024-11-13/a62d3ad9-2b35-49ce-a693-88844d3e1eb1.pn
 deadline: 2024-12-14 00:00:00 +0900
 link: "https://festa.io/events/6361"
 tags:
-  - 밋업
+  - 준비중
 ---
