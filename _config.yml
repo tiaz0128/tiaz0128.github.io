@@ -31,6 +31,8 @@ lsi: false
 excerpt_separator: "\n\n"
 incremental: false
 
+timezone: Asia/Seoul
+
 # 추가 포스트 설정
 collections:
   seminars:
