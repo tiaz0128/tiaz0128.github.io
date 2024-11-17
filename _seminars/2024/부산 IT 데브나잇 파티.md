@@ -1,5 +1,5 @@
 ---
-title: "DDD Seoul 2024"
+title: "부산 IT 데브나잇 파티"
 date: 2024-11-23 17:00:00 
 location: "부산 해운대구 센텀동로 41 센텀벤처타운 6층 엘리스랩  라운지"
 origin: "https://mogacco.oopy.io/11fad97c-d174-80ac-8388-e5d091d6033b"
