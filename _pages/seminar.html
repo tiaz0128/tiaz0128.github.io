@@ -17,9 +17,11 @@ permalink: /seminars
         <ul class="seminar-list" id="seminarList">
             {% assign now = site.time %}
             {% for seminar in site.seminars %}
-                {% assign seminar_date = seminar.date | date: '%Y-%m-%d' %}
-                {% assign today_date = now | date: '%Y-%m-%d' %}
-                {% if seminar_date >= today_date %}
+                {% assign seminar_date = seminar.date | date: '%Y-%m-%d %H:%M:%S' %}
+                {% assign today_date = 'now' | date: '%Y-%m-%d %H:%M:%S' %}
+                {% assign today_date_kst = today_date | date: '%s' | plus: 32400 | date: '%Y-%m-%d %H:%M:%S' %}
+                {% assign seminar_date_kst = seminar_date | date: '%s' | plus: 32400 | date: '%Y-%m-%d %H:%M:%S' %}
+                {% if seminar_date_kst >= today_date_kst %}
                 <li class="seminar-item">
                     <div class="seminar-title">
                         <a target="_blank" href="{{seminar.origin}}">{{seminar.title}}</a>
@@ -94,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 시간을 UTC+9로 변환합니다
                 const timeMatch = dateMatch[2].split(':');
                 let hours = parseInt(timeMatch[0]);
+                hours = (hours + 9) % 24;  // UTC to KST
                 
                 // 새로운 시간 문자열을 생성합니다
                 const newTimeStr = `${hours.toString().padStart(2, '0')}:${timeMatch[1]}`;
