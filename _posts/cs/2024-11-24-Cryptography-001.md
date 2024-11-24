@@ -154,4 +154,4 @@ tags: [암호학, 대칭키, 비대칭키]
 
 아래의 영상에서 공개키가 '소인수 분해'로 동작하는 원리를 잘 설명해주고 있으니 한번 보시는 것을 추천드립니다!
 
-[YouTube : “전세계를 해킹 가능“ 양자컴퓨터로 ...\| 김범준 교수](https://youtu.be/itlJrSUNSMw?si=Wn5ADjLjP779FUUo&t=583)
+[YouTube : “전세계를 해킹 가능“ 양자컴퓨터로 ...\| 김범준 교수](https://youtu.be/itlJrSUNSMw?si=Wn5ADjLjP779FUUo&t=583){:target="_blank"}
