@@ -1,5 +1,6 @@
 ---
 layout: category
-title:  flask
+catalogue: flask
+title:  Flask
 permalink: /category/flask
 ---

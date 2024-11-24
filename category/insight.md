@@ -1,5 +1,6 @@
 ---
 layout: category
-title:  insight
+catalogue: insight
+title:  Insight
 permalink: /category/insight
 ---

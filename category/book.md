@@ -1,5 +1,6 @@
 ---
 layout: category
-title:  book
+catalogue: book
+title:  Book
 permalink: /category/book
 ---

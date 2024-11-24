@@ -1,5 +1,6 @@
 ---
 layout: category
-title:  tool
+catalogue:  tool
+title: Tool
 permalink: /category/tool
 ---
