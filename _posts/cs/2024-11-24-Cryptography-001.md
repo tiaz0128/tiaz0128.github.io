@@ -121,12 +121,12 @@ tags: [암호학, 대칭키, 비대칭키]
 
 '키 배송 문제'를 해결하는 방법에는 몇가지 방법이 있습니다. 그 중에서 가장 대표적인 방법이 '비대칭키 암호화' 방식입니다.
 
-간단하게 설명하자면 두 개의 키가 존재하는 암호화 방식입니다. 암호화에 사용하는 키 따로, 복호화에 사용하는 키 따로 존재하는 방식 입니다. 암호화/복호화에 사용하는 키가 때문에 '비대칭키'라 합니다. 두 개의 키는 아래와 같습니다.
+간단하게 설명하자면 두 개의 키가 존재하는 암호화 방식입니다. 암호화에 사용하는 키 따로, 복호화에 사용하는 키 따로 존재하는 방식 입니다. 암호화/복호화에 사용하는 키가 다르기 때문에 '비대칭키'라 합니다. 두 개의 키는 아래와 같습니다.
 
 - '누구나 볼수 있는 키' = '공개키(public-key)'
 - '본인만 갖고 있는 키' = '개인키(private-key)'
 
-![암호화 복호화](/assets/img/content/cs/Cryptography/008.png)
+![암호화 복호화](/assets/img/content/cs/Cryptography/014.png){:.img-m}
 
 `> 비대칭키 : 두 개의 키를 사용하여 암호화와 복호화를 하는 방법`{:.img-caption}
 
@@ -160,34 +160,45 @@ tags: [암호학, 대칭키, 비대칭키]
 
 이놈도 저놈도 사용하려니 뭔가 부족해 보입니다. 그래서 실제로는 **두 방식을 같이 사용하는 경우가 많습니다.**{:.orange}
 
-## 예시 : SSH 연결
+## 예시 : GitHub SSH 설정
 
 ---
 
-AWS에서 EC2 서버에 SSH(22)로 접속하는 과정을 한번 생각해 봅시다.EC2 인스턴스를 생성하면서 키 페어를 생성할 수 있습니다. 이때 생성되는 키 페어는 비대칭키를 의미합니다.
+<div class="callout">:memo:
+  <div>
+    <span>'GitHub에 SSH 설정법'을 잘 모르시면 </span>
+    <a href="/GitHub/1" target="_blank">
+        <strong>"SSH 로 GitHub 연결"</strong>
+    </a> &nbsp; 글을 확인 해주세요!
+  </div>
+</div>
 
-- EC2 서버에는 공개키(public-key)
-- 다운로드 받는 개인키(private-key)
+GitHub에 SSH 설정하는 과정을 한번 생각해 봅시다. 사용자가 직접 비대칭키를 만들어서 개인키는 보관하고, 공개키를 GitHub에 등록 합니다.
 
-![암호화 복호화](/assets/img/content/cs/Cryptography/009.png)
+- GitHub 서버에는 공개키(public-key)
+- 사용자만 가지고 있는 개인키(private-key)
 
-`> AWS EC2 생성시, 키 페어를 지정`{:.img-caption}
+![암호화 복호화](/assets/img/content/cs/Cryptography/013.png){:.img-m}
+
+`> 사용자가 GitHub에 등록한 공개키는 누구나 확인 가능하다`{:.img-caption}
 
 ### 초기 연결 설정 (비대칭키 사용)
 
-1. 클라이언트는 세션에서 사용할 임시 대칭키(세션 키)를 생성
-2. 클라이언트는 이 세션 키를 다운로드 받은 개인키(private-key)로 암호화하여 서버에 전송
-3. 서버는 자신의 공개키(public-key)로 암호화된 세션 키를 복호화
+1. 사용자는 세션에서 사용할 임시 대칭키(세션 키)를 생성
+2. 사용자는 이 세션 키를 개인키(private-key)로 암호화하여 GitHub 서버에 전송
+3. GitHub 서버는 자신의 공개키(public-key)로 암호화된 세션 키를 복호화
 
-![암호화 복호화](/assets/img/content/cs/Cryptography/011.png){:.img-m}
+![암호화 복호화](/assets/img/content/cs/Cryptography/015.png){:.img-m}
 
 `> 대칭키를 비대칭키로 암호화해서 안전하게 배송한다.`{:.img-caption}
+
+만약 GitHub가 가진 공개키로 제대로 복호화가 진행되지 않는다면, 즉 공개키의 짝인 개인키가 아니면 사용자는 인증에 실패하게 됩니다. 비밀키를 가진 사람만 해당 GitHub 인증을 통과 할 수 있겠죠?
 
 ### 이후 통신 (대칭키 사용)
 
 양쪽 모두 동일한 세션 키를 공유하게 되었으므로, 이후의 모든 통신은 이 대칭키를 사용하여 안전하게 데이터를 암호화/복호화 할 수 있게 됩니다. 이런 방식은 SSH뿐만 아니라 HTTPS 등 많은 보안 프로토콜에서 사용되는 일반적인 패턴입니다.
 
-![암호화 복호화](/assets/img/content/cs/Cryptography/012.png){:.img-m}
+![암호화 복호화](/assets/img/content/cs/Cryptography/016.png){:.img-m}
 
 ## 마무리
 
