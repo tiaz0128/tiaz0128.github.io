@@ -224,5 +224,17 @@ GitHub에 SSH 설정하는 과정을 한번 생각해 봅시다. 사용자가 �
 
 아래의 영상에서 공개키가 '소인수 분해'로 동작하는 원리를 잘 설명해주고 있으니 한번 보시는 것을 추천드립니다!
 
-- [YouTube : 생활코딩 \| 암호학1 - 4.1. 양방향 암호화 - 비대칭키(공개키 방식)](https://youtu.be/MR4sCU82tgo?si=TVrWz4WguRCkEL1O)
-- [YouTube : 스파르타 연구소 \| “전세계를 해킹 가능“ 양자컴퓨터로 ...\| 김범준 교수](https://youtu.be/itlJrSUNSMw?si=Wn5ADjLjP779FUUo&t=583){:target="_blank"}
+<ul>
+  <li>
+    <span class="logos--youtube"></span>
+    <a href="https://youtu.be/MR4sCU82tgo?si=TVrWz4WguRCkEL1O" target="_blank">
+      생활코딩 : 암호학1 - 4.1. 양방향 암호화 - 비대칭키 (공개키 방식)
+    </a>
+  </li>
+  <li>
+    <span class="logos--youtube"></span>
+    <a href="https://youtu.be/itlJrSUNSMw?si=Wn5ADjLjP779FUUo&t=583" target="_blank">
+        스파르타 연구소 :  “전세계를 해킹 가능“ 양자컴퓨터로 ... | 김범준 교수
+    </a>
+  </li>
+</ul>
