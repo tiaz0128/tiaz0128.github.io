@@ -23,13 +23,13 @@ Made with Jekyll using the [Tale](https://github.com/chesterhow/tale) theme.
 ### 1. Gemefile.lock 파일 생성
 
 ```bash
-$ docker-compose up gemfile
+$ docker compose up gemfile
 ```
 
-### 2. docker-compose up
+### 2. docker compose up
 
 ```bash
-$ docker-compose up dev --build
+$ docker compose up dev --build
 
-$ docker-compose down
+$ docker compose down
 ```

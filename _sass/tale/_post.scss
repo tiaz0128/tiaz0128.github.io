@@ -313,6 +313,7 @@
         }
     }
 
+    // 유투브 임베드 영상
     .youtube {
         display: flex;
         justify-content: center;
@@ -450,7 +451,7 @@
         flex-direction: column;
 
         .book {
-            width: 24% !important;
+            width: 50% !important;
             align-self: center;
             margin: 1rem 0 0.5rem !important;
         }
