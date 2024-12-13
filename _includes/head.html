@@ -8,9 +8,9 @@
   <meta property="og:locale" content="ko_KR">
 
   {% if page.subject %}
-  <meta property="og:image" content="{{site.baseurl}}/assets/img/title/{{page.catalogue}}/{{page.subject}}.png" />
-  <meta name="twitter:image" content="{{site.baseurl}}/assets/img/title/{{page.catalogue}}/{{page.subject}}.png" />
-  <meta property="og:image:alt" content={{page.subtitle}} />
+  <meta property="og:image" content="https://tiaz.dev/assets/img/title/{{ page.catalogue }}/{{ page.subject }}.png" />
+  <meta name="twitter:image" content="https://tiaz.dev/assets/img/title/{{ page.catalogue }}/{{ page.subject }}.png" />
+  <meta property="og:image:alt" content="{{page.subtitle}}" />
   {% else %}
   <meta property="og:image" content={{ site.author.pic }} />
   <meta name="twitter:image" content={{ site.author.pic }} />
