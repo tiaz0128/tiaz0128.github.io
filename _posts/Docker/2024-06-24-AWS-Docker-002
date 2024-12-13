@@ -4,7 +4,7 @@ date: 2024-06-24
 catalogue: "AWS"
 subject: "AWS-Docker"
 title: "AWS Pipline - Docker 배포"
-subtitle: "Pipline으로 Docker 배포 해보기"
+description: "Pipline으로 Docker 배포 해보기"
 author: tiaz0128
 permalink: /Docker/2
 tags: [AWS, Docker]

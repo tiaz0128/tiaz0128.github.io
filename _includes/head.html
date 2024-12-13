@@ -3,14 +3,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  {% seo locale=false%}
+  {% seo locale=false %}
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ko_KR">
 
   {% if page.subject %}
   <meta property="og:image" content="https://tiaz.dev/assets/img/title/{{ page.catalogue }}/{{ page.subject }}.png" />
   <meta name="twitter:image" content="https://tiaz.dev/assets/img/title/{{ page.catalogue }}/{{ page.subject }}.png" />
-  <meta property="og:image:alt" content="{{page.subtitle}}" />
+  <meta property="og:image:alt" content="{{page.description}}" />
   {% else %}
   <meta property="og:image" content={{ site.author.pic }} />
   <meta name="twitter:image" content={{ site.author.pic }} />

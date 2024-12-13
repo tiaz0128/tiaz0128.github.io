@@ -4,7 +4,7 @@ date: 2024-06-06
 catalogue: "Celery"
 subject: "Celery"
 title: "Celery : 자동 웹비나 참석"
-subtitle: "Celery Beat와 Google calendar를 활용한 자동 웹비나 참석"
+description: "Celery Beat와 Google calendar를 활용한 자동 웹비나 참석"
 author: tiaz0128
 permalink: /Celery/2
 tags: [Celery, Beat]
