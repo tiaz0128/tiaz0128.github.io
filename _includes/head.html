@@ -8,8 +8,8 @@
   <meta property="og:locale" content="ko_KR">
 
   {% if page.subject %}
-  <meta property="og:image" content="/assets/img/title/{{page.catalogue}}/{{page.subject}}.png" />
-  <meta name="twitter:image" content="/assets/img/title/{{page.catalogue}}/{{page.subject}}.png" />
+  <meta property="og:image" content="{{site.baseurl}}/assets/img/title/{{page.catalogue}}/{{page.subject}}.png" />
+  <meta name="twitter:image" content="{{site.baseurl}}/assets/img/title/{{page.catalogue}}/{{page.subject}}.png" />
   <meta property="og:image:alt" content={{page.subtitle}} />
   {% else %}
   <meta property="og:image" content={{ site.author.pic }} />
