@@ -7,14 +7,15 @@
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ko_KR">
 
-  {% if page.img %}
-  <meta property="og:image" content={{ page.img }} />
-  <meta name="twitter:image" content={{ page.img }} />
+  {% if page.subject %}
+  <meta property="og:image" content="/assets/img/title/{{page.catalogue}}/{{page.subject}}.png" />
+  <meta name="twitter:image" content="/assets/img/title/{{page.catalogue}}/{{page.subject}}.png" />
+  <meta property="og:image:alt" content={{page.subtitle}} />
   {% else %}
   <meta property="og:image" content={{ site.author.pic }} />
   <meta name="twitter:image" content={{ site.author.pic }} />
-  {% endif %}
   <meta property="og:image:alt" content="Eat Sleep Coding. Never Never Giveup." />
+  {% endif %}
 
   <!-- CSS -->
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
