@@ -22,7 +22,7 @@ permalink: /seminars
                 {% assign today_date_kst = today_date | date: '%s' | plus: 32400 | date: '%Y-%m-%d %H:%M:%S' %}
                 {% assign seminar_date_kst = seminar_date | date: '%s' | plus: 32400 | date: '%Y-%m-%d %H:%M:%S' %}
                 {% if seminar_date_kst >= today_date_kst %}
-                <li class="seminar-item">
+                <li class="seminar-item" data-date="{{ seminar.date | date: '%Y-%m-%dT%H:%M:%S' }}">
                     <div class="seminar-title">
                         <a target="_blank" href="{{seminar.origin}}">{{seminar.title}}</a>
                     </div>
@@ -155,6 +155,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 초기 배지 업데이트
     updateDateBadges();
+
+    // 하루 이상 지난 세미나 숨기기
+    function hideOldSeminars() {
+        const seminars = document.querySelectorAll('.seminar-item');
+        const now = new Date();
+
+        seminars.forEach(seminar => {
+            const seminarDate = new Date(seminar.getAttribute('data-date'));
+            const timeDifference = now - seminarDate;
+            const daysDifference = timeDifference / (1000 * 3600 * 24);
+
+            if (daysDifference > 1) {
+                seminar.style.display = 'none';
+            }
+        });
+    }
+
+    hideOldSeminars();
 });
 </script>
 
