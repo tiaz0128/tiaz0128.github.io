@@ -15,20 +15,15 @@ permalink: /seminars
             <input type="text" class="search-box" placeholder="세미나 검색..." id="searchInput">
         </div>
         <ul class="seminar-list" id="seminarList">
-            {% assign now = site.time %}
             {% for seminar in site.seminars %}
-                {% assign seminar_date = seminar.date | date: '%Y-%m-%d %H:%M:%S' %}
-                {% assign today_date = 'now' | date: '%Y-%m-%d %H:%M:%S' %}
-                {% assign today_date_kst = today_date | date: '%s' | plus: 32400 | date: '%Y-%m-%d %H:%M:%S' %}
-                {% assign seminar_date_kst = seminar_date | date: '%s' | plus: 32400 | date: '%Y-%m-%d %H:%M:%S' %}
-                {% if seminar_date_kst >= today_date_kst %}
-                <li class="seminar-item" data-date="{{ seminar.date | date: '%Y-%m-%dT%H:%M:%S' }}">
+                <li class="seminar-item" data-seminar-date="{{ seminar.date | date: '%Y-%m-%d %H:%M:%S' }}" 
+                    {% if seminar.deadline %}data-deadline="{{ seminar.deadline | date: '%Y-%m-%d %H:%M:%S' }}"{% endif %}>
                     <div class="seminar-title">
                         <a target="_blank" href="{{seminar.origin}}">{{seminar.title}}</a>
                     </div>
                     <div class="seminar-content">
                         <div class="seminar-details">
-                            <p>일시: {{ seminar.date | date: '%Y년 %m월 %d일 (%a) %H:%M' }}</p>
+                            <p class="seminar-date">일시: {{ seminar.date | date: '%Y년 %m월 %d일 (%a) %H:%M' }}</p>
                             <p>장소: {{seminar.location}}</p>
                             <div class="tags-container">
                                 {% for tag in seminar.tags %}
@@ -36,19 +31,10 @@ permalink: /seminars
                                 {% endfor %}
                             </div>
                             {% if seminar.deadline %}
-                                {% assign now = site.time %}
-                                {% assign deadline = seminar.deadline | date: '%s' | plus: 0 %}
-                                {% assign current = now | date: '%s' | plus: 0 %}
-                                {% if deadline > current %}
-                                    <p class="deadline-info">
-                                        <span class="deadline-status">신청가능</span>
-                                        <span class="deadline-date"><a target="_blank" href="{{seminar.link}}">~ {{ seminar.deadline | date: '%Y년 %m월 %d일 %H:%M'}} 까지</a></span>
-                                    </p>
-                                {% else %}
-                                    <p class="deadline-info">
-                                        <span class="deadline-status closed">마감됨</span>
-                                    </p>
-                                {% endif %}
+                            <p class="deadline-info">
+                                <span class="deadline-status"></span>
+                                <span class="deadline-date"><a target="_blank" href="{{seminar.link}}">~ {{ seminar.deadline | date: '%Y년 %m월 %d일 %H:%M'}} 까지</a></span>
+                            </p>
                             {% endif %}
                         </div>
                         <div class="seminar-image-container">
@@ -59,7 +45,6 @@ permalink: /seminars
                         </div>
                     </div>
                 </li>
-                {% endif %}
             {% endfor %}
         </ul>
     </div>
@@ -67,7 +52,6 @@ permalink: /seminars
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // 한국어 요일 매핑
     const weekdayMap = {
         'Mon': '월',
         'Tue': '화',
@@ -78,130 +62,100 @@ document.addEventListener('DOMContentLoaded', function() {
         'Sun': '일'
     };
 
-    // 시간 정보가 있는 모든 p 태그를 찾습니다
-    const timeElements = document.querySelectorAll('.seminar-details p');
-    
-    timeElements.forEach(element => {
-        if (element.textContent.includes('일시:')) {
-            // 원본 시간 텍스트를 가져옵니다
-            const originalText = element.textContent;
-            
-            // 날짜 부분을 추출합니다
-            const dateMatch = originalText.match(/\d{4}년 \d{2}월 \d{2}일 \(([A-Za-z]+)\) (\d{2}:\d{2})/);
-            
-            if (dateMatch) {
-                // 요일을 한글로 변환합니다
-                const koreanWeekday = weekdayMap[dateMatch[1]];
-                
-                // 시간을 UTC+9로 변환합니다
-                const timeMatch = dateMatch[2].split(':');
-                let hours = parseInt(timeMatch[0]);
-                hours = (hours + 9) % 24;  // UTC to KST
-                
-                // 새로운 시간 문자열을 생성합니다
-                const newTimeStr = `${hours.toString().padStart(2, '0')}:${timeMatch[1]}`;
-                
-                // 전체 텍스트를 업데이트합니다
-                const newText = originalText.replace(/\([A-Za-z]+\)/, `(${koreanWeekday})`).replace(/\d{2}:\d{2}/, newTimeStr);
-                
-                element.textContent = newText;
-            }
-        }
-    });
-
-    // 날짜 차이 계산 및 배지 추가 함수
-    function updateDateBadges() {
-        const timeElements = document.querySelectorAll('.seminar-details p');
+    function updateSeminarVisibility() {
+        const now = new Date();
+        const seminarItems = document.querySelectorAll('.seminar-item');
         
-        timeElements.forEach(element => {
-            if (element.textContent.includes('일시:')) {
-                const seminarItem = element.closest('.seminar-item');
-                const dateBadge = seminarItem.querySelector('.date-badge');
-                
-                // 날짜 텍스트에서 날짜 부분만 추출
-                const dateText = element.textContent.match(/(\d{4})년 (\d{2})월 (\d{2})일/);
-                if (dateText) {
-                    const seminarDate = new Date(dateText[1], parseInt(dateText[2])-1, dateText[3]);
-                    const today = new Date();
-                    
-                    // 날짜 차이 계산 (밀리초를 일로 변환)
-                    const diffTime = seminarDate - today;
-                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                    
-                    // 배지 텍스트 설정
-                    let badgeText = '';
-                    if (diffDays <= 0) {
-                        badgeText = '오늘';
-                    } else {
-                        badgeText = `D-${diffDays}`;
-                    }
-                    
-                    // 배지 스타일 설정
-                    let badgeColor = '';
-                    if (diffDays <= 3) {
-                        badgeColor = 'rgba(255, 87, 87, 0.9)';  // 임박한 세미나
-                    } else if (diffDays <= 7) {
-                        badgeColor = 'rgba(255, 156, 7, 0.9)';  // 이번 주 세미나
-                    } else {
-                        badgeColor = 'rgba(0, 0, 0, 0.7)';  // 나머지
-                    }
-                    
-                    dateBadge.textContent = badgeText;
-                    dateBadge.style.backgroundColor = badgeColor;
-                }
+        seminarItems.forEach(item => {
+            const seminarDate = new Date(item.dataset.seminarDate);
+            if (seminarDate < now) {
+                item.style.display = 'none';
             }
         });
     }
 
-    // 초기 배지 업데이트
+    function updateDeadlineStatus() {
+        const now = new Date();
+        const deadlineInfos = document.querySelectorAll('.deadline-info');
+        
+        deadlineInfos.forEach(info => {
+            const seminarItem = info.closest('.seminar-item');
+            const deadlineDate = new Date(seminarItem.dataset.deadline);
+            const statusElement = info.querySelector('.deadline-status');
+            
+            if (deadlineDate > now) {
+                statusElement.textContent = '신청가능';
+                statusElement.classList.remove('closed');
+            } else {
+                statusElement.textContent = '마감됨';
+                statusElement.classList.add('closed');
+            }
+        });
+    }
+
+    function updateDateBadges() {
+        const now = new Date();
+        const seminarItems = document.querySelectorAll('.seminar-item');
+        
+        seminarItems.forEach(item => {
+            const seminarDate = new Date(item.dataset.seminarDate);
+            const dateBadge = item.querySelector('.date-badge');
+            
+            const diffTime = seminarDate - now;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            let badgeText = '';
+            if (diffDays <= 0) {
+                badgeText = '오늘';
+            } else {
+                badgeText = `D-${diffDays}`;
+            }
+            
+            let badgeColor = '';
+            if (diffDays <= 3) {
+                badgeColor = 'rgba(255, 87, 87, 0.9)';
+            } else if (diffDays <= 7) {
+                badgeColor = 'rgba(255, 156, 7, 0.9)';
+            } else {
+                badgeColor = 'rgba(0, 0, 0, 0.7)';
+            }
+            
+            dateBadge.textContent = badgeText;
+            dateBadge.style.backgroundColor = badgeColor;
+        });
+    }
+
+    // 초기 업데이트
+    updateSeminarVisibility();
+    updateDeadlineStatus();
     updateDateBadges();
 
-    // 하루 이상 지난 세미나 숨기기
-    function hideOldSeminars() {
-        const seminars = document.querySelectorAll('.seminar-item');
-        const now = new Date();
-
-        seminars.forEach(seminar => {
-            const seminarDate = new Date(seminar.getAttribute('data-date'));
-            const timeDifference = now - seminarDate;
-            const daysDifference = timeDifference / (1000 * 3600 * 24);
-
-            if (daysDifference > 1) {
-                seminar.style.display = 'none';
-            }
-        });
-    }
-
-    hideOldSeminars();
-});
-</script>
-
-<script>
+    // 검색 기능
     const searchInput = document.getElementById('searchInput');
     const seminarList = document.getElementById('seminarList');
     const seminarItems = seminarList.getElementsByClassName('seminar-item');
 
-    // 검색 기능
     searchInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
         
         Array.from(seminarItems).forEach(item => {
-            const title = item.querySelector('.seminar-title').textContent.toLowerCase();
-            const info = item.querySelector('.seminar-details').textContent.toLowerCase();
-            
-            if (title.includes(searchTerm) || info.includes(searchTerm)) {
-                item.style.display = '';
-            } else {
-                item.style.display = 'none';
+            if (item.style.display !== 'none') {  // 이미 지난 세미나는 검색에서 제외
+                const title = item.querySelector('.seminar-title').textContent.toLowerCase();
+                const info = item.querySelector('.seminar-details').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || info.includes(searchTerm)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
             }
         });
     });
 
     // 태그 클릭 이벤트
     document.querySelectorAll('.tag').forEach(tag => {
-        tag.style.cursor = 'pointer'; // 클릭 가능함을 표시
+        tag.style.cursor = 'pointer';
         
-        // 호버 효과
         tag.addEventListener('mouseover', function() {
             this.style.backgroundColor = 'rgba(187, 134, 252, 0.2)';
         });
@@ -210,14 +164,11 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.backgroundColor = 'rgba(187, 134, 252, 0.1)';
         });
         
-        // 클릭 이벤트
         tag.addEventListener('click', function() {
-            const tagText = this.textContent;
-            searchInput.value = tagText;
-            // 검색 이벤트 트리거
+            searchInput.value = this.textContent;
             searchInput.dispatchEvent(new Event('input'));
-            // 검색창에 포커스
             searchInput.focus();
         });
     });
+});
 </script>
