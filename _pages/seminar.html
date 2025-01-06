@@ -26,13 +26,13 @@ permalink: /seminars
                             <p class="seminar-date">✨일시: {{ seminar.date | date: '%Y년 %m월 %d일' }} 
                                 {%- assign day = seminar.date | date: '%a' -%}
                                 {%- case day -%}
-                                  {%- when 'Mon' -%}(월)
-                                  {%- when 'Tue' -%}(화)
-                                  {%- when 'Wed' -%}(수)
-                                  {%- when 'Thu' -%}(목)
-                                  {%- when 'Fri' -%}(금)
-                                  {%- when 'Sat' -%}(토) 
-                                  {%- when 'Sun' -%}(일)
+                                  {%- when 'Mon' -%}(월)&nbsp;
+                                  {%- when 'Tue' -%}(화)&nbsp;
+                                  {%- when 'Wed' -%}(수)&nbsp;
+                                  {%- when 'Thu' -%}(목)&nbsp;
+                                  {%- when 'Fri' -%}(금)&nbsp;
+                                  {%- when 'Sat' -%}(토)&nbsp;
+                                  {%- when 'Sun' -%}(일)&nbsp;
                                 {%- endcase -%}
                                 {{ seminar.date | date: '%H:%M' }}
                             </p>
