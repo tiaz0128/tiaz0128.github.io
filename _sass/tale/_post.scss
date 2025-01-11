@@ -50,7 +50,7 @@
     &-subtile {
         color: $grey-1;
         font-family: $sans-serif;
-        font-size: 12px;
+        font-size: 14px;
     }
 
     &-writer {
@@ -104,6 +104,7 @@
         
         text-align: left;
         margin-bottom: 2rem;
+        flex-flow: wrap;
 
         a {
             background-color: $back-color;
