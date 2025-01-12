@@ -4,6 +4,9 @@ description:    "밥잠코. 절절포!"
 baseurl:        ""
 url:            https://tiaz.dev
 
+site:
+  name: "" 
+
 # Author
 author:         
   name:         tiaz
@@ -59,7 +62,6 @@ paginate:       5
 
 # Excludes
 exclude: [ Gemfile, Gemfile.lock, tale.gemspec ]
-
 
 host: "0.0.0.0"
 livereload: true
