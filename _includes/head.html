@@ -12,6 +12,9 @@
   {% if paginator.page %}
   <meta name="robots" content="noindex, follow">
   {% endif %}
+  {% if page.url contains "/category" or page.url == "/seminars" %}
+  <meta name="robots" content="noindex, follow">
+  {% endif %}
 
   {% seo locale=false %}
   <meta property="og:type" content="website" />
