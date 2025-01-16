@@ -28,7 +28,7 @@ layout: null
   <url>
     <loc>{{ site.url }}/tags.html</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
 

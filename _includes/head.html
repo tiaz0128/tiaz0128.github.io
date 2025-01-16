@@ -9,6 +9,9 @@
   <meta name="description" content="요청하신 페이지를 찾을 수 없습니다. 다른 콘텐츠를 확인해보세요.">
   <link rel="canonical" href="https://tiaz.dev/404.html">
   {% endif %}
+  {% if paginator.page %}
+  <meta name="robots" content="noindex, follow">
+  {% endif %}
 
   {% seo locale=false %}
   <meta property="og:type" content="website" />
