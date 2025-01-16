@@ -1,48 +1,50 @@
 ---
+layout: null
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    {% for post in site.posts %}
-    <url>
-        <loc>{{ site.url }}{{ post.url | remove: 'index.html' }}</loc>
-        <priority>1</priority>
-    </url>
-    {% endfor %}
 
-    {% for page in site.pages %}
-    {% if page.layout != nil %}
-    {% if page.layout != 'feed' %}
-    {% if page.title != 'Search' %}
-    {% if page.title != '404' %}
-    {% unless page.url contains 'page' %}
+  <!-- 블로그 포스트 URL -->
+  {% for post in site.posts %}
+    {% assign days_since_update = site.time | date: "%s" | minus: post.date | divided_by: 86400 %}
     <url>
-        <loc>{{ site.url }}{{ page.url | remove: 'index.html' }}</loc>
-        <priority>0.5</priority>
+      <loc>{{ site.url }}{{ post.url | uri_escape }}</loc>
+      <lastmod>{{ post.upd_date | default: post.date | date_to_xmlschema }}</lastmod>
+      
+      {% if days_since_update <= 7 %}
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+      {% elsif days_since_update <= 30 %}
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+      {% else %}
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+      {% endif %}
     </url>
-    {% endunless %}
-    {% endif %}
-    {% endif %}
-    {% endif %}
-    {% endif %}
-    {% endfor %}
-    <url>
-        <loc>https://tiaz.dev/seminars</loc>
-        <priority>0.1</priority>
-    </url>
-    <url>
-        <loc>http://tiaz.dev/</loc>
-        <priority>0.1</priority>
-    </url>
-    <url>
-        <loc>http://www.tiaz.dev/</loc>
-        <priority>0.1</priority>
-    </url>
-    <url>
-        <loc>https://tiaz.dev/assets/search/search.json</loc>
-        <priority>0.1</priority>
-    </url>
-    <url>
-        <loc>https://tiaz.dev/feed.xml</loc>
-        <priority>0.1</priority>
-    </url>
+  {% endfor %}
+
+  <!-- 페이지 URL (tags, about) -->
+  <url>
+    <loc>{{ site.url }}/tags.html</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>{{ site.url }}/about.html</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+
+  <!-- RSS 피드 -->
+  <url>
+    <loc>{{ site.url }}/feed.xml</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.2</priority>
+  </url>
+
 </urlset>
