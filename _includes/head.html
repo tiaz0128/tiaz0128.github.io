@@ -3,18 +3,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+  <!-- SEO 최적화 -->
+  {% if page.url == "/404.html" %}
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="요청하신 페이지를 찾을 수 없습니다. 다른 콘텐츠를 확인해보세요.">
+  <link rel="canonical" href="https://tiaz.dev/404.html">
+  {% endif %}
+
   {% seo locale=false %}
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ko_KR">
 
   {% if page.subject %}
-  <meta property="og:image" content="https://tiaz.dev/assets/img/title/{{ page.catalogue }}/{{ page.subject }}.png" />
-  <meta name="twitter:image" content="https://tiaz.dev/assets/img/title/{{ page.catalogue }}/{{ page.subject }}.png" />
+  <meta property="og:image" content="{{ site.url }}//assets/img/title/{{ page.catalogue }}/{{ page.subject }}.png" />
+  <meta name="twitter:image" content="{{ site.url }}//assets/img/title/{{ page.catalogue }}/{{ page.subject }}.png" />
   <meta property="og:image:alt" content="{{page.description}}" />
   {% else %}
   <meta property="og:image" content={{ site.author.pic }} />
   <meta name="twitter:image" content={{ site.author.pic }} />
-  <meta property="og:image:alt" content="Eat Sleep Coding. Never Never Giveup." />
+  <meta property="og:image:alt" content="Eat Sleep Coding. Never Never GiveUp." />
   {% endif %}
 
   <!-- CSS -->

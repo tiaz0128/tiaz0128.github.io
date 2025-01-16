@@ -2,7 +2,7 @@
 
 [https://tiaz.dev/](https://tiaz.dev/)
 
-Eat Sleep Coding. Never Never Giveup.
+Eat Sleep Coding. Never Never GiveUp.
 
 밥잠코. 절절포
 
