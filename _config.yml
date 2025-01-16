@@ -4,6 +4,8 @@ header:         "tiaz.dev"
 description:    "밥잠코. 절절포!"
 baseurl:        ""
 url:            https://tiaz.dev
+locale: "ko_KR"
+lang: "ko"
 
 # Author
 author:         
