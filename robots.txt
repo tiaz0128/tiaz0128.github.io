@@ -8,8 +8,5 @@ Allow: /
 
 Disallow: /assets/js/
 Disallow: /assets/json/
-Disallow: /category
-Disallow: /seminars
-Disallow: /page
 
 Sitemap: {{ site.url }}/sitemap.xml
