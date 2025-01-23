@@ -456,59 +456,63 @@
     a {
         text-decoration: none;
     }
-}
+    
+    .nav-links {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
 
-.nav-links {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-}
+    .nav-previous,
+    .nav-next {
+        flex: 1;
+        padding: 1rem;
+        text-decoration: none;
+        color: #e1e1e1;
+        background: #1a1a1a;
+        border-radius: 4px;
+        transition: all 0.3s ease;
 
-.nav-previous,
-.nav-next {
-    flex: 1;
-    padding: 1rem;
-    text-decoration: none;
-    color: #e1e1e1;
-    background: #1a1a1a;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
+        &:hover {
+            background: #2a2a2a;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+    }
 
-.nav-previous:hover,
-.nav-next:hover {
-    background: #2a2a2a;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-}
+    .nav-previous {
+        text-align: left;
+    }
 
-.nav-previous {
-    text-align: left;
-}
+    .nav-next {
+        text-align: right;
+    }
 
-.nav-next {
-    text-align: right;
-}
+    .nav-subtitle {
+        display: block;
+        font-size: 0.8rem;
+        color: #d2d2d2;
+        margin-bottom: 0.5rem;
+    }
 
-.nav-subtitle {
-    display: block;
-    font-size: 0.8rem;
-    color: #d2d2d2;
-    margin-bottom: 0.5rem;
-}
+    .nav-title {
+        display: block;
+        color: $default-title;
+        font-weight: bold;
+        font-size: 1rem;
 
-.nav-title {
-    display: block;
-    font-weight: bold;
-    font-size: 1rem;
-}
+        &:hover {
+            opacity: 1;
+            color: $blue;
+        }
+    }
 
-.nav-description{
-    display: block;
-    font-size: 0.9rem;
-    color: #d2d2d2;
-    margin-top: 0.5rem;
+    .nav-description{
+        display: block;
+        font-size: 0.9rem;
+        color: #d2d2d2;
+        margin-top: 0.5rem;
+    }
 }
-// --end 하단 다음글 이전글 네비게이션
 
 // 모바일 대응
 @media (max-width: 800px) {
@@ -537,7 +541,7 @@
     }
 }
 
-
+// 테블릿 대응
 @media (min-width: 1200px) {
     .post-toc {
         position: fixed;
@@ -546,7 +550,7 @@
         top: 30px;
         font-size: 12px;
 
-        h2 {
+        .toc-title {
             color: $default-color;
         }
     
@@ -582,6 +586,8 @@
         }
     }
 }
+
+// 데스크탑 대응
 
 @media (max-width: 1200px) {
     .post-toc {
