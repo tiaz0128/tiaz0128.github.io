@@ -1,0 +1,30 @@
+{% assign posts = site.posts | where_exp: "post", "post.url != page.url" %}
+
+{% assign prev_post = posts | where: "url", page.prev_post | first %}
+{% assign next_post = posts | where: "url", page.next_post | first %}
+
+{% if prev_post or next_post %}
+<div class="post-navigation">
+    <div class="nav-links">
+        {% if prev_post %}
+        <a href="{{ prev_post.url }}" class="nav-previous">
+            <span class="nav-subtitle">이전글</span>
+            <span class="nav-title">{{ prev_post.title }}</span>
+            {% if prev_post.description %}
+            <span class="nav-description">{{ prev_post.description | truncate: 100 }}</span>
+            {% endif %}
+        </a>
+        {% endif %}
+        
+        {% if next_post %}
+        <a href="{{ next_post.url }}" class="nav-next">
+            <span class="nav-subtitle">다음글</span>
+            <span class="nav-title">{{ next_post.title }}</span>
+            {% if next_post.description %}
+            <span class="nav-description">{{ next_post.description | truncate: 100 }}</span>
+            {% endif %}
+        </a>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
