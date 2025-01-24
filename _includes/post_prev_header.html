@@ -1,0 +1,14 @@
+{% assign posts = site.posts | where_exp: "post", "post.url != page.url" %}
+{% assign prev_post = posts | where: "url", page.prev_post | first %}
+
+{% if prev_post %}
+<div class="prev-header-nav">
+    <div class="nav-emoji">:memo:</div>
+    <div class="nav-content">
+        <span>이전글 - </span>
+        <a href="{{ prev_post.url }}" class="nav-link">
+            <strong>{{ prev_post.title }}</strong>
+        </a>
+    </div>
+</div>
+{% endif %}

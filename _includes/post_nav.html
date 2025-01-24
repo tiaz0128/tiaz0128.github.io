@@ -11,7 +11,7 @@
             <span class="nav-subtitle">이전글</span>
             <span class="nav-title">{{ prev_post.title }}</span>
             {% if prev_post.description %}
-            <span class="nav-description">{{ prev_post.description | truncate: 100 }}</span>
+            <span class="nav-description">{{ prev_post.description }}</span>
             {% endif %}
         </a>
         {% endif %}
@@ -21,7 +21,7 @@
             <span class="nav-subtitle">다음글</span>
             <span class="nav-title">{{ next_post.title }}</span>
             {% if next_post.description %}
-            <span class="nav-description">{{ next_post.description | truncate: 100 }}</span>
+            <span class="nav-description">{{ next_post.description }}</span>
             {% endif %}
         </a>
         {% endif %}
