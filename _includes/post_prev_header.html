@@ -1,5 +1,8 @@
 {% assign posts = site.posts | where_exp: "post", "post.url != page.url" %}
-{% assign prev_post = posts | where: "url", page.prev_post | first %}
+
+{% if page.prev_post %}
+  {% assign prev_post = posts | where: "url", page.prev_post | first %}
+{% endif %}
 
 {% if prev_post %}
 <div class="callout-note">
