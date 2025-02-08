@@ -2,13 +2,10 @@
 {% assign prev_post = posts | where: "url", page.prev_post | first %}
 
 {% if prev_post %}
-<div class="prev-header-nav">
-    <div class="nav-emoji">:memo:</div>
-    <div class="nav-content">
-        <span>이전글 - </span>
-        <a href="{{ prev_post.url }}" class="nav-link" target="_blank">
-            <strong>{{ prev_post.title }}</strong>
-        </a>
+<div class="callout-note">
+    <span>이전글</span>
+    <div>
+      <a href="{{ prev_post.url }}" target="_blank">{{ prev_post.title }}</a>
     </div>
 </div>
 {% endif %}

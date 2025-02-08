@@ -152,12 +152,9 @@ tags: [암호학, 대칭키, 비대칭키]
 
 ## 예시 : GitHub SSH 설정
 
-<div class="callout">:memo:
-  <div>
-    <span>'GitHub에 SSH 설정법'을 잘 모르시면 </span>
-    <a href="/GitHub/1" target="_blank">
-        <strong>"SSH 로 GitHub 연결"</strong>
-    </a> &nbsp; 글을 확인 해주세요!
+<div class="callout-note">
+  <div>'GitHub에 SSH 설정법'에 대해 더 자세히 알고 싶으시다면
+    <a href="/GitHub/1" target="_blank">"SSH 로 GitHub 연결"</a> 글을 확인 해주세요!
   </div>
 </div>
 

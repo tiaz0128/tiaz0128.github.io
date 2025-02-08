@@ -18,6 +18,17 @@ $blue: #4a9ae1 !default;
 $orange: #ed9d13;
 $yellow: #FFD700;
 
+//alert colors
+$alert-background: #262626;
+
+$alert-note: #1f6feb;
+$alert-tip: #FFD700;
+$alert-warning: #9e6a03;
+$alert-important: #ab7df8;
+$alert-caution: #bd561d;
+$alert-question: #5bc0de;
+
+
 // Fonts
 $serif-primary: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol" !default;
 $serif-secondary: Ubuntu !default;
