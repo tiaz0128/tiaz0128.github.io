@@ -1,4 +1,4 @@
----
+
 layout: post
 date: 2025-02-09
 upd_date: 2025-02-09
@@ -10,7 +10,7 @@ author: tiaz0128
 permalink: /Network/3
 tags: [DNS]
 prev_post: /Network/2
----
+
 
 ## DNS 동작 원리
 
