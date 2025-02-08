@@ -1,0 +1,23 @@
+---
+layout: post
+date: 2025-02-09
+upd_date: 2025-02-09
+catalogue: "Network"
+subject: "DNS"
+title: "DNS(Domain Name System) 동작 원리"
+description: "DNS가 동작하는 원리에 대해서"
+author: tiaz0128
+permalink: /Network/3
+tags: [DNS]
+prev_post: /Network/2
+---
+
+## DNS 동작 원리
+
+## 네임 서버
+
+## 도메인 구매의 의미
+
+## 서브도메인을 생성 하여 IP 할당
+
+

@@ -43,12 +43,4 @@ layout: null
     <priority>0.1</priority>
   </url>
 
-  <!-- RSS 피드 -->
-  <url>
-    <loc>{{ site.url }}/feed.xml</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.2</priority>
-  </url>
-
 </urlset>
