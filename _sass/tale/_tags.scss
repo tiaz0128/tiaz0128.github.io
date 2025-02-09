@@ -19,22 +19,34 @@
   &-clouds {
     text-align: center;
     font-family: $serif-secondary;
+    margin: 1rem 0 2rem;
 
     a {
       display: inline-block;
-      margin: 0 0.1rem 0.5rem;
+      margin: 0.2rem;
       padding: 0.2rem 0.5rem;
-      background: $back-color;
-      border-radius: 5px;
-      color: $default-color;
+      font-size: 0.9rem;
+      color: $default-tint;
       text-decoration: none;
+      border: 1px solid $grey-2;
+      border-radius: 3px;
 
       &:hover {
-        background: $blue;
+        color: $blue;
+        border-color: $blue;
+      }
+
+      // 태그 카운트
+      .tag-count {
+        display: inline-block;
+        margin-left: 0.2rem;
+        font-size: 0.8rem;
+        color: $default-tint;
       }
     }
   }
 
+  // 나머지 스타일은 그대로 유지
   &-item {
     &-icon {
       height: 20px;
@@ -47,6 +59,12 @@
       margin: 2rem 0 0.5rem;
       font-family: $sans-serif;
       color: $default-color;
+    }
+    
+    &-count {
+      font-size: 0.8em;
+      color: $default-tint;
+      font-weight: normal;
     }
   }
 
