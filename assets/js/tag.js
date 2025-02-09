@@ -1,6 +1,6 @@
 // TOC와 h2 태그를 선택합니다.
-var tagLinks = document.querySelectorAll(".inline_toc a");
-var h2Elements = Array.from(document.querySelectorAll(".post h2"));
+var tagLinks = document.querySelectorAll(".tags-clouds > a");
+var h2Elements = Array.from(document.querySelectorAll("h2.tags-item-label"));
 
 // 스크롤 이벤트 리스너를 추가합니다.
 window.addEventListener('scroll', function() {
@@ -34,7 +34,7 @@ tagLinks.forEach((link, i) => {
         // 클릭한 링크에 해당하는 h2 태그의 위치로 스크롤합니다.
         // 여기서 20px을 더하여 스크롤 위치를 조정합니다.
         window.scrollTo({
-            top: h2Elements[i].offsetTop - 48,
+            top: h2Elements[i].offsetTop - 70,
             behavior: 'smooth' // 스크롤이 부드럽게 이동하도록 설정합니다.
         });
     });

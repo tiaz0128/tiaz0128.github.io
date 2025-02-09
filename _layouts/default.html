@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-  {% include head.html %}
+  {% include component/head.html %}
 
   <body>
-    {% include navigation.html %}
-    {% include code_copy.html %}
+    {% include component/navigation.html %}
 
     <main>
       {{ content }}
     </main>
   
-    {% include footer.html %}
-    {% include top_arrow.html %}
+    {% include component/footer.html %}
+    {% include script/top_arrow.html %}
   </body>
 </html>

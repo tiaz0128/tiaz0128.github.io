@@ -1,7 +1,7 @@
 <aside class="post-toc">
     <h2 class="toc-title">Table of Contents</h2>
     
-    {% include toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=2 h_max=2 %}
+    {% include component/toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=2 h_max=2 %}
     
     <div class="post-tags">
         {% for tag in page.tags %}

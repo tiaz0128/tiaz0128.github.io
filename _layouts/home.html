@@ -52,46 +52,4 @@ layout: default
     {% endif %}
 </div>
 
-<script>
-    const pageInput = document.getElementById('pageInput');
-    const totalPages = {{ paginator.total_pages }};
-
-    pageInput.addEventListener('keydown', function(event) {
-        if(event.key === '-' || event.key === '+') {
-            return event.preventDefault();
-        }
-
-        if(event.key === 'Enter') {
-            event.preventDefault(); // Prevent form submission
-            goToPage();
-        }
-        
-        re = new RegExp(`^[0-9]$`);
-
-        if(re.test(event.key)) {
-            let value = event.target.value;
-            cnt = value.length;
-            totalCnt = String(totalPages).length;
-
-            if(cnt >= totalCnt) return event.preventDefault(); 
-        }
-    });
-
-
-    function goToPage() {
-        const pageInput = document.getElementById('pageInput');
-        const pageNumber = parseInt(pageInput.value);
-        const baseUrl = '{{ site.baseurl }}';
-
-        if (pageNumber <= totalPages) {
-            if (pageNumber === 0 ||pageNumber === 1) {
-                window.location.href = baseUrl + '/';
-            } else {
-                window.location.href = baseUrl + '/page' + pageNumber + '/';
-            }
-        } else {
-            window.location.href = baseUrl + '/page' + totalPages + '/';
-        }
-    }
-
-</script>
+{% include script/page_input.html %}

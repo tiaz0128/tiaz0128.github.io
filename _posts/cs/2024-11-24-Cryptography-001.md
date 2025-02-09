@@ -159,7 +159,7 @@ ref-link:
 
 ## 예시 : GitHub SSH 설정
 
-{% include alert.html
+{% include template/alert.html
   type="note"
   about="GitHub SSH 설정"
   url="/GitHub/1"
@@ -206,4 +206,4 @@ GitHub에 SSH 설정하는 과정을 한번 생각해 봅시다. 사용자가 �
 
 아래의 영상에서 공개키의 기본 원리와 '소인수 분해'로 동작하는 원리를 잘 설명해주고 있으니 한번 보시는 것을 추천드립니다!
 
-{% include ref.html refs=page.ref-link %}
+{% include template/ref.html refs=page.ref-link %}
