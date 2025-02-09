@@ -1,0 +1,33 @@
+<ul>
+    {% for ref in include.refs %}
+        <li>
+            {% case ref.type %}
+                {% when 'youtube' %}
+                    <span class="logos--youtube"></span>
+                {% when 'doc' %}
+                    <span class="logos--doc"></span>
+                {% when 'facebook' %}
+                    <span class="logos--facebook"></span>
+                {% when 'url' %}
+                    <span class="logos--url"></span>
+                {% when 'article' %}
+                    <span class="logos--article"></span>
+                {% else %}
+                    <span class="logos--default"></span>
+            {% endcase %}
+            
+            <a href="{{ ref.url }}" 
+               target="_blank"
+               {% if ref.type == 'youtube' %}
+                   class="youtube-link"
+               {% endif %}
+            >
+                {{ ref.title }}
+            </a>
+            
+            {% if ref.description %}
+                <div class="description">{{ ref.description }}</div>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

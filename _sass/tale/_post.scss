@@ -356,6 +356,11 @@
             height: auto;
         }
 
+        .half {
+            max-width: 50%;
+            flex: 5;
+            height: auto;
+        }
     }
 
     div.highlight > .button-copy-code {

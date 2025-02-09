@@ -1,0 +1,18 @@
+<!-- _includes/book-info.html -->
+<div class="left-right">
+    <img class="book" src="/assets/img/title/book/{{ include.title }}.png" alt="{{ include.title }}">
+    <ul class="">
+        <li>
+            <strong>제목</strong> : <a href="{{ include.book_url }}" target="_blank">{{ include.title }}</a>
+        </li>
+        <li><strong>저자</strong> : {{ include.author }}</li>
+        <li><strong>출판사</strong> : {{ include.publisher }}</li>
+        <li><strong>대상 독자</strong> : {{ include.target_readers }}</li>
+        <li>
+            <strong>한줄 평</strong> : 
+            <div>
+                {{ include.review }}
+            </div>
+        </li>
+    </ul>
+</div>

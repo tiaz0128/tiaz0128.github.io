@@ -1,0 +1,12 @@
+<div class="img-container">
+    {% if include.type == '3-7' %}
+        <img class="left-3" src="{{ include.left }}" />
+        <img class="right-7" src="{{ include.right }}" />
+    {% elsif include.type == '7-3' %}
+        <img class="left-7" src="{{ include.left }}" />
+        <img class="right-3" src="{{ include.right }}" />
+    {% elsif include.type == 'half' %}
+        <img class="half" src="{{ include.left }}" />
+        <img class="half" src="{{ include.right }}" />
+    {% endif %}
+</div>
