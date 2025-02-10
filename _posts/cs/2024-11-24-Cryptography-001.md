@@ -159,7 +159,7 @@ ref-link:
 
 ## 예시 : GitHub SSH 설정
 
-{% include template/alert.html
+{% include template/link.html
   type="note"
   about="GitHub SSH 설정"
   url="/GitHub/1"
