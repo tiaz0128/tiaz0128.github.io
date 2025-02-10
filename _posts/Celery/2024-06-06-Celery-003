@@ -1,0 +1,17 @@
+---
+layout: post
+date: 2025-02-22
+upd_date: 2025-02-22
+catalogue: "Celery"
+subject: "Celery"
+title: "Celery : 자동 웹비나 참석"
+description: "Celery Beat와 Google calendar를 활용한 자동 웹비나 참석"
+author: tiaz0128
+permalink: /Celery/3
+tags: [Celery, Beat]
+prev_post: /Celery/2
+---
+
+beat 쓰는법법
+
+기타 기법에 대해서 찾아보고 쓰기

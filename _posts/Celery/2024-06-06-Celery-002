@@ -1,12 +1,20 @@
 ---
 layout: post
 date: 2024-06-06
-upd_date: 2025-01-23
+upd_date: 2025-02-17
 catalogue: "Celery"
 subject: "Celery"
-title: "Celery : 자동 웹비나 참석"
-description: "Celery Beat와 Google calendar를 활용한 자동 웹비나 참석"
+title: "Celery 동시 처리"
+description: "Celery를 통한 여러 작업을 처리하는 방법에 대해서"
 author: tiaz0128
 permalink: /Celery/2
-tags: [Celery, Beat]
+tags: [Celery]
+prev_post: /Celery/1
+next_post: /Celery/3
 ---
+
+동시에 처리
+
+순서대로 처리
+
+MQ에 여러개 처리
