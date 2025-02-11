@@ -438,6 +438,42 @@
     .mermaid .flowchart-link {
         stroke-width: 3px !important;
     }
+
+    // GitHub 링크
+    .github-source-link {
+        display: flex;
+        margin: 10px 0;
+        padding: 14px 12px;
+        background: $alert-background;
+        border-radius: 4px;
+        font-size: 0.9rem;
+      
+        a {
+          font-weight: 600;
+        }
+      }
+      
+      .github-source-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      
+        .github-icon {
+          flex-shrink: 0;
+          fill: #fff;
+          height: 24px;
+          width: 24px;
+        }
+      }
+      
+      .github-link {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
 }
 
 // 하단 다음글 이전글 네비게이션
