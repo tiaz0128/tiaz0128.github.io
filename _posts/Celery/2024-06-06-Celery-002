@@ -4,7 +4,7 @@ date: 2025-02-11
 upd_date: 2025-02-11
 catalogue: "Celery"
 subject: "Celery"
-title: "Celery 동시 처리"
+title: "Celery 병렬 처리"
 description: "Celery를 통한 여러 작업을 한번에 처리하는 방법"
 author: tiaz0128
 permalink: /Celery/2
@@ -16,7 +16,7 @@ prev_post: /Celery/1
 {% include template/github.html
   repo_name="tiaz0128/celery-tutorial"
   url="https://github.com/tiaz0128/celery-tutorial"
-  branch="main"
+  branch="concurrency"
 %}
 
 동시에 처리
