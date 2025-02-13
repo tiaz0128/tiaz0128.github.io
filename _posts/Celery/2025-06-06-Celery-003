@@ -1,0 +1,102 @@
+---
+layout: post
+date: 2025-02-11
+upd_date: 2025-02-11
+catalogue: "Celery"
+subject: "Celery"
+title: "Celery 병렬 처리"
+description: "Celery를 통한 여러 작업을 한번에 처리하는 방법"
+author: tiaz0128
+permalink: /Celery/3
+tags: [Celery]
+prev_post: /Celery/1
+# next_post: /Celery/3
+---
+
+{% include template/github.html
+  repo_name="tiaz0128/celery-tutorial"
+  url="https://github.com/tiaz0128/celery-tutorial/tree/parallelism"
+  branch="parallelism"
+%}
+
+## 병렬 처리(Parallel Processing)
+
+저번에는 Celery의 기본적인 분산처리에 대해 알아보았습니다. 이번에는 Celery를 활용한 **병렬 처리(Parallel Processing)**를 알아보겠습니다.
+
+병렬 처리는 **여러 작업을 동시에 실행**{:.orange}하여 전체 처리 시간을 단축시키는 기법으로, 대용량 데이터 처리나 복잡한 연산이 필요한 백엔드 시스템에서 특히 중요합니다.
+
+### 병렬 처리 주요 패턴
+
+Celery에서는 작업을 효율적으로 처리하기 위한 **다양한 병렬 처리 패턴을 제공**합니다.
+
+- `group` : 독립적인 여러 작업을 동시에 실행
+- `chord` : 모든 병렬 작업이 완료된 후 콜백 함수를 실행
+- `chain` : 작업들을 순차적으로 연결
+
+## 환경 구성
+
+redis와 rabbitmq를 동작시키기 위해 docker compose를 사용하겠습니다. `docker-compose.yaml` 파일을 작성하고 아래의 명령으로 컨테이너를 실행합니다.
+
+```bash
+$ docker compose up -d
+```
+
+<div class="file-name">docker-compose.yaml</div>
+
+```yaml
+services:
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+```
+
+## group
+
+`group`은 서로 독립적인 여러 작업을 동시에 처리해야 할 때 사용합니다. 예를 들어 여러 이미지 동시 처리, 대량 데이터 병렬 처리 등이 있습니다.
+
+```python
+from celery import group
+
+result = group([
+    add.s(2, 2),
+    multiply.s(4, 4),
+    power.s(2, 3)
+])()
+```
+
+## chord
+
+`chord`는 여러 작업의 결과를 모아서 최종 처리가 필요할 때 유용합니다. 여러 API에서 데이터를 수집하여 취합하는 경우에 적합합니다.
+
+```python
+from celery import chord
+
+chord(
+    [task1.s(), task2.s(), task3.s()],
+    callback.s()
+)()
+```
+
+## chain
+
+`chain`은 작업 간에 데이터 의존성이 있을 때 사용합니다. 데이터 전처리 → 분석 → 결과 저장 과정와 같은 정해진 순서를 지켜야 하는 경우에 사용합니다.
+
+```python
+from celery import chain
+
+chain(
+    task1.s(), 
+    task2.s(), 
+    task3.s(),
+)
+```
+
+## 기타 패턴
+
+

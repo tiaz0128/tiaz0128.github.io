@@ -1,0 +1,152 @@
+---
+layout: post
+date: 2025-02-11
+upd_date: 2025-02-11
+catalogue: "Celery"
+subject: "Celery"
+title: "Celery 기초: App & Tasks"
+description: "Celery의 가장 기본 구성인 Application, Tasks에 대해서"
+author: tiaz0128
+permalink: /Celery/2
+tags: [Celery]
+prev_post: /Celery/1
+# next_post: /Celery/3
+---
+
+{% include template/github.html
+  repo_name="tiaz0128/celery-tutorial"
+  url="https://github.com/tiaz0128/celery-tutorial/tree/app-tasks"
+  branch="app-tasks"
+%}
+
+## 환경 구성
+
+저번에는 Celery의 기본적인 사용방법에 대해 알아보았습니다. 이번부터는 Celery의 주요 개념과 사용법 보다 자세히 톺아보는 시간을 가져보겠습니다!
+
+### docker-compose
+
+redis와 rabbitmq를 동작시키기 위해 docker compose를 사용하겠습니다. `docker-compose.yaml` 파일을 작성하고 아래의 명령으로 컨테이너를 실행합니다.
+
+```bash
+$ docker compose up -d
+```
+
+<div class="file-name">docker-compose.yaml</div>
+
+```yaml
+services:
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+```
+
+## Celery Application
+
+Celery의 가장 기본이 되는 인스턴스를 의미합니다. Celery Application 또는 app 이라고 합니다. `Celery` 클래스를 이용해서 생성 할 수 있습니다.
+
+### 폴더 구조
+
+```text
+├── docker-compose.yaml
+└── src
+    └── run.py (추가 파일)
+```
+
+### run.py 파일 작성
+
+<div class="file-name">src/run.py</div>
+
+```python
+from celery import Celery
+
+app = Celery(
+    "tasks",
+    broker="pyamqp://guest:guest@localhost//",
+    broker_connection_retry_on_startup=True,
+)
+```
+
+- 첫번쨰 인자값은 생성하는 인스턴스 = Application의 이름을 넣어줍니다.
+- `broker` : 메시지 큐 지정
+- `broker_connection_retry_on_startup` : 시작 시 브로커와의 연결이 실패했을 때 재시도할지 여부
+
+### Celery 실행
+
+아래의 명령으로 브로커에서 작업(Task)를 가져와 처리하는 **워커(Worker)**{:.orange}가 실행 됩니다. 우선 출력된 내용을 한번 확인 하겠습니다.
+
+```bash
+$ cd src
+
+$ celery -A run worker
+```
+
+```text
+ -------------- celery@tiaz v5.4.0 (opalescent)
+--- ***** ----- 
+-- ******* ---- Linux-5.15.153.1-microsoft-standard-...
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         tasks:0x7f77f4403f80
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     disabled://
+- *** --- * --- .> concurrency: 12 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+[tasks]
+
+```
+
+### [config] 확인
+
+- `app` : 지정한 Application의 이름
+- `transport` : 작업을 전송해주는 메시지큐
+- `results` : 결과를 저장하는 백엔드. 지금은 지정하지 않았기 때문에 disable
+- `concurrency` : 동시에 동작하는 워커의 갯수
+
+### [queues] & [tasks] 확인
+
+`[queues]`를 확인 해보면 메세지가 저장되는 celery라는 큐가 기본으로 있는 것을 확인 할 수 있습니다. 그리고 `tasks`에는 아무것도 없는 것을 확인 할 수 있습니다.
+
+## Celery Tasks
+
+Task는 Celery Application의 기본 구성 요소입니다. Task는 호출 가능한(callable) 객체로부터 생성되는 클래스입니다. 각 Task는 두 가지 역할을 수행합니다.
+
+- 태스크가 호출될 때의 동작 정의 (메시지 전송)
+- 워커가 해당 메시지를 수신했을 때의 동작 정의
+
+### 메시지 처리 방식
+
+- 각 Task는 고유한 이름을 가지며, 이 이름으로 워커가 실행할 함수를 찾습니다
+- Task 메시지는 워커가 승인(acknowledge)하기 전까지 큐에서 제거되지 않습니다
+- 워커는 여러 메시지를 미리 예약할 수 있습니다
+- 워커가 예기치 않게 종료되더라도(전원 문제 등) 메시지는 다른 워커에게 재전달됩니다
+
+### 멱등성(Idempotency)과 승인 전략
+
+- Task 함수는 이상적으로 멱등성을 가져야 합니다 (동일한 인자로 여러 번 호출되어도 의도치 않은 부작용이 없어야 함)
+- 기본적으로 워커는 태스크 실행 직전에 메시지를 승인합니다
+- 멱등성이 보장된 태스크의 경우 `acks_late` 옵션을 설정하여 태스크 완료 후 승인하도록 할 수 있습니다
+
+### 특별한 종료 상황에서의 동작
+
+- `acks_late`가 활성화되어 있더라도 다음 상황에서는 메시지가 승인됩니다:
+  - 자식 프로세스가 `sys.exit()`을 호출하는 경우
+  - 시그널에 의해 종료되는 경우
+- 이는 의도적인 설계로, 다음과 같은 상황을 고려한 것입니다:
+  - SIGSEGV와 같은 커널 시그널 발생
+  - 시스템 관리자의 의도적인 태스크 종료
+  - 메모리 초과로 인한 OOM Killer 동작
+  - 무한 루프 방지
+
+### 작업 재전달 설정
+
+- 위와 같은 상황에서도 태스크 재전달이 필요한 경우 `task_reject_on_worker_lost` 설정을 활성화할 수 있습니다

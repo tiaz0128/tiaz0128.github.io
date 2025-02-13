@@ -7,9 +7,9 @@ subject: "Celery"
 title: "Celery : 자동 웹비나 참석"
 description: "Celery Beat와 Google calendar를 활용한 자동 웹비나 참석"
 author: tiaz0128
-permalink: /Celery/3
+permalink: /Celery/4
 tags: [Celery, Beat]
-prev_post: /Celery/2
+prev_post: /Celery/3
 ---
 동시성 처리가 필요한 상황 설명
 
