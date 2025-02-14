@@ -8,14 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const postsPerPage = 4;
   const totalPages = Math.ceil(posts.length / postsPerPage);
   
-  console.log('Total posts:', posts.length);
-  console.log('Total pages:', totalPages);
-
   // 현재 URL에서 숫자 추출
   const currentPostUrl = window.location.pathname;
   const currentPostId = parseInt(currentPostUrl.split('/').pop());
-  console.log('Current Post ID:', currentPostId);
-
+  
   // 포스트들의 ID와 인덱스 매핑
   const postMapping = posts.map((post, index) => {
     const postUrl = post.querySelector('a').getAttribute('href');
@@ -29,27 +25,27 @@ document.addEventListener('DOMContentLoaded', () => {
     return mapping.id < currentPostId;
   });
 
-  console.log('Found post index:', currentPostIndex);
+  
 
   // 현재 포스트가 있는 페이지 계산
   let currentPage = Math.floor((currentPostIndex > 0 ? currentPostIndex - 1 : 0) / postsPerPage);
-  console.log('Calculated current page:', currentPage);
+  
   
   // 유효성 검사
   if (currentPage < 0 || currentPage >= totalPages) {
     currentPage = 0;
-    console.log('Reset to first page');
+    
   }
 
   function updatePosts() {
     const startIdx = currentPage * postsPerPage;
     const endIdx = startIdx + postsPerPage;
-    console.log('Showing posts from', startIdx, 'to', endIdx);
+    
     
     posts.forEach((post, index) => {
       if (index >= startIdx && index < endIdx) {
         post.classList.remove('hidden');
-        console.log('Showing post:', index);
+        
       } else {
         post.classList.add('hidden');
       }
@@ -57,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     prevBtn.disabled = currentPage === 0;
     nextBtn.disabled = currentPage >= totalPages - 1;
-    console.log('Current page:', currentPage, 'Button states:', { prev: prevBtn.disabled, next: nextBtn.disabled });
+    
   }
 
   prevBtn.addEventListener('click', () => {

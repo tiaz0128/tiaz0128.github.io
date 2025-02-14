@@ -1,32 +1,42 @@
+<!-- 1. 현재 카테고리의 총 포스트 수를 계산 (현재 포스트 포함) -->
+{%- assign total_category_posts = site.posts | where: "category", page.category -%}
+
+<!-- 2. 현재 포스트를 제외한 관련 포스트들을 가져옴 -->
+{%- assign related_posts = site.posts | where: "category", page.category | where_exp: "post", "post.url != page.url" -%}
+
+<!-- 3. 카테고리의 총 포스트 수가 2개 이상일 때만 관련 포스트 섹션을 표시 -->
+{%- if total_category_posts.size >= 2 -%}
 <div class="related-posts">
-    <div class="related-posts__header">
-      <h2 class="title">관련 포스트</h2>
-      <div class="nav-buttons">
-        <button class="nav-btn prev" aria-label="이전 포스트">
-          <svg viewBox="0 0 24 24" width="20" height="20">
-            <path stroke="currentColor" stroke-width="2" fill="none" d="M15 19l-7-7 7-7"/>
-          </svg>
-        </button>
-        <button class="nav-btn next" aria-label="다음 포스트">
-          <svg viewBox="0 0 24 24" width="20" height="20">
-            <path stroke="currentColor" stroke-width="2" fill="none" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-  
-    <div class="posts-grid">
-      {% assign posts = site.posts | where: "category", page.category | where_exp: "post", "post.url != page.url" %}
-      <div class="grid-container">
-        {% for post in posts %}
-        <article class="post-card {% if forloop.index > 4 %}hidden{% endif %}">
-            <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.png" alt="" class="post-background">
-            <a href="{{ post.url }}" class="post-link" target="_blank">
-              <h3 class="nav-post-title">{{ post.title }}</h3>
-              <p class="post-excerpt">{{ post.description }}</p>
-            </a>
-        </article>
-        {% endfor %}
-      </div>
+  <div class="related-posts__header">
+    <h2 class="title">관련 포스트</h2>
+    <div class="nav-buttons">
+      <button class="nav-btn prev" aria-label="이전 포스트">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path stroke="currentColor" stroke-width="2" fill="none" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button class="nav-btn next" aria-label="다음 포스트">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path stroke="currentColor" stroke-width="2" fill="none" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
     </div>
   </div>
+
+  <div class="posts-grid">
+    {% assign posts = site.posts | where: "category", page.category | where_exp: "post", "post.url != page.url" %}
+    <div class="grid-container">
+      {% for post in posts %}
+      <article class="post-card {% if forloop.index > 4 %}hidden{% endif %}">
+        <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.png" alt=""
+          class="post-background">
+        <a href="{{ post.url }}" class="post-link" target="_blank">
+          <h3 class="nav-post-title">{{ post.title }}</h3>
+          <p class="post-excerpt">{{ post.description }}</p>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}

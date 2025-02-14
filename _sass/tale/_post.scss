@@ -812,7 +812,7 @@ $callout-types: (
   
   .post-card {
     position: relative;
-    height: 120px;
+    height: 100px;
     background: #2a2a2a;
     border-radius: 8px;
     overflow: hidden;
@@ -820,18 +820,10 @@ $callout-types: (
   }
   
   .post-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, 
-      rgba(0,0,0,0.8) 0%,
-      rgba(0,0,0,0.8) 50%,
-      rgba(0,0,0,0.8) 100%
+    background: linear-gradient(to right,
+    rgba(0,0,0,0.2) 20%,
+    rgba(0,0,0,0.2) 100%
     );
-    z-index: 1;
   }
   
   .post-card:hover {
@@ -844,44 +836,48 @@ $callout-types: (
   
   .post-background {
     position: absolute;
-    top: 0;
+    width: 100px;  /* 이미지 너비 고정 */
+    height: 100%;
     left: 0;
-    width: 100%;
-    height: 100%;
     object-fit: cover;
-    z-index: 0;
-  }
-  
-  .post-link {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    // justify-content: space-between;
-    padding: 0.8rem;
-    text-decoration: none;
-    color: inherit;
-    height: 100%;
-    z-index: 2;
   }
   
   .nav-post-title {
     font-size: 0.9rem;
     color: $default-color;
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.3rem;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    // overflow: hidden;
+    -webkit-line-clamp: 2; /* 최대 2줄까지 표시 */
+    line-clamp: 2; /* 최대 2줄까지 표시 */
+    overflow: hidden;
+    overflow-wrap: break-word; /* 긴 단어 처리 */
+    word-break: keep-all; /* 한글 단어 단위 줄바꿈 */
+    line-height: 1.2; /* 줄 높이 조정 */
+    max-height: 2.4em; /* line-height의 2배 */
     font-weight: 600;
     text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-  }
+}
+
+.post-link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: .75rem;
+    padding-left: 120px;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    z-index: 2;
+    width: 100%; /* 너비 100% 설정 */
+    box-sizing: border-box; /* 패딩을 포함한 전체 크기 계산 */
+}
   
   .post-excerpt {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: $default-color;
     margin: 0 0 0.2rem;
     display: -webkit-box;
-    // -webkit-line-clamp: 2;
-    // overflow: hidden;
     -webkit-box-orient: vertical;
     text-shadow: 0 1px 2px rgba(0,0,0,0.8);
   }
@@ -889,23 +885,49 @@ $callout-types: (
   .post-date {
     display: none;
   }
-  
+
+@media (max-width: 800px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .post-excerpt {
+    font-size: 0.7rem;
+  }
+
+  .post-card {
+    height: 80px;
+  }
+
+  .post-background {
+    width: 80px;
+  }
+
+  .post-link {
+    padding: 0.75rem;
+    padding-left: 100px;  /* 이미지 너비 + 여백 */
+  }
+
+  .post-excerpt {
+    font-size: 0.75rem;
+  }
+}
 
 @media (max-width: 640px) {
     .grid-container {
       grid-template-columns: 1fr;
       gap: 0.5rem;
-      padding: 0 0.5rem;
     }
     
     .post-card {
-      height: 100px;
+      height: 80px;
       display: flex;
     }
   
     .post-background {
       position: absolute;
-      width: 120px;  /* 이미지 너비 고정 */
+      width: 80px;  /* 이미지 너비 고정 */
       height: 100%;
       left: 0;
       object-fit: cover;
@@ -920,7 +942,7 @@ $callout-types: (
   
     .post-link {
       padding: 0.75rem;
-      padding-left: 130px;  /* 이미지 너비 + 여백 */
+      padding-left: 100px;  /* 이미지 너비 + 여백 */
     }
   
     .nav-post-title {
@@ -929,7 +951,7 @@ $callout-types: (
     }
   
     .post-excerpt {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
     }
   
     .nav-buttons {
@@ -938,29 +960,32 @@ $callout-types: (
   
     .related-posts__header {
       margin-bottom: 0.75rem;
-      padding: 0px 8px;
-    }
-  
-    .title {
-      font-size: 1.25rem;
     }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 480px) {
+  .nav-post-title {
+    font-size: 0.85rem;
+    margin: 0;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+  }
+
+  .post-excerpt {
+    display: none;
+  }
+
   .post-card {
-    min-height: 100px;
+    height: 50px;
   }
 
   .post-background {
-    width: 100px;
+    width: 50px;
   }
 
   .post-link {
     padding: 0.5rem;
-    padding-left: 110px;
-  }
-
-  .nav-post-title {
-    font-size: 0.9rem;
+    padding-left: 65px;  /* 이미지 너비 + 여백 */
+    justify-content: center;
   }
 }

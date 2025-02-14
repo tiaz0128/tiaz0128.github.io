@@ -5,7 +5,7 @@ upd_date: 2025-01-23
 category: "cs"
 subject: "Cryptography"
 title: "대칭키, 비대칭키"
-description: "암호학의 기본! 대칭키와 비대칭키에 대해서 알아보자"
+description: "암호학의 기본! 대칭키와 비대칭키"
 author: tiaz0128
 permalink: /cs/1
 tags: [암호학, 대칭키, 비대칭키]
