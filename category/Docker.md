@@ -1,6 +1,6 @@
 ---
 layout: category
-catalogue: Docker
+category: Docker
 title:  Docker
 permalink: /category/Docker
 ---

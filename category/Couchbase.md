@@ -1,6 +1,6 @@
 ---
 layout: category
-catalogue: Couchbase
+category: Couchbase
 title:  Couchbase
 permalink: /category/Couchbase
 ---

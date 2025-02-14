@@ -1,0 +1,79 @@
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('.grid-container');
+  const posts = Array.from(container.querySelectorAll('.post-card'));
+  const prevBtn = document.querySelector('.nav-btn.prev');
+  const nextBtn = document.querySelector('.nav-btn.next');
+  
+  const postsPerPage = 4;
+  const totalPages = Math.ceil(posts.length / postsPerPage);
+  
+  console.log('Total posts:', posts.length);
+  console.log('Total pages:', totalPages);
+
+  // 현재 URL에서 숫자 추출
+  const currentPostUrl = window.location.pathname;
+  const currentPostId = parseInt(currentPostUrl.split('/').pop());
+  console.log('Current Post ID:', currentPostId);
+
+  // 포스트들의 ID와 인덱스 매핑
+  const postMapping = posts.map((post, index) => {
+    const postUrl = post.querySelector('a').getAttribute('href');
+    const postId = parseInt(postUrl.split('/').pop());
+    return { id: postId, index };
+  });
+  
+  // 정렬된 순서에서 현재 포스트의 위치 찾기
+  const currentPostIndex = postMapping.findIndex(mapping => {
+    // 현재 ID보다 큰 ID 중 가장 작은 것의 바로 다음 위치
+    return mapping.id < currentPostId;
+  });
+
+  console.log('Found post index:', currentPostIndex);
+
+  // 현재 포스트가 있는 페이지 계산
+  let currentPage = Math.floor((currentPostIndex > 0 ? currentPostIndex - 1 : 0) / postsPerPage);
+  console.log('Calculated current page:', currentPage);
+  
+  // 유효성 검사
+  if (currentPage < 0 || currentPage >= totalPages) {
+    currentPage = 0;
+    console.log('Reset to first page');
+  }
+
+  function updatePosts() {
+    const startIdx = currentPage * postsPerPage;
+    const endIdx = startIdx + postsPerPage;
+    console.log('Showing posts from', startIdx, 'to', endIdx);
+    
+    posts.forEach((post, index) => {
+      if (index >= startIdx && index < endIdx) {
+        post.classList.remove('hidden');
+        console.log('Showing post:', index);
+      } else {
+        post.classList.add('hidden');
+      }
+    });
+
+    prevBtn.disabled = currentPage === 0;
+    nextBtn.disabled = currentPage >= totalPages - 1;
+    console.log('Current page:', currentPage, 'Button states:', { prev: prevBtn.disabled, next: nextBtn.disabled });
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (currentPage > 0) {
+      currentPage--;
+      updatePosts();
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentPage < totalPages - 1) {
+      currentPage++;
+      updatePosts();
+    }
+  });
+
+  updatePosts();
+});
+</script>

@@ -1,4 +1,4 @@
-.catalogue {
+.category {
   padding-top: 3rem;
 
   &-tags{
@@ -31,8 +31,8 @@
     display: block;
     padding: 0 0 2rem 0;
 
-    &:hover .catalogue-line,
-    &:focus .catalogue-line {
+    &:hover .category-line,
+    &:focus .category-line {
       width: 5rem;
     }
 
@@ -40,7 +40,7 @@
       border: 0;
     }
 
-    &:hover .catalogue-title{
+    &:hover .category-title{
       color: $blue;
     }
 

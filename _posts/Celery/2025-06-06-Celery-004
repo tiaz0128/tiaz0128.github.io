@@ -2,7 +2,7 @@
 layout: post
 date: 2025-02-22
 upd_date: 2025-02-22
-catalogue: "Celery"
+category: "Celery"
 subject: "Celery"
 title: "Celery : 자동 웹비나 참석"
 description: "Celery Beat와 Google calendar를 활용한 자동 웹비나 참석"

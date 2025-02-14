@@ -1,6 +1,6 @@
 ---
 layout: category
-catalogue: Celery
+category: Celery
 title: Celery
 permalink: /category/Celery
 ---

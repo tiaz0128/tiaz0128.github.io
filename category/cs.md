@@ -1,6 +1,6 @@
 ---
 layout: category
-catalogue: cs
+category: cs
 title: Computer Science
 permalink: /category/cs
 ---

@@ -1,6 +1,6 @@
 ---
 layout: category
-catalogue:  python
+category:  python
 title:  python
 permalink: /category/python
 ---

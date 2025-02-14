@@ -1,6 +1,6 @@
 ---
 layout: category
-catalogue: AWS
+category: AWS
 title:  AWS
 permalink: /category/AWS
 ---

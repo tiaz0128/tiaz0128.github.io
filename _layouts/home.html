@@ -2,34 +2,34 @@
 layout: default
 ---
 
-<div class="catalogue">
+<div class="category">
     {% for post in paginator.posts %}
-    <div class="catalogue-tags">
+    <div class="category-tags">
         <span class="small-tag">
-            <a href="{{site.baseurl}}/category/{{post.catalogue}}" class="tag">
-                {{post.catalogue}}
+            <a href="{{site.baseurl}}/category/{{post.category}}" class="tag">
+                {{post.category}}
             </a>    
         </span>
-        <time datetime="{{ post.date }}" class="catalogue-time">{{ post.date | date: "%Y-%m-%d" }}</time>
+        <time datetime="{{ post.date }}" class="category-time">{{ post.date | date: "%Y-%m-%d" }}</time>
     </div>
-    <div class="catalogue-container">
-        <a href="{{site.baseurl}}/category/{{post.catalogue}}" class="tag">
-            {% if post.catalogue == 'book'%}
+    <div class="category-container">
+        <a href="{{site.baseurl}}/category/{{post.category}}" class="tag">
+            {% if post.category == 'book'%}
             <div class="img-book-container">
-                <img src="{{site.baseurl}}/assets/img/title/{{post.catalogue}}/{{post.subject}}.png" />
+                <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.png" />
             </div>
             {% else %}
             <div class="img-container">
-                <img src="{{site.baseurl}}/assets/img/title/{{post.catalogue}}/{{post.subject}}.png" />
+                <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.png" />
             </div>
             {% endif %}
         </a>
 
-        <a href="{{ post.url | prepend: site.baseurl }}" class="catalogue-item">
+        <a href="{{ post.url | prepend: site.baseurl }}" class="category-item">
             <div>
-                <h1 class="catalogue-title">{{ post.title }}</h1>
-                <div class="catalogue-line"></div>
-                <p class="catalogue-description">
+                <h1 class="category-title">{{ post.title }}</h1>
+                <div class="category-line"></div>
+                <p class="category-description">
                     {{ post.description }}
                 </p>
             </div>

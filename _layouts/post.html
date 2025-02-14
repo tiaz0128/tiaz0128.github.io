@@ -21,13 +21,13 @@ layout: default
     <img src="/assets/img/tiaz.jpg" alt="{{page.author}}" title="📖 {{ page.author }}">
   </div>
 
-    {% include component/post_prev_header.html %}
+    {% include component/post_nav.html %}
   
     {{ content }}
 
 </div>
 
-{% include component/post_nav.html %}
+{% include component/header_nav.html %}
 
 {% include component/footer_tag.html %}
 
@@ -49,3 +49,5 @@ layout: default
 {% include script/mathjax.html %}
 
 {% include script/code_copy.html %}
+
+{% include script/related_posts.html %}

@@ -2,7 +2,7 @@
 layout: post
 date: 2024-11-23
 upd_date: 2025-01-23
-catalogue: "cs"
+category: "cs"
 subject: "Cryptography"
 title: "대칭키, 비대칭키"
 description: "암호학의 기본! 대칭키와 비대칭키에 대해서 알아보자"

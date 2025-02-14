@@ -1,6 +1,6 @@
 ---
 layout: category
-catalogue: Network
+category: Network
 title:  Network
 permalink: /category/Network
 ---

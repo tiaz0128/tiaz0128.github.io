@@ -1,6 +1,6 @@
 ---
 layout: category
-catalogue: GitHub
+category: GitHub
 title:  GitHub
 permalink: /category/GitHub
 ---

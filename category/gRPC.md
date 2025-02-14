@@ -1,6 +1,6 @@
 ---
 layout: category
-catalogue:  gRPC
+category:  gRPC
 title:  gRPC
 permalink: /category/gRPC
 ---
