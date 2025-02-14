@@ -17,6 +17,10 @@
         background-color: hsla(0, 0%, 100%, .07);
     }
 
+    strong  {
+        font-weight: 600;
+    }
+
     &-info {
         color: $default-tint;
         font-family: $serif-primary;
