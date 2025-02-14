@@ -542,10 +542,7 @@
 
 // 하단 다음글 이전글 네비게이션
 .post-navigation {
-    // margin: 2rem 0;
-    // padding: 1rem 0;
-    // border-top: 1px solid $default-hr;
-    // border-bottom: 1px solid $default-hr;
+    margin: 2rem 0;
 
     a {
         text-decoration: none;
@@ -564,17 +561,7 @@
     .nav-previous,
     .nav-next {
         flex: 1;
-        padding: 0.5rem;
         text-decoration: none;
-        color: #e1e1e1;
-        background: #1a1a1a;
-        border-radius: 4px;
-        transition: all 0.3s ease;
-
-        &:hover {
-            background: #2a2a2a;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-        }
     }
 
     .nav-previous {
@@ -596,10 +583,14 @@
         display: block;
         color: $default-tint;
         font-size: 0.8rem;
+        opacity: 1 !important;
 
-        &:hover {
-            opacity: 1;
-            color: $blue;
+        a {
+            color: $default-tint;
+
+            &:hover {
+                color: $blue;
+            }
         }
     }
 
@@ -939,14 +930,6 @@ $callout-types: (
   
     .post-excerpt {
       font-size: 0.7rem;
-    }
-  
-    .post-date {
-      display: block;
-      font-size: 0.75rem;
-      color: #ccc;
-      margin-top: auto;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
     }
   
     .nav-buttons {

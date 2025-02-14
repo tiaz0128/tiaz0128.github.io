@@ -1,0 +1,32 @@
+<div class="related-posts">
+    <div class="related-posts__header">
+      <h2 class="title">관련 포스트</h2>
+      <div class="nav-buttons">
+        <button class="nav-btn prev" aria-label="이전 포스트">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path stroke="currentColor" stroke-width="2" fill="none" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <button class="nav-btn next" aria-label="다음 포스트">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path stroke="currentColor" stroke-width="2" fill="none" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  
+    <div class="posts-grid">
+      {% assign posts = site.posts | where: "category", page.category | where_exp: "post", "post.url != page.url" %}
+      <div class="grid-container">
+        {% for post in posts %}
+        <article class="post-card {% if forloop.index > 4 %}hidden{% endif %}">
+            <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.png" alt="" class="post-background">
+            <a href="{{ post.url }}" class="post-link" target="_blank">
+              <h3 class="nav-post-title">{{ post.title }}</h3>
+              <p class="post-excerpt">{{ post.description }}</p>
+            </a>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
