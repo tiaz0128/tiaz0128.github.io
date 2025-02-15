@@ -13,7 +13,7 @@ footer,
   width: 80%;
 
   @media (max-width: 600px) {
-    #about{
+    #about {
       display: none;
     }
   }
@@ -78,24 +78,26 @@ footer,
   }
 }
 
-@media (max-width: 600px){
-  .nav{
-    h2{
+@media (max-width: 600px) {
+  .nav {
+    h2 {
       display: none;
     }
   }
 
-  .category-container{
-    a{
-        .img-container,
-        .img-book-container{
-            display: none;
-        }
+  .category-container {
+    a {
+
+      .img-container,
+      .img-book-container {
+        display: none;
+      }
     }
   }
 
   .category-tags {
     justify-content: space-between !important;
+
     .small-tag {
       display: unset !important;
     }

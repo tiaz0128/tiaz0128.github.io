@@ -14,18 +14,18 @@ code {
     line-height: 1.5;
   }
 
-  &.language-plaintext{
-    font-family: ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";
+  &.language-plaintext {
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
   }
 
   &.path {
     background-color: $code-path;
     color: $black;
     font-weight: 600;
-    font-family: ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
     padding: .2em .25em;
   }
-  
+
   &.branch {
     color: $orange;
   }
@@ -62,8 +62,8 @@ pre code {
     padding: 0 .75rem 0 .25rem;
     // Make sure numbers aren't selectable
     -webkit-user-select: none;
-       -moz-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    user-select: none;
   }
 }
 

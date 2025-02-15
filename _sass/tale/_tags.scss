@@ -60,7 +60,7 @@
       font-family: $sans-serif;
       color: $default-color;
     }
-    
+
     &-count {
       font-size: 0.8em;
       color: $default-tint;
@@ -74,7 +74,7 @@
     padding: 5px 0;
 
     &:hover &-title,
-    &:target &-title{
+    &:target &-title {
       color: $blue;
     }
 
@@ -111,10 +111,10 @@
       }
     }
   }
-  
+
   @media (max-width: 385px) {
-    .tags-post-meta{
-        display: none;
+    .tags-post-meta {
+      display: none;
     }
   }
 }
