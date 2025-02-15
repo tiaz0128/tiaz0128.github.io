@@ -1,0 +1,31 @@
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.img-container img, .img-book-container img');
+    
+    images.forEach(img => {
+        let isAnimating = false;
+        
+        img.addEventListener('mouseenter', () => {
+            if (!isAnimating && !img.classList.contains('jumping')) {
+                isAnimating = true;
+                img.classList.remove('falling');
+                img.classList.add('jumping');
+            }
+        });
+
+        img.addEventListener('mouseleave', () => {
+            if (img.classList.contains('jumping')) {
+                img.classList.remove('jumping');
+                img.classList.add('falling');
+            }
+        });
+
+        img.addEventListener('animationend', () => {
+            isAnimating = false;
+            if (img.classList.contains('falling')) {
+                img.classList.remove('falling');
+            }
+        });
+    });
+});
+</script>

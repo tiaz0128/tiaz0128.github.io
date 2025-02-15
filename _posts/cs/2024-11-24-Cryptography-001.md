@@ -163,7 +163,7 @@ ref-link:
   type="note"
   about="GitHub SSH 설정"
   url="/GitHub/1"
-  title="SSH 로 GitHub 연결"
+  title="GitHub SSH 연결"
 %}
 
 GitHub에 SSH 설정하는 과정을 한번 생각해 봅시다. 사용자가 직접 비대칭키를 만들어서 개인키는 보관하고, 공개키를 GitHub에 등록 합니다.
