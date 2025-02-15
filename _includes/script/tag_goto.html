@@ -1,7 +1,34 @@
 <script type="text/javascript">
-    window.onload = function() {
+    window.onload = function () {
         var script = document.createElement('script');
         script.src = "{{ '/assets/js/tag.js' | relative_url }}";
         document.body.appendChild(script);
     };
+
+    // 페이지가 완전히 로드된 후 실행
+    window.addEventListener('load', () => {
+        // URL에 해시가 있는 경우에만 실행
+        if (window.location.hash) {
+            // 약간의 지연을 준 후 실행 (페이지 렌더링 완료 보장)
+            setTimeout(() => {
+                try {
+                    // 해시에 해당하는 요소 찾기
+                    const targetId = window.location.hash.substring(1); // # 제거
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        const offset = window.innerHeight * 0.05;
+
+                        // 요소의 위치로 스크롤
+                        window.scrollTo({
+                            top: targetElement.getBoundingClientRect().top + window.pageYOffset - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                } catch (error) {
+                    console.error('Scroll adjustment failed:', error);
+                }
+            }, 100);
+        }
+    });
 </script>
