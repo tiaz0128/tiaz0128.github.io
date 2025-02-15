@@ -1,35 +1,17 @@
 .category {
-  padding-top: 3rem;
+  &-layout {
+    margin-top: 3rem;
+  }
 
   &-tags {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: right;
-
-    .small-tag {
-      display: none;
-      font-size: 12px;
-      background: $back-color;
-      border-radius: 5px;
-      padding: 0.2px 4px 0 4px;
-      min-width: 30px;
-      text-align: center;
-
-      a {
-        color: $default-color;
-        font-weight: 500;
-      }
-    }
+    display: none;
   }
 
   &-item {
     border-bottom: 1px solid $grey-2;
     color: $default-color;
     display: block;
-    padding: 0 0 2rem 0;
+    width: 100%;
 
     &:hover .category-line,
     &:focus .category-line {
@@ -47,6 +29,12 @@
     .emoji {
       display: none;
     }
+  }
+
+  &-hr-container {
+    display: flex;
+    align-items: anchor-center;
+    justify-content: space-between;
   }
 
   &-time {
@@ -79,7 +67,15 @@
 
   &-container {
     display: flex;
-    gap: 24px;
+    width: 100%;
+    gap: 36px;
+    padding: 10px 20px;
+    align-items: center;
+
+    >.tag {
+      width: 100px;
+      height: 100px;
+    }
 
     .img-container,
     .img-book-container {
@@ -100,6 +96,7 @@
         border-radius: 12px;
         object-fit: cover;
         will-change: transform;
+        margin: 0;
 
         &.jumping {
           animation: jump-up 0.8s cubic-bezier(.2, .6, .35, 1) forwards;
@@ -141,6 +138,53 @@
           transform: translateY(0) scale(1);
         }
       }
+    }
+
+    .img-book-container img {
+      object-fit: contain !important;
+      background: white;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .category {
+    &-layout {
+      margin-top: 3rem;
+    }
+
+    &-container {
+      gap: 0;
+      padding: 0;
+      display: block;
+    }
+
+    &-tags {
+      display: none;
+      margin-bottom: .8rem;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: right;
+
+      .small-tag {
+        display: none;
+        font-size: 12px;
+        background: $back-color;
+        border-radius: 5px;
+        padding: 0.2px 4px 0 4px;
+        min-width: 30px;
+        text-align: center;
+
+        a {
+          color: $default-color;
+          font-weight: 500;
+        }
+      }
+    }
+
+    &-hr-container time {
+      display: none;
     }
   }
 }

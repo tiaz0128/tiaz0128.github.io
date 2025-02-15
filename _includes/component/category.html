@@ -1,0 +1,36 @@
+<div class="category-layout">
+    <div class="category-tags">
+        <span class="small-tag">
+            <a href="{{site.baseurl}}/category/{{post.category}}" class="tag">
+                {{post.category}}
+            </a>
+        </span>
+        <time datetime="{{ post.date }}" class="category-time">{{ post.date | date: "%Y-%m-%d" }}</time>
+    </div>
+    <div class="category-container">
+        <a href="{{site.baseurl}}/category/{{post.category}}" class="tag">
+            {% if post.category == 'book'%}
+            <div class="img-book-container">
+                <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.png" />
+            </div>
+            {% else %}
+            <div class="img-container">
+                <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.png" />
+            </div>
+            {% endif %}
+        </a>
+
+        <a href="{{ post.url | prepend: site.baseurl }}" class="category-item">
+            <div>
+                <h1 class="category-title">{{ post.title }}</h1>
+                <div class="category-hr-container">
+                    <div class="category-line"></div>
+                    <time datetime="{{ post.date }}" class="category-time">{{ post.date | date: "%Y-%m-%d" }}</time>
+                </div>
+                <p class="category-description">
+                    {{ post.description }}
+                </p>
+            </div>
+        </a>
+    </div>
+</div>
