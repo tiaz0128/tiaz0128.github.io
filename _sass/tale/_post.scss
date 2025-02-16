@@ -490,7 +490,7 @@
 
 // 다음글 이전글 네비게이션
 .post-navigation {
-  margin: 2rem 0;
+  margin: 3rem 0 2rem;
 
   a {
     text-decoration: none;
@@ -650,7 +650,7 @@ $callout-types: (
 
 // 기본 callout 스타일
 %callout-base {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   position: relative;
   padding: 0.75rem 1rem 0.75rem 3rem; // 패딩 조정
   margin: 1rem 0;

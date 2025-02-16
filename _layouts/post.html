@@ -10,7 +10,7 @@ layout: default
       {% endfor %}
     </div>
   </div>
-  
+
   <h1 class="post-title">{{ page.title }}</h1>
   <p class="post-subtile">{{ page.description }}</p>
   <div class="post-writer">
@@ -22,9 +22,11 @@ layout: default
     <time datetime="{{ page.upd_date }}">수정일: {{ page.upd_date | date: "%Y-%m-%d" }}</time>
   </div>
 
-    {% include component/header_nav.html %}
-  
-    {{ content }}
+  {% include component/prev_next_post.html %}
+
+  {{ content }}
+
+  {% include component/prev_next_post.html %}
 
 </div>
 
@@ -32,7 +34,7 @@ layout: default
 
 {% include component/footer_tag.html %}
 
-<hr/>
+<hr />
 
 <div class="post-author">
   {% include component/about.html %}
@@ -41,7 +43,7 @@ layout: default
 
 {% include component/aside.html %}
 
-<hr/>
+<hr />
 
 {% include script/utteranc.html %}
 
