@@ -10,52 +10,71 @@ permalink: /tags
     <div class="tags-header-line"></div>
   </div>
   
-  {% assign sorted_tags = site.tags | sort %}
+  {% capture tags %}
+    {% for tag in site.tags %}
+      {{ tag[0] | downcase }}|{{ tag[0] }}||
+    {% endfor %}
+  {% endcapture %}
+  {% assign sorted_temp = tags | split:'||' | sort %}
   
   <div class="tags-clouds">
-    {% for tag in sorted_tags %}
-    <a href="#{{ tag[0] }}">
-      {{ tag[0] }}<span class="tag-count">({{ tag[1].size }})</span>
-    </a>
+    {% for tag_name in sorted_temp %}
+      {% assign tag_parts = tag_name | split:'|' %}
+      {% assign real_tag_name = tag_parts[1] %}
+      {% if real_tag_name != "" %}
+        {% assign real_tag = site.tags[real_tag_name] %}
+        {% if real_tag %}
+          <a href="#{{ real_tag_name | slugify }}">
+            {{ real_tag_name }}<span class="tag-count">({{ real_tag.size }})</span>
+          </a>
+        {% endif %}
+      {% endif %}
     {% endfor %}
   </div>
   
-  {% for tag in sorted_tags %}
-  <div class="tags-item" id="{{ tag[0] }}">
-    <svg
-      class="tags-item-icon"
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="feather feather-tag"
-    >
-      <path
-        d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"
-      ></path>
-      <line x1="7" y1="7" x2="7.01" y2="7"></line>
-    </svg>
-    <h2 class="tags-item-label">{{ tag[0] }} <span class="tags-item-count">({{ tag[1].size }})</span></h2>
-    {% assign sorted_posts = tag[1] | sort: 'date' | reverse %}
-    {% for post in sorted_posts %}
-    <a class="tags-post" href="{{ post.url | prepend: site.baseurl }}">
-      <div>
-        <span class="tags-post-title">{{ post.title }}</span>
-        <div class="tags-post-line"></div>
-      </div>
-      <span class="tags-post-meta">
-        <time datetime="{{ post.ins_date }}">
-          {{ post.ins_date | date:"%Y-%m-%d" }}
-        </time>
-      </span>
-    </a>
-    {% endfor %}
-  </div>
+  {% for tag_name in sorted_temp %}
+    {% assign tag_parts = tag_name | split:'|' %}
+    {% assign real_tag_name = tag_parts[1] %}
+    {% if real_tag_name != "" %}
+      {% assign real_tag = site.tags[real_tag_name] %}
+      {% if real_tag %}
+        <div class="tags-item" id="{{ real_tag_name | slugify }}">
+          <svg
+            class="tags-item-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-tag"
+          >
+            <path
+              d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"
+            ></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <h2 class="tags-item-label">{{ real_tag_name }} <span class="tags-item-count">({{ real_tag.size }})</span></h2>
+          {% assign sorted_posts = real_tag | sort: 'date' | reverse %}
+          {% for post in sorted_posts %}
+          <a class="tags-post" href="{{ post.url | prepend: site.baseurl }}">
+            <div>
+              <span class="tags-post-title">{{ post.title }}</span>
+              <div class="tags-post-line"></div>
+            </div>
+            <span class="tags-post-meta">
+              <time datetime="{{ post.ins_date }}">
+                {{ post.ins_date | date:"%Y-%m-%d" }}
+              </time>
+            </span>
+          </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
   {% endfor %}
 </div>
 
