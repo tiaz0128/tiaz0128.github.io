@@ -7,13 +7,13 @@ layout: null
   <!-- 블로그 포스트 URL -->
   {% assign current_time = site.time | date: '%s' %}
   {% for post in site.posts %}
-    {% assign post_time = post.date | date: '%s' %}
+    {% assign post_time = post.ins_date | date: '%s' %}
     {% assign time_diff = current_time | minus: post_time %}
     {% assign days_since = time_diff | divided_by: 86400 %}
     
     <url>
       <loc>{{ site.url }}{{ post.url }}</loc>
-      <lastmod>{{ post.upd_date | default: post.date | date_to_xmlschema }}</lastmod>
+      <lastmod>{{ post.upd_date | default: post.ins_date | date_to_xmlschema }}</lastmod>
       
       {% if days_since < 7 %}
         <changefreq>daily</changefreq>

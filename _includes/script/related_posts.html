@@ -2,62 +2,72 @@
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.grid-container');
   const posts = Array.from(container.querySelectorAll('.post-card'));
+  const navButtons = document.querySelector('.nav-buttons');
   const prevBtn = document.querySelector('.nav-btn.prev');
   const nextBtn = document.querySelector('.nav-btn.next');
   
   const postsPerPage = 4;
   const totalPages = Math.ceil(posts.length / postsPerPage);
   
+  console.log('=== 초기 상태 ===');
+  console.log('총 포스트 수:', posts.length);
+  console.log('총 페이지 수:', totalPages);
+  
+  if (posts.length <= postsPerPage) {
+    console.log('포스트가 4개 이하라서 내비게이션 숨김');
+    navButtons.style.display = 'none';
+    return;
+  }
+  
   // 현재 URL에서 숫자 추출
   const currentPostUrl = window.location.pathname;
   const currentPostId = parseInt(currentPostUrl.split('/').pop());
+  console.log('현재 URL:', currentPostUrl);
+  console.log('현재 포스트 ID:', currentPostId);
   
   // 포스트들의 ID와 인덱스 매핑
   const postMapping = posts.map((post, index) => {
     const postUrl = post.querySelector('a').getAttribute('href');
     const postId = parseInt(postUrl.split('/').pop());
+    console.log(`포스트 매핑 - index: ${index}, id: ${postId}, url: ${postUrl}`);
     return { id: postId, index };
   });
-  
-  // 정렬된 순서에서 현재 포스트의 위치 찾기
-  const currentPostIndex = postMapping.findIndex(mapping => {
-    // 현재 ID보다 큰 ID 중 가장 작은 것의 바로 다음 위치
-    return mapping.id < currentPostId;
-  });
 
+  // 현재 포스트보다 ID가 큰 포스트 수 계산 (더 최신 포스트)
+  const newerPostsCount = postMapping.filter(post => post.id > currentPostId).length;
+  console.log('현재 포스트보다 새로운 포스트 수:', newerPostsCount);
   
-
   // 현재 포스트가 있는 페이지 계산
-  let currentPage = Math.floor((currentPostIndex > 0 ? currentPostIndex - 1 : 0) / postsPerPage);
-  
-  
-  // 유효성 검사
-  if (currentPage < 0 || currentPage >= totalPages) {
-    currentPage = 0;
-    
-  }
+  let currentPage = Math.floor(newerPostsCount / postsPerPage);
+  console.log('계산된 현재 페이지:', currentPage);
 
   function updatePosts() {
     const startIdx = currentPage * postsPerPage;
     const endIdx = startIdx + postsPerPage;
     
+    console.log('=== 페이지 업데이트 ===');
+    console.log('시작 인덱스:', startIdx);
+    console.log('끝 인덱스:', endIdx);
     
     posts.forEach((post, index) => {
       if (index >= startIdx && index < endIdx) {
         post.classList.remove('hidden');
-        
+        console.log(`포스트 ${index} 표시`);
       } else {
         post.classList.add('hidden');
+        console.log(`포스트 ${index} 숨김`);
       }
     });
 
     prevBtn.disabled = currentPage === 0;
     nextBtn.disabled = currentPage >= totalPages - 1;
-    
+    console.log('이전 버튼 비활성화:', prevBtn.disabled);
+    console.log('다음 버튼 비활성화:', nextBtn.disabled);
   }
 
   prevBtn.addEventListener('click', () => {
     if (currentPage > 0) {
+      console.log('이전 페이지로 이동:', currentPage - 1);
       currentPage--;
       updatePosts();
     }
@@ -65,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   nextBtn.addEventListener('click', () => {
     if (currentPage < totalPages - 1) {
+      console.log('다음 페이지로 이동:', currentPage + 1);
       currentPage++;
       updatePosts();
     }

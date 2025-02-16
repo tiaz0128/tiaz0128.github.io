@@ -81,7 +81,6 @@
     color: $grey-1;
 
     padding-bottom: 10px;
-    margin-bottom: 3.5rem;
 
     span {
       white-space: nowrap;
@@ -141,6 +140,15 @@
         background-color: $blue;
       }
     }
+  }
+
+  &-date {
+    color: $grey-1;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    margin-bottom: 3.5rem;
   }
 
   &-line {
@@ -478,69 +486,9 @@
       text-decoration: underline;
     }
   }
-
-  // 상단 네비게이션
-  // .navigation-posts {
-  //     display: flex;
-  //     justify-content: space-between;
-  //     margin: 10px 0;
-
-  //     .post-card {
-  //       background: linear-gradient(135deg, $default-bg, $default-bg);
-  //       border-radius: 8px;
-  //       padding: 10px;
-  //       width: 48%;
-  //     //   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  //       transition: transform 0.3s ease;
-
-  //       &:hover {
-  //         transform: translateY(-3px);
-  //         background: linear-gradient(135deg, #3d3d3d, #292929);
-  //       }
-
-  //       .post-link {
-  //         display: flex;
-  //         align-items: center;
-  //         text-decoration: none;
-  //         color: $default-color;
-
-  //         .content {
-  //           text-align: inherit;
-
-  //           .label {
-  //             font-size: 0.7rem;
-  //             color: $grey-1;
-  //             margin-bottom: 3px;
-  //           }
-
-  //           .title {
-  //             font-size: 0.9rem;
-  //             font-weight: bold;
-  //             color: $blue;
-  //           }
-  //         }
-  //       }
-  //     }
-
-  //     .previous-post {
-  //       justify-content: flex-start;
-  //       margin-right: auto;
-  //       visibility: visible;
-  //     }
-
-  //     .next-post {
-  //       justify-content: flex-end;
-  //       margin-left: auto;
-  //       visibility: visible;
-  //     }
-
-  //     .post-card:empty {
-  //       visibility: hidden;
-  //     }
-  // }
 }
 
-// 하단 다음글 이전글 네비게이션
+// 다음글 이전글 네비게이션
 .post-navigation {
   margin: 2rem 0;
 
@@ -623,11 +571,6 @@
   .nav-next {
     text-align: center;
   }
-
-
-  .nav-links {
-    display: none !important;
-  }
 }
 
 // 테블릿 대응
@@ -677,7 +620,6 @@
 }
 
 // 데스크탑 대응
-
 @media (max-width: 1200px) {
   .post-toc {
     display: none;
@@ -796,6 +738,11 @@ $callout-types: (
 .nav-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+
+  &:hover {
+    background: #2a2a2a;
+    color: #999;
+  }
 }
 
 .grid-container {
@@ -884,10 +831,6 @@ $callout-types: (
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-.post-date {
-  display: none;
-}
-
 @media (max-width: 800px) {
   .grid-container {
     grid-template-columns: 1fr;
@@ -918,6 +861,10 @@ $callout-types: (
 }
 
 @media (max-width: 640px) {
+  .nav-links {
+    display: none !important;
+  }
+
   .grid-container {
     grid-template-columns: 1fr;
     gap: 0.5rem;

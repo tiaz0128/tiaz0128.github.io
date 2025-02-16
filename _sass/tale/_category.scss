@@ -41,7 +41,7 @@
     color: $default-tint;
     font-family: $serif-secondary;
     letter-spacing: .5px;
-    font-size: 12px;
+    font-size: 0.7rem;
   }
 
   &-title {
@@ -181,10 +181,6 @@
           font-weight: 500;
         }
       }
-    }
-
-    &-hr-container time {
-      display: none;
     }
   }
 }

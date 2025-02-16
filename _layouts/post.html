@@ -9,9 +9,6 @@ layout: default
       <a href="{{site.baseurl}}/tags#{{tag}}" class="tag" target="_blank">{{ tag }}</a>
       {% endfor %}
     </div>
-    {% if page.date %}
-      <time datetime="{{ page.date }}">{{ page.date | date: "%Y-%m-%d" }}</time>
-    {% endif %}
   </div>
   
   <h1 class="post-title">{{ page.title }}</h1>
@@ -19,6 +16,10 @@ layout: default
   <div class="post-writer">
     <span>written by</span>
     <img src="/assets/img/tiaz.jpg" alt="{{page.author}}" title="📖 {{ page.author }}">
+  </div>
+  <div class="post-date">
+    <time datetime="{{ page.ins_date }}">작성일: {{ page.ins_date | date: "%Y-%m-%d" }}</time>
+    <time datetime="{{ page.upd_date }}">수정일: {{ page.upd_date | date: "%Y-%m-%d" }}</time>
   </div>
 
     {% include component/header_nav.html %}

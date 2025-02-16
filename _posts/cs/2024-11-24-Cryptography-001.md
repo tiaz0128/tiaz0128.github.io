@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2024-11-23
+ins_date: 2024-11-23
 upd_date: 2025-01-23
 category: "cs"
 subject: "Cryptography"
