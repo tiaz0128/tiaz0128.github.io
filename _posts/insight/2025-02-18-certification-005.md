@@ -3,12 +3,12 @@ layout: post
 ins_date: 2025-02-18
 upd_date: 2025-02-18
 category: "insight"
-subject: "NHN Cloud Essentials(CES)"
+subject: "NHN Cloud certification"
 title: "NHN Cloud Essentials(CES) 자격증 후기"
 description: "NHN Cloud 입문자를 위한 가장 기본적인 역량을 검증하는 시험"
 author: tiaz0128
 permalink: /insight/5
-tags: [insight, 자격증]
+tags: [insight, 자격증, NHN Cloud]
 ref-link:
   - type: youtube
     url: 'https://www.youtube.com/playlist?list=PL42XJKPNDepbkolFMgQbuPo9p-meEtEWL'
