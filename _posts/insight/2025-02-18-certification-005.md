@@ -1,10 +1,10 @@
----
+b---
 layout: post
 ins_date: 2025-02-18
 upd_date: 2025-02-18
 category: "insight"
 subject: "NHN Cloud certification"
-title: "NHN Cloud Essentials(CES) 자격증 후기"
+title: "NHN Cloud 자격증 Essentials(CES) 후기"
 description: "NHN Cloud 입문자를 위한 가장 기본적인 역량을 검증하는 시험"
 author: tiaz0128
 permalink: /insight/5
@@ -38,7 +38,7 @@ NHN Cloud 자격증은 3가지 단계로 구성되어 있습니다.
 
 {% include template/alert.html
   type="note"
-  about="현재(2025-02-18 기준) 가장 기본적인 역량을 검증할 수 있는 시험인 <b>CES(Cloud Essentials Essential)만 응시 가능</b>합니다."
+  about="현재(2025-02-18 기준) 가장 기본적인 역량을 검증할 수 있는 시험인 <b>CES(Cloud Essentials Essential)만 응시 가능</b>합니다. 올해 하반기에 나머지 자격증이 순차적으로 출시할 예정입니다."
 %}
 
 [시험 일정](https://www.nhncloud.com/kr/edu/certification/date){:.none target="_blank"}을 꼭 미리 확인하세요! 같은 날 20명까지 접수 가능했습니다. 아직 시험이 나온지 얼마 안됐으니 자주 일정을 확인해보세요!
@@ -88,7 +88,7 @@ NHN Cloud 자격증은 3가지 단계로 구성되어 있습니다.
 - 신분증 준비
 - 웹캠 및 장비 점검
 - 듀얼 모니터 사용 불가
-- 측면이 보이도록 설정 필수 (거치대 사용 가능) 그 외 물품 금지
+- 휴대폰으로 측면이 보이도록 설정 필수 (거치대 사용 가능) 그 외 물품 금지
   - 시험 도중 휴대폰 화면이 꺼지지 않도록 화면 꺼짐 방지 설정 사전 확인
 
 ## 공부 방법
@@ -110,7 +110,7 @@ NHN Cloud 자격증은 3가지 단계로 구성되어 있습니다.
 ### 출제 문제 주제
 
 - 컴퓨팅 관련 : 인스턴스, 이미지, 템플릿, AS
-- **네트워크 관련**{:.orange} : VPC, SG, DNS, ACL, 플로팅 IP, NAT, IG, LB ...
+- **네트워크 관련**{:.orange} : VPC, SG, DNS, ACL, 플로팅 IP, NAT, IGW, LB ...
 - 스토리지 관련 : NAS, Block Storage, Object Storage
 - 기타 서비스 : RDS, Backup, EasyCache
 - 조직 / 프로젝트 관련
