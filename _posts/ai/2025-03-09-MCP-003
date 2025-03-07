@@ -7,8 +7,8 @@ subject: "MCP"
 title: "MCP(Model Context Protocol) 서버 구축"
 description: "MCP로 커스텀 서버 구축해보기"
 author: tiaz0128
-permalink: /ai/2
-prev_post: /ai/1
+permalink: /ai/3
+prev_post: /ai/2
 tags: [MCP, AI, python]
 ---
 
