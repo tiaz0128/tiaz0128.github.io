@@ -13,9 +13,10 @@ footer,
   width: 80%;
 
   @media (max-width: 600px) {
-    #about {
-      display: none;
-    }
+    // 모바일에서 탭 숨김
+    // #about {
+    //   display: none;
+    // }
   }
 }
 
