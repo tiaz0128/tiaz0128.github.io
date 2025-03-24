@@ -6,11 +6,12 @@ Eat Sleep Coding. Never Never GiveUp.
 
 밥잠코. 절절포
 
-<img src="./assets/img/zo.jpg" width="200" height="200"/>
+<img src="./assets/img/tiaz.webp" width="200" height="200" alt="tiaz0128"/>
 
 <br/>
 
 ## Using Theme
+
 Made with Jekyll using the [Tale](https://github.com/chesterhow/tale) theme.
 
 <br/>

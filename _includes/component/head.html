@@ -1,6 +1,6 @@
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- SEO 최적화 -->
@@ -21,8 +21,8 @@
   <meta property="og:locale" content="ko_KR">
 
   {% if page.subject %}
-  <meta property="og:image" content="{{ site.url }}//assets/img/title/{{ page.category }}/{{ page.subject }}.png" />
-  <meta name="twitter:image" content="{{ site.url }}//assets/img/title/{{ page.category }}/{{ page.subject }}.png" />
+  <meta property="og:image" content="{{ site.url }}//assets/img/title/{{ page.category }}/{{ page.subject }}.webp" />
+  <meta name="twitter:image" content="{{ site.url }}//assets/img/title/{{ page.category }}/{{ page.subject }}.webp" />
   <meta property="og:image:alt" content="{{page.description}}" />
   {% else %}
   <meta property="og:image" content={{ site.author.pic }} />

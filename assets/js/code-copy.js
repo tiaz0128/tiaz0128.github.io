@@ -11,6 +11,8 @@ blocks.forEach((block) => {
     let button = document.createElement("button");
     button.className = "button-copy-code";
     button.innerHTML = COPY_SVG;
+    button.ariaLabel = "Copy code to clipboard";
+    
     block.appendChild(button);
 
     button.addEventListener("click", async () => {

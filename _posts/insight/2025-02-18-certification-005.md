@@ -32,7 +32,7 @@ NHN Cloud 자격증은 3가지 단계로 구성되어 있습니다.
 - CAA(Cloud Architect Associate)
 - CAP(Cloud Architect Professional)
 
-![NHN Cloud 자격증](/assets/img/content/insight/005/004.png){:.img-s}
+![NHN Cloud 자격증](/assets/img/content/insight/005/004.webp){:.img-s}
 
 `> NHN Cloud 자격증은 3가지 단계로 구성`{:.img-caption}
 
@@ -47,7 +47,7 @@ NHN Cloud 자격증은 3가지 단계로 구성되어 있습니다.
 
 ## 시험 개요 : NHN Cloud Essentials(CES)
 
-![NHN Cloud 자격증](/assets/img/content/insight/005/001.png)
+![NHN Cloud 자격증](/assets/img/content/insight/005/001.webp)
 
 - 시험명 : [NHN Cloud Essentials(CES)](https://www.nhncloud.com/kr/edu/certification/essential){:target="_blank"}
 - 시험 일시 : 2025-02-17 19:00
@@ -72,7 +72,7 @@ NHN Cloud 자격증은 3가지 단계로 구성되어 있습니다.
 - 시험장 입장 가능 시간: 19:00 ~ 19:30 해당 시간 사이에 언제든지 입장 가능
 - 시험 시간: 입장 후 사전 설정이 완료되면 바로 90분 동안 시험을 진행하실 수 있습니다.
 
-![시험 방법](/assets/img/content/insight/005/005.png){:.img-m}
+![시험 방법](/assets/img/content/insight/005/005.webp){:.img-m}
 
 `> 시험장 사전 테스트 반드시 확인하자!`{:.img-caption}
 
@@ -80,7 +80,7 @@ NHN Cloud 자격증은 3가지 단계로 구성되어 있습니다.
 
 당일 오전 9시에 **이메일로 오는 시험 응시 URL을 통해 시험 입장이 가능**{:.orange}합니다. 반드시 해당 메일을 잘 보관하고 계세요!
 
-![주의 사항](/assets/img/content/insight/005/002.png){:.img-m}
+![주의 사항](/assets/img/content/insight/005/002.webp){:.img-m}
 
 `> 시험 당일 오는 메일을 꼭 잘 보관하고 있자!`{:.img-caption}
 
@@ -122,7 +122,7 @@ NHN Cloud 자격증은 3가지 단계로 구성되어 있습니다.
 
 저는 이번 자격증 시험에 응시해서 합격했습니다! 다음 단계 자격증 시험도 나오게 되면 또 찾아뵙겠습니다! 감사합니다. 😊
 
-![자격증](/assets/img/content/insight/005/003.png){:.img-m}
+![자격증](/assets/img/content/insight/005/003.webp){:.img-m}
 
 `> 멋진 CES 자격증!`{:.img-caption}
 

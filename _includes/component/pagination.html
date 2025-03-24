@@ -4,7 +4,7 @@
     <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="left arrow">&#8592;&nbsp;&nbsp;prev</a>
     {% endif %}
 
-    <input id="pageInput" type="number" value="{{ paginator.page }}">
+    <input id="pageInput" type="number" value="{{ paginator.page }}" aria-label="page number">
 
     <span> / {{ paginator.total_pages }}</span>
 

@@ -1,9 +1,9 @@
 <section class="about-body">
     <ul class="contact-list">
     {% if site.email %}
-      <li class="email"><a href="mailto:{{site.email}}"><i class="far fa-envelope"></i></a></li>
+      <li class="email"><a href="mailto:{{site.email}}" aria-label="mail"><i class="far fa-envelope"></i></a></li>
     {% else %}
-      <li class="email"><a href="mailto:tiaz0128.dev@gmail.com"><i class="far fa-envelope" aria-hidden="true"></i></a></li>
+      <li class="email"><a href="mailto:tiaz0128.dev@gmail.com" aria-label="mail"><i class="far fa-envelope" aria-hidden="true"></i></a></li>
     {% endif %}
 
     <!-- {% if site.website %}
@@ -13,21 +13,21 @@
     {% endif %} -->
 
     {% if site.github %}
-      <li class="github"><a href="http://github.com/{{site.github}}" target="_blank"><i class="fab fa-github"></i></a></li>
+      <li class="github"><a href="http://github.com/{{site.github}}" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
     {% else %}
-      <li class="github"><a href="http://github.com/tiaz0128" target="_blank"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+      <li class="github"><a href="http://github.com/tiaz0128" target="_blank" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a></li>
     {% endif %}
 
     {% if site.instagram %}
-      <li class="instagram"><a href="http://instagram.com/{{site.instagram}}" target="_blank"><i class="fab fa-instagram"></i></a></li>
+      <li class="instagram"><a href="http://instagram.com/{{site.instagram}}" target="_blank" aria-label="instagram"><i class="fab fa-instagram"></i></a></li>
     {% else %}
-      <li class="instagram"><a href="http://instagram.com/tiaz.dev" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+      <li class="instagram"><a href="http://instagram.com/tiaz.dev" target="_blank" aria-label="instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
     {% endif %}
 
     {% if site.linkedin %}
-      <li class="linkedin"><a href="http://linkedin.com/in/{{site.github}}" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+      <li class="linkedin"><a href="http://linkedin.com/in/{{site.github}}" target="_blank" aria-label="linkedin"><i class="fab fa-linkedin"></i></a></li>
     {% else %}
-      <li class="linkedin"><a href="http://linkedin.com/in/tiaz0128" target="_blank"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+      <li class="linkedin"><a href="http://linkedin.com/in/tiaz0128" target="_blank" aria-label="linkedin"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
     {% endif %}
    </ul>
 </section>

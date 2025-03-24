@@ -1,25 +1,25 @@
 <div class="category-layout">
     <div class="category-tags">
         <span class="small-tag">
-            <a href="{{site.baseurl}}/category/{{post.category}}" class="tag">
+            <a href="{{site.baseurl}}/category/{{post.category}}" class="tag" aria-label="{{post.category}}">
                 {{post.category}}
             </a>
         </span>
     </div>
     <div class="category-container">
-        <a href="{{site.baseurl}}/category/{{post.category}}" class="tag">
+        <a href="{{site.baseurl}}/category/{{post.category}}" class="tag" aria-label="{{post.category}}">
             {% if post.category == 'book'%}
             <div class="img-book-container">
-                <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.png" />
+                <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.webp" alt="{{post.subject}}"/>
             </div>
             {% else %}
             <div class="img-container">
-                <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.png" />
+                <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.webp" alt="{{post.subject}}"/>
             </div>
             {% endif %}
         </a>
 
-        <a href="{{ post.url | prepend: site.baseurl }}" class="category-item">
+        <a href="{{ post.url | prepend: site.baseurl }}" class="category-item" aria-label="{{post.category}}">
             <div>
                 <h1 class="category-title">{{ post.title }}</h1>
                 <div class="category-hr-container">
