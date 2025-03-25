@@ -34,3 +34,11 @@ $ docker compose up dev --build
 
 $ docker compose down
 ```
+
+## 이미지 -> webp
+
+```bash
+$ pip install pillow
+
+$ python convert-webp.py
+```

@@ -575,7 +575,7 @@
 
 // 테블릿 대응
 @media (min-width: 1200px) {
-  .post-toc {
+.post-toc {
     position: fixed;
     width: 200px;
     right: calc((100% - 800px) / 2 - 240px);
@@ -614,6 +614,21 @@
 
       &:hover {
         background-color: $blue;
+      }
+    }
+  }
+
+  .banner-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .x-banner{
+      width: 100%;
+      display: flex;
+      direction: row;
+      img {
+        width: 40px;
       }
     }
   }

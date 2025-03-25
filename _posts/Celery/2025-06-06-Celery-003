@@ -5,7 +5,7 @@ upd_date: 2025-02-11
 category: "Celery"
 subject: "Celery"
 title: "Celery 병렬 처리"
-description: "Celery를 통한 여러 작업을 한번에 처리하는 방법"
+subtitle: "Celery를 통한 여러 작업을 한번에 처리하는 방법"
 author: tiaz0128
 permalink: /Celery/3
 tags: [Celery]

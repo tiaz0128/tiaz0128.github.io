@@ -5,7 +5,7 @@ upd_date: 2025-02-09
 category: "Network"
 subject: "DNS"
 title: "DNS(Domain Name System) 동작 원리"
-description: "DNS가 동작하는 원리에 대해서"
+subtitle: "DNS가 동작하는 원리에 대해서"
 author: tiaz0128
 permalink: /Network/3
 tags: [DNS]
