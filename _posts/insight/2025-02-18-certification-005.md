@@ -5,6 +5,7 @@ upd_date: 2025-02-18
 category: "insight"
 subject: "NHN Cloud certification"
 title: "NHN Cloud 자격증 Essentials(CES) 후기"
+description: "NHN Cloud 입문용 CES 자격증 응시 과정을 정리하며 시험 방식, 준비법, 후기까지 초보자 관점에서 유용한 정보를 제공합니다​."
 subtitle: "NHN Cloud 입문자를 위한 가장 기본적인 역량을 검증하는 시험"
 author: tiaz0128
 permalink: /insight/5

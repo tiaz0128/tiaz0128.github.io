@@ -5,6 +5,7 @@ upd_date: 2025-01-23
 category: "cs"
 subject: "Cryptography"
 title: "대칭키, 비대칭키"
+description: "대칭키와 비대칭키의 개념부터 차이점, 실제 사용 예시(GitHub SSH)까지 암호화 방식의 원리와 활용을 직관적으로 설명합니다​."
 subtitle: "암호학의 기본! 대칭키와 비대칭키"
 author: tiaz0128
 permalink: /cs/1

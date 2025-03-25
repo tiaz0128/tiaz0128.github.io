@@ -5,6 +5,7 @@ upd_date: 2025-02-22
 category: "Celery"
 subject: "Celery"
 title: "Celery : 자동 웹비나 참석"
+description: test
 subtitle: "Celery Beat와 Google calendar를 활용한 자동 웹비나 참석"
 author: tiaz0128
 permalink: /Celery/4

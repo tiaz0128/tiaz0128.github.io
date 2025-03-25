@@ -14,7 +14,7 @@
   padding-bottom: 30px;
   margin-bottom: 30px;
 
-  &:after {
+  &::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -23,7 +23,7 @@
     display: block;
     height: 1px;
     width: 80px;
-    background-color: $default-color;
+    background-color: $default-hr;
   }
 
   .author-image-container {

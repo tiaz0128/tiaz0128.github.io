@@ -4,13 +4,13 @@ $default-shade: rgba(255, 255, 255, 0.81) !default;
 $default-tint: #aaa !default;
 $default-title: rgba(98, 191, 255, 0.70);
 $default-bg: rgb(25, 25, 25);
-$default-hr: #979797;
+$default-hr: hsla(0, 0%, 100%, .07);
 
 $shadow-color: rgba(0, 0, 0, .2) !default;
 $back-color: #2a3844;
 $code-path: #515c67;
 
-$grey-1: $default-hr !default;
+$grey-1: #979797 !default;
 $grey-2: rgba(255, 255, 255, 0.07) !default;
 $grey-3: rgb(63, 68, 71) !default;
 $white: #fff !default;
