@@ -126,3 +126,7 @@ mjx-container *::-webkit-scrollbar-thumb {
 mjx-container *::-webkit-scrollbar-thumb:hover {
   background-color: rgba(110, 118, 129, 0.7);
 }
+
+.MathJax_Display{
+  overflow-y: auto;
+}
