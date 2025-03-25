@@ -3,6 +3,15 @@
         var script = document.createElement('script');
         script.src = "{{ '/assets/js/tag.js' | relative_url }}";
         document.body.appendChild(script);
+
+        if (window.location.hash){
+            // window.location.hash와 동일한 href 속성이 있는 a 태그 찾기
+            var target = document.querySelector('a[href="' + window.location.hash.toLowerCase() + '"]');
+            if (target) {
+                // a 태그에 click 이벤트 발생시키기
+                target.click();
+            }
+        }
     };
 
     // 페이지가 완전히 로드된 후 실행
