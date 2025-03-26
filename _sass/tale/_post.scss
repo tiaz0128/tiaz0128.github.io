@@ -191,6 +191,10 @@
   a.none {
     background-image: none !important;
     padding-inline-end: 0px !important;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: #0066cc;
+    text-decoration-thickness: 1px;
   }
 
   a:hover {
