@@ -32,12 +32,24 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
-
+  
   <!-- Google Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700">
+  <!-- Google Fonts 최적화 - preconnect 사용 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- 폰트 로드를 비동기적으로 처리 -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&display=swap" media="print" onload="this.media='all'">
+
+  <!-- 폰트를 불러오지 못할 경우를 대비한 fallback -->
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&display=swap">
+  </noscript>
   
   <!-- post인 경우에만 가져오기 -->
   {% if page.layout == "post" %}
