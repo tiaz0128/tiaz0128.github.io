@@ -37,11 +37,14 @@
   <!-- Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400,700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700">
   
+  <!-- post인 경우에만 가져오기 -->
+  {% if page.layout == "post" %}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400,700&display=swap">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+  {% endif %}
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="{{ "/assets/favicon-32x32.png" | relative_url }}">
