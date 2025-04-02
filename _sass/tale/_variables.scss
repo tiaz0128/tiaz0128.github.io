@@ -8,7 +8,6 @@ $default-hr: hsla(0, 0%, 100%, .07);
 
 $shadow-color: rgba(0, 0, 0, .2) !default;
 $back-color: #2a3844;
-$code-path: #284159;
 
 $grey-1: #979797 !default;
 $grey-2: rgba(255, 255, 255, 0.07) !default;
@@ -19,7 +18,10 @@ $black: #191919 !default;
 $blue: rgba(98, 191, 255, 0.70) !default;
 $orange: #ed9d13;
 $yellow: #FFD700;
+$gold: #e6c07b;
 $green: #b5bc64;
+
+$code-path: $grey-3;
 
 //alert colors
 $alert-background: #262626;
