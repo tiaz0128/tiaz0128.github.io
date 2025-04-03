@@ -3,7 +3,7 @@ from PIL import Image
 from pathlib import Path
 
 
-def convert_to_webp(source_path, output_path, quality=80):
+def convert_to_webp(source_path, output_path, quality=100):
     """이미지를 WebP 형식으로 변환합니다."""
     try:
         image = Image.open(source_path)
