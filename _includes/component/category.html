@@ -21,7 +21,7 @@
 
         <a href="{{ post.url | prepend: site.baseurl }}" class="category-item" aria-label="{{post.category}}">
             <div>
-                <h1 class="category-title">{{ post.title }}</h1>
+                <h2 class="category-title">{{ post.title }}</h2>
                 <div class="category-hr-container">
                     <div class="category-line"></div>
                     <time datetime="{{ post.ins_date }}" class="category-time">{{ post.ins_date | date: "%Y-%m-%d" }}</time>
