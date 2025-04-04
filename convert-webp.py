@@ -12,8 +12,8 @@ def convert_to_webp(source_path, output_path, quality=100):
             # 세로는 100px로 고정하고 가로는 비율에 맞게 조정
             if image.height > 100:
                 ratio = image.width / image.height
-                new_width = int(100 * ratio)
-                image = image.resize((new_width, 100), Image.Resampling.LANCZOS)
+                new_width = int(200 * ratio)
+                image = image.resize((new_width, 200), Image.Resampling.LANCZOS)
                 print(f"타이틀 이미지 크기 조정: {source_path} -> {output_path}")
 
         # RGBA 모드 확인 (투명도가 있는 이미지)
