@@ -57,7 +57,7 @@ payload = {
     "host": host,
     "key": "90f828d361c54550931a61cfd003feb0",
     "keyLocation": f"https://{host}/90f828d361c54550931a61cfd003feb0.txt",
-    "urlList": list(map(lambda x: f"{host}/{x}", url_list)),
+    "urlList": list(map(lambda x: f"https://{host}/{x}", url_list)),
 }
 
 response = requests.post(url, headers=headers, data=json.dumps(payload))
