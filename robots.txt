@@ -10,3 +10,5 @@ Disallow: /assets/js/
 Disallow: /assets/json/
 
 Sitemap: {{ site.url }}/sitemap.xml
+
+#DaumWebMasterTool:06e34924bc9d2560bea2b153a409941c9f416714c29e1069711c7bed6598b5e3:Ha0ldmzinEYwVMjVBwJiaA==
