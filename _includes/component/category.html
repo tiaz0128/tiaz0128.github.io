@@ -8,15 +8,9 @@
     </div>
     <div class="category-container">
         <a href="{{site.baseurl}}/category/{{post.category}}" class="tag" aria-label="{{post.category}}">
-            {% if post.category == 'book'%}
-            <div class="img-book-container">
-                <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.webp" alt="{{post.subject}}"/>
+            <div class="{% if post.category == 'book' %}img-book-container{% else %}img-container{% endif %}">
+                <img loading="lazy" src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.webp" alt="{{post.subject}}"/>
             </div>
-            {% else %}
-            <div class="img-container">
-                <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.webp" alt="{{post.subject}}"/>
-            </div>
-            {% endif %}
         </a>
 
         <a href="{{ post.url | prepend: site.baseurl }}" class="category-item" aria-label="{{post.category}}">
