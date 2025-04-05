@@ -1,0 +1,211 @@
+{% if include.images %}
+<div class="responsive-gallery" id="gallery-{{ include.id | default: 'default' }}">
+  <!-- <div class="gallery-grid">
+    {% for image in include.images %}
+    <div class="gallery-item">
+      <img src="{{ image }}" alt="{{ include.alt | default: '갤러리 이미지' }}" loading="lazy">
+    </div>
+    {% endfor %}
+  </div> -->
+  
+  <div class="gallery-carousel">
+    <div class="carousel-container">
+      {% for image in include.images %}
+      <div class="carousel-item">
+        <img src="{{ image }}" alt="{{ include.alt | default: '갤러리 이미지' }}" loading="lazy">
+      </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-prev" aria-label="이전 이미지">◀</button>
+    <button class="carousel-next" aria-label="다음 이미지">▶</button>
+    <div class="carousel-dots">
+      {% for image in include.images %}
+      <button class="dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="이미지 {{ forloop.index }} 보기"></button>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+/* 공통 스타일 */
+.responsive-gallery {
+  margin: 2rem 0;
+  /* 추가 스타일 */
+  display: flex;
+  justify-content: center;
+}
+
+.responsive-gallery img {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 그리드 갤러리 (데스크탑) */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 10px;
+}
+
+.gallery-item {
+  overflow: hidden;
+  aspect-ratio: 1 / 1; /* 일관된 비율 유지 */
+  border-radius: 4px;
+}
+
+/* 캐러셀 (모바일) */
+.gallery-carousel {
+  /* display: none; */
+  max-width: 500px;
+  display: block;
+  /* 추가 스타일 */
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-container {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.carousel-item {
+  flex: 0 0 100%;
+  aspect-ratio: 1 / 1; /* 일관된 비율 유지 */
+}
+
+.carousel-prev, .carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carousel-prev {
+  left: 10px;
+}
+
+.carousel-next {
+  right: 10px;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  margin: 0 5px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: #333;
+}
+
+/* 반응형 미디어 쿼리 */
+/* @media (max-width: 768px) {
+  .gallery-grid {
+    display: none;
+  }
+  
+  .gallery-carousel {
+    display: block;
+  }
+} */
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const galleryId = '{{ include.id | default: "default" }}';
+  const gallery = document.getElementById(`gallery-${galleryId}`);
+  if (!gallery) return;
+
+  const container = gallery.querySelector('.carousel-container');
+  const prevBtn = gallery.querySelector('.carousel-prev');
+  const nextBtn = gallery.querySelector('.carousel-next');
+  const dots = gallery.querySelectorAll('.dot');
+  const items = gallery.querySelectorAll('.carousel-item');
+  let currentIndex = 0;
+  
+  // 슬라이드 이동 함수
+  function goToSlide(index) {
+    currentIndex = index;
+    container.style.transform = `translateX(-${currentIndex * 100}%)`;
+    
+    // 도트 활성화 상태 업데이트
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+  
+  // 이벤트 리스너 추가
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1;
+    goToSlide(currentIndex);
+  });
+  
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
+    goToSlide(currentIndex);
+  });
+  
+  // 도트 버튼 이벤트 리스너
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const index = parseInt(dot.getAttribute('data-index'));
+      goToSlide(index);
+    });
+  });
+  
+  // 터치 이벤트 지원
+  let startX, moveX;
+  const threshold = 50; // 스와이프 감지 임계값
+  
+  container.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
+  
+  container.addEventListener('touchmove', (e) => {
+    moveX = e.touches[0].clientX;
+  });
+  
+  container.addEventListener('touchend', () => {
+    if (!startX || !moveX) return;
+    
+    const diff = startX - moveX;
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        // 왼쪽으로 스와이프
+        currentIndex = Math.min(currentIndex + 1, items.length - 1);
+      } else {
+        // 오른쪽으로 스와이프
+        currentIndex = Math.max(currentIndex - 1, 0);
+      }
+      goToSlide(currentIndex);
+    }
+    
+    startX = null;
+    moveX = null;
+  });
+});
+</script>
+{% endif %}
