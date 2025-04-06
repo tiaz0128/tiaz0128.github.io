@@ -51,7 +51,9 @@ url_list = [
     "flask/1",
 ]
 
-url = "https://api.indexnow.org/IndexNow"
+NAVER_URL = "https://searchadvisor.naver.com/indexnow"
+BING_URL = "https://api.indexnow.org/IndexNow"
+
 headers = {"Content-Type": "application/json; charset=utf-8"}
 payload = {
     "host": host,
@@ -60,6 +62,6 @@ payload = {
     "urlList": list(map(lambda x: f"https://{host}/{x}", url_list)),
 }
 
-response = requests.post(url, headers=headers, data=json.dumps(payload))
+response = requests.post(BING_URL, headers=headers, data=json.dumps(payload))
 print(response.status_code)
 print(response.text)
