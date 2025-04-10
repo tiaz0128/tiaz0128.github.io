@@ -3,7 +3,7 @@ import json
 
 host = "tiaz.dev"
 url_list = [
-    "insight/13",
+    "ai/4",
 ]
 
 headers = {"Content-Type": "application/json; charset=utf-8"}
