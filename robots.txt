@@ -6,6 +6,8 @@ permalink: /robots.txt
 User-agent: *
 Allow: /
 
+Disallow: /about
+Disallow: /seminars
 Disallow: /assets/js/
 Disallow: /assets/json/
 

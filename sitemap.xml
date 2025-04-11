@@ -27,20 +27,4 @@ layout: null
       {% endif %}
     </url>
   {% endfor %}
-
-  <!-- 페이지 URL (tags, about) -->
-  <url>
-    <loc>{{ site.url }}/tags</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>{{ site.url }}/about</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.1</priority>
-  </url>
-
 </urlset>
