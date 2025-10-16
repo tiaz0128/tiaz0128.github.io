@@ -60,7 +60,7 @@ def process_directory(source_dir):
 
 
 if __name__ == "__main__":
-    image_dir = "assets/img"
+    image_dir = "img"
 
     # 디렉토리 확인
     if not os.path.exists(image_dir):
