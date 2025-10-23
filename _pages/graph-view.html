@@ -151,31 +151,32 @@ permalink: /graph-view
 
     .node-label {
     font-family: Arial, sans-serif;
-    font-size: 10px;
+    font-size: 11px;
     fill: white;
     text-anchor: middle;
     pointer-events: none;
     transition: all 0.3s ease;
+    dominant-baseline: hanging;
   }
 
   .node-label.highlighted {
     fill: #ffffff;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
   }
 
   .node-label.connected-1 {
     fill: #cccccc;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 13px;
     text-shadow: 0 0 4px rgba(204, 204, 204, 0.6);
   }
 
   .node-label.connected-2 {
     fill: #888888;
     font-weight: 500;
-    font-size: 11px;
+    font-size: 12px;
     text-shadow: 0 0 2px rgba(136, 136, 136, 0.4);
   }
 
@@ -255,6 +256,12 @@ permalink: /graph-view
     <div class="legend-item">
       <div class="legend-color" style="background-color: #40804c;"></div>
       <span>Posts</span>
+    </div>
+    <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); margin: 10px 0;">
+    <div style="font-size: 10px; color: #cccccc; line-height: 1.3;">
+      <div>• Click tags to highlight</div>
+      <div>• Ctrl+Click posts to open</div>
+      <div>• Click background to clear</div>
     </div>
   </div>
   
@@ -445,8 +452,8 @@ node
       .html(`
         <strong>${d.label}</strong><br/>
         Type: ${d.type}<br/>
-        ${d.type === "tag" ? `Used in ${d.count} posts` : ""}
-        ${d.type === "post" ? `Category: ${d.category}<br/>Tags: ${d.tags.join(", ")}` : ""}
+        ${d.type === "tag" ? `Used in ${d.count} posts<br/><em style="color: #cccccc; font-size: 10px;">Click to highlight connections</em>` : ""}
+        ${d.type === "post" ? `Category: ${d.category}<br/>Tags: ${d.tags.join(", ")}<br/><em style="color: #ffff88; font-size: 10px;">Ctrl+Click to open post</em>` : ""}
       `)
       .style("left", (mouseX + offsetX) + "px")
       .style("top", (mouseY + offsetY) + "px");
@@ -504,7 +511,7 @@ simulation.on("tick", () => {
 
   labels
     .attr("x", d => d.x)
-    .attr("y", d => d.y + (d.type === "tag" ? 4 : 3));
+    .attr("y", d => d.y + d.size + 5);
 });
 
 // Control functions
