@@ -1,0 +1,653 @@
+---
+layout: default
+title: "Graph View"
+permalink: /graph-view
+---
+
+<style>
+  .graph-container {
+    width: 100%;
+    height: 80vh;
+    border: 2px solid #333;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    margin: 50px 0;
+    padding: 25px;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .graph-container:hover {
+    border-color: #444;
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .graph-controls {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 100;
+    background: #9e9e9e1a;;
+    padding: 5px;
+    border-radius: 12px;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .graph-controls button {
+    margin: 3px;
+    padding: 8px 14px;
+    background: linear-gradient(135deg, #404040 0%, #2a2a2a 100%);
+    color: white;
+    border: 1px solid #555;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .graph-controls button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .graph-controls button:hover {
+    background: linear-gradient(135deg, #505050 0%, #3a3a3a 100%);
+    border-color: #666;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .graph-controls button:hover:before {
+    left: 100%;
+  }
+
+  .graph-controls button:active {
+    transform: translateY(0px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .node {
+    stroke: #fff;
+    stroke-width: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .node.tag {
+    fill: #0044aa;
+  }
+
+  .node.post {
+    fill: #40804c;
+  }
+
+  .node.highlighted {
+    stroke: #ffffff;
+    stroke-width: 3px;
+    filter: brightness(1.4) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+  }
+
+  .node.connected-1 {
+    stroke: #cccccc;
+    stroke-width: 2.5px;
+    filter: brightness(1.2) drop-shadow(0 0 4px rgba(204, 204, 204, 0.6));
+  }
+
+  .node.connected-2 {
+    stroke: #888888;
+    stroke-width: 2px;
+    filter: brightness(1.1) drop-shadow(0 0 2px rgba(136, 136, 136, 0.4));
+  }
+
+  .node.dimmed {
+    opacity: 0.1;
+    filter: grayscale(1) brightness(0.3);
+  }
+
+  .link {
+    stroke: #999;
+    stroke-opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+
+  .link.highlighted {
+    stroke: #ffffff;
+    stroke-opacity: 1;
+    stroke-width: 3px;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+  }
+
+  .link.connected {
+    stroke: #cccccc;
+    stroke-opacity: 0.9;
+    stroke-width: 2px;
+    filter: drop-shadow(0 0 2px rgba(204, 204, 204, 0.5));
+  }
+
+  .link.dimmed {
+    stroke-opacity: 0.05;
+    filter: brightness(0.2);
+  }
+
+    .node-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    fill: white;
+    text-anchor: middle;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  .node-label.highlighted {
+    fill: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  }
+
+  .node-label.connected-1 {
+    fill: #cccccc;
+    font-weight: 600;
+    font-size: 12px;
+    text-shadow: 0 0 4px rgba(204, 204, 204, 0.6);
+  }
+
+  .node-label.connected-2 {
+    fill: #888888;
+    font-weight: 500;
+    font-size: 11px;
+    text-shadow: 0 0 2px rgba(136, 136, 136, 0.4);
+  }
+
+  .node-label.dimmed {
+    fill: rgba(255, 255, 255, 0.1);
+    opacity: 0.3;
+  }
+
+  .tooltip {
+    position: absolute;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 250px;
+    line-height: 1.4;
+  }
+
+  .legend {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: #9e9e9e1a;
+    padding: 15px;
+    border-radius: 12px;
+    color: white;
+    font-size: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    min-width: 100px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin: 6px 0;
+    transition: all 0.2s ease;
+  }
+
+  .legend-item:hover {
+    transform: translateX(2px);
+  }
+
+  .legend-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+  }
+
+  .legend-item:hover .legend-color {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+</style>
+
+<div class="graph-container" id="graph-container">
+  <div class="graph-controls">
+    <button onclick="resetZoom()">Reset Zoom</button>
+    <button onclick="toggleLabels()">Toggle Labels</button>
+    <button onclick="togglePhysics()" id="physicsBtn">Pause Physics</button>
+  </div>
+  
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #0044aa;"></div>
+      <span>Tags</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #40804c;"></div>
+      <span>Posts</span>
+    </div>
+  </div>
+  
+  <div class="tooltip" id="tooltip" style="display: none;"></div>
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<script>
+// Graph data will be populated from Jekyll
+const posts = [
+  {% for post in site.posts %}
+  {
+    id: "post-{{ post.url | slugify }}",
+    title: "{{ post.title | escape }}",
+    url: "{{ post.url }}",
+    category: "{{ post.category }}",
+    tags: [{% for tag in post.tags %}"{{ tag }}"{% unless forloop.last %},{% endunless %}{% endfor %}],
+    type: "post"
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+
+// Process data to create nodes and links
+let nodes = [];
+let links = [];
+let tagCounts = {};
+
+// Count tag frequencies
+posts.forEach(post => {
+  post.tags.forEach(tag => {
+    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+  });
+});
+
+// Create tag nodes
+Object.keys(tagCounts).forEach(tag => {
+  nodes.push({
+    id: `tag-${tag}`,
+    label: tag,
+    type: "tag",
+    size: Math.max(5, Math.min(20, tagCounts[tag] * 3)),
+    count: tagCounts[tag]
+  });
+});
+
+// Create post nodes and links
+posts.forEach(post => {
+  nodes.push({
+    id: post.id,
+    label: post.title,
+    url: post.url,
+    category: post.category,
+    type: "post",
+    size: 8,
+    tags: post.tags
+  });
+
+  // Create links between posts and tags
+  post.tags.forEach(tag => {
+    links.push({
+      source: post.id,
+      target: `tag-${tag}`,
+      type: "post-tag"
+    });
+  });
+
+  // Create links between posts that share tags
+  posts.forEach(otherPost => {
+    if (post.id !== otherPost.id) {
+      const sharedTags = post.tags.filter(tag => otherPost.tags.includes(tag));
+      if (sharedTags.length > 0) {
+        const linkId = [post.id, otherPost.id].sort().join('-');
+        if (!links.find(l => l.id === linkId)) {
+          links.push({
+            id: linkId,
+            source: post.id,
+            target: otherPost.id,
+            type: "post-post",
+            strength: sharedTags.length
+          });
+        }
+      }
+    }
+  });
+});
+
+// D3.js visualization
+const container = d3.select("#graph-container");
+const width = container.node().getBoundingClientRect().width;
+const height = container.node().getBoundingClientRect().height;
+
+const svg = container.append("svg")
+  .attr("width", width)
+  .attr("height", height)
+  .on("click", (event) => {
+    // Clear highlighting when clicking on background
+    if (event.target === event.currentTarget) {
+      clearHighlighting();
+      highlightedNode = null;
+    }
+  });
+
+const g = svg.append("g");
+
+// Zoom behavior
+const zoom = d3.zoom()
+  .scaleExtent([0.1, 4])
+  .on("zoom", (event) => {
+    g.attr("transform", event.transform);
+  });
+
+svg.call(zoom);
+
+// Force simulation
+const simulation = d3.forceSimulation(nodes)
+  .force("link", d3.forceLink(links).id(d => d.id).distance(d => {
+    if (d.type === "post-tag") return 50;
+    if (d.type === "post-post") return 80 + (5 - d.strength) * 20;
+    return 100;
+  }))
+  .force("charge", d3.forceManyBody().strength(d => {
+    if (d.type === "tag") return -300 - (d.count * 50);
+    return -200;
+  }))
+  .force("center", d3.forceCenter(width / 2, height / 2))
+  .force("collision", d3.forceCollide().radius(d => d.size + 5));
+
+// Create links
+const link = g.append("g")
+  .selectAll("line")
+  .data(links)
+  .enter().append("line")
+  .attr("class", "link")
+  .style("stroke-width", d => {
+    if (d.type === "post-post") return Math.max(1, d.strength);
+    return 1;
+  })
+  .style("stroke-opacity", d => {
+    if (d.type === "post-post") return 0.3 + (d.strength * 0.1);
+    return 0.6;
+  });
+
+// Create nodes
+const node = g.append("g")
+  .selectAll("circle")
+  .data(nodes)
+  .enter().append("circle")
+  .attr("class", d => `node ${d.type}`)
+  .attr("r", d => d.size)
+  .call(d3.drag()
+    .on("start", dragstarted)
+    .on("drag", dragged)
+    .on("end", dragended));
+
+// Create labels
+const labels = g.append("g")
+  .selectAll("text")
+  .data(nodes)
+  .enter().append("text")
+  .attr("class", "node-label")
+  .text(d => {
+    if (d.type === "tag") return d.label;
+    return d.label.length > 20 ? d.label.substring(0, 17) + "..." : d.label;
+  })
+  .style("font-size", d => d.type === "tag" ? "12px" : "10px");
+
+// Tooltip
+const tooltip = d3.select("#tooltip");
+
+// Highlighting state
+let highlightedNode = null;
+
+// Mouse events
+node
+  .on("mouseover", (event, d) => {
+    // Use mouse position for better tooltip placement
+    const mouseX = event.pageX || event.clientX + window.scrollX;
+    const mouseY = event.pageY || event.clientY + window.scrollY;
+    
+    // Force tooltip to appear on the left side
+    const tooltipWidth = 250; // max-width from CSS
+    const tooltipHeight = 80; // estimated height
+    const offsetX = -tooltipWidth - 15; // Always show on the left
+    const offsetY = -tooltipHeight / 2; // Center vertically relative to mouse
+    
+    tooltip.style("display", "block")
+      .html(`
+        <strong>${d.label}</strong><br/>
+        Type: ${d.type}<br/>
+        ${d.type === "tag" ? `Used in ${d.count} posts` : ""}
+        ${d.type === "post" ? `Category: ${d.category}<br/>Tags: ${d.tags.join(", ")}` : ""}
+      `)
+      .style("left", (mouseX + offsetX) + "px")
+      .style("top", (mouseY + offsetY) + "px");
+  })
+  .on("mousemove", (event, d) => {
+    // Update tooltip position on mouse move for better tracking
+    const mouseX = event.pageX || event.clientX + window.scrollX;
+    const mouseY = event.pageY || event.clientY + window.scrollY;
+    
+    // Force tooltip to appear on the left side
+    const tooltipWidth = 250;
+    const tooltipHeight = 80;
+    const offsetX = -tooltipWidth - 15; // Always show on the left
+    const offsetY = -tooltipHeight / 2; // Center vertically relative to mouse
+    
+    tooltip
+      .style("left", (mouseX + offsetX) + "px")
+      .style("top", (mouseY + offsetY) + "px");
+  })
+  .on("mouseout", () => {
+    tooltip.style("display", "none");
+  })
+  .on("click", (event, d) => {
+    // Handle post URL opening
+    if (d.type === "post" && d.url && event.ctrlKey) {
+      window.open(d.url, '_blank');
+      return;
+    }
+    
+    // Toggle highlighting for tags
+    if (d.type === "tag") {
+      if (highlightedNode === d.id) {
+        // Clear highlighting
+        clearHighlighting();
+        highlightedNode = null;
+      } else {
+        // Apply new highlighting
+        highlightConnectedNodes(d);
+        highlightedNode = d.id;
+      }
+    }
+  });
+
+// Update positions
+simulation.on("tick", () => {
+  link
+    .attr("x1", d => d.source.x)
+    .attr("y1", d => d.source.y)
+    .attr("x2", d => d.target.x)
+    .attr("y2", d => d.target.y);
+
+  node
+    .attr("cx", d => d.x)
+    .attr("cy", d => d.y);
+
+  labels
+    .attr("x", d => d.x)
+    .attr("y", d => d.y + (d.type === "tag" ? 4 : 3));
+});
+
+// Control functions
+let labelsVisible = true;
+let physicsRunning = true;
+
+function resetZoom() {
+  svg.transition().duration(750).call(
+    zoom.transform,
+    d3.zoomIdentity
+  );
+}
+
+function toggleLabels() {
+  labelsVisible = !labelsVisible;
+  labels.style("display", labelsVisible ? "block" : "none");
+}
+
+function togglePhysics() {
+  if (physicsRunning) {
+    // Pause physics: fix all nodes at current positions
+    simulation.stop();
+    nodes.forEach(d => {
+      d.fx = d.x;
+      d.fy = d.y;
+    });
+    document.getElementById("physicsBtn").textContent = "Resume Physics";
+  } else {
+    // Resume physics: release all nodes
+    nodes.forEach(d => {
+      d.fx = null;
+      d.fy = null;
+    });
+    simulation.restart();
+    document.getElementById("physicsBtn").textContent = "Pause Physics";
+  }
+  physicsRunning = !physicsRunning;
+}
+
+// Highlighting functions
+function highlightConnectedNodes(clickedNode) {
+  // Clear any existing highlighting
+  clearHighlighting();
+  
+  // Find 1st level connections (direct connections to clicked node)
+  const firstLevel = new Set();
+  const secondLevel = new Set();
+  
+  // Find direct connections
+  links.forEach(link => {
+    const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+    const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+    
+    if (sourceId === clickedNode.id) {
+      firstLevel.add(targetId);
+    } else if (targetId === clickedNode.id) {
+      firstLevel.add(sourceId);
+    }
+  });
+  
+  // Find 2nd level connections (connections to 1st level nodes)
+  links.forEach(link => {
+    const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+    const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+    
+    if (firstLevel.has(sourceId) && !firstLevel.has(targetId) && targetId !== clickedNode.id) {
+      secondLevel.add(targetId);
+    } else if (firstLevel.has(targetId) && !firstLevel.has(sourceId) && sourceId !== clickedNode.id) {
+      secondLevel.add(sourceId);
+    }
+  });
+  
+  // Apply highlighting classes to nodes
+  node.classed("highlighted", d => d.id === clickedNode.id)
+      .classed("connected-1", d => firstLevel.has(d.id))
+      .classed("connected-2", d => secondLevel.has(d.id))
+      .classed("dimmed", d => d.id !== clickedNode.id && !firstLevel.has(d.id) && !secondLevel.has(d.id));
+  
+  // Apply highlighting classes to labels
+  labels.classed("highlighted", d => d.id === clickedNode.id)
+         .classed("connected-1", d => firstLevel.has(d.id))
+         .classed("connected-2", d => secondLevel.has(d.id))
+         .classed("dimmed", d => d.id !== clickedNode.id && !firstLevel.has(d.id) && !secondLevel.has(d.id));
+  
+  // Apply highlighting to links
+  link.classed("highlighted", l => {
+    const sourceId = typeof l.source === 'object' ? l.source.id : l.source;
+    const targetId = typeof l.target === 'object' ? l.target.id : l.target;
+    return sourceId === clickedNode.id || targetId === clickedNode.id;
+  })
+  .classed("connected", l => {
+    const sourceId = typeof l.source === 'object' ? l.source.id : l.source;
+    const targetId = typeof l.target === 'object' ? l.target.id : l.target;
+    return (firstLevel.has(sourceId) && firstLevel.has(targetId)) ||
+           (firstLevel.has(sourceId) && secondLevel.has(targetId)) ||
+           (firstLevel.has(targetId) && secondLevel.has(sourceId));
+  })
+  .classed("dimmed", l => {
+    const sourceId = typeof l.source === 'object' ? l.source.id : l.source;
+    const targetId = typeof l.target === 'object' ? l.target.id : l.target;
+    const isHighlighted = sourceId === clickedNode.id || targetId === clickedNode.id;
+    const isConnected = (firstLevel.has(sourceId) && firstLevel.has(targetId)) ||
+                       (firstLevel.has(sourceId) && secondLevel.has(targetId)) ||
+                       (firstLevel.has(targetId) && secondLevel.has(sourceId));
+    return !isHighlighted && !isConnected;
+  });
+}
+
+function clearHighlighting() {
+  node.classed("highlighted connected-1 connected-2 dimmed", false);
+  link.classed("highlighted connected dimmed", false);
+  labels.classed("highlighted connected-1 connected-2 dimmed", false);
+}
+
+// Drag functions
+function dragstarted(event, d) {
+  if (!event.active && physicsRunning) simulation.alphaTarget(0.3).restart();
+  d.fx = d.x;
+  d.fy = d.y;
+}
+
+function dragged(event, d) {
+  d.fx = event.x;
+  d.fy = event.y;
+}
+
+function dragended(event, d) {
+  if (!event.active && physicsRunning) simulation.alphaTarget(0);
+  // Only release node position if physics is running
+  if (physicsRunning) {
+    d.fx = null;
+    d.fy = null;
+  }
+}
+
+// Resize handler
+window.addEventListener('resize', () => {
+  const newWidth = container.node().getBoundingClientRect().width;
+  const newHeight = container.node().getBoundingClientRect().height;
+  
+  svg.attr("width", newWidth).attr("height", newHeight);
+  simulation.force("center", d3.forceCenter(newWidth / 2, newHeight / 2));
+  simulation.alpha(0.3).restart();
+});
+
+</script>

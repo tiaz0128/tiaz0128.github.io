@@ -37,9 +37,9 @@ incremental: false
 timezone: UTC
 
 # 추가 포스트 설정
-collections:
-  seminars:
-    output: true
+# collections:
+#   seminars:
+#     output: true
 
 include:
   - _pages
