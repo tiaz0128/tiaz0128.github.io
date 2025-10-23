@@ -6,8 +6,8 @@
     <ul>
       <li><a id="about" href="{{ '/about' | prepend: site.baseurl }}">About</a></li>
       <li><a href="{{ site.baseurl }}/">Posts</a></li>
-      <li><a href="{{ '/tags' | prepend: site.baseurl }}">Tags</a></li>
-      <li><a href="{{ '/graph-view' | prepend: site.baseurl }}">Graph View</a></li>
+      <li id="tags"><a href="{{ '/tags' | prepend: site.baseurl }}">Tags</a></li>
+      <li id="graph-view"><a href="{{ '/graph-view' | prepend: site.baseurl }}">Graph View</a></li>
       <li id="header-search"><a href="{{ '/search' | prepend: site.baseurl }}" aria-label="search"><span class="fa-search"></span></a></li>
     </ul>
   </div>

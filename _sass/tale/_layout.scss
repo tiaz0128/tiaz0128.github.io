@@ -14,7 +14,12 @@ footer,
 
   @media (max-width: 600px) {
     // 모바일에서 탭 숨김
-    // #about {
+    #graph-view {
+      display: none;
+    }
+    
+    // Graph View 링크를 모바일에서 숨김
+    // a[href*="/graph-view"] {
     //   display: none;
     // }
   }
