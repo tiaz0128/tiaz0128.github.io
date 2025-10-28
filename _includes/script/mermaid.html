@@ -31,6 +31,16 @@ mermaid.registerIconPacks([
     fetch('/assets/json/icons/aws.json').then((res) => res.json()),
   },
   {
+    name: 'azr',
+    loader: () =>
+    fetch('/assets/json/icons/azr.json').then((res) => res.json()),
+  },
+  {
+    name: 'gcp',
+    loader: () =>
+    fetch('/assets/json/icons/gcp.json').then((res) => res.json()),
+  },
+  {
     name: 'custom',
     loader: () =>
     fetch('/assets/json/icons/custom.json').then((res) => res.json()),
