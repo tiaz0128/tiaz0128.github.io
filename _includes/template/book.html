@@ -1,6 +1,17 @@
 <!-- _includes/book-info.html -->
 <div class="left-right">
-    <img class="book" src="/assets/img/title/book/{{ include.title }}.webp" alt="{{ include.title }}">
+    {% assign path_parts = page.permalink | split: '/' %}
+    {% assign last_num = path_parts | last | plus: 0 %}
+    {% if last_num < 10 %}
+        {% assign padded = '00' | append: last_num %}
+    {% elsif last_num < 100 %}
+        {% assign padded = '0' | append: last_num %}
+    {% else %}
+        {% assign padded = last_num %}
+    {% endif %}
+    {% assign base_path = path_parts | pop | join: '/' %}
+    {% assign new_permalink = base_path | append: '/' | append: padded %}
+    <img class="book" src="/assets/img/content{{ new_permalink }}/000.webp" alt="{{ include.title }}">
     <ul class="">
         <li>
             <strong>제목</strong> : <a href="{{ include.book_url }}" target="_blank">{{ include.title }}</a>
