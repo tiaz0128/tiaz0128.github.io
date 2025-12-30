@@ -1,7 +1,7 @@
 ---
 layout: post
 ins_date: 2024-11-23
-upd_date: 2025-01-23
+upd_date: 2025-12-30
 category: "cs"
 subject: "Cryptography"
 title: "대칭키, 비대칭키"
