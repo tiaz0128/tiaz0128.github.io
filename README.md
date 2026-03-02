@@ -35,10 +35,22 @@ $ docker compose up dev --build
 $ docker compose down
 ```
 
+### 3. WSL서버 접속
+
+```bash
+$ ip addr show eth0 | grep 'inet ' | awk '{print $2}'
+172.31.176.197/20
+```
+
+아래의 URL로 접속
+```
+http://172.31.176.197:4000
+```
+
 ## 이미지 -> webp
 
 ```bash
-$ pip install pillow
+$ uv sync
 
 $ python convert-webp.py
 ```
