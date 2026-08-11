@@ -326,6 +326,18 @@
     margin: 10px;
   }
 
+  // howtodraw.cloud 다이어그램 임베드
+  .howtodraw-embed {
+    margin: 1.5rem 0;
+
+    iframe {
+      display: block;
+      width: 100%;
+      border: 1px solid #e3e8f0;
+      border-radius: 12px;
+    }
+  }
+
   // 왼쪽 그림, 오른쪽 글
   .left-right {
     display: flex;
