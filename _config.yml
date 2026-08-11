@@ -58,6 +58,15 @@ plugins:
   - jemoji #Uncomment this to allow emoji in your post
   - jekyll-spaceship
 
+# jekyll-spaceship
+# mathjax-processor의 기본 src에 polyfill.io가 하드코딩되어 있으나,
+# 해당 도메인은 2024년 공급망 공격 이후 압류되어 현재 응답하지 않는다.
+# (es6 폴리필은 IE11용이라 현재는 불필요) src 배열은 병합이 아닌 교체로 동작한다.
+jekyll-spaceship:
+  mathjax-processor:
+    src:
+      - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
 # Permalinks
 paginate:       5
 
