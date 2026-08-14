@@ -3,6 +3,7 @@ name: Build and deploy Jekyll site
 on:
   push:
     branches: [ "master" ]
+  workflow_dispatch:
 
 permissions:
   contents: read
