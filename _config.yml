@@ -35,7 +35,9 @@ lsi: false
 excerpt_separator: "\n\n"
 incremental: false
 
-timezone: UTC
+# 글 날짜는 한국 시간 기준으로 적는다. UTC로 두면 오늘 날짜로 쓴 글이
+# 한국시간 09:00(UTC 자정) 전까지 "future date"로 빌드에서 제외된다.
+timezone: Asia/Seoul
 
 # 추가 포스트 설정
 # collections:

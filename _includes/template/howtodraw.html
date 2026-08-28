@@ -1,13 +1,56 @@
 {%- comment -%}
   howtodraw.cloud 다이어그램 임베드
-  사용: {% include template/howtodraw.html src="https://howtodraw.cloud/d/<id>" height="600" %}
-    src    : iframe 소스 (공개 /d/<id> 링크, 공유 #d= 링크, 또는 레포에 올린 내보내기 .html)
-    height : 높이(px), 기본 560
-    title  : 접근성용 제목 (선택)
+
+  1) 호스팅 다이어그램 (권장) — id 만 넘기면 임베드 URL을 조립한다
+     {% include template/howtodraw.html id="<diagram-id>" height="420" %}
+
+  2) 스토리의 특정 스텝만 재생 — story 로 구간을 지정한다 (1부터 시작)
+     {% include template/howtodraw.html id="<id>" story="3-6" %}      3,4,5,6번 스텝
+     {% include template/howtodraw.html id="<id>" story="1,3-5" %}    목록 + 구간
+     {% include template/howtodraw.html id="<id>" story="all" %}      스토리 전체
+
+  3) 직접 만든 주소 (공유 #d= 링크, 레포에 올린 내보내기 .html 등)
+     {% include template/howtodraw.html src="https://..." %}
+
+  파라미터
+    id      : 호스팅 다이어그램 id (/d/<id>)
+    src     : iframe 주소를 직접 넘길 때. 있으면 id·story 보다 우선한다
+    story   : 재생할 스텝. "3-6" / "1,3-5" / "all". 없으면 재생하지 않고 멈춰 있다
+    auto    : "0" 이면 첫 스텝에 멈춘 채로 열린다 (기본: 자동 재생)
+    loop    : "1" 이면 마지막 스텝 뒤 처음으로 돌아간다
+    bare    : "1" 이면 툴바·재생 컨트롤 없이 그림만 나온다
+    height  : 높이(px). 기본 400 (본문 폭 708px 기준 16:9), narrow 는 600
+    narrow  : "1" 이면 세로(9:16) 스토리용으로 폭을 340px 로 좁힌다
+    title   : 접근성용 제목 (선택)
+
+  주의: story 를 주지 않으면 지금까지처럼 "멈춰 있는 다이어그램"으로 열린다.
+  스텝을 지정해도 링크를 직접 연 독자에게 같은 화면이 보인다 (embed 전용이 아님).
 {%- endcomment -%}
-<div class="howtodraw-embed">
-  <iframe src="{{ include.src }}"
-          height="{{ include.height | default: 560 }}"
+
+{%- if include.src -%}
+  {%- assign embed_src = include.src -%}
+{%- else -%}
+  {%- capture embed_src -%}
+    https://howtodraw.cloud/d/{{ include.id }}?embed=1
+    {%- if include.story -%}
+      {%- if include.story == "all" -%}&amp;story{%- else -%}&amp;story={{ include.story }}{%- endif -%}
+    {%- endif -%}
+    {%- if include.auto == "0" -%}&amp;auto=0{%- endif -%}
+    {%- if include.loop == "1" -%}&amp;loop=1{%- endif -%}
+    {%- if include.bare == "1" -%}&amp;bare=1{%- endif -%}
+  {%- endcapture -%}
+  {%- assign embed_src = embed_src | strip -%}
+{%- endif -%}
+
+{%- if include.narrow == "1" -%}
+  {%- assign embed_height = include.height | default: 600 -%}
+{%- else -%}
+  {%- assign embed_height = include.height | default: 400 -%}
+{%- endif -%}
+
+<div class="howtodraw-embed{% if include.narrow == "1" %} is-narrow{% endif %}">
+  <iframe src="{{ embed_src }}"
+          height="{{ embed_height }}"
           title="{{ include.title | default: 'howtodraw.cloud diagram' }}"
           loading="lazy" frameborder="0"
           referrerpolicy="strict-origin-when-cross-origin"></iframe>

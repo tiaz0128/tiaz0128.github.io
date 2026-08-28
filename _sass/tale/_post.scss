@@ -336,6 +336,13 @@
       border: 1px solid #e3e8f0;
       border-radius: 12px;
     }
+
+    // 세로(9:16) 스토리 — 본문 폭을 다 쓰면 글 한 편만큼 길어진다
+    &.is-narrow iframe {
+      width: 340px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
   }
 
   // 왼쪽 그림, 오른쪽 글
