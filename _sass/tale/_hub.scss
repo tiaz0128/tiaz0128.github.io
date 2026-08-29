@@ -363,7 +363,9 @@
       margin-top: 0.1rem;
     }
 
+    /* 제목이 폭을 다 쓰도록 아래로 내려보내되, 오른쪽에 붙인다. */
     .hub-get {
+      justify-content: flex-end;
       margin-top: -0.3rem;
       padding-left: 0;
       width: 100%;
