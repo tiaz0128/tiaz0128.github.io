@@ -3,9 +3,31 @@
 #
 # 새 문서 넣는 순서
 #   1. resources/<slug>.html 에 통짜 HTML 을 넣는다 (프런트매터 없이).
+#      slug 는 파일 이름 그대로다 — 소문자 하이픈. /link 가 여기서
+#      /resources/<slug>.html 과 .pdf 링크를 그대로 만들어 낸다.
 #   2. cd script && uv run shot.py <slug>
 #      -> 표지 미리보기, 배포용 PDF, 서비스 아이콘이 한 번에 만들어진다.
+#      새로 깐 WSL 이면 chromium 이 라이브러리가 없어 못 뜬다. 한 번만:
+#        sudo npx playwright install-deps chromium
 #   3. 이 파일 맨 위에 항목을 추가한다. date 가 최신인 것이 표지를 갖는다.
+#      title/summary 는 문서 표지에 박힌 것과 같게. 옛 항목을 고쳐 쓰는
+#      거라면 slug·title·cover 를 전부 새 것으로 바꿨는지 볼 것 —
+#      cover 만 옛 파일에 남아 있어도 목록은 옛 표지를 계속 보여준다.
+#   4. 배포. master 에 올리면 .github/workflows/jekyll.yml 이 빌드해서
+#      GitHub Pages 로 내보낸다. 다른 절차는 없다.
+#
+#        git add resources/<slug>.html resources/<slug>.pdf \
+#                assets/img/resources/<slug>-cover.webp \
+#                _data/resources.yml _data/service_icons.yml
+#        git commit && git push origin master
+#
+#      PDF 는 구운 물건이지만 빌드 산출물이 아니라 저장소에 같이 들어간다.
+#      받기 버튼이 그 파일을 그대로 주기 때문에, 없으면 404 다.
+#      문서를 갈아치웠다면 옛 slug 의 html·pdf·cover 를 git rm 한다.
+#      프런트매터가 없어 Jekyll 이 그냥 복사하는 파일이라, 항목만 지우면
+#      목록에서만 빠지고 옛 URL 은 계속 열린다.
+#      배포가 반영이 안 되면 나온 페이지의 generator 메타를 본다.
+#      Jekyll v3.10.0 이면 워크플로가 아니라 레거시 Pages 빌드가 돈 것이다.
 #
 # 왜 컬렉션(_resources/)이 아닌가:
 #   컬렉션 문서는 Jekyll::Document라서 jekyll-spaceship의 8개 프로세서가
@@ -28,14 +50,15 @@
 #             (Architecture)과 선화(Resource) 두 계열이 섞여 있어서, 같이
 #             걸면 크기를 아무리 맞춰도 따로 논다. 이름이 리소스를 가리키는
 #             쪽(amazon_ec2_instance)이 대개 선화다.
-- slug: eni-public-ip-eip
-  title: "ENI · Public IP · EIP"
-  summary: "EC2는 무엇으로 통신하고, 왜 IP가 바뀌는가"
+- slug: ec2-ebs-eni
+  title: "EC2 · EBS · ENI"
+  summary: "서버 한 대는 무엇으로 이루어지고, 무엇이 남고, 어떻게 연결되는가"
   kind: cheatsheet
   services:
     - amazon_ec2_instance
+    - amazon_elastic_block_store_volume
     - amazon_vpc_elastic_network_interface
     - amazon_ec2_elastic_ip_address
-  date: 2026-08-29
-  pages: 4
-  cover: /assets/img/resources/eni-public-ip-eip-cover.webp
+  date: 2026-08-30
+  pages: 12
+  cover: /assets/img/resources/ec2-ebs-eni-cover.webp
