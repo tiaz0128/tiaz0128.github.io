@@ -347,12 +347,10 @@
     gap: 1rem;
     padding: 0.85rem;
 
-    /* 이 줄의 주인공은 제목이다. 나머지 줄보다 한 단계 키운다.
-       폭이 넉넉하면 받기 버튼이 서비스 아이콘과 같은 줄에 앉고,
-       좁아지면(대략 폰) 알아서 아래로 접힌다 — 미디어 쿼리 없이
-       flex-basis 가 그 경계를 정한다. */
+    /* 이 줄의 주인공은 제목이다. 나머지 줄보다 한 단계 키우고 폭을 다 준다.
+       받기 버튼은 흐름에서 빼내 오른쪽 아래에 얹으므로 글을 밀지 않는다. */
     .hub-open {
-      flex: 1 1 20rem;
+      flex: 1 1 100%;
     }
 
     .hub-row-label {
@@ -365,13 +363,23 @@
       margin-top: 0.1rem;
     }
 
-    /* 같은 줄에 앉을 때는 아래쪽에 맞춰 서비스 아이콘과 나란히,
-       접혔을 때는 오른쪽 끝에. 둘 다 margin-left: auto 가 해결한다. */
+    /* 서비스 아이콘 줄의 오른쪽 빈자리에 얹는다. 흐름에서 빠지므로
+       제목과 요약이 카드 폭을 그대로 쓴다. */
     .hub-get {
-      align-self: flex-end;
-      margin-left: auto;
+      bottom: 0.85rem;
       padding-left: 0;
+      position: absolute;
+      right: 0.85rem;
       width: auto;
+    }
+
+    /* 폰에서는 서비스 아이콘과 겹칠 폭이라 흐름으로 되돌려 아래 줄에 둔다. */
+    @media (max-width: 520px) {
+      .hub-get {
+        margin-left: auto;
+        margin-top: -0.3rem;
+        position: static;
+      }
     }
   }
 
