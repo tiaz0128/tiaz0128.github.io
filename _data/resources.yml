@@ -1,5 +1,11 @@
-# 자료실 카탈로그. 문서 자체는 resources/<slug>.html 에 있는 통짜 정적 파일이고,
-# 이 파일은 그 목록을 만든다. 문서를 추가할 때 여기에도 한 줄 넣는다.
+# 치트 시트 카탈로그. 문서 자체는 resources/<slug>.html 에 있는 통짜 정적
+# 파일이고, 이 파일은 그 목록을 만든다.
+#
+# 새 문서 넣는 순서
+#   1. resources/<slug>.html 에 통짜 HTML 을 넣는다 (프런트매터 없이).
+#   2. cd script && uv run shot.py <slug>
+#      -> 표지 미리보기, 배포용 PDF, 서비스 아이콘이 한 번에 만들어진다.
+#   3. 이 파일 맨 위에 항목을 추가한다. date 가 최신인 것이 표지를 갖는다.
 #
 # 왜 컬렉션(_resources/)이 아닌가:
 #   컬렉션 문서는 Jekyll::Document라서 jekyll-spaceship의 8개 프로세서가
@@ -10,7 +16,7 @@
 #
 # cover:  문서 1페이지를 실제로 렌더한 이미지. 손으로 만들지 말고
 #         `cd script && uv run shot.py <slug>` 로 굽는다.
-# kind:    cheatsheet | exam — 뱃지가 갈린다.
+# kind:    cheatsheet | exam — services 가 비었을 때 쓰는 기본 아이콘이 갈린다.
 # services: 이 문서가 다루는 AWS 서비스들. assets/json/icons/aws.json 의 키.
 #           표지가 걸린 첫 장은 아래에 전부 늘어놓고, 한 줄짜리 목록은
 #           첫 번째 것을 제 아이콘으로 쓴다.

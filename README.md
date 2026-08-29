@@ -54,3 +54,23 @@ $ uv sync
 
 $ python convert-webp.py
 ```
+
+## 치트 시트 추가
+
+문서는 `resources/<slug>.html` 에 두는 통짜 HTML 이다. 프런트매터를 붙이면
+Jekyll 컬렉션 문서가 되어 jekyll-spaceship 이 달라붙고 빌드가 멈추므로,
+프런트매터 없이 정적 파일로 둔다.
+
+```bash
+# 1. 문서를 넣는다
+$ cp <어딘가>/my-sheet.html resources/my-sheet.html
+
+# 2. 표지 미리보기 + 배포용 PDF + 서비스 아이콘을 굽는다
+$ cd script
+$ uv run shot.py my-sheet      # 인자 없이 돌리면 resources/ 전부
+
+# 3. _data/resources.yml 맨 위에 항목을 추가한다 (파일 안 주석 참고)
+```
+
+`/link` 목록은 `date` 가 가장 최신인 문서만 표지를 크게 보여주고,
+나머지는 한 줄로 세운다. PDF 는 파생물이니 손으로 고치지 말고 2번을 다시 돌린다.
