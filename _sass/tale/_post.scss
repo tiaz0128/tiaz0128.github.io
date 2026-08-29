@@ -343,6 +343,17 @@
       max-width: 100%;
       margin: 0 auto;
     }
+
+    // title 로 붙는 캡션. 색·정렬은 .img-caption 에서 그대로 물려받고, 이 둘만
+    // 다시 잡는다.
+    //  - 여백 : .img-caption 의 -15px 는 <img> 아래 남는 line-height 를 걷어내려는
+    //           값이라, 그런 여백이 없는 iframe 에서는 글자가 그림 안으로 파고든다.
+    //  - 크기 : 본문에서 캡션은 `> 설명` 처럼 코드로 적혀 85% 로 줄어든다. 여기는
+    //           코드가 아니므로 같은 크기를 직접 준다.
+    .howtodraw-caption {
+      margin-top: 0.6rem;
+      font-size: 85%;
+    }
   }
 
   // 왼쪽 그림, 오른쪽 글

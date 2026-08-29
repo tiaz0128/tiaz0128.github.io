@@ -16,12 +16,12 @@
     id      : 호스팅 다이어그램 id (/d/<id>)
     src     : iframe 주소를 직접 넘길 때. 있으면 id·story 보다 우선한다
     story   : 재생할 스텝. "3-6" / "1,3-5" / "all". 없으면 재생하지 않고 멈춰 있다
-    auto    : "0" 이면 첫 스텝에 멈춘 채로 열린다 (기본: 자동 재생)
+    auto    : "1" 이면 스스로 재생된다. 기본은 멈춰 있다가 재생 버튼을 눌러야 시작
     loop    : "1" 이면 마지막 스텝 뒤 처음으로 돌아간다
     bare    : "1" 이면 툴바·재생 컨트롤 없이 그림만 나온다
     height  : 높이(px). 기본 400 (본문 폭 708px 기준 16:9), narrow 는 600
     narrow  : "1" 이면 세로(9:16) 스토리용으로 폭을 340px 로 좁힌다
-    title   : 접근성용 제목 (선택)
+    title   : 그림 아래 캡션. 붙이면 iframe 의 접근성 제목으로도 쓰인다 (선택)
 
   주의: story 를 주지 않으면 지금까지처럼 "멈춰 있는 다이어그램"으로 열린다.
   스텝을 지정해도 링크를 직접 연 독자에게 같은 화면이 보인다 (embed 전용이 아님).
@@ -36,6 +36,7 @@
       {%- if include.story == "all" -%}&amp;story{%- else -%}&amp;story={{ include.story }}{%- endif -%}
     {%- endif -%}
     {%- if include.auto == "0" -%}&amp;auto=0{%- endif -%}
+    {%- if include.auto == "1" -%}&amp;auto=1{%- endif -%}
     {%- if include.loop == "1" -%}&amp;loop=1{%- endif -%}
     {%- if include.bare == "1" -%}&amp;bare=1{%- endif -%}
   {%- endcapture -%}
@@ -54,4 +55,11 @@
           title="{{ include.title | default: 'howtodraw.cloud diagram' }}"
           loading="lazy" frameborder="0"
           referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  {%- comment -%}
+    이미지 캡션과 같은 모양(.img-caption)을 쓰되, 자기 여백은 자기가 갖는다.
+    title 이 없으면 캡션도 없다 — iframe 의 기본 제목은 접근성용이지 설명이 아니다.
+  {%- endcomment -%}
+  {%- if include.title -%}
+  <span class="img-caption howtodraw-caption">&gt; {{ include.title | escape }}</span>
+  {%- endif -%}
 </div>
