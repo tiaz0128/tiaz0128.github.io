@@ -383,17 +383,23 @@
     }
   }
 
+  /* 표지는 A4 한 장이라 통째로 두면 9rem 넘게 길어져 옆 글보다 훨씬 크다.
+     위쪽만 남기고 잘라낸다 — 제목 블록이 이 문서를 알아보는 부분이다. */
   &-paper {
     background: $white;
     border-radius: 3px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, .35);
     flex-shrink: 0;
+    height: 7rem;
     line-height: 0;
     overflow: hidden;
     width: 6.5rem;
 
     img {
       display: block;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
       width: 100%;
     }
   }
@@ -401,7 +407,7 @@
 
 
   @media (max-width: 480px) {
-    &-paper { width: 5rem; }
+    &-paper { height: 5.4rem; width: 5rem; }
     &-row-arrow { display: none; }
   }
 }
