@@ -1,0 +1,25 @@
+<script>
+  /* 폰에서 들어오는 페이지라 공유가 실제로 쓰인다. 네이티브 공유 시트가
+     있으면 그걸 열고, 없으면(데스크톱) 주소만 복사하고 버튼으로 알려준다. */
+  (() => {
+    const btn = document.querySelector('.hub-share');
+    if (!btn) return;
+    const label = btn.querySelector('.hub-share-said');
+
+    btn.addEventListener('click', async () => {
+      const url = location.href;
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: document.title, url });
+          return;
+        }
+        await navigator.clipboard.writeText(url);
+        btn.classList.add('is-said');
+        label.textContent = '주소 복사됨';
+        setTimeout(() => btn.classList.remove('is-said'), 1600);
+      } catch {
+        /* 사용자가 공유 시트를 닫은 경우도 여기로 온다. 알릴 것 없음. */
+      }
+    });
+  })();
+</script>

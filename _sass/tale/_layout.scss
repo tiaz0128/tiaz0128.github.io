@@ -12,40 +12,31 @@ footer,
   max-width: 708px;
   width: 80%;
 
-  @media (max-width: 600px) {
-    // 모바일에서 탭 숨김
-    #tags {
-      display: none;
-    }
-    
-    // Graph View 링크를 모바일에서 숨김
-    // a[href*="/graph-view"] {
-    //   display: none;
-    // }
-  }
 }
 
 .nav {
   box-shadow: 0 2px 2px -2px $shadow-color;
-  overflow: auto;
   background-color: $back-color;
+  padding: 0.45rem 0;
   position: sticky;
   top: 0;
   z-index: 9999;
 
+  /* 이름은 왼쪽, 아이콘은 오른쪽. 아이콘이 되면서 좁은 화면에서도
+     한 줄에 들어가므로 폭에 따라 배치를 바꿀 이유가 없어졌다. */
   &-container {
-    margin: 0.5rem auto;
-    position: relative;
-    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
   }
 
   &-title {
     @include transition(all .2s ease-out);
     color: $default-color;
-    display: inline-block;
-    margin: 0;
-    padding-right: .2rem;
     font-family: $serif-secondary;
+    margin: 0;
+    white-space: nowrap;
 
     &:hover,
     &:focus {
@@ -54,43 +45,75 @@ footer,
   }
 
   ul {
+    display: flex;
     list-style-type: none;
-    margin: 1rem 0 0;
+    margin: 0;
     padding: 0;
-    text-align: center;
   }
 
   li {
-    @include transition(all .2s ease-out);
-    color: $default-color;
-    font-family: $serif-secondary;
-    display: inline-block;
-    opacity: .9;
-    padding: 0 2rem 0 0;
+    padding: 0 .2rem;
 
     &:last-child {
       padding-right: 0;
     }
+  }
+
+  /* 아이콘 버튼만. 사이트 이름을 감싼 a 는 여기 걸리면 안 된다. */
+  li a {
+    @include transition(all .2s ease-out);
+    align-items: center;
+    border-radius: 8px;
+    color: $default-color;
+    display: flex;
+    height: 2.2rem;
+    justify-content: center;
+    opacity: .85;
+    width: 2.2rem;
+
+    svg {
+      height: 1.2rem;
+      width: 1.2rem;
+    }
 
     &:hover,
     &:focus {
-      opacity: 0.6;
+      background: rgba(255, 255, 255, .09);
+      opacity: 1;
     }
   }
 
-  a {
-    color: $default-color;
-    font-family: $sans-serif;
+  /* 폰에서는 이름 + 아이콘 6개가 빠듯해 가로 여백만 조인다.
+     세로로는 오히려 넉넉해야 한다 — 엄지로 누르는 막대라 iOS 내비바
+     정도(약 56px)는 되어야 손에 잡힌다. */
+  @media (max-width: 600px) {
+    padding: 0.7rem 0;
+
+    .nav-container {
+      width: 92%;
+    }
+
+    .nav-title {
+      font-size: 1.35rem;
+    }
+
+    li {
+      padding: 0 .1rem;
+    }
+
+    li a {
+      height: 2.3rem;
+      width: 2.3rem;
+
+      svg {
+        height: 1.2rem;
+        width: 1.2rem;
+      }
+    }
   }
 }
 
 @media (max-width: 600px) {
-  .nav {
-    h2 {
-      display: none;
-    }
-  }
-
   .category-container {
     a {
 
@@ -106,28 +129,6 @@ footer,
 
     .small-tag {
       display: unset !important;
-    }
-  }
-}
-
-@media (min-width: 600px) {
-  .nav {
-    &-container {
-      text-align: left;
-    }
-
-    ul {
-      bottom: 0;
-      position: absolute;
-      right: 0;
-    }
-  }
-}
-
-@media (max-width: 600px) {
-  .nav {
-    ul {
-      position: relative;
     }
   }
 }

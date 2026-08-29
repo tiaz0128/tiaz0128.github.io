@@ -1,14 +1,31 @@
+{%- comment -%}
+  탭이 다섯 개가 되면서 글자만으로는 읽기가 나빠졌다. 아이콘으로 세우고
+  이름은 title/aria-label 로 남긴다 — 폭이 줄어 모바일에서도 한 줄에 든다.
+{%- endcomment -%}
 <nav class="nav">
   <div class="nav-container">
     <a href="{{ site.baseurl }}/" aria-label="home">
       <h2 class="nav-title">{{ site.header }}</h2>
     </a>
     <ul>
-      <li><a id="about" href="{{ '/about' | prepend: site.baseurl }}">About</a></li>
-      <li><a href="{{ site.baseurl }}/">Posts</a></li>
-      <li id="tags"><a href="{{ '/tags' | prepend: site.baseurl }}">Tags</a></li>
-      <li id="graph-view"><a href="{{ '/graph-view' | prepend: site.baseurl }}">Graph View</a></li>
-      <li id="header-search"><a href="{{ '/search' | prepend: site.baseurl }}" aria-label="search"><span class="fa-search"></span></a></li>
+      <li><a id="about" href="{{ '/about' | prepend: site.baseurl }}" title="About" aria-label="About">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.4" r="3.9"/><path d="M4.6 20.2a7.4 7.4 0 0 1 14.8 0"/></svg>
+      </a></li>
+      <li><a href="{{ site.baseurl }}/" title="Posts" aria-label="Posts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.4h9.6L19 8.8v10.8H5z"/><path d="M14.6 4.4v4.4H19"/><path d="M8.2 12.6h7.6M8.2 16h5"/></svg>
+      </a></li>
+      <li id="link"><a href="{{ '/link/' | prepend: site.baseurl }}" title="Link" aria-label="Link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.2 13.8a4.2 4.2 0 0 0 6.3.45l2.5-2.5a4.2 4.2 0 0 0-5.94-5.94l-1.43 1.42"/><path d="M13.8 10.2a4.2 4.2 0 0 0-6.3-.45l-2.5 2.5a4.2 4.2 0 0 0 5.94 5.94l1.42-1.42"/></svg>
+      </a></li>
+      <li id="tags"><a href="{{ '/tags' | prepend: site.baseurl }}" title="Tags" aria-label="Tags">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><path d="M7 7h.01"/></svg>
+      </a></li>
+      <li id="graph-view"><a href="{{ '/graph-view' | prepend: site.baseurl }}" title="Graph View" aria-label="Graph View">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6.4" r="2.6"/><circle cx="18" cy="9.6" r="2.6"/><circle cx="10.4" cy="18.4" r="2.6"/><path d="M8.5 7.2l7 1.7M16.6 11.9l-4.5 4.4M8.9 15.9L7 9"/></svg>
+      </a></li>
+      <li id="header-search"><a href="{{ '/search' | prepend: site.baseurl }}" title="Search" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="M15.6 15.6L20.4 20.4"/></svg>
+      </a></li>
     </ul>
   </div>
 </nav>

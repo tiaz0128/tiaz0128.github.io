@@ -20,7 +20,9 @@
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ko_KR">
 
-  {% if page.subject %}
+  {% if page.image %}
+  {% comment %} seo-tag가 og:image / twitter:image / twitter:card를 이미 내보냈다. {% endcomment %}
+  {% elsif page.subject %}
   <meta property="og:image" content="{{ site.url }}//assets/img/title/{{ page.category }}/{{ page.subject }}.webp" />
   <meta name="twitter:image" content="{{ site.url }}//assets/img/title/{{ page.category }}/{{ page.subject }}.webp" />
   <meta property="og:image:alt" content="{{page.description}}" />

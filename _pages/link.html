@@ -1,0 +1,137 @@
+---
+layout: hub
+title: "tiaz.dev"
+description: "치트시트와 모의고사, 만든 것, 영상, 채널 — 한 곳에."
+permalink: /link/
+image: /assets/img/resources/eni-public-ip-eip.webp
+tagline: "🖼️ 그림으로 배우는 개발 &amp; 클라우드!"
+---
+
+<div class="hub">
+
+  <button class="hub-share" type="button" aria-label="이 페이지 공유">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 16V3.6"/><path d="m7.6 8 4.4-4.4L16.4 8"/>
+      <path d="M5 13.5v5.1a1.9 1.9 0 0 0 1.9 1.9h10.2a1.9 1.9 0 0 0 1.9-1.9v-5.1"/>
+    </svg>
+    <span class="hub-share-said" aria-live="polite"></span>
+  </button>
+
+  <header class="hub-profile">
+    <div class="hub-avatar">
+      <img src="{{ '/assets/img/cloud.jpg' | prepend: site.baseurl }}" alt="tiaz" width="120" height="120">
+    </div>
+    <h1 class="hub-name">{{ page.title }}</h1>
+    <p class="hub-tagline">{{ page.tagline }}</p>
+  </header>
+
+  {% for group in site.data.links %}
+  <section class="hub-group{% if group.display == 'icons' %} hub-group-plain{% endif %}">
+    {%- comment -%}
+      아이콘만 세우는 구역은 제목을 달지 않는다. 카드 맨 아래에
+      그냥 놓이는 자리라 이름표가 붙으면 오히려 무거워진다.
+    {%- endcomment -%}
+    {% unless group.display == 'icons' %}
+    <h2 class="hub-group-title">{{ group.category }}</h2>
+    {% if group.note %}<p class="hub-group-note">{{ group.note }}</p>{% endif %}
+    {% endunless %}
+
+    {% comment %} 자료실 구역은 _data/resources.yml 에서 자동으로 채운다. {% endcomment %}
+    {% if group.source == 'resources' %}
+      {% assign docs = site.data.resources | sort: 'date' | reverse %}
+      {% for doc in docs %}
+      {% comment %}
+        첫 장만 표지를 보여준다. 쌓일수록 목록이 길어지면 안 된다.
+        줄 전체를 누르면 문서가 열리고(::after 가 줄을 덮는다), 받기 버튼은
+        그 위에 얹혀 제 몫만 한다 — a 안에 a 를 넣지 않으려는 구조다.
+      {% endcomment %}
+      {% assign href = '/resources/' | append: doc.slug | prepend: site.baseurl %}
+      <div class="hub-row{% if forloop.first %} hub-doc{% endif %}">
+        <a class="hub-open" href="{{ href }}.html" target="_blank" rel="noopener">
+          {% if forloop.first and doc.cover %}
+          <span class="hub-paper">
+            <img src="{{ doc.cover | prepend: site.baseurl }}" alt="{{ doc.title }} 표지" loading="lazy">
+          </span>
+          {% else %}
+          <span class="hub-row-ico">
+            {%- assign first_svc = doc.services | first -%}
+            {%- if site.data.service_icons[first_svc] -%}
+            {% include component/service-icon.html key=first_svc %}
+            {%- elsif doc.kind == 'exam' -%}
+            {% include component/link-icon.html name="quiz" %}
+            {%- else -%}
+            {% include component/link-icon.html name="sheet" %}
+            {%- endif -%}
+          </span>
+          {% endif %}
+          <span class="hub-row-text">
+            <span class="hub-row-label">{{ doc.title }}</span>
+            {% if forloop.first %}
+            <span class="hub-row-note">{{ doc.summary }}</span>
+            {% if doc.pages %}<span class="hub-row-meta">A4 {{ doc.pages }}장</span>{% endif %}
+            {% if doc.services %}
+            {%- comment -%} 이 문서가 다루는 서비스. 표지 옆 빈자리를 채운다. {%- endcomment -%}
+            <span class="hub-svcs">
+              {% for key in doc.services %}{% include component/service-icon.html key=key %}{% endfor %}
+            </span>
+            {% endif %}
+            {% endif %}
+          </span>
+        </a>
+        {% if forloop.first %}
+        <div class="hub-get">
+          <a class="hub-get-btn" href="{{ href }}.html" download
+             aria-label="{{ doc.title }} HTML로 받기">{% include component/link-icon.html name="download" %}HTML</a>
+          <a class="hub-get-btn" href="{{ href }}.pdf" download
+             aria-label="{{ doc.title }} PDF로 받기">{% include component/link-icon.html name="download" %}PDF</a>
+        </div>
+        {% else %}
+        <span class="hub-row-arrow" aria-hidden="true">↗</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+    {% elsif group.display == 'icons' %}
+      <div class="hub-icons">
+        {% for link in group.links %}
+        {% assign external = false %}
+        {% if link.url contains '://' %}{% assign external = true %}{% endif %}
+        <a class="hub-icon" href="{{ link.url }}" title="{{ link.label }}"
+           aria-label="{{ link.label }}"{% if external %} target="_blank" rel="noopener"{% endif %}>
+          {%- if link.logo -%}
+          <img class="hub-ico" src="{{ link.logo | prepend: site.baseurl }}" alt="" loading="lazy">
+          {%- else -%}
+          {% include component/link-icon.html name=link.icon %}
+          {%- endif -%}
+        </a>
+        {% endfor %}
+      </div>
+
+    {% else %}
+      {% for link in group.links %}
+      {%- comment -%} 사이트 안쪽 링크(스킴 없음)는 같은 탭에서 연다. {%- endcomment -%}
+      {% assign external = false %}
+      {% if link.url contains '://' %}{% assign external = true %}{% endif %}
+      <a class="hub-row" href="{{ link.url | prepend: '' }}"{% if external %} target="_blank" rel="noopener"{% endif %}>
+        <span class="hub-row-ico">
+          {%- if link.logo -%}
+          <img class="hub-ico" src="{{ link.logo | prepend: site.baseurl }}" alt="" loading="lazy">
+          {%- else -%}
+          {% include component/link-icon.html name=link.icon %}
+          {%- endif -%}
+        </span>
+        <span class="hub-row-text">
+          <span class="hub-row-label">{{ link.label }}</span>
+          {% if link.note %}<span class="hub-row-note">{{ link.note }}</span>{% endif %}
+        </span>
+        <span class="hub-row-arrow" aria-hidden="true">{% if external %}↗{% else %}→{% endif %}</span>
+      </a>
+      {% endfor %}
+    {% endif %}
+  </section>
+  {% endfor %}
+
+</div>
+
+{% include script/hub_share.html %}

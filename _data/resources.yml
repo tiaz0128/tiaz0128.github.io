@@ -1,0 +1,35 @@
+# 자료실 카탈로그. 문서 자체는 resources/<slug>.html 에 있는 통짜 정적 파일이고,
+# 이 파일은 그 목록을 만든다. 문서를 추가할 때 여기에도 한 줄 넣는다.
+#
+# 왜 컬렉션(_resources/)이 아닌가:
+#   컬렉션 문서는 Jekyll::Document라서 jekyll-spaceship의 8개 프로세서가
+#   전부 달라붙는다(:documents, pre_render/post_render). 문서 하나가 660KB짜리
+#   base64 영상 덩어리라 Nokogiri 파싱과 정규식 스캔에서 빌드가 몇 분씩 멈춘다.
+#   render_with_liquid: false 로는 Liquid만 꺼지고 spaceship은 못 막는다.
+#   프런트매터가 없으면 Jekyll은 StaticFile로 보고 그냥 복사한다 — 처리 0.
+#
+# cover:  문서 1페이지를 실제로 렌더한 이미지. 손으로 만들지 말고
+#         `cd script && uv run shot.py <slug>` 로 굽는다.
+# kind:    cheatsheet | exam — 뱃지가 갈린다.
+# services: 이 문서가 다루는 AWS 서비스들. assets/json/icons/aws.json 의 키.
+#           표지가 걸린 첫 장은 아래에 전부 늘어놓고, 한 줄짜리 목록은
+#           첫 번째 것을 제 아이콘으로 쓴다.
+#           shot.py 가 쓰인 것만 골라 _data/service_icons.yml 로 뽑아둔다
+#           (원본이 2.5MB라 통째로 못 읽는다).
+#           비워두면 일반 문서 아이콘으로 떨어진다.
+#
+#           ★ 한 문서 안에서는 같은 계열로 고를 것. aws.json 에는 색 사각형
+#             (Architecture)과 선화(Resource) 두 계열이 섞여 있어서, 같이
+#             걸면 크기를 아무리 맞춰도 따로 논다. 이름이 리소스를 가리키는
+#             쪽(amazon_ec2_instance)이 대개 선화다.
+- slug: eni-public-ip-eip
+  title: "ENI · Public IP · EIP"
+  summary: "EC2는 무엇으로 통신하고, 왜 IP가 바뀌는가"
+  kind: cheatsheet
+  services:
+    - amazon_ec2_instance
+    - amazon_vpc_elastic_network_interface
+    - amazon_ec2_elastic_ip_address
+  date: 2026-08-29
+  pages: 4
+  cover: /assets/img/resources/eni-public-ip-eip-cover.webp

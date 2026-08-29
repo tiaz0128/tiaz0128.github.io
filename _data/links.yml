@@ -1,0 +1,60 @@
+# 프로필 링크 — linktr.ee/tiaz.dev 를 대신한다. 위에서부터 그대로 그려진다.
+#
+# category:  구역 제목
+# note:      구역 제목 아래 회색 한 줄 (선택)
+# source:    'resources' 를 주면 _data/resources.yml 을 자동으로 채운다.
+#            첫 번째만 표지를 크게 보여주고 나머지는 한 줄로 세운다.
+#            치트시트를 추가할 때 이 파일은 건드리지 않아도 된다.
+# links[].icon:  component/link-icon.html 이 아는 이름
+#                web youtube linkedin instagram github aws diagram article sheet quiz
+#                (없거나 모르는 이름이면 사슬 아이콘)
+# links[].logo:   아이콘 대신 쓸 이미지 경로. icon 보다 우선한다.
+# display:  'icons' 를 주면 줄 대신 아이콘만 한 줄로 세운다.
+#           라벨이 사라지므로 title/aria-label 로만 남는다 —
+#           이름 없이도 알아볼 아이콘이 있는 구역에만 쓸 것.
+
+- category: 유용한 정보
+  links:
+    - label: "대학생을 위한 AWS $570 리워드 프로그램"
+      note: "AWS 공식 · 학생 대상 크레딧"
+      url: "https://builder.aws.com/student-rewards?trk=d8ec3b19-0f37-4f8c-8c12-189f913e205c&sc_channel=el"
+      icon: aws
+
+- category: 치트 시트
+  note: "브라우저에서 보고, 동적인 HTML or PDF"
+  source: resources
+
+- category: 아키텍처 추천 자료
+  links:
+    - label: "AWS를 사용한다면 반드시 알아야 할 네트워크 기초 지식"
+      note: "YouTube"
+      url: "https://youtu.be/vCNexbgYmQ8"
+      icon: youtube
+    - label: "One to Many: Evolving VPC Design"
+      note: "AWS Architecture Blog"
+      url: "https://aws.amazon.com/blogs/architecture/one-to-many-evolving-vpc-design"
+      icon: article
+
+- category: 프로필
+  display: icons
+  links:
+    - label: "tiaz.dev 블로그"
+      note: "그림으로 풀어 쓴 개발·클라우드 글"
+      url: "/"
+      icon: web
+    - label: "howtodraw.cloud"
+      note: "아키텍처 다이어그램 그리는 서비스"
+      url: "https://howtodraw.cloud/guide.html"
+      logo: /assets/img/howtodrawcloud.webp
+    - label: "YouTube"
+      note: "@tiaz0128"
+      url: "https://linktw.in/VCcFJE"
+      icon: youtube
+    - label: "LinkedIn"
+      note: "tiaz0128"
+      url: "https://linktw.in/MsUecn"
+      icon: linkedin
+    - label: "Instagram"
+      note: "@tiaz.dev"
+      url: "https://instagram.com/tiaz.dev"
+      icon: instagram

@@ -1,0 +1,10 @@
+{%- comment -%}
+  치트시트의 대표 AWS 서비스 아이콘.
+  {% include component/service-icon.html key=doc.service %}
+  _data/service_icons.yml 은 shot.py 가 만든다(원본 aws.json 이 2.5MB라
+  통째로 _data 에 두지 않는다). 없는 키면 아무것도 그리지 않는다.
+{%- endcomment -%}
+{%- assign svc = site.data.service_icons[include.key] -%}
+{%- if svc -%}
+<svg class="hub-ico hub-ico-service" viewBox="{{ svc.view_box }}" aria-hidden="true">{{ svc.body }}</svg>
+{%- endif -%}

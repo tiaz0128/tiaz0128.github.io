@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  {% include component/head.html %}
+
+  {% comment %}
+    프로필 링크 페이지 전용. 대부분 인스타 바이오를 타고 폰으로 들어온다.
+    사이트 내비게이션은 첫 화면에서 프로필과 경쟁하기만 하므로 뺐고,
+    블로그로 가는 길은 카드 맨 아래 아이콘 줄의 지구본이 맡는다.
+    top_arrow(외부 스크립트)와 hover(글 이미지용)도 이 페이지엔 필요 없다.
+  {% endcomment %}
+  <body class="hub-page">
+    <main>
+      {{ content }}
+    </main>
+
+    <footer class="hub-footer">
+      <span>&copy; <time datetime="{{ site.time }}">{{ site.time | date: '%Y' }}</time> {{ site.author.name }}. All rights reserved.</span>
+    </footer>
+  </body>
+</html>
