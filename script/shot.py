@@ -1,12 +1,18 @@
 """치트시트 문서에서 표지 미리보기와 배포용 PDF를 굽는다.
 
     uv run shot.py                      # resources/ 전부
-    uv run shot.py eni-public-ip-eip    # 하나만
+    uv run shot.py ec2-ebs-eni          # 하나만
 
 산출물
-    assets/img/resources/<slug>-cover.webp   목록에 쓰는 1페이지 표지
+    assets/img/resources/<slug>-cover.webp   1페이지 그림
     resources/<slug>.pdf                     받기 버튼이 주는 파일
     _data/service_icons.yml                  목록 줄에 쓰는 AWS 서비스 아이콘
+
+표지는 문서마다 걸리지 않는다. 치트 시트 구역 맨 위에 견본 한 장이
+붙을 뿐이고, 그게 어느 것인지는 _data/links.yml 의 sample: 이 정한다.
+그러니 여기서 구운 -cover.webp 는 그 견본을 갈 때만 쓴다 — 새 문서마다
+굽지 않아도 된다. PDF 는 문서마다 필요하고, 브라우저 인쇄로 뽑아도 된다
+(A4 · 여백 없음 · 배경 그래픽 켬).
 
 HTML이 원본이고 PDF는 파생물이다. PDF를 손으로 고치지 말 것 —
 문서를 고치고 이걸 다시 돌린다.
@@ -19,7 +25,7 @@ from pathlib import Path
 
 import yaml
 from PIL import Image
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import Error, sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "resources"
@@ -122,6 +128,24 @@ def shoot(browser, path: Path) -> Path:
     return dst, pdf_path
 
 
+def launch(p):
+    """chromium 을 띄운다. 못 뜨면 고칠 방법을 말해 준다.
+
+    새로 깐 WSL/우분투에는 chromium 이 기대는 시스템 라이브러리가 없다.
+    Playwright 가 내는 건 60줄짜리 traceback 이고 정작 무엇이 없는지는
+    브라우저 로그 한가운데 묻힌다. 여기서 가로채 한 줄로 바꾼다.
+    """
+    try:
+        return p.chromium.launch()
+    except Error as e:
+        if "error while loading shared libraries" not in str(e):
+            raise
+        raise SystemExit(
+            "chromium 이 시스템 라이브러리가 없어 못 뜬다. 한 번만 깔면 된다:\n"
+            "    sudo apt-get install -y libnss3 libnspr4 libasound2t64"
+        ) from None
+
+
 def main() -> None:
     wanted = sys.argv[1:]
     files = sorted(SRC.glob("*.html"))
@@ -131,7 +155,7 @@ def main() -> None:
         raise SystemExit("찍을 문서가 없다")
 
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        browser = launch(p)
 
         n = sync_service_icons(browser)
         print(f"서비스 아이콘 {n}개 -> _data/service_icons.yml")

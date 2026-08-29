@@ -5,29 +5,37 @@
 #   1. resources/<slug>.html 에 통짜 HTML 을 넣는다 (프런트매터 없이).
 #      slug 는 파일 이름 그대로다 — 소문자 하이픈. /link 가 여기서
 #      /resources/<slug>.html 과 .pdf 링크를 그대로 만들어 낸다.
-#   2. cd script && uv run shot.py <slug>
-#      -> 표지 미리보기, 배포용 PDF, 서비스 아이콘이 한 번에 만들어진다.
-#      새로 깐 WSL 이면 chromium 이 라이브러리가 없어 못 뜬다. 한 번만:
-#        sudo npx playwright install-deps chromium
-#   3. 이 파일 맨 위에 항목을 추가한다. date 가 최신인 것이 표지를 갖는다.
-#      title/summary 는 문서 표지에 박힌 것과 같게. 옛 항목을 고쳐 쓰는
-#      거라면 slug·title·cover 를 전부 새 것으로 바꿨는지 볼 것 —
-#      cover 만 옛 파일에 남아 있어도 목록은 옛 표지를 계속 보여준다.
+#   2. 같은 이름으로 resources/<slug>.pdf 를 둔다. 받기 버튼이 이 파일을
+#      그대로 주기 때문에, 없으면 404 다. 뽑는 길은 둘 다 결과가 같다.
+#        - 브라우저 인쇄: A4 · 여백 없음 · 배경 그래픽 켬.
+#          배경 그래픽을 빼면 표와 카드의 색이 전부 날아간다.
+#        - cd script && uv run shot.py <slug>
+#          (새로 깐 WSL 이면 chromium 이 기대는 라이브러리를 한 번만:
+#           sudo apt-get install -y libnss3 libnspr4 libasound2t64)
+#   3. 이 파일 맨 위에 항목을 추가한다.
+#      title/summary 는 문서 표지에 박힌 것과 같게.
+#      services: 에 처음 쓰는 키가 있으면 shot.py 를 한 번 돌려야 한다.
+#      _data/service_icons.yml 을 그게 만드는데, 아이콘 잉크 경계를 재려고
+#      브라우저를 쓰기 때문이다. 안 돌려도 에러는 안 난다 — 그 아이콘만
+#      조용히 안 그려지고 일반 문서 아이콘으로 떨어진다.
 #   4. 배포. master 에 올리면 .github/workflows/jekyll.yml 이 빌드해서
 #      GitHub Pages 로 내보낸다. 다른 절차는 없다.
 #
 #        git add resources/<slug>.html resources/<slug>.pdf \
-#                assets/img/resources/<slug>-cover.webp \
 #                _data/resources.yml _data/service_icons.yml
 #        git commit && git push origin master
 #
-#      PDF 는 구운 물건이지만 빌드 산출물이 아니라 저장소에 같이 들어간다.
-#      받기 버튼이 그 파일을 그대로 주기 때문에, 없으면 404 다.
-#      문서를 갈아치웠다면 옛 slug 의 html·pdf·cover 를 git rm 한다.
-#      프런트매터가 없어 Jekyll 이 그냥 복사하는 파일이라, 항목만 지우면
-#      목록에서만 빠지고 옛 URL 은 계속 열린다.
+#      문서를 갈아치웠다면 옛 slug 의 html·pdf 를 git rm 한다. 프런트매터가
+#      없어 Jekyll 이 그냥 복사하는 파일이라, 항목만 지우면 목록에서만
+#      빠지고 옛 URL 은 계속 열린다.
 #      배포가 반영이 안 되면 나온 페이지의 generator 메타를 본다.
 #      Jekyll v3.10.0 이면 워크플로가 아니라 레거시 Pages 빌드가 돈 것이다.
+#
+# 표지는 여기 없다:
+#   목록 줄은 전부 같은 꼴이고, 표지는 구역 맨 위에 견본 한 장만 걸린다.
+#   그 한 장은 _data/links.yml 의 sample: 이 정하고 새 문서를 따라다니지
+#   않는다. 그래서 문서를 넣을 때마다 표지를 굽지 않아도 된다.
+#   견본을 갈고 싶을 때만 shot.py 로 그 문서를 굽고 sample: 을 바꾼다.
 #
 # 왜 컬렉션(_resources/)이 아닌가:
 #   컬렉션 문서는 Jekyll::Document라서 jekyll-spaceship의 8개 프로세서가
@@ -36,12 +44,10 @@
 #   render_with_liquid: false 로는 Liquid만 꺼지고 spaceship은 못 막는다.
 #   프런트매터가 없으면 Jekyll은 StaticFile로 보고 그냥 복사한다 — 처리 0.
 #
-# cover:  문서 1페이지를 실제로 렌더한 이미지. 손으로 만들지 말고
-#         `cd script && uv run shot.py <slug>` 로 굽는다.
+# pages:   A4 몇 장인지. 줄에 "A4 12장"으로 붙는다. 문서의 .sheet 개수다.
 # kind:    cheatsheet | exam — services 가 비었을 때 쓰는 기본 아이콘이 갈린다.
 # services: 이 문서가 다루는 AWS 서비스들. assets/json/icons/aws.json 의 키.
-#           표지가 걸린 첫 장은 아래에 전부 늘어놓고, 한 줄짜리 목록은
-#           첫 번째 것을 제 아이콘으로 쓴다.
+#           줄 왼쪽 아이콘은 이 중 첫 번째를 쓴다 — 대표를 맨 앞에 둘 것.
 #           shot.py 가 쓰인 것만 골라 _data/service_icons.yml 로 뽑아둔다
 #           (원본이 2.5MB라 통째로 못 읽는다).
 #           비워두면 일반 문서 아이콘으로 떨어진다.
@@ -61,4 +67,3 @@
     - amazon_ec2_elastic_ip_address
   date: 2026-08-30
   pages: 12
-  cover: /assets/img/resources/ec2-ebs-eni-cover.webp

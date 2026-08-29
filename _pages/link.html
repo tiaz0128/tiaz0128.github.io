@@ -39,56 +39,70 @@ tagline: "🖼️ 그림으로 배우는 개발 &amp; 클라우드!"
 
     {% comment %} 자료실 구역은 _data/resources.yml 에서 자동으로 채운다. {% endcomment %}
     {% if group.source == 'resources' %}
+      {%- comment -%}
+        표지는 문서마다 걸지 않고 구역에 샘플 한 장만 둔다. 이게 어떤
+        물건인지는 한 번만 보이면 되고, 그러면 문서를 넣을 때마다 표지를
+        새로 굽지 않아도 된다. 어느 문서를 쓸지는 _data/links.yml 의
+        sample: 이 정한다.
+      {%- endcomment -%}
+      {% if group.sample_video or group.sample %}
+      <figure class="hub-sample">
+        {%- if group.sample_video -%}
+        {%- comment -%}
+          이 문서의 값은 종이가 아니라 움직인다는 데 있다. 정지 사진은
+          그걸 못 보여주니 한 토막을 물린다. 소리 없이 저 혼자 돌고,
+          폰에서 전체화면으로 튀지 않는다(playsinline).
+          poster 는 영상이 뜨기 전과 자동재생이 막혔을 때 자리를 지킨다.
+        {%- endcomment -%}
+        <video class="hub-sample-media" autoplay loop muted playsinline
+               preload="metadata"
+               {%- if group.sample %} poster="{{ group.sample | prepend: site.baseurl }}"{% endif %}>
+          <source src="{{ group.sample_video | prepend: site.baseurl }}"
+                  type="video/{{ group.sample_video | split: '.' | last }}">
+        </video>
+        {%- else -%}
+        <img class="hub-sample-media" src="{{ group.sample | prepend: site.baseurl }}"
+             alt="치트 시트 한 장이 어떻게 생겼는지 보여주는 샘플" loading="lazy">
+        {%- endif -%}
+        <figcaption>{{ group.sample_note | default: "샘플 · 치트 시트 1페이지" }}</figcaption>
+      </figure>
+      {% endif %}
       {% assign docs = site.data.resources | sort: 'date' | reverse %}
       {% for doc in docs %}
-      {% comment %}
-        첫 장만 표지를 보여준다. 쌓일수록 목록이 길어지면 안 된다.
+      {%- comment -%}
         줄 전체를 누르면 문서가 열리고(::after 가 줄을 덮는다), 받기 버튼은
         그 위에 얹혀 제 몫만 한다 — a 안에 a 를 넣지 않으려는 구조다.
-      {% endcomment %}
+
+        왼쪽에 대표 아이콘 하나를 세우지 않고 다루는 서비스를 아래에 전부
+        늘어놓는다. 치트 시트를 고르는 기준이 제목보다 "무엇이 들었나"라서,
+        하나만 보이면 나머지 셋을 감추는 셈이 된다.
+      {%- endcomment -%}
       {% assign href = '/resources/' | append: doc.slug | prepend: site.baseurl %}
-      <div class="hub-row{% if forloop.first %} hub-doc{% endif %}">
+      <div class="hub-row hub-res">
         <a class="hub-open" href="{{ href }}.html" target="_blank" rel="noopener">
-          {% if forloop.first and doc.cover %}
-          <span class="hub-paper">
-            <img src="{{ doc.cover | prepend: site.baseurl }}" alt="{{ doc.title }} 표지" loading="lazy">
-          </span>
-          {% else %}
-          <span class="hub-row-ico">
-            {%- assign first_svc = doc.services | first -%}
-            {%- if site.data.service_icons[first_svc] -%}
-            {% include component/service-icon.html key=first_svc %}
-            {%- elsif doc.kind == 'exam' -%}
-            {% include component/link-icon.html name="quiz" %}
-            {%- else -%}
-            {% include component/link-icon.html name="sheet" %}
-            {%- endif -%}
-          </span>
-          {% endif %}
           <span class="hub-row-text">
             <span class="hub-row-label">{{ doc.title }}</span>
-            {% if forloop.first %}
-            <span class="hub-row-note">{{ doc.summary }}</span>
-            {% if doc.pages %}<span class="hub-row-meta">A4 {{ doc.pages }}장</span>{% endif %}
-            {% if doc.services %}
-            {%- comment -%} 이 문서가 다루는 서비스. 표지 옆 빈자리를 채운다. {%- endcomment -%}
-            <span class="hub-svcs">
-              {% for key in doc.services %}{% include component/service-icon.html key=key %}{% endfor %}
+            {% if doc.summary %}<span class="hub-row-note">{{ doc.summary }}</span>{% endif %}
+            <span class="hub-res-foot">
+              <span class="hub-svcs">
+                {%- if doc.services -%}
+                {%- for key in doc.services -%}{% include component/service-icon.html key=key %}{%- endfor -%}
+                {%- elsif doc.kind == 'exam' -%}
+                {% include component/link-icon.html name="quiz" %}
+                {%- else -%}
+                {% include component/link-icon.html name="sheet" %}
+                {%- endif -%}
+              </span>
+              {% if doc.pages %}<span class="hub-row-meta">A4 {{ doc.pages }}장</span>{% endif %}
             </span>
-            {% endif %}
-            {% endif %}
           </span>
         </a>
-        {% if forloop.first %}
         <div class="hub-get">
           <a class="hub-get-btn" href="{{ href }}.html" download
              aria-label="{{ doc.title }} HTML로 받기">{% include component/link-icon.html name="download" %}HTML</a>
           <a class="hub-get-btn" href="{{ href }}.pdf" download
              aria-label="{{ doc.title }} PDF로 받기">{% include component/link-icon.html name="download" %}PDF</a>
         </div>
-        {% else %}
-        <span class="hub-row-arrow" aria-hidden="true">↗</span>
-        {% endif %}
       </div>
       {% endfor %}
 

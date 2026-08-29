@@ -1,5 +1,6 @@
 /* 프로필 링크 허브 — 링크트리를 대신한다.
-   프로필 → 카테고리별 링크 줄. 자료실 줄만 문서 표지를 함께 보여준다. */
+   프로필 → 카테고리별 링크 줄. 줄은 전부 같은 꼴이고, 자료실 구역만
+   위에 견본 한 장(&-sample)을 얹는다. */
 .hub-page {
   background: $black;
 
@@ -287,24 +288,6 @@
     }
   }
 
-  /* 표지가 걸린 문서가 다루는 서비스들. 메타 아래 빈자리에 늘어놓는다.
-     아이콘마다 잉크 밀도가 달라 맨몸으로 두면 크기가 안 맞아 보인다.
-     같은 타일에 앉히면 눈이 타일을 기준으로 읽는다. */
-  &-svcs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 0.7rem;
-
-    .hub-ico-service {
-      background: rgba(255, 255, 255, .05);
-      border-radius: 8px;
-      height: 1.95rem;
-      padding: 0.3rem;
-      width: 1.95rem;
-    }
-  }
-
   /* ---- 아이콘만 세우는 구역 ------------------------------------------- */
   /* 제목 없이 카드 맨 아래에 놓인다. 위 구역과 선 하나로만 나눈다. */
   &-group-plain {
@@ -340,74 +323,83 @@
 
   }
 
-  /* ---- 자료실 줄: 문서 1페이지를 그대로 보여준다 ----------------------- */
-  &-doc {
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 0.85rem;
+  /* ---- 자료실 샘플 ---------------------------------------------------- */
+  /* 표지를 문서마다 거는 대신 구역에 샘플 한 장만 둔다. 어느 문서의
+     1페이지를 쓸지는 _data/links.yml 의 sample: 이 정한다 — 최신 문서를
+     따라다니지 않으므로 문서를 넣을 때마다 새로 굽지 않아도 된다.
+     잘라내지 않는다. 윗부분만 보여주면 어떤 물건인지가 아니라 제목만
+     보인다. 한 장이 통째로 서야 "이만큼 들었다"가 전해진다.
+     영상(sample_video)이 걸리면 그쪽이 대신 선다 — 이 문서의 값은
+     종이가 아니라 움직인다는 데 있어서 정지 사진으로는 안 전해진다. */
+  &-sample {
+    margin: 0 0 0.9rem;
 
-    /* 이 줄의 주인공은 제목이다. 나머지 줄보다 한 단계 키우고 폭을 다 준다.
-       받기 버튼은 흐름에서 빼내 오른쪽 아래에 얹으므로 글을 밀지 않는다. */
-    .hub-open {
-      flex: 1 1 100%;
-    }
-
-    .hub-row-label {
-      font-size: 1.15rem;
-      line-height: 1.3;
-    }
-
-    .hub-row-note {
-      font-size: 0.8rem;
-      margin-top: 0.1rem;
-    }
-
-    /* 서비스 아이콘 줄의 오른쪽 빈자리에 얹는다. 흐름에서 빠지므로
-       제목과 요약이 카드 폭을 그대로 쓴다. */
-    .hub-get {
-      bottom: 0.85rem;
-      padding-left: 0;
-      position: absolute;
-      right: 0.85rem;
-      width: auto;
-    }
-
-    /* 폰에서는 서비스 아이콘과 겹칠 폭이라 흐름으로 되돌려 아래 줄에 둔다. */
-    @media (max-width: 520px) {
-      .hub-get {
-        margin-left: auto;
-        margin-top: -0.3rem;
-        position: static;
-      }
-    }
-  }
-
-  /* 표지는 A4 한 장이라 통째로 두면 9rem 넘게 길어져 옆 글보다 훨씬 크다.
-     위쪽만 남기고 잘라낸다 — 제목 블록이 이 문서를 알아보는 부분이다. */
-  &-paper {
-    background: $white;
-    border-radius: 3px;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, .35);
-    flex-shrink: 0;
-    height: 7rem;
-    line-height: 0;
-    overflow: hidden;
-    width: 6.5rem;
-
-    img {
+    /* _base.scss 의 `img { margin: 0 0 1rem }` 이 캡션을 밀어낸다. */
+    &-media {
+      background: $white;
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 10px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, .45);
       display: block;
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
+      height: auto;
+      margin: 0;
       width: 100%;
     }
+
+    figcaption {
+      color: $grey-4;
+      font-family: $serif-secondary;
+      font-size: 0.7rem;
+      letter-spacing: .03em;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
   }
 
+  /* ---- 자료실 줄 ------------------------------------------------------- */
+  /* 왼쪽 아이콘 타일이 없다. 대표 하나를 세우는 대신 다루는 서비스를
+     아래에 전부 늘어놓는 쪽이 이 목록에서 고르는 기준에 맞는다.
+     받기 버튼은 오른쪽에 붙고, 좁아지면 아래로 내려간다 — .hub-row 의
+     gap 이 세로에도 걸려서 내려간 줄 간격은 저절로 맞는다. */
+  &-res {
+    flex-wrap: wrap;
 
+    /* 폰에서는 받기 버튼 둘이 글 폭을 절반 가까이 먹어 제목까지 접힌다.
+       여는 링크에 한 줄을 다 주면 버튼이 아래로 내려간다. */
+    @media (max-width: 520px) {
+      .hub-open { flex-basis: 100%; }
+    }
+
+    /* 서비스 아이콘과 장수는 한 줄에 같이 앉는다. 둘 다 "무엇이 들었나"를
+       말하는 것이라 떨어뜨리면 줄이 세 층으로 늘어진다. */
+    &-foot {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.6rem;
+      margin-top: 0.5rem;
+
+      .hub-row-meta { margin-top: 0; }
+    }
+  }
+
+  /* 아이콘마다 잉크 밀도가 달라 맨몸으로 두면 크기가 안 맞아 보인다.
+     같은 타일에 앉히면 눈이 타일을 기준으로 읽는다. */
+  &-svcs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+
+    .hub-ico {
+      background: rgba(255, 255, 255, .05);
+      border-radius: 7px;
+      height: 1.8rem;
+      padding: 0.28rem;
+      width: 1.8rem;
+    }
+  }
 
   @media (max-width: 480px) {
-    &-paper { height: 5.4rem; width: 5rem; }
     &-row-arrow { display: none; }
   }
 }
