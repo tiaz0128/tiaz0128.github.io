@@ -70,8 +70,9 @@ tagline: "🖼️ 그림으로 배우는 개발 &amp; 클라우드!"
       {% assign docs = site.data.resources | sort: 'date' | reverse %}
       {% for doc in docs %}
       {%- comment -%}
-        줄 전체를 누르면 문서가 열리고(::after 가 줄을 덮는다), 받기 버튼은
-        그 위에 얹혀 제 몫만 한다 — a 안에 a 를 넣지 않으려는 구조다.
+        줄은 누를 수 없다. 누를 수 있는 건 아래 버튼 셋뿐이다.
+        줄 전체를 덮는 링크를 두면 작은 버튼을 빗맞힌 탭이 거기 걸려
+        "받기를 눌렀는데 창이 열리는" 꼴이 된다. 폰에서 특히 그렇다.
 
         왼쪽에 대표 아이콘 하나를 세우지 않고 다루는 서비스를 아래에 전부
         늘어놓는다. 치트 시트를 고르는 기준이 제목보다 "무엇이 들었나"라서,
@@ -79,29 +80,30 @@ tagline: "🖼️ 그림으로 배우는 개발 &amp; 클라우드!"
       {%- endcomment -%}
       {% assign href = '/resources/' | append: doc.slug | prepend: site.baseurl %}
       <div class="hub-row hub-res">
-        <a class="hub-open" href="{{ href }}.html" target="_blank" rel="noopener">
-          <span class="hub-row-text">
-            <span class="hub-row-label">{{ doc.title }}</span>
-            {% if doc.summary %}<span class="hub-row-note">{{ doc.summary }}</span>{% endif %}
-            <span class="hub-res-foot">
-              <span class="hub-svcs">
-                {%- if doc.services -%}
-                {%- for key in doc.services -%}{% include component/service-icon.html key=key %}{%- endfor -%}
-                {%- elsif doc.kind == 'exam' -%}
-                {% include component/link-icon.html name="quiz" %}
-                {%- else -%}
-                {% include component/link-icon.html name="sheet" %}
-                {%- endif -%}
-              </span>
-              {% if doc.pages %}<span class="hub-row-meta">A4 {{ doc.pages }}장</span>{% endif %}
+        <span class="hub-row-text">
+          <span class="hub-row-label">{{ doc.title }}</span>
+          {% if doc.summary %}<span class="hub-row-note">{{ doc.summary }}</span>{% endif %}
+          <span class="hub-res-foot">
+            <span class="hub-svcs">
+              {%- if doc.services -%}
+              {%- for key in doc.services -%}{% include component/service-icon.html key=key %}{%- endfor -%}
+              {%- elsif doc.kind == 'exam' -%}
+              {% include component/link-icon.html name="quiz" %}
+              {%- else -%}
+              {% include component/link-icon.html name="sheet" %}
+              {%- endif -%}
             </span>
+            {% if doc.pages %}<span class="hub-row-meta">A4 {{ doc.pages }}장</span>{% endif %}
           </span>
-        </a>
+        </span>
+        {%- comment -%} 손가락으로 짚는 것이라 셋 다 44px 아래로 두지 않는다. {%- endcomment -%}
         <div class="hub-get">
-          <a class="hub-get-btn" href="{{ href }}.html" download
-             aria-label="{{ doc.title }} HTML로 받기">{% include component/link-icon.html name="download" %}HTML</a>
           <a class="hub-get-btn" href="{{ href }}.pdf" download
              aria-label="{{ doc.title }} PDF로 받기">{% include component/link-icon.html name="download" %}PDF</a>
+          <a class="hub-get-btn" href="{{ href }}.html" download
+             aria-label="{{ doc.title }} HTML로 받기">{% include component/link-icon.html name="download" %}HTML</a>
+          <a class="hub-get-btn" href="{{ href }}.html" target="_blank" rel="noopener"
+             aria-label="{{ doc.title }} 브라우저에서 열기">{% include component/link-icon.html name="open" %}보기</a>
         </div>
       </div>
       {% endfor %}

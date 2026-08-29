@@ -234,50 +234,34 @@
     width: 2.15rem;
   }
 
-  /* 줄 안의 여는 링크. ::after 로 줄 전체를 덮어 어디를 눌러도 열리게 하고,
-     받기 버튼만 그 위에 얹는다. */
-  &-open {
-    align-items: center;
-    display: flex;
-    flex: 1 1 9rem;
-    gap: 0.9rem;
-    min-width: 0;
-    text-decoration: none;
-
-    &::after {
-      content: "";
-      inset: 0;
-      position: absolute;
-    }
-  }
-
   &-get {
     display: flex;
     flex-shrink: 0;
     gap: 0.35rem;
     margin-left: auto;
     padding-left: 0.6rem;
-    position: relative;
-    z-index: 1;
 
+    /* 손가락으로 짚는 것이지 눈으로 읽는 것이 아니다. 작게 두면 빗맞고,
+       빗맞은 탭은 줄을 덮은 ::after 에 걸려 엉뚱하게 문서가 열린다. */
     &-btn {
       @include transition(all .2s ease-out);
       align-items: center;
       border: 1px solid rgba(255, 255, 255, .12);
-      border-radius: 8px;
+      border-radius: 9px;
       color: $default-tint;
       display: flex;
       font-family: $serif-secondary;
-      font-size: 0.68rem;
-      gap: 0.25rem;
+      font-size: 0.75rem;
+      gap: 0.3rem;
       justify-content: center;
       letter-spacing: .03em;
-      padding: 0.4rem 0.55rem;
+      min-height: 2.35rem;
+      padding: 0.45rem 0.7rem;
       text-decoration: none;
 
       .hub-ico {
-        height: 0.85rem;
-        width: 0.85rem;
+        height: 0.95rem;
+        width: 0.95rem;
       }
 
       &:hover,
@@ -364,10 +348,37 @@
   &-res {
     flex-wrap: wrap;
 
-    /* 폰에서는 받기 버튼 둘이 글 폭을 절반 가까이 먹어 제목까지 접힌다.
-       여는 링크에 한 줄을 다 주면 버튼이 아래로 내려간다. */
+    /* 누를 수 없는 줄이다. 손을 올렸을 때 들리고 테두리가 파래지면
+       누를 수 있다고 말하는 셈이라 거짓말이 된다. */
+    &:hover,
+    &:focus {
+      border-color: rgba(255, 255, 255, .04);
+      transform: none;
+    }
+
+    /* hub-open 이 잡아 주던 자리를 글 영역이 직접 잡는다. */
+    .hub-row-text {
+      flex: 1 1 9rem;
+    }
+
+    /* 폰에서는 버튼 셋이 글 폭을 다 먹어 제목까지 접힌다. 여는 링크에
+       한 줄을 다 주면 버튼이 아래로 내려간다. 거기서 셋이 폭을 고르게
+       나눠 가지면 하나하나가 손가락만큼 넓어진다 — 44px 은 빗맞지 않는
+       최소치로 통하는 크기다. */
     @media (max-width: 520px) {
-      .hub-open { flex-basis: 100%; }
+      .hub-row-text { flex-basis: 100%; }
+
+      .hub-get {
+        margin-left: 0;
+        padding-left: 0;
+        width: 100%;
+      }
+
+      .hub-get-btn {
+        flex: 1 1 0;
+        min-height: 44px;
+        font-size: 0.82rem;
+      }
     }
 
     /* 서비스 아이콘과 장수는 한 줄에 같이 앉는다. 둘 다 "무엇이 들었나"를
