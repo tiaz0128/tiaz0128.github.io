@@ -26,13 +26,6 @@ tagline: "🖼️ 그림으로 배우는 개발 &amp; 클라우드!"
     <p class="hub-tagline">{{ page.tagline }}</p>
   </header>
 
-  {%- comment -%}
-    받기 버튼 위에 선다. 대부분 인스타 앱 안에서 열리는 페이지이고, 거기서는
-    받기가 저장으로 이어지지 않는다 — 눌러 보고 실패하기 전에 먼저 말한다.
-    앱 안 브라우저가 아니면 아무것도 그리지 않는다.
-  {%- endcomment -%}
-  {% include component/inapp.html %}
-
   {% for group in site.data.links %}
   <section class="hub-group{% if group.display == 'icons' %} hub-group-plain{% endif %}">
     {%- comment -%}
@@ -74,6 +67,14 @@ tagline: "🖼️ 그림으로 배우는 개발 &amp; 클라우드!"
         <figcaption>{{ group.sample_note | default: "샘플 · 치트 시트 1페이지" }}</figcaption>
       </figure>
       {% endif %}
+
+      {%- comment -%}
+        받기 버튼 바로 위에 선다. 대부분 인스타 앱 안에서 열리는 페이지이고,
+        거기서는 받기가 저장으로 이어지지 않는다 — 눌러 보고 실패하기 전에
+        먼저 말한다. 저장이 걸리는 건 아래 받기 버튼뿐이라 안내도 이 구역
+        안에 둔다. 앱 안 브라우저가 아니면 아무것도 그리지 않는다.
+      {%- endcomment -%}
+      {% include component/inapp.html %}
       {% assign docs = site.data.resources | sort: 'date' | reverse %}
       {% for doc in docs %}
       {%- comment -%}
