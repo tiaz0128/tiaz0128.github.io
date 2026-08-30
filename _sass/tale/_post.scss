@@ -330,17 +330,32 @@
   .howtodraw-embed {
     margin: 1.5rem 0;
 
+    // 높이는 폭에서 나온다. height 를 박아두면 본문이 좁아지는 폰에서 액자만
+    // 원래 높이로 남아 비율이 깨지고, 그림은 그 안에서 다시 레터박스를 친다.
+    // aspect-ratio 면 폭이 정해질 때 높이가 따라오므로 어느 화면에서나 같은
+    // 액자가 되고, 로드 전에도 자리를 차지해 본문이 밀리지 않는다.
+    // (height 를 명시한 임베드는 인라인 스타일이 이 auto 를 덮는다.)
     iframe {
       display: block;
       width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
       border: 1px solid #e3e8f0;
       border-radius: 12px;
     }
 
+    // 정사각(1:1) 스토리 — 폰에서는 본문 폭 그대로가 맞는 크기지만, 데스크톱에서
+    // 708px 정사각형은 화면을 통째로 먹는다. 그래서 위쪽만 잘라 가운데에 둔다.
+    &.is-square iframe {
+      aspect-ratio: 1 / 1;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
     // 세로(9:16) 스토리 — 본문 폭을 다 쓰면 글 한 편만큼 길어진다
-    &.is-narrow iframe {
-      width: 340px;
-      max-width: 100%;
+    &.is-portrait iframe {
+      aspect-ratio: 9 / 16;
+      max-width: 340px;
       margin: 0 auto;
     }
 

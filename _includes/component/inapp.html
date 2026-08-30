@@ -1,0 +1,44 @@
+{%- comment -%}
+  앱 안 브라우저 안내 — 배너 하나와 시트 하나.
+
+  둘 다 숨은 채로 나가고, script/hub_inapp.html 이 그런 브라우저를 알아봤을
+  때만 연다. 자바스크립트가 죽으면 아무것도 보이지 않고 페이지는 지금까지처럼
+  동작한다 — 안내가 없을 뿐이지 무엇도 망가지지 않는다.
+
+  앱 이름은 스크립트가 채운다. "앱 안 브라우저"라고 뭉뚱그리는 것보다
+  "인스타 앱"이라고 짚어 주는 편이 훨씬 빨리 읽힌다.
+{%- endcomment -%}
+
+<aside class="hub-inapp" hidden>
+  <span class="hub-inapp-word">
+    <b class="hub-inapp-app">앱 안 브라우저</b>에서는 파일이 저장되지 않아요
+  </span>
+  <button class="hub-inapp-go" type="button">브라우저로 열기</button>
+</aside>
+
+<div class="hub-sheet" hidden>
+  <div class="hub-sheet-scrim" data-hub-close></div>
+  <div class="hub-sheet-card" role="dialog" aria-modal="true"
+       aria-labelledby="hub-sheet-title">
+    <h2 class="hub-sheet-title" id="hub-sheet-title">여기서는 저장이 안 돼요</h2>
+    <p class="hub-sheet-body">
+      <b class="hub-inapp-app">앱 안 브라우저</b>에는 파일을 받아 둘 곳이 없습니다.
+      브라우저로 열고 같은 버튼을 다시 누르면 그대로 저장됩니다.
+    </p>
+    {%- comment -%}
+      iOS 에만 붙는 줄. 사파리를 강제로 여는 길이 없어서 버튼이 헛돌 수 있고,
+      그때 통하는 건 앱이 제 메뉴에 달아 둔 "외부 브라우저로 열기"뿐이다.
+    {%- endcomment -%}
+    <p class="hub-sheet-hint" hidden>
+      버튼이 듣지 않으면 화면 구석의 <b>⋯</b> 메뉴에서
+      <b>외부 브라우저로 열기</b>를 고르세요.
+    </p>
+    <button class="hub-sheet-go" type="button">브라우저로 열기</button>
+    <button class="hub-sheet-copy" type="button">주소 복사</button>
+    {%- comment -%}
+      받기를 눌러 시트가 떴을 때만 나온다. 배너에서 연 시트에는 "원래 가려던
+      곳"이 없으므로 이 줄도 없다.
+    {%- endcomment -%}
+    <button class="hub-sheet-skip" type="button" hidden>그냥 여기서 볼게요 →</button>
+  </div>
+</div>

@@ -108,6 +108,164 @@
     margin: 0.5rem 0 0;
   }
 
+  /* ---- 앱 안 브라우저 안내 --------------------------------------------- */
+  /* 대부분의 방문이 인스타 앱 안에서 일어나고, 거기에는 파일을 받아 둘 곳이
+     없다(script/hub_inapp.html). 눌러 보고 아무 일도 안 일어나는 것보다 먼저
+     말하는 편이 낫다 — 프로필 바로 아래, 받기 버튼보다 위.
+
+     경고색이지만 빨강은 아니다. 뭔가 고장났다는 말이 아니라 여는 방법이 하나
+     더 있다는 말이라서. 숨김은 attribute 로 하고 여기서 display 를 되돌린다 —
+     display:flex 가 브라우저 기본 [hidden] 규칙을 이기기 때문이다. */
+  &-inapp {
+    align-items: center;
+    background: rgba(237, 157, 19, .09);
+    border: 1px solid rgba(237, 157, 19, .28);
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .55rem .7rem;
+    justify-content: center;
+    margin: 0 0 1.5rem;
+    padding: .75rem .9rem;
+
+    &[hidden] { display: none; }
+
+    &-word {
+      color: $default-color;
+      font-size: .78rem;
+      line-height: 1.5;
+      text-align: center;
+
+      b {
+        color: $orange;
+        font-weight: 600;
+      }
+    }
+
+    &-go {
+      @include transition(all .2s ease-out);
+      background: $orange;
+      border: 0;
+      border-radius: 999px;
+      color: #1c1d20;
+      cursor: pointer;
+      font-family: $serif-secondary;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      min-height: 2.2rem;
+      padding: 0 1.05rem;
+      white-space: nowrap;
+
+      &:hover,
+      &:focus { background: lighten($orange, 8%); }
+    }
+  }
+
+  /* ---- 안내 시트 ------------------------------------------------------- */
+  /* 배너를 지나쳐 받기를 누른 사람에게 뜬다. 아래에서 올라오는 자리인 것은
+     폰에서 읽히는 물건이고, 엄지가 닿는 곳이 화면 아래라서다. */
+  &-sheet {
+    align-items: flex-end;
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    position: fixed;
+    z-index: 50;
+
+    &[hidden] { display: none; }
+
+    &-scrim {
+      background: rgba(0, 0, 0, .62);
+      inset: 0;
+      position: absolute;
+    }
+
+    &-card {
+      background: #1c1d20;
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 18px 18px 0 0;
+      max-width: 34rem;
+      /* 아이폰 홈 인디케이터가 마지막 버튼을 덮지 않도록. */
+      padding: 1.4rem 1.15rem calc(1.2rem + env(safe-area-inset-bottom));
+      position: relative;
+      width: 100%;
+    }
+
+    &-title {
+      color: $default-color;
+      font-family: $serif-secondary;
+      font-size: 1.05rem;
+      margin: 0 0 .6rem;
+    }
+
+    &-body,
+    &-hint {
+      color: $grey-1;
+      font-size: .8rem;
+      line-height: 1.65;
+      margin: 0 0 .5rem;
+
+      b { color: $default-color; }
+    }
+
+    &-hint {
+      &[hidden] { display: none; }
+    }
+
+    &-go,
+    &-copy,
+    &-skip {
+      @include transition(all .2s ease-out);
+      border-radius: 11px;
+      cursor: pointer;
+      display: block;
+      font-family: $serif-secondary;
+      /* 손가락으로 짚는 버튼이라 줄과 같은 44px 아래로 두지 않는다. */
+      min-height: 44px;
+      margin-top: .55rem;
+      width: 100%;
+    }
+
+    &-go {
+      background: $orange;
+      border: 0;
+      color: #1c1d20;
+      font-size: .88rem;
+      font-weight: 700;
+
+      &:hover,
+      &:focus { background: lighten($orange, 8%); }
+    }
+
+    &-copy {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, .14);
+      color: $default-tint;
+      font-size: .82rem;
+
+      &:hover,
+      &:focus {
+        border-color: $blue;
+        color: $blue;
+      }
+    }
+
+    /* 나가지 않고 그대로 보겠다는 길. 버튼이 아니라 문장처럼 보이게 둔다 —
+       권하는 길은 위의 둘이고, 이건 거절할 자리다. */
+    &-skip {
+      background: transparent;
+      border: 0;
+      color: $grey-4;
+      font-size: .78rem;
+
+      &[hidden] { display: none; }
+
+      &:hover,
+      &:focus { color: $default-tint; }
+    }
+  }
+
   /* ---- 카테고리 ------------------------------------------------------- */
   &-group {
     margin-bottom: 2.25rem;

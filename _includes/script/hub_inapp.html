@@ -1,0 +1,144 @@
+<script>
+  /* 앱 안 브라우저에서 온 사람을 진짜 브라우저로 내보낸다.
+
+     이 페이지는 인스타 바이오를 타고 들어오므로 방문 대부분이 앱 안 브라우저,
+     즉 다운로드 매니저가 없는 웹뷰다. 거기서 <a download> 는 지켜지지 않는다 —
+     iOS 는 속성을 무시하고 PDF 를 웹뷰 안에 그냥 그리고, 안드로이드는 URL 을
+     바깥 앱에 넘긴다. 그래서 "받기"를 누른 사람이 아무것도 못 받는다.
+
+     서버 쪽으로도 못 고친다. GitHub Pages 라 Content-Disposition 을 붙일 수
+     없고, 붙인들 저장할 곳이 없는 것은 그대로다. 그러니 이 파일이 하는 일은
+     받아지게 만드는 게 아니라, 받아지는 곳으로 내보내는 것이다. */
+  (() => {
+    const ua = navigator.userAgent || '';
+
+    /* 이름이 잡히는 앱만 센다. "정규 브라우저가 아닌 웹뷰"를 통째로 잡으려
+       들면 삼성 인터넷이나 결제창까지 걸려서, 멀쩡히 받아지는 브라우저에
+       "여기선 안 됩니다" 를 띄우게 된다. 틀린 경고가 없는 경고보다 나쁘다. */
+    const APPS = [
+      [/Instagram/i, '인스타 앱'],
+      [/Barcelona/i, '스레드 앱'],
+      [/FBAN|FBAV|FB_IAB/i, '페이스북 앱'],
+      [/KAKAOTALK/i, '카카오톡'],
+      [/NAVER\(inapp/i, '네이버 앱'],
+      [/DaumApps/i, '다음 앱'],
+      [/Line\//i, '라인'],
+    ];
+    const hit = APPS.find(([re]) => re.test(ua));
+    if (!hit) return;
+
+    const banner = document.querySelector('.hub-inapp');
+    const sheet = document.querySelector('.hub-sheet');
+    if (!banner || !sheet) return;
+
+    const isAndroid = /Android/i.test(ua);
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+    /* 바깥으로 나가는 길은 플랫폼마다 다르고, 한쪽은 보장이 없다.
+
+       안드로이드는 확실하다. intent: 로 크롬을 지목하고, 크롬이 없는 기기는
+       browser_fallback_url 이 받는다.
+
+       iOS 에는 사파리를 강제로 여는 API 가 없다. x-safari-https: 는 웹뷰가
+       모르는 스킴을 시스템에 넘기면서 열리는 길이라 대개 통하지만, 안 통할
+       때는 아무 일도 일어나지 않는다 — 실패를 알 방법도 없다. 그래서 iOS 는
+       버튼을 바로 쏘지 않고 시트를 먼저 연다. 시트에 ⋯ 메뉴로 여는 방법이
+       같이 적혀 있어서, 버튼이 헛돌아도 다음 수가 눈앞에 남는다. */
+    function escapeToBrowser() {
+      const here = location.href;
+      if (isAndroid) {
+        const u = new URL(here);
+        location.href =
+          'intent://' + u.host + u.pathname + u.search +
+          '#Intent;scheme=' + u.protocol.replace(':', '') +
+          ';package=com.android.chrome' +
+          ';S.browser_fallback_url=' + encodeURIComponent(here) +
+          ';end';
+        return;
+      }
+      if (isIOS) {
+        location.href = 'x-safari-' + here;
+        return;
+      }
+      window.open(here, '_blank', 'noopener');
+    }
+
+    /* 주소를 넘겨 주는 마지막 수단. 클립보드 API 가 웹뷰에서 막혀 있는 경우가
+       있어서, 거기서 통하는 옛 길(execCommand)을 뒤에 세워 둔다. */
+    async function copyHere() {
+      const url = location.href;
+      try {
+        await navigator.clipboard.writeText(url);
+        return true;
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = url;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, url.length);
+        let ok = false;
+        try { ok = document.execCommand('copy'); } catch { ok = false; }
+        ta.remove();
+        return ok;
+      }
+    }
+
+    const skip = sheet.querySelector('.hub-sheet-skip');
+    let pending = null;   // 시트를 띄운 버튼이 원래 가려던 곳
+
+    function openSheet(href) {
+      pending = href || null;
+      skip.hidden = !pending;
+      sheet.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSheet() {
+      sheet.hidden = true;
+      document.body.style.overflow = '';
+    }
+
+    for (const el of document.querySelectorAll('.hub-inapp-app')) {
+      el.textContent = hit[1];
+    }
+    if (isIOS) sheet.querySelector('.hub-sheet-hint').hidden = false;
+    banner.hidden = false;
+
+    banner.querySelector('.hub-inapp-go').addEventListener('click', () => {
+      if (isAndroid) escapeToBrowser();
+      else openSheet(null);
+    });
+    sheet.querySelector('.hub-sheet-go').addEventListener('click', escapeToBrowser);
+
+    skip.addEventListener('click', () => {
+      const href = pending;
+      closeSheet();
+      if (href) location.href = href;
+    });
+
+    const copyBtn = sheet.querySelector('.hub-sheet-copy');
+    copyBtn.addEventListener('click', async () => {
+      const ok = await copyHere();
+      copyBtn.textContent = ok ? '주소 복사됨' : '복사가 막혀 있어요';
+      setTimeout(() => { copyBtn.textContent = '주소 복사'; }, 1800);
+    });
+
+    for (const el of sheet.querySelectorAll('[data-hub-close]')) {
+      el.addEventListener('click', closeSheet);
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !sheet.hidden) closeSheet();
+    });
+
+    /* 가로채는 건 받기 버튼뿐이다. "보기"에는 download 가 없고, 앱 안에서도
+       제대로 열리는 하나라 건드릴 이유가 없다 — 오히려 인앱에서 자료를 보는
+       가장 짧은 길이다. */
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a.hub-get-btn[download]');
+      if (!a) return;
+      e.preventDefault();
+      openSheet(a.href);
+    });
+  })();
+</script>

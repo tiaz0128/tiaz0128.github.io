@@ -2,7 +2,7 @@
   howtodraw.cloud 다이어그램 임베드
 
   1) 호스팅 다이어그램 (권장) — id 만 넘기면 임베드 URL을 조립한다
-     {% include template/howtodraw.html id="<diagram-id>" height="420" %}
+     {% include template/howtodraw.html id="<diagram-id>" %}
 
   2) 스토리의 특정 스텝만 재생 — story 로 구간을 지정한다 (1부터 시작)
      {% include template/howtodraw.html id="<id>" story="3-6" %}      3,4,5,6번 스텝
@@ -19,9 +19,13 @@
     auto    : "1" 이면 스스로 재생된다. 기본은 멈춰 있다가 재생 버튼을 눌러야 시작
     loop    : "1" 이면 마지막 스텝 뒤 처음으로 돌아간다
     bare    : "1" 이면 툴바·재생 컨트롤 없이 그림만 나온다
-    height  : 높이(px). 기본 400 (본문 폭 708px 기준 16:9), narrow 는 600
-    narrow  : "1" 이면 세로(9:16) 스토리용으로 폭을 340px 로 좁힌다
+    ratio   : 액자 비율. "16:9"(기본) / "1:1" / "9:16"
+    height  : 높이(px). 주면 ratio 대신 이 높이로 고정된다 (스토리 없는 그림용)
     title   : 그림 아래 캡션. 붙이면 iframe 의 접근성 제목으로도 쓰인다 (선택)
+
+  ratio 는 액자만 정한다. 재생되는 그림의 비율은 다이어그램 문서에 저장된
+  스토리의 Frame 값이고, 뷰어가 그 비율로 레터박스를 친다. 둘이 어긋나면
+  가운데에 다른 모양의 창이 뜨므로, 스토리 스튜디오의 Frame 과 같은 값을 준다.
 
   주의: story 를 주지 않으면 지금까지처럼 "멈춰 있는 다이어그램"으로 열린다.
   스텝을 지정해도 링크를 직접 연 독자에게 같은 화면이 보인다 (embed 전용이 아님).
@@ -43,15 +47,20 @@
   {%- assign embed_src = embed_src | strip -%}
 {%- endif -%}
 
-{%- if include.narrow == "1" -%}
-  {%- assign embed_height = include.height | default: 600 -%}
-{%- else -%}
-  {%- assign embed_height = include.height | default: 400 -%}
-{%- endif -%}
+{%- comment -%}
+  높이는 CSS 가 비율로 잡는다 — 폭이 정해지면 높이가 따라오므로, 폰에서도
+  본문 폭에 맞는 액자가 되고 로딩 중 레이아웃이 밀리지 않는다. height 를 준
+  경우에만 인라인으로 고정한다 (인라인이 스타일시트를 이긴다).
+{%- endcomment -%}
+{%- case include.ratio -%}
+  {%- when "1:1" -%}{%- assign ratio_class = " is-square" -%}
+  {%- when "9:16" -%}{%- assign ratio_class = " is-portrait" -%}
+  {%- else -%}{%- assign ratio_class = "" -%}
+{%- endcase -%}
 
-<div class="howtodraw-embed{% if include.narrow == "1" %} is-narrow{% endif %}">
+<div class="howtodraw-embed{{ ratio_class }}">
   <iframe src="{{ embed_src }}"
-          height="{{ embed_height }}"
+          {% if include.height %}style="height: {{ include.height }}px"{% endif %}
           title="{{ include.title | default: 'howtodraw.cloud diagram' }}"
           loading="lazy" frameborder="0"
           referrerpolicy="strict-origin-when-cross-origin"></iframe>
