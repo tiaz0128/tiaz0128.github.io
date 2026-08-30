@@ -324,6 +324,15 @@
     display: flex;
     justify-content: center;
     margin: 10px;
+
+    // 세로 영상(쇼츠). 가로용 560x315 를 그대로 쓰면 9:16 영상이 좌우로
+    // 레터박스를 친 채 납작하게 들어간다. 폭만 잡고 높이는 비율에서 나오게 한다.
+    &.is-portrait iframe {
+      width: 100%;
+      height: auto;
+      max-width: 340px;
+      aspect-ratio: 9 / 16;
+    }
   }
 
   // howtodraw.cloud 다이어그램 임베드

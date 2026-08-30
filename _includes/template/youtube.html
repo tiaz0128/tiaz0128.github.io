@@ -1,4 +1,4 @@
-<div class="youtube">
+<div class="youtube{% if include.ratio == '9:16' %} is-portrait{% endif %}">
     <iframe width="560" height="315" src="{{ include.url }}"
         title="YouTube video player" frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
