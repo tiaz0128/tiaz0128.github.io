@@ -963,7 +963,7 @@ td .bad { color: var(--bad); font-weight: 700; }
 <body>
 <div class="bar no-print">
   <span class="bar-name">EC2 · EBS · ENI</span>
-  <button class="bar-btn ghost bar-save" type="button" data-file="ec2-ebs-eni-cheatsheet.html">HTML 저장</button>
+  <button class="bar-btn ghost bar-save" type="button" data-file="ec2-ebs-eni-summary.html">HTML 저장</button>
   <button class="bar-btn" onclick="window.print()">인쇄 / PDF 저장</button>
 </div>
 <article class="sheet"><div class="stamp">2026-08-30 업데이트</div>
@@ -1254,7 +1254,7 @@ td .bad { color: var(--bad); font-weight: 700; }
     const url = URL.createObjectURL(new Blob([copy], { type: 'text/html;charset=utf-8' }));
     const a = document.createElement('a');
     a.href = url;
-    a.download = keep.dataset.file || (document.title || 'cheatsheet') + '.html';
+    a.download = keep.dataset.file || (document.title || 'summary') + '.html';
     a.click();
     /* Late, and not on the next tick: a click on an anchor only *starts* the
        download, and a URL revoked out from under it is a save that never lands. */

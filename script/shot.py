@@ -1,4 +1,4 @@
-"""치트시트 문서에서 표지 미리보기와 배포용 PDF를 굽는다.
+"""요약본 문서에서 표지 미리보기와 배포용 PDF를 굽는다.
 
     uv run shot.py                      # resources/ 전부
     uv run shot.py ec2-ebs-eni          # 하나만
@@ -8,7 +8,7 @@
     resources/<slug>.pdf                     받기 버튼이 주는 파일
     _data/service_icons.yml                  목록 줄에 쓰는 AWS 서비스 아이콘
 
-표지는 문서마다 걸리지 않는다. 치트 시트 구역 맨 위에 견본 한 장이
+표지는 문서마다 걸리지 않는다. 요약본 구역 맨 위에 견본 한 장이
 붙을 뿐이고, 그게 어느 것인지는 _data/links.yml 의 sample: 이 정한다.
 그러니 여기서 구운 -cover.webp 는 그 견본을 갈 때만 쓴다 — 새 문서마다
 굽지 않아도 된다. PDF 는 문서마다 필요하고, 브라우저 인쇄로 뽑아도 된다
@@ -37,7 +37,7 @@ COVER_W = 620  # 저장할 폭. 카드에서 최대 2배로 쓰인다.
 
 
 def sync_service_icons(browser) -> int:
-    """치트시트가 쓰는 AWS 서비스 아이콘만 골라 _data 로 뽑는다.
+    """요약본이 쓰는 AWS 서비스 아이콘만 골라 _data 로 뽑는다.
 
     aws.json 이 2.5MB라 통째로 _data 에 두면 매 빌드마다 그걸 파싱한다.
     쓰는 것만 옮겨 두면 Liquid 에서 바로 꺼내 쓸 수 있다.

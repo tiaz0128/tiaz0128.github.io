@@ -55,7 +55,7 @@ $ uv sync
 $ python convert-webp.py
 ```
 
-## 치트 시트 추가
+## 요약본 추가
 
 문서는 `resources/<slug>.html` 에 두는 통짜 HTML 이다. 프런트매터를 붙이면
 Jekyll 컬렉션 문서가 되어 jekyll-spaceship 이 달라붙고 빌드가 멈추므로,

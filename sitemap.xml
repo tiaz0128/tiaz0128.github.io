@@ -28,7 +28,7 @@ layout: null
     </url>
   {% endfor %}
 
-  <!-- 프로필 링크 허브와 치트시트 문서들. 링크트리를 대신하는 자리라 색인에 올린다. -->
+  <!-- 프로필 링크 허브와 요약본 문서들. 링크트리를 대신하는 자리라 색인에 올린다. -->
   <url>
     <loc>{{ site.url }}/link/</loc>
     <changefreq>weekly</changefreq>

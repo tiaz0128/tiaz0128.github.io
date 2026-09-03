@@ -7,19 +7,19 @@
 #            읽는 쪽에서는 구별이 안 된다. 줄마다 붙는 날짜(_data/resources.yml
 #            의 date)가 "언제 손봤나"를 말하고 이쪽이 "계속 는다"를 말한다.
 # source:    'resources' 를 주면 _data/resources.yml 을 자동으로 채운다.
-#            줄은 전부 같은 꼴이다. 치트시트를 추가할 때 이 파일은
+#            줄은 전부 같은 꼴이다. 요약본을 추가할 때 이 파일은
 #            건드리지 않아도 된다.
 # sample:    구역 맨 위에 걸리는 샘플. 문서마다 거는 표지가 아니라
-#            "치트 시트가 이렇게 생겼다"를 보이는 한 장이라, 새 문서를
+#            "요약본이 이렇게 생겼다"를 보이는 한 장이라, 새 문서를
 #            넣어도 따라 바뀌지 않는다. 바꾸고 싶을 때만 바꾼다.
 #            shot.py 가 구운 <slug>-cover.webp 를 그대로 쓰면 된다.
 # sample_video:  있으면 이게 대신 서고 sample 은 poster 로 내려간다.
-#            치트 시트의 값은 종이가 아니라 움직인다는 데 있어서 정지
+#            요약본의 값은 종이가 아니라 움직인다는 데 있어서 정지
 #            사진으로는 그게 안 전해진다. 소리 없이 저 혼자 돈다.
 #            assets/video/ 에 두고 짧게(5~10초) · 작게 자를 것 —
 #            자동재생이라 첫 화면에서 그대로 내려받는다.
 #            .mp4 를 기본으로. type 은 확장자에서 따간다.
-# sample_note:   샘플 아래 회색 한 줄. 없으면 "샘플 · 치트 시트 1페이지".
+# sample_note:   샘플 아래 회색 한 줄. 없으면 "샘플 · 요약본 1페이지".
 # links[].icon:  component/link-icon.html 이 아는 이름
 #                web youtube linkedin instagram github aws diagram article sheet quiz
 #                (없거나 모르는 이름이면 사슬 아이콘)
@@ -35,7 +35,7 @@
       url: "https://builder.aws.com/student-rewards?trk=d8ec3b19-0f37-4f8c-8c12-189f913e205c&sc_channel=el"
       icon: aws
 
-- category: 치트 시트 (무료)
+- category: 요약본 (무료)
   note: "움직이는 HTML or PDF 출력해서 보기"
   ongoing: "계속 추가하고 다듬는 중"
   source: resources
