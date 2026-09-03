@@ -286,6 +286,35 @@
       text-align: center;
     }
 
+    /* 이 구역은 끝난 목록이 아니라 계속 자라는 서랍이다 — 오늘 다 받아 간
+       사람이 다음 달에 다시 올 이유가 여기에 있다. 줄마다 붙는 날짜가
+       "언제 손봤나"라면 이 알약은 "여기서 끝이 아니다"다.
+       점은 깜빡이지 않는다. 실시간으로 뭐가 도는 자리가 아니고, 이 카드에서
+       움직여도 되는 것은 위의 샘플 영상 하나뿐이다. */
+    &-live {
+      align-items: center;
+      background: rgba(237, 157, 19, .09);
+      border: 1px solid rgba(237, 157, 19, .28);
+      border-radius: 999px;
+      color: $default-tint;
+      display: flex;
+      font-size: 0.72rem;
+      gap: 0.4rem;
+      line-height: 1.5;
+      margin: -0.15rem auto 1rem;
+      padding: 0.3rem 0.8rem;
+      width: fit-content;
+
+      &::before {
+        background: $orange;
+        border-radius: 50%;
+        content: "";
+        flex-shrink: 0;
+        height: 0.4rem;
+        width: 0.4rem;
+      }
+    }
+
     &-title + .hub-row {
       margin-top: 0.9rem;
     }
@@ -549,6 +578,14 @@
       margin-top: 0.5rem;
 
       .hub-row-meta { margin-top: 0; }
+
+      /* 장수와 업데이트 날짜는 같은 무게의 곁다리 둘이다. 사이에 점을
+         찍지 않으면 좁은 화면에서 "A4 12장 2026-08-30"이 한 덩어리로
+         읽힌다. */
+      .hub-row-meta + .hub-row-meta::before {
+        content: "·";
+        margin-right: 0.5rem;
+      }
     }
   }
 

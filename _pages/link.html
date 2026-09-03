@@ -35,6 +35,12 @@ tagline: "🖼️ 그림으로 배우는 개발 &amp; 클라우드!"
     {% unless group.display == 'icons' %}
     <h2 class="hub-group-title">{{ group.category }}</h2>
     {% if group.note %}<p class="hub-group-note">{{ group.note }}</p>{% endif %}
+    {%- comment -%}
+      끝난 목록이 아니라 계속 늘어나는 서랍이라고 말하는 자리. 줄마다 붙는
+      날짜가 "언제 손봤나"를 말하고, 이 알약은 "여기서 끝이 아니다"를 말한다.
+      둘 다 있어야 오늘 받아 간 사람이 다시 올 이유가 생긴다.
+    {%- endcomment -%}
+    {% if group.ongoing %}<p class="hub-group-live">{{ group.ongoing }}</p>{% endif %}
     {% endunless %}
 
     {% comment %} 자료실 구역은 _data/resources.yml 에서 자동으로 채운다. {% endcomment %}
@@ -102,6 +108,11 @@ tagline: "🖼️ 그림으로 배우는 개발 &amp; 클라우드!"
               {%- endif -%}
             </span>
             {% if doc.pages %}<span class="hub-row-meta">A4 {{ doc.pages }}장</span>{% endif %}
+            {%- comment -%}
+              문서 표지에 박힌 것과 같은 날이다(문서 쪽은 .stamp). 받아 둔
+              파일이 이번 판인지 지난 판인지는 목록에서도 알 수 있어야 한다.
+            {%- endcomment -%}
+            {% if doc.date %}<span class="hub-row-meta">{{ doc.date | date: "%Y-%m-%d" }} 업데이트</span>{% endif %}
           </span>
         </span>
         {%- comment -%} 손가락으로 짚는 것이라 셋 다 44px 아래로 두지 않는다. {%- endcomment -%}

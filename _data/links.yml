@@ -2,6 +2,10 @@
 #
 # category:  구역 제목
 # note:      구역 제목 아래 회색 한 줄 (선택)
+# ongoing:   note 아래에 서는 알약 한 줄 (선택). "이 구역은 아직 안 끝났다"를
+#            말하는 자리다 — 목록이 짧아 보이는 것과 목록이 죽은 것은 다르고,
+#            읽는 쪽에서는 구별이 안 된다. 줄마다 붙는 날짜(_data/resources.yml
+#            의 date)가 "언제 손봤나"를 말하고 이쪽이 "계속 는다"를 말한다.
 # source:    'resources' 를 주면 _data/resources.yml 을 자동으로 채운다.
 #            줄은 전부 같은 꼴이다. 치트시트를 추가할 때 이 파일은
 #            건드리지 않아도 된다.
@@ -33,6 +37,7 @@
 
 - category: 치트 시트 (무료)
   note: "움직이는 HTML or PDF 출력해서 보기"
+  ongoing: "계속 추가하고 다듬는 중"
   source: resources
   sample: /assets/img/resources/cheatsheet-sample-poster.webp
   sample_video: /assets/video/cheatsheet-sample.mp4
