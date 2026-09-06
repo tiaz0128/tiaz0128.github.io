@@ -52,29 +52,37 @@
 #          목록 순서가 뒤집히는 것도 같은 이유로 곤란하다.
 #          그래서 순서는 번호가 잡고, date 는 "언제 손봤나"만 말한다.
 #          모든 항목에 적을 것. 빠지면 그 줄이 1번보다 앞에 선다.
+# badge:   줄에 붙는 알약의 말머리. new 면 NEW, 없으면 UPDATE 다.
+#          알약이 서는 기간은 date 가 정한다(21일). 지난 것은 저절로
+#          회색 한 줄로 돌아가니 여기를 지우러 오지 않아도 된다.
 # date:    마지막으로 손본 날. 줄에 붙는 "2026-09-06 업데이트" 다. 문서 표지
 #          오른쪽 위의 .stamp 와 같은 날을 적는다. 그쪽은 내보낸 날이 자동으로
 #          박히니, 문서를 다시 내보냈으면 여기도 같이 고칠 것. 안 고치면
 #          목록만 지난 판을 말한다.
 # pages:   A4 몇 장인지. 줄에 "A4 12장"으로 붙는다. 문서의 .sheet 개수다.
 # kind:    cheatsheet | exam — services 가 비었을 때 쓰는 기본 아이콘이 갈린다.
-# services: 이 문서가 다루는 AWS 서비스들. assets/json/icons/aws.json 의 키.
+# services: 이 문서가 다루는 AWS 서비스들. assets/json/icons/aws.json 의 키,
+#           또는 aws-group.json 의 group_* 키(리전 · VPC · 서브넷처럼 서비스가
+#           아니라 "구역"인 것들. iconify 의 aws 세트에 없어서 따로 뒀다).
 #           줄 왼쪽 아이콘은 이 중 첫 번째를 쓴다 — 대표를 맨 앞에 둘 것.
 #           shot.py 가 쓰인 것만 골라 _data/service_icons.yml 로 뽑아둔다
 #           (원본이 2.5MB라 통째로 못 읽는다).
 #           비워두면 일반 문서 아이콘으로 떨어진다.
 #
-#           ★ 한 문서 안에서는 같은 계열로 고를 것. aws.json 에는 색 사각형
-#             (Architecture)과 선화(Resource) 두 계열이 섞여 있어서, 같이
-#             걸면 크기를 아무리 맞춰도 따로 논다. 이름이 리소스를 가리키는
+#           ★ 한 문서 안에서는 같은 계열로 고를 것. 색 사각형(Architecture ·
+#             group_*)과 선화(Resource) 두 계열이 섞여 있어서, 같이 걸면
+#             크기를 아무리 맞춰도 따로 논다. 이름이 리소스를 가리키는
 #             쪽(amazon_ec2_instance)이 대개 선화다.
 - slug: aws-network
   order: 1
+  badge: new
   title: "AWS 네트워크 기초"
   summary: "클라우드를 왜 쓰는지, 그 안의 네트워크는 어떻게 생겼는지"
   kind: cheatsheet
   services:
-    - amazon_vpc_virtual_private_cloud_vpc
+    - group_region
+    - group_vpc
+    - group_private_subnet
   date: 2026-09-06
   pages: 15
 

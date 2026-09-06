@@ -57,8 +57,16 @@ def sync_service_icons(browser) -> int:
         dst.unlink(missing_ok=True)
         return 0
 
-    icons = json.loads((ROOT / "assets" / "json" / "icons" / "aws.json")
-                       .read_text("utf-8"))["icons"]
+    # aws.json 은 iconify 의 aws 세트를 그대로 받아 둔 것이라 손대지 않는다.
+    # 거기에는 서비스 아이콘만 있고 리전·VPC·서브넷 같은 그룹 아이콘이 없다.
+    # 그건 AWS 공식 아키텍처 아이콘 패키지 쪽 물건이라, 요약본 표지에 이미
+    # 박혀 있는 SVG 를 꺼내 aws-group.json 에 따로 모아 뒀다. 뒤에 얹으므로
+    # 이름이 겹치면 그룹 쪽이 이긴다 — 겹치게 두지 말 것.
+    def load(name):
+        return json.loads((ROOT / "assets" / "json" / "icons" / name)
+                          .read_text("utf-8"))["icons"]
+
+    icons = {**load("aws.json"), **load("aws-group.json")}
     page = browser.new_page()
     page.set_content("<body></body>")
 
@@ -66,7 +74,7 @@ def sync_service_icons(browser) -> int:
     for key in wanted:
         ic = icons.get(key)
         if ic is None:
-            raise SystemExit(f"aws.json 에 '{key}' 가 없다")
+            raise SystemExit(f"aws.json·aws-group.json 에 '{key}' 가 없다")
         box = page.evaluate(
             """([w, h, body]) => {
                  const ns = 'http://www.w3.org/2000/svg';

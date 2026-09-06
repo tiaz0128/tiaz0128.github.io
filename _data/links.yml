@@ -53,6 +53,10 @@
       note: "AWS Architecture Blog"
       url: "https://aws.amazon.com/blogs/architecture/one-to-many-evolving-vpc-design"
       icon: article
+    - label: "Amazon EC2로 첫 워크로드 시작하기"
+      note: "YouTube · AWS Korea"
+      url: "https://youtu.be/Mg6lLromiQM"
+      icon: youtube
 
 - category: 프로필
   display: icons

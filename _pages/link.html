@@ -116,8 +116,23 @@ tagline: "🖼️ 그림으로 배우는 개발 &amp; 클라우드!"
             {%- comment -%}
               문서 표지에 박힌 것과 같은 날이다(문서 쪽은 .stamp). 받아 둔
               파일이 이번 판인지 지난 판인지는 목록에서도 알 수 있어야 한다.
+
+              그런데 회색 곁다리로 세워 두면 장수 옆에 묻혀 안 읽힌다.
+              계속 고쳐 올리는 물건이라 "또 손봤다"가 다시 올 이유인데,
+              그게 제일 안 보이는 자리에 있었다. 그래서 최근 것만 알약으로
+              세운다. badge: 는 말머리만 정하고(new = 처음 올린 것, 없으면
+              UPDATE), 언제까지 세울지는 날짜가 정한다 — 21일이 지나면
+              저절로 회색 한 줄로 돌아간다. 지난 문서의 badge 를 손으로
+              지우러 다니지 않아도 되라고 이렇게 둔다.
+              기준은 빌드 시각이다. 안 올리면 페이지도 그대로다.
             {%- endcomment -%}
-            {% if doc.date %}<span class="hub-row-meta">{{ doc.date | date: "%Y-%m-%d" }} 업데이트</span>{% endif %}
+            {%- assign fresh_after = site.time | date: '%s' | minus: 1814400 -%}
+            {%- assign doc_at = doc.date | date: '%s' | plus: 0 -%}
+            {%- if doc.date and doc_at > fresh_after -%}
+            <span class="hub-row-tag{% if doc.badge == 'new' %} is-new{% endif %}"><b>{% if doc.badge == 'new' %}NEW{% else %}UPDATE{% endif %}</b>{{ doc.date | date: "%Y-%m-%d" }}</span>
+            {%- elsif doc.date -%}
+            <span class="hub-row-meta">{{ doc.date | date: "%Y-%m-%d" }} 업데이트</span>
+            {%- endif -%}
           </span>
         </span>
         {%- comment -%} 손가락으로 짚는 것이라 셋 다 44px 아래로 두지 않는다. {%- endcomment -%}

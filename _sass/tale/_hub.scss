@@ -380,6 +380,38 @@
       margin-top: 0.3rem;
     }
 
+    /* 갱신 표시. 곁다리 회색 글씨로는 장수 옆에 묻혀서, 자주 고쳐 올린다는
+       것 자체가 안 보였다. 알약으로 세우고 말머리를 굵게 둔다 — 눈은 날짜
+       숫자보다 낱말을 먼저 잡는다.
+       색은 새로 올린 것(NEW)만 파랗다. 둘 다 튀면 어느 게 새 것인지가
+       도로 안 보이고, 목록이 알약밭이 된다. */
+    &-tag {
+      align-items: baseline;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .09);
+      border-radius: 999px;
+      color: $grey-1;
+      display: inline-flex;
+      font-size: 0.64rem;
+      gap: 0.35rem;
+      letter-spacing: .02em;
+      padding: 0.26rem 0.55rem;
+      white-space: nowrap;
+
+      b {
+        color: $gold;
+        font-weight: 700;
+        letter-spacing: .08em;
+      }
+
+      &.is-new {
+        background: rgba(98, 191, 255, .13);
+        border-color: rgba(98, 191, 255, .34);
+
+        b { color: $blue; }
+      }
+    }
+
     &-arrow {
       @include transition(color .2s ease-out);
       color: $grey-4;
