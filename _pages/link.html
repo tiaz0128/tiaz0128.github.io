@@ -81,7 +81,12 @@ tagline: "🖼️ 그림으로 배우는 개발 &amp; 클라우드!"
         안에 둔다. 앱 안 브라우저가 아니면 아무것도 그리지 않는다.
       {%- endcomment -%}
       {% include component/inapp.html %}
-      {% assign docs = site.data.resources | sort: 'date' | reverse %}
+      {%- comment -%}
+        번호순이지 최신순이 아니다. 이어서 읽는 시리즈라 1번이 먼저 서야
+        하고, 최신순으로 세우면 2번을 손볼 때마다 1번이 아래로 밀린다.
+        "언제 손봤나"는 줄에 붙는 날짜가 따로 말한다.
+      {%- endcomment -%}
+      {% assign docs = site.data.resources | sort: 'order' %}
       {% for doc in docs %}
       {%- comment -%}
         줄은 누를 수 없다. 누를 수 있는 건 아래 버튼 셋뿐이다.

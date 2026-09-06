@@ -12,7 +12,9 @@
 #        - cd script && uv run shot.py <slug>
 #          (새로 깐 WSL 이면 chromium 이 기대는 라이브러리를 한 번만:
 #           sudo apt-get install -y libnss3 libnspr4 libasound2t64)
-#   3. 이 파일 맨 위에 항목을 추가한다.
+#   3. 이 파일에 항목을 추가한다. 자리는 order: 가 정하니 어디에 적든
+#      목록에는 번호순으로 선다 — 그래도 읽는 사람이 헷갈리지 않게
+#      번호 순서대로 적어 둔다.
 #      title/summary 는 문서 표지에 박힌 것과 같게.
 #      services: 에 처음 쓰는 키가 있으면 shot.py 를 한 번 돌려야 한다.
 #      _data/service_icons.yml 을 그게 만드는데, 아이콘 잉크 경계를 재려고
@@ -44,10 +46,16 @@
 #   render_with_liquid: false 로는 Liquid만 꺼지고 spaceship은 못 막는다.
 #   프런트매터가 없으면 Jekyll은 StaticFile로 보고 그냥 복사한다 — 처리 0.
 #
-# date:    마지막으로 손본 날. 두 군데에 쓰인다 — 목록 순서(최신이 위)와
-#          줄에 붙는 "2026-08-30 업데이트". 문서 표지 오른쪽 위의 .stamp 와
-#          같은 날을 적는다. 그쪽은 내보낸 날이 자동으로 박히니, 문서를 다시
-#          내보냈으면 여기도 같이 고칠 것. 안 고치면 목록만 지난 판을 말한다.
+# order:   시리즈 번호. 문서 표지 왼쪽 위의 kicker(AWS BASIC · 01)와 같은 수다.
+#          목록은 이 순서로 선다. 읽는 순서가 있는 시리즈라서 최신순으로
+#          세우면 1번을 보기 전에 2번이 먼저 걸린다 — 문서를 손볼 때마다
+#          목록 순서가 뒤집히는 것도 같은 이유로 곤란하다.
+#          그래서 순서는 번호가 잡고, date 는 "언제 손봤나"만 말한다.
+#          모든 항목에 적을 것. 빠지면 그 줄이 1번보다 앞에 선다.
+# date:    마지막으로 손본 날. 줄에 붙는 "2026-09-06 업데이트" 다. 문서 표지
+#          오른쪽 위의 .stamp 와 같은 날을 적는다. 그쪽은 내보낸 날이 자동으로
+#          박히니, 문서를 다시 내보냈으면 여기도 같이 고칠 것. 안 고치면
+#          목록만 지난 판을 말한다.
 # pages:   A4 몇 장인지. 줄에 "A4 12장"으로 붙는다. 문서의 .sheet 개수다.
 # kind:    cheatsheet | exam — services 가 비었을 때 쓰는 기본 아이콘이 갈린다.
 # services: 이 문서가 다루는 AWS 서비스들. assets/json/icons/aws.json 의 키.
@@ -60,14 +68,25 @@
 #             (Architecture)과 선화(Resource) 두 계열이 섞여 있어서, 같이
 #             걸면 크기를 아무리 맞춰도 따로 논다. 이름이 리소스를 가리키는
 #             쪽(amazon_ec2_instance)이 대개 선화다.
+- slug: aws-network
+  order: 1
+  title: "AWS 네트워크 기초"
+  summary: "클라우드를 왜 쓰는지, 그 안의 네트워크는 어떻게 생겼는지"
+  kind: cheatsheet
+  services:
+    - amazon_vpc_virtual_private_cloud_vpc
+  date: 2026-09-06
+  pages: 15
+
 - slug: ec2-ebs-eni
+  order: 2
   title: "EC2 · EBS · ENI"
-  summary: "서버 한 대는 무엇으로 이루어지고, 무엇이 남고, 어떻게 연결되는가"
+  summary: "서버 한 대는 무엇으로 이루어져 있고, 어떻게 연결되는가"
   kind: cheatsheet
   services:
     - amazon_ec2_instance
     - amazon_elastic_block_store_volume
     - amazon_vpc_elastic_network_interface
     - amazon_ec2_elastic_ip_address
-  date: 2026-08-30
-  pages: 12
+  date: 2026-09-06
+  pages: 14
