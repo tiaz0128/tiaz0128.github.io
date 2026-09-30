@@ -77,7 +77,7 @@
 #             크기를 아무리 맞춰도 따로 논다. 이름이 리소스를 가리키는
 #             쪽(amazon_ec2_instance)이 대개 선화다.
 - slug: aws-network
-  slugs: { en: aws-network-en }  # ja zh es it fr: 판이 다 되면 넣는다
+  slugs: { en: aws-network-en, ja: aws-network-ja, zh: aws-network-zh, es: aws-network-es, it: aws-network-it, fr: aws-network-fr }
   order: 1
   badge: new
   title: "AWS 네트워크 기초"
@@ -103,7 +103,7 @@
   pages: 15
 
 - slug: ec2-ebs-eni
-  slugs: { en: ec2-ebs-eni-en }  # ja zh es it fr: 판이 다 되면 넣는다
+  slugs: { en: ec2-ebs-eni-en, ja: ec2-ebs-eni-ja, zh: ec2-ebs-eni-zh, es: ec2-ebs-eni-es, it: ec2-ebs-eni-it, fr: ec2-ebs-eni-fr }
   order: 2
   title: "EC2 · EBS · ENI"
   summary: "서버 한 대는 무엇으로 이루어져 있고, 어떻게 연결되는가"
