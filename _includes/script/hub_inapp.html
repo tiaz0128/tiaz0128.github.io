@@ -16,14 +16,52 @@
        들면 삼성 인터넷이나 결제창까지 걸려서, 멀쩡히 받아지는 브라우저에
        "여기선 안 됩니다" 를 띄우게 된다. 틀린 경고가 없는 경고보다 나쁘다. */
     const APPS = [
-      [/Instagram/i, '인스타 앱'],
-      [/Barcelona/i, '스레드 앱'],
-      [/FBAN|FBAV|FB_IAB/i, '페이스북 앱'],
-      [/KAKAOTALK/i, '카카오톡'],
-      [/NAVER\(inapp/i, '네이버 앱'],
-      [/DaumApps/i, '다음 앱'],
-      [/Line\//i, '라인'],
+      [/Instagram/i, 'instagram'],
+      [/Barcelona/i, 'threads'],
+      [/FBAN|FBAV|FB_IAB/i, 'facebook'],
+      [/KAKAOTALK/i, 'kakao'],
+      [/NAVER\(inapp/i, 'naver'],
+      [/DaumApps/i, 'daum'],
+      [/Line\//i, 'line'],
     ];
+
+    /* 안내 문구는 링크 페이지에서 고른 말을 따른다(html[data-lang], 말을 바꾸면 langchange). {app} 은 앱 이름.
+       앱 메뉴 이름("외부 브라우저로 열기")은 그 말로 된 앱이 실제로 쓰는 말에 맞춘다. */
+    const BRAND = { instagram: 'Instagram', threads: 'Threads', facebook: 'Facebook', kakao: 'KakaoTalk', naver: 'NAVER', daum: 'Daum', line: 'LINE' };
+    const T = {
+      ko: { app: { instagram: '인스타 앱', threads: '스레드 앱', facebook: '페이스북 앱', kakao: '카카오톡', naver: '네이버 앱', daum: '다음 앱', line: '라인' },
+        banner: '<b>{app}</b>에서는 파일이 저장되지 않아요', go: '브라우저로 열기', title: '여기서는 저장이 안 돼요',
+        body: '<b>{app}</b>에는 파일을 받아 둘 곳이 없습니다. 브라우저로 열고 같은 버튼을 다시 누르면 그대로 저장됩니다.',
+        hint: '버튼이 듣지 않으면 화면 구석의 <b>⋯</b> 메뉴에서 <b>외부 브라우저로 열기</b>를 고르세요.',
+        copy: '주소 복사', copied: '주소 복사됨', blocked: '복사가 막혀 있어요', skip: '그냥 여기서 볼게요 →' },
+      en: { banner: 'Files can\u2019t be saved in the <b>{app}</b> browser', go: 'Open in browser', title: 'Can\u2019t save here',
+        body: 'The <b>{app}</b> browser has nowhere to keep files. Open this page in your browser and tap the same button again — it saves right away.',
+        hint: 'If the button does nothing, tap the <b>⋯</b> menu in the corner and choose <b>Open in external browser</b>.',
+        copy: 'Copy link', copied: 'Link copied', blocked: 'Copying is blocked', skip: 'Just view it here →' },
+      ja: { banner: '<b>{app}</b>のブラウザではファイルを保存できません', go: 'ブラウザで開く', title: 'ここでは保存できません',
+        body: '<b>{app}</b>のブラウザにはファイルの保存先がありません。ブラウザで開いて同じボタンをもう一度押せば、そのまま保存できます。',
+        hint: 'ボタンが効かないときは、画面の隅の <b>⋯</b> メニューから<b>外部ブラウザで開く</b>を選んでください。',
+        copy: 'リンクをコピー', copied: 'コピーしました', blocked: 'コピーできません', skip: 'このまま見る →' },
+      zh: { banner: '在 <b>{app}</b> 内置浏览器中无法保存文件', go: '在浏览器中打开', title: '这里无法保存',
+        body: '<b>{app}</b> 内置浏览器没有保存文件的地方。请在浏览器中打开，再按一次同一个按钮，就能直接保存。',
+        hint: '如果按钮没有反应，请点屏幕角落的 <b>⋯</b> 菜单，选择<b>在外部浏览器中打开</b>。',
+        copy: '复制链接', copied: '已复制链接', blocked: '无法复制', skip: '就在这里看 →' },
+      es: { banner: 'En el navegador de <b>{app}</b> no se pueden guardar archivos', go: 'Abrir en el navegador', title: 'Aquí no se puede guardar',
+        body: 'El navegador de <b>{app}</b> no tiene dónde guardar archivos. Abre la página en tu navegador y vuelve a tocar el mismo botón: se guardará al instante.',
+        hint: 'Si el botón no responde, toca el menú <b>⋯</b> de la esquina y elige <b>Abrir en el navegador externo</b>.',
+        copy: 'Copiar enlace', copied: 'Enlace copiado', blocked: 'No se puede copiar', skip: 'Verlo aquí →' },
+      it: { banner: 'Nel browser di <b>{app}</b> i file non si possono salvare', go: 'Apri nel browser', title: 'Qui non si può salvare',
+        body: 'Il browser di <b>{app}</b> non ha dove tenere i file. Apri la pagina nel tuo browser e tocca di nuovo lo stesso pulsante: si salva subito.',
+        hint: 'Se il pulsante non risponde, tocca il menu <b>⋯</b> nell\u2019angolo e scegli <b>Apri nel browser esterno</b>.',
+        copy: 'Copia link', copied: 'Link copiato', blocked: 'Copia bloccata', skip: 'Guardalo qui →' },
+      fr: { banner: 'Impossible d\u2019enregistrer des fichiers dans le navigateur de l\u2019app <b>{app}</b>', go: 'Ouvrir dans le navigateur', title: 'Impossible d\u2019enregistrer ici',
+        body: 'Le navigateur de l\u2019app <b>{app}</b> n\u2019a nulle part où garder les fichiers. Ouvrez la page dans votre navigateur et touchez à nouveau le même bouton : l\u2019enregistrement se fait tout de suite.',
+        hint: 'Si le bouton ne répond pas, touchez le menu <b>⋯</b> dans le coin et choisissez <b>Ouvrir dans le navigateur externe</b>.',
+        copy: 'Copier le lien', copied: 'Lien copié', blocked: 'Copie bloquée', skip: 'Le voir ici →' },
+    };
+    const words = () => T[document.documentElement.dataset.lang] || T.en;
+    const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
     const hit = APPS.find(([re]) => re.test(ua));
     if (!hit) return;
 
@@ -44,8 +82,10 @@
        때는 아무 일도 일어나지 않는다 — 실패를 알 방법도 없다. 그래서 iOS 는
        버튼을 바로 쏘지 않고 시트를 먼저 연다. 시트에 ⋯ 메뉴로 여는 방법이
        같이 적혀 있어서, 버튼이 헛돌아도 다음 수가 눈앞에 남는다. */
+    /* 바깥 브라우저에서도 고른 말 그대로 열리게 ?lang= 을 싣는다. */
+    const hereWithLang = () => { const u = new URL(location.href); u.searchParams.set('lang', document.documentElement.dataset.lang || 'ko'); return u.toString(); };
     function escapeToBrowser() {
-      const here = location.href;
+      const here = hereWithLang();
       if (isAndroid) {
         const u = new URL(here);
         location.href =
@@ -66,7 +106,7 @@
     /* 주소를 넘겨 주는 마지막 수단. 클립보드 API 가 웹뷰에서 막혀 있는 경우가
        있어서, 거기서 통하는 옛 길(execCommand)을 뒤에 세워 둔다. */
     async function copyHere() {
-      const url = location.href;
+      const url = hereWithLang();
       try {
         await navigator.clipboard.writeText(url);
         return true;
@@ -99,9 +139,20 @@
       document.body.style.overflow = '';
     }
 
-    for (const el of document.querySelectorAll('.hub-inapp-app')) {
-      el.textContent = hit[1];
+    const copyBtn = sheet.querySelector('.hub-sheet-copy');
+    function paint() {
+      const w = words(), app = esc((w.app || {})[hit[1]] || BRAND[hit[1]]), put = (t) => t.replace('{app}', app);
+      banner.querySelector('.hub-inapp-word').innerHTML = put(w.banner);
+      banner.querySelector('.hub-inapp-go').textContent = w.go;
+      sheet.querySelector('.hub-sheet-title').textContent = w.title;
+      sheet.querySelector('.hub-sheet-body').innerHTML = put(w.body);
+      sheet.querySelector('.hub-sheet-hint').innerHTML = w.hint;
+      sheet.querySelector('.hub-sheet-go').textContent = w.go;
+      copyBtn.textContent = w.copy;
+      skip.textContent = w.skip;
     }
+    paint();
+    document.addEventListener('langchange', paint);
     if (isIOS) sheet.querySelector('.hub-sheet-hint').hidden = false;
     banner.hidden = false;
 
@@ -117,11 +168,10 @@
       if (href) location.href = href;
     });
 
-    const copyBtn = sheet.querySelector('.hub-sheet-copy');
     copyBtn.addEventListener('click', async () => {
       const ok = await copyHere();
-      copyBtn.textContent = ok ? '주소 복사됨' : '복사가 막혀 있어요';
-      setTimeout(() => { copyBtn.textContent = '주소 복사'; }, 1800);
+      copyBtn.textContent = ok ? words().copied : words().blocked;
+      setTimeout(() => { copyBtn.textContent = words().copy; }, 1800);
     });
 
     for (const el of sheet.querySelectorAll('[data-hub-close]')) {
