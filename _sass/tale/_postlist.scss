@@ -1,0 +1,170 @@
+/* 글 목록(홈 · 카테고리): 카테고리 칩 줄 + 카드. 폰 1열, 넓으면 2열.
+   칩 줄은 메뉴 밑에 붙어서 내려도 따라온다. */
+.pl-filter {
+  background: $black;
+  display: flex;
+  gap: .4rem;
+  margin: 0 -1rem;
+  overflow-x: auto;
+  padding: .9rem 1rem .7rem;
+  position: sticky;
+  scrollbar-width: none;
+  top: 3.3rem;
+  z-index: 5;
+
+  &::-webkit-scrollbar { display: none; }
+
+  /* 넓은 화면에서는 가로로 밀지 않고 전부 보이게 감싼다 */
+  @media (min-width: 760px) {
+    flex-wrap: wrap;
+    overflow: visible;
+    position: static;
+  }
+}
+
+.pl-chip {
+  @include transition(all .15s ease-out);
+  align-items: center;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 999px;
+  color: $default-color;
+  cursor: pointer;
+  display: inline-flex;
+  flex: none;
+  font-family: $sans-serif;
+  font-size: .82rem;
+  gap: .4rem;
+  min-height: 2.2rem;
+  padding: 0 .85rem;
+  white-space: nowrap;
+
+  b {
+    color: $default-tint;
+    font-size: .72rem;
+    font-weight: 700;
+  }
+
+  &:hover { border-color: rgba(255, 255, 255, .35); }
+
+  &.is-on {
+    background: $default-shade;
+    border-color: $default-shade;
+    color: $black;
+    font-weight: 700;
+
+    b { color: rgba(0, 0, 0, .55); }
+  }
+}
+
+.pl-grid {
+  display: grid;
+  gap: .9rem;
+  grid-template-columns: 1fr;
+  margin: .4rem 0 3rem;
+
+  @media (min-width: 760px) { grid-template-columns: 1fr 1fr; }
+}
+
+.pl-card {
+  @include transition(all .15s ease-out);
+  background: rgba(255, 255, 255, .035);
+  border: 1px solid rgba(255, 255, 255, .07);
+  border-radius: 14px;
+  color: $default-color;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+  padding: .95rem 1rem 1.05rem;
+
+  &[hidden] { display: none; }
+
+  &:hover,
+  &:focus {
+    background: rgba(255, 255, 255, .06);
+    border-color: rgba(255, 255, 255, .18);
+    transform: translateY(-2px);
+
+    .pl-title { color: $blue; }
+    .pl-thumb img { transform: scale(1.06); }
+  }
+}
+
+/* 윗줄: 썸네일 · 카테고리 · 날짜 */
+.pl-head {
+  align-items: center;
+  display: flex;
+  gap: .7rem;
+}
+
+.pl-thumb {
+  background: rgba(255, 255, 255, .06);
+  border-radius: 10px;
+  flex: none;
+  height: 2.6rem;
+  overflow: hidden;
+  width: 2.6rem;
+
+  img {
+    @include transition(transform .25s ease-out);
+    display: block;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  /* 책은 표지라 자르지 않고 세운다 */
+  &.is-book img { object-fit: contain; }
+}
+
+.pl-meta {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  font-size: .72rem;
+  gap: .5rem;
+  justify-content: space-between;
+  min-width: 0;
+
+  time {
+    color: $default-tint;
+    font-family: $serif-secondary;
+    letter-spacing: .4px;
+  }
+}
+
+.pl-cat {
+  background: rgba(98, 191, 255, .12);
+  border-radius: 999px;
+  color: $blue;
+  font-weight: 700;
+  padding: .12rem .6rem;
+}
+
+.pl-title {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: $default-shade;
+  display: -webkit-box;
+  font-family: $sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+  overflow: hidden;
+}
+
+.pl-sub {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: $default-tint;
+  display: -webkit-box;
+  font-size: .84rem;
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+.pl-back {
+  font-size: .85rem;
+  margin: 0 0 .6rem;
+}

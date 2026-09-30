@@ -3,7 +3,7 @@
       {{include.about}}
       
       {% if include.url %}
-      <a href="{{include.url}}" target="_blank">"{{include.title}}"</a> 글을 확인 해주세요!
+      {% if page.lang == 'en' %}Check out <a href="{{include.url}}" target="_blank">"{{include.title}}"</a>!{% else %}<a href="{{include.url}}" target="_blank">"{{include.title}}"</a> 글을 확인 해주세요!{% endif %}
       {% endif %}
     </div>
 </div>

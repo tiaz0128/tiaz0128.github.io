@@ -14,13 +14,13 @@
     <img class="book" src="/assets/img/content{{ new_permalink }}/000.webp" alt="{{ include.title }}">
     <ul class="">
         <li>
-            <strong>제목</strong> : <a href="{{ include.book_url }}" target="_blank">{{ include.title }}</a>
+            <strong>{% if page.lang == 'en' %}Title{% else %}제목{% endif %}</strong> : <a href="{{ include.book_url }}" target="_blank">{{ include.title }}</a>{% if page.lang == 'en' and page.original_title %} <span class="book-original">({{ page.original_title }})</span>{% endif %}
         </li>
-        <li><strong>저자</strong> : {{ include.author }}</li>
-        <li><strong>출판사</strong> : {{ include.publisher }}</li>
-        <li><strong>대상 독자</strong> : {{ include.target_readers }}</li>
+        <li><strong>{% if page.lang == 'en' %}Author{% else %}저자{% endif %}</strong> : {{ include.author }}</li>
+        <li><strong>{% if page.lang == 'en' %}Publisher{% else %}출판사{% endif %}</strong> : {{ include.publisher }}</li>
+        <li><strong>{% if page.lang == 'en' %}For{% else %}대상 독자{% endif %}</strong> : {{ include.target_readers }}</li>
         <li>
-            <strong>한줄 평</strong> : 
+            <strong>{% if page.lang == 'en' %}In one line{% else %}한줄 평{% endif %}</strong> : 
             <div>
                 {{ include.review }}
             </div>

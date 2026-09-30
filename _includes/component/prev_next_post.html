@@ -13,15 +13,17 @@
    <div class="nav-links">
        {% if prev_post %}
        <div class="nav-previous">
-           <span class="nav-subtitle">◀ 이전글</span>
-           <span class="nav-title"><a href="{{ prev_post.url }}" class="none" target="_blank">{{ prev_post.title }}</a></span>
+           <span class="nav-subtitle">◀ {% include component/tr.html ko="이전글" en="Previous" %}</span>
+           {% include component/en-of.html path=prev_post.path %}
+           <span class="nav-title"><a href="{{ prev_post.url }}" class="none" target="_blank">{% include component/tr.html ko=prev_post.title en=en.title %}</a></span>
        </div>
        {% endif %}
        
        {% if next_post %}
        <div class="nav-next" >
-           <span class="nav-subtitle">다음글 ▶</span>
-           <span class="nav-title"><a href="{{ next_post.url }}" class="none" target="_blank">{{ next_post.title }}</a></span>
+           <span class="nav-subtitle">{% include component/tr.html ko="다음글" en="Next" %} ▶</span>
+           {% include component/en-of.html path=next_post.path %}
+           <span class="nav-title"><a href="{{ next_post.url }}" class="none" target="_blank">{% include component/tr.html ko=next_post.title en=en.title %}</a></span>
        </div>
        {% endif %}
    </div>

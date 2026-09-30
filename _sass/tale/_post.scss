@@ -37,7 +37,8 @@
       margin: 0;
       text-align: right;
 
-      a {
+      .tag {
+        font-style: normal;
         background-image: none;
         background-color: $back-color;
         border-radius: 3px;
@@ -664,7 +665,7 @@
       color: $orange;
     }
 
-    a.tag {
+    .tag {
       background-color: #2a3844;
       border-radius: 3px;
       font-family: Ubuntu;
@@ -909,7 +910,8 @@ $callout-types: (
 
 .post-card {
   position: relative;
-  height: 100px;
+  /* 높이는 글만큼(제목 두 줄 + 부제 두 줄). 100px 고정이면 넘친 제목 윗줄이 잘렸다(2026-09-30) */
+  min-height: 100px;
   background: #2a2a2a;
   border-radius: 8px;
   overflow: hidden;
@@ -954,10 +956,7 @@ $callout-types: (
   /* 긴 단어 처리 */
   word-break: keep-all;
   /* 한글 단어 단위 줄바꿈 */
-  line-height: 1.2;
-  /* 줄 높이 조정 */
-  max-height: 2.4em;
-  /* line-height의 2배 */
+  line-height: 1.35;
   font-weight: 600;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
@@ -966,11 +965,12 @@ $callout-types: (
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  min-height: 100px;
   padding: .75rem;
   padding-left: 120px;
   text-decoration: none;
   color: inherit;
-  height: 100%;
   z-index: 2;
   width: 100%;
   /* 너비 100% 설정 */
@@ -981,9 +981,13 @@ $callout-types: (
 .post-excerpt {
   font-size: 0.8rem;
   color: $default-color;
-  margin: 0 0 0.2rem;
+  margin: 0;
+  line-height: 1.45;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
@@ -997,8 +1001,9 @@ $callout-types: (
     font-size: 0.7rem;
   }
 
-  .post-card {
-    height: 80px;
+  .post-card,
+  .post-link {
+    min-height: 80px;
   }
 
   .post-background {

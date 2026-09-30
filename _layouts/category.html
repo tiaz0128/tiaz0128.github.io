@@ -1,16 +1,21 @@
 ---
 layout: default
 ---
-
+{%- comment -%} 카테고리 한 곳의 글(/category/<이름>). 홈과 같은 카드. {%- endcomment -%}
+{%- assign cat = site.data.categories[page.category] -%}
+{%- assign cat_ko = cat.ko | default: page.title -%}
+{%- assign cat_en = cat.en | default: page.title -%}
 <div class="tags-header">
-    <h1 class="tags-header-title">{{ page.title }}</h1>
+    <h1 class="tags-header-title">{% include component/tr.html ko=cat_ko en=cat_en %}</h1>
     <div class="tags-header-line"></div>
 </div>
 
-<div class="category" style="padding-top:0">
+<p class="pl-back"><a href="{{ site.baseurl }}/?cat={{ page.category }}">← {% include component/tr.html ko="전체 글 목록" en="All posts" %}</a></p>
+
+<div class="pl-grid">
     {% for post in site.posts %}
     {% if page.category == post.category %}
-        {% include component/category.html %}
+        {% include component/post-card.html %}
     {% endif %}
     {% endfor %}
 </div>

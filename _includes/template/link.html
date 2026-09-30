@@ -1,5 +1,12 @@
 <div class="callout-{{include.type}}">
+    {%- comment -%} 영어판(page.lang == 'en', _plugins/en_twin.rb)에서는 문구도 영어로. {%- endcomment -%}
+    {% if page.lang == 'en' %}
+    <div>Want to know more about '{{include.about}}'?
+      Check out <a href="{{include.url}}" target="_blank">"{{include.title}}"</a>!
+    </div>
+    {% else %}
     <div>'{{include.about}}'에 대해 더 자세히 알고 싶으시다면,
       <a href="{{include.url}}" target="_blank">"{{include.title}}"</a> 글을 확인 해주세요!
     </div>
+    {% endif %}
 </div>

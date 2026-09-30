@@ -1,0 +1,7 @@
+{%- comment -%}
+  글의 영어판을 찾아 `en` 에 둔다. _posts/<경로>.md 의 짝은 _en/<같은 경로>.md 다
+  (컬렉션 en, output: false — 따로 페이지를 내지 않고 한국어 글 안에 함께 실린다).
+  없으면 en 은 비어 있다.
+{%- endcomment -%}
+{%- assign en_path = include.path | replace_first: '_posts/', '_en/' -%}
+{%- assign en = site.en | where: 'relative_path', en_path | first -%}

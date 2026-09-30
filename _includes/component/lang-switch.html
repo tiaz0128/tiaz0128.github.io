@@ -1,0 +1,22 @@
+{%- comment -%} 누르면 ko ↔ en. 파란 막대가 고른 말 밑으로 미끄러진다. 고른 것은 기억하고, 주소에 ?lang= 이 있으면 그것도 맞춰 둔다. {%- endcomment -%}
+<button type="button" class="lang-switch" title="한국어 / English" aria-label="Language: 한국어 / English">
+  <span class="ls-track"><span class="ls-opt ls-ko">KO</span><span class="ls-opt ls-en">EN</span></span>
+</button>
+<script>
+(function () {
+  document.querySelectorAll('.lang-switch:not([data-on])').forEach(function (b) {
+    b.dataset.on = '1';
+    b.addEventListener('click', function () {
+      var d = document.documentElement, l = d.dataset.lang === 'en' ? 'ko' : 'en';
+      d.dataset.lang = l; d.lang = l;
+      // the thumb slides by CSS; the globe turns once and the page fades in (_lang.scss)
+      d.classList.remove('lang-flip'); void d.offsetWidth; d.classList.add('lang-flip');
+      setTimeout(function () { d.classList.remove('lang-flip'); }, 600);
+      try { localStorage.setItem('lang', l); } catch (e) {}
+      var u = new URL(location.href);
+      if (u.searchParams.has('lang')) { u.searchParams.set('lang', l); history.replaceState(null, '', u); }
+      document.dispatchEvent(new CustomEvent('langchange', { detail: l }));
+    });
+  });
+})();
+</script>

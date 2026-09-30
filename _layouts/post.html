@@ -2,6 +2,8 @@
 layout: default
 ---
 
+{%- comment -%} 이 글의 영어판. 아래 조각들(이전/다음·관련 글)도 en 을 다시 채우므로 page_en 으로 붙잡아 둔다. {%- endcomment -%}
+{% include component/en-of.html path=page.path %}{% assign page_en = en %}
 <div class="post">
   <div class="post-info">
     <div class="category-tags">
@@ -11,20 +13,26 @@ layout: default
     </div>
   </div>
 
-  <h1 class="post-title">{{ page.title }}</h1>
-  <p class="post-subtile">{{ page.subtitle }}</p>
+  <h1 class="post-title">{% include component/tr.html ko=page.title en=page_en.title %}</h1>
+  <p class="post-subtile">{% include component/tr.html ko=page.subtitle en=page_en.subtitle %}</p>
   <div class="post-writer">
     <span>written by</span>
     <img src="/assets/img/tiaz.webp" alt="{{page.author}}" title="📖 {{ page.author }}">
   </div>
   <div class="post-date">
-    <time datetime="{{ page.ins_date }}">작성일: {{ page.ins_date | date: "%Y-%m-%d" }}</time>
-    <time datetime="{{ page.upd_date }}">수정일: {{ page.upd_date | date: "%Y-%m-%d" }}</time>
+    <time datetime="{{ page.ins_date }}">{% include component/tr.html ko="작성일" en="Published" %}: {{ page.ins_date | date: "%Y-%m-%d" }}</time>
+    <time datetime="{{ page.upd_date }}">{% include component/tr.html ko="수정일" en="Updated" %}: {{ page.upd_date | date: "%Y-%m-%d" }}</time>
   </div>
 
   {% include component/prev_next_post.html %}
 
+  {%- comment -%} 영어판이 있으면 두 본문을 다 싣고 스위치가 하나만 보인다. {%- endcomment -%}
+  {% if page_en %}
+  <div class="l-ko">{{ content }}</div>
+  <div class="l-en" lang="en">{{ page_en.content }}</div>
+  {% else %}
   {{ content }}
+  {% endif %}
 
   {% include component/prev_next_post.html %}
 

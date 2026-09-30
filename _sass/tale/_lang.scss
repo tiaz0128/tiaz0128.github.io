@@ -1,0 +1,87 @@
+/* 한영 스위치(component/lang-switch.html): KO · EN 두 글자, 메뉴 아이콘처럼 가볍게.
+   지금 말은 밝게, 다른 쪽은 흐리게. 파란 막대(.ls-track::after)가 지금 말 밑으로 미끄러진다(살짝 튕기며).
+   누르면 본문이 짧게 페이드되며 바뀐다(html.lang-flip, 스크립트가 0.6초 붙였다 뗀다).
+   (2026-09-30: 지구본 + 흰 알약 토글은 "너무 별로" — 무겁고 메뉴에서 튀었다.) */
+.lang-switch {
+  background: none;
+  border: 0;
+  border-radius: 8px;
+  color: $default-color;
+  cursor: pointer;
+  font-family: $sans-serif;
+  line-height: 1;
+  padding: .35rem .3rem .45rem;
+
+  &:hover .ls-opt { color: $default-shade; }
+  &:focus-visible { outline: 2px solid $blue; outline-offset: 2px; }
+}
+
+.ls-track {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  position: relative;
+
+  /* the thin divider between the two */
+  &::before {
+    align-self: center;
+    background: rgba(255, 255, 255, .25);
+    content: '';
+    grid-column: 2;
+    grid-row: 1;
+    height: .8rem;
+  }
+
+  /* the sliding bar under the language on show */
+  &::after {
+    background: $blue;
+    border-radius: 2px;
+    bottom: -.4rem;
+    content: '';
+    height: 2px;
+    left: 0;
+    position: absolute;
+    transform: translateX(var(--ls-x, 0));
+    transition: transform .4s cubic-bezier(.34, 1.56, .64, 1);
+    width: calc(50% - .5px);
+  }
+}
+
+html[data-lang="en"] .ls-track { --ls-x: calc(100% + 1px); }
+
+.ls-opt {
+  color: rgba(255, 255, 255, .38);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  padding: 0 .5rem;
+  text-align: center;
+  transition: color .25s ease-out;
+}
+
+.ls-ko { grid-column: 1; grid-row: 1; }
+.ls-en { grid-column: 3; grid-row: 1; }
+
+html:not([data-lang="en"]) .ls-ko,
+html[data-lang="en"] .ls-en { color: $default-shade; }
+
+html.lang-flip main { animation: ls-fade .35s ease-out; }
+@keyframes ls-fade { from { opacity: .25; transform: translateY(4px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-track::after { transition: none; }
+  html.lang-flip main { animation: none; }
+}
+
+.nav .lang-switch { margin-left: .2rem; }
+
+/* 링크 페이지: 카드 왼쪽 위, 공유 버튼과 같은 어두운 바탕 */
+.hub .lang-switch {
+  background: rgba(255, 255, 255, .07);
+  border-radius: 999px;
+  left: 1rem;
+  padding: .75rem .55rem .85rem;
+  position: absolute;
+  top: 1rem;
+
+  &:hover { background: rgba(255, 255, 255, .14); }
+}

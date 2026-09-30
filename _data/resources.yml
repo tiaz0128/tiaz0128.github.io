@@ -59,6 +59,9 @@
 #          오른쪽 위의 .stamp 와 같은 날을 적는다. 그쪽은 내보낸 날이 자동으로
 #          박히니, 문서를 다시 내보냈으면 여기도 같이 고칠 것. 안 고치면
 #          목록만 지난 판을 말한다.
+# title_en · summary_en: 한영 스위치의 영어 문구. 없으면 영어에서도 한국어가 선다.
+# slug_en: 영어판 문서(resources/<slug_en>.html · .pdf). 있으면 영어 스위치의 받기 버튼이 이걸 준다.
+#          만드는 법은 한국어판과 같다(shot.py <slug_en> 으로 PDF).
 # pages:   A4 몇 장인지. 줄에 "A4 12장"으로 붙는다. 문서의 .sheet 개수다.
 # kind:    cheatsheet | exam — services 가 비었을 때 쓰는 기본 아이콘이 갈린다.
 # services: 이 문서가 다루는 AWS 서비스들. assets/json/icons/aws.json 의 키,
@@ -74,10 +77,13 @@
 #             크기를 아무리 맞춰도 따로 논다. 이름이 리소스를 가리키는
 #             쪽(amazon_ec2_instance)이 대개 선화다.
 - slug: aws-network
+  slug_en: aws-network-en
   order: 1
   badge: new
   title: "AWS 네트워크 기초"
   summary: "클라우드를 왜 쓰는지, 그 안의 네트워크는 어떻게 생겼는지"
+  title_en: "AWS Networking Basics"
+  summary_en: "Why the cloud, and what the network inside it looks like"
   kind: cheatsheet
   services:
     - group_region
@@ -87,9 +93,11 @@
   pages: 15
 
 - slug: ec2-ebs-eni
+  slug_en: ec2-ebs-eni-en
   order: 2
   title: "EC2 · EBS · ENI"
   summary: "서버 한 대는 무엇으로 이루어져 있고, 어떻게 연결되는가"
+  summary_en: "What one server is made of, and how it connects"
   kind: cheatsheet
   services:
     - amazon_ec2_instance

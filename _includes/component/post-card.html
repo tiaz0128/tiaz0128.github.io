@@ -1,0 +1,23 @@
+{%- comment -%}
+  글 목록의 카드 한 장(홈 · 카테고리 페이지). 윗줄에 썸네일 · 카테고리 · 날짜, 그 아래 제목 · 부제가
+  카드 폭을 다 쓴다(썸네일을 왼쪽 세로 칸에 두면 그 밑이 비었다, 2026-09-30).
+  카드 전체가 글로 가는 링크다. 제목과 부제는 영어판이 있으면 한영 스위치를 따른다.
+  data-cat 은 홈의 칩 필터가 쓴다.
+{%- endcomment -%}
+{% include component/en-of.html path=post.path %}
+{%- assign cat = site.data.categories[post.category] -%}
+{%- assign cat_ko = cat.ko | default: post.category -%}
+{%- assign cat_en = cat.en | default: post.category -%}
+<a class="pl-card" href="{{ post.url | prepend: site.baseurl }}" data-cat="{{ post.category }}">
+  <span class="pl-head">
+    <span class="pl-thumb{% if post.category == 'book' %} is-book{% endif %}">
+      <img loading="lazy" src="{{ site.baseurl }}/assets/img/title/{{ post.category }}/{{ post.subject }}.webp" alt="">
+    </span>
+    <span class="pl-meta">
+      <span class="pl-cat">{% include component/tr.html ko=cat_ko en=cat_en %}</span>
+      <time datetime="{{ post.ins_date }}">{{ post.ins_date | date: "%Y-%m-%d" }}</time>
+    </span>
+  </span>
+  <span class="pl-title">{% include component/tr.html ko=post.title en=en.title %}</span>
+  {% if post.subtitle %}<span class="pl-sub">{% include component/tr.html ko=post.subtitle en=en.subtitle %}</span>{% endif %}
+</a>

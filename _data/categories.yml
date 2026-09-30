@@ -1,0 +1,17 @@
+# 글 목록 칩과 카드에 보이는 카테고리 이름(post.category → 한국어 · 영어).
+# 여기 없는 카테고리는 값 그대로 선다. 새 카테고리를 만들면 한 줄 더한다.
+AWS: { ko: AWS, en: AWS }
+python: { ko: Python, en: Python }
+insight: { ko: 인사이트, en: Insights }
+book: { ko: 책, en: Books }
+Network: { ko: 네트워크, en: Network }
+ai: { ko: AI, en: AI }
+Docker: { ko: Docker, en: Docker }
+gRPC: { ko: gRPC, en: gRPC }
+flask: { ko: Flask, en: Flask }
+Couchbase: { ko: Couchbase, en: Couchbase }
+Celery: { ko: Celery, en: Celery }
+tool: { ko: 도구, en: Tools }
+k8s: { ko: 쿠버네티스, en: Kubernetes }
+cs: { ko: CS, en: CS }
+GitHub: { ko: GitHub, en: GitHub }

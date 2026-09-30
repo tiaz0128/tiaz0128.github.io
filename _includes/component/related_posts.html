@@ -8,7 +8,7 @@
 {%- if total_category_posts.size >= 2 -%}
 <div class="related-posts">
   <div class="related-posts__header">
-    <h2 class="title">관련 포스트</h2>
+    <h2 class="title">{% include component/tr.html ko="관련 포스트" en="Related posts" %}</h2>
     <div class="nav-buttons">
       <button class="nav-btn prev" aria-label="이전 포스트">
         <svg viewBox="0 0 24 24" width="20" height="20">
@@ -31,8 +31,9 @@
         <img src="{{site.baseurl}}/assets/img/title/{{post.category}}/{{post.subject}}.webp" alt="post.subject"
           class="post-background">
         <a href="{{ post.url }}" class="post-link" target="_blank">
-          <h3 class="nav-post-title">{{ post.title }}</h3>
-          <p class="post-excerpt">{{ post.subtitle }}</p>
+          {% include component/en-of.html path=post.path %}
+          <h3 class="nav-post-title">{% include component/tr.html ko=post.title en=en.title %}</h3>
+          <p class="post-excerpt">{% include component/tr.html ko=post.subtitle en=en.subtitle %}</p>
         </a>
       </article>
       {% endfor %}

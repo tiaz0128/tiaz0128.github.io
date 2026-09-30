@@ -16,8 +16,8 @@
       </div>
       {% endfor %}
     </div>
-    <button class="carousel-prev" aria-label="이전 이미지">◀</button>
-    <button class="carousel-next" aria-label="다음 이미지">▶</button>
+    <button class="carousel-prev" aria-label="{% if page.lang == 'en' %}Previous image{% else %}이전 이미지{% endif %}">◀</button>
+    <button class="carousel-next" aria-label="{% if page.lang == 'en' %}Next image{% else %}다음 이미지{% endif %}">▶</button>
     <div class="carousel-dots">
       {% for image in include.images %}
       <button class="dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="이미지 {{ forloop.index }} 보기"></button>

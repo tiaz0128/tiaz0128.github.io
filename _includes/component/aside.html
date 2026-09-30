@@ -1,7 +1,12 @@
 <aside class="post-toc">
     <h2 class="toc-title">Table of Contents</h2>
     
+    {% if page_en %}
+    <div class="l-ko">{% include component/toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=2 h_max=2 %}</div>
+    <div class="l-en">{% include component/toc.html html=page_en.content sanitize=true class="inline_toc" id="my_toc_en" h_min=2 h_max=2 %}</div>
+    {% else %}
     {% include component/toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=2 h_max=2 %}
+    {% endif %}
     
     <div class="post-tags">
         {% for tag in page.tags %}
@@ -24,7 +29,7 @@
             <span class="link-label">Facebook</span>
           </a>
         </div>
-        <p class="python-kr"><span>◁</span> 파이썬 한국 사용자 모임 <span>▷</span></p>
+        <p class="python-kr"><span>◁</span> {% include component/tr.html ko="파이썬 한국 사용자 모임" en="Python Korea User Group" %} <span>▷</span></p>
     </div>
 
     <!-- 광고 자리 -->

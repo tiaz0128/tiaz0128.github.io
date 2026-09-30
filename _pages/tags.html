@@ -62,7 +62,8 @@ permalink: /tags
           {% for post in sorted_posts %}
           <a class="tags-post" href="{{ post.url | prepend: site.baseurl }}">
             <div>
-              <span class="tags-post-title">{{ post.title }}</span>
+              {% include component/en-of.html path=post.path %}
+              <span class="tags-post-title">{% include component/tr.html ko=post.title en=en.title %}</span>
               <div class="tags-post-line"></div>
             </div>
             <span class="tags-post-meta">

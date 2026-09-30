@@ -1,17 +1,42 @@
 ---
 layout: default
 ---
-<div class="tags-header" style="display: none;">
-    <h1 class="tags-header-title">Posts</h1>
-    <div class="tags-header-line"></div>
+{%- comment -%}
+  글 목록(2026-09-30): 위에 카테고리 칩(글 수), 아래 최신순 카드 — 폰 1열 · 넓으면 2열.
+  칩은 페이지 안에서 바로 거르고, 고른 것은 주소의 ?cat= 에 남는다(공유 · 뒤로 가기).
+  63편이면 한 페이지에 다 들어가서 페이지를 나누지 않는다(이미지는 lazy).
+{%- endcomment -%}
+{% assign groups = site.posts | group_by: 'category' | sort: 'size' | reverse %}
+<div class="pl-filter" role="toolbar" aria-label="Categories">
+  <button type="button" class="pl-chip is-on" data-cat="">{% include component/tr.html ko="전체" en="All" %}<b>{{ site.posts.size }}</b></button>
+  {%- for g in groups -%}
+  {%- assign cat = site.data.categories[g.name] -%}
+  {%- assign cat_ko = cat.ko | default: g.name -%}
+  {%- assign cat_en = cat.en | default: g.name -%}
+  <button type="button" class="pl-chip" data-cat="{{ g.name }}">{% include component/tr.html ko=cat_ko en=cat_en %}<b>{{ g.size }}</b></button>
+  {%- endfor -%}
 </div>
 
-<div class="category">
-    {% for post in paginator.posts %}
-        {% include component/category.html %}
-    {% endfor %}
+<div class="pl-grid">
+  {% for post in site.posts %}
+    {% include component/post-card.html %}
+  {% endfor %}
 </div>
 
-{% include component/pagination.html %}
-
-{% include script/page_input.html %}
+<script>
+(function () {
+  var chips = document.querySelectorAll('.pl-chip'), cards = document.querySelectorAll('.pl-card');
+  function show(cat, push) {
+    chips.forEach(function (c) { c.classList.toggle('is-on', c.dataset.cat === cat); });
+    cards.forEach(function (c) { c.hidden = !!cat && c.dataset.cat !== cat; });
+    if (push) {
+      var u = new URL(location.href);
+      if (cat) u.searchParams.set('cat', cat); else u.searchParams.delete('cat');
+      history.replaceState(null, '', u);
+    }
+  }
+  chips.forEach(function (c) { c.addEventListener('click', function () { show(c.dataset.cat, true); }); });
+  var first = new URLSearchParams(location.search).get('cat') || '';
+  if ([].some.call(chips, function (c) { return c.dataset.cat === first; })) show(first, false);
+})();
+</script>

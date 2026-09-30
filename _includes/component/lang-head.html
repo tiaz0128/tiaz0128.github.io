@@ -1,0 +1,15 @@
+{%- comment -%}
+  한영 스위치. 어느 말을 보일지는 그리기 전에 정한다(깜빡임 없이):
+  ?lang= → 지난번 고른 것 → 브라우저가 한국어면 ko, 아니면 en.
+  두 말을 다 가진 자리는 .l-ko / .l-en 한 쌍으로 둘 다 들고 있다(component/tr.html).
+  영어판이 없는 자리는 한국어만 클래스 없이 그려서, en 에서도 비지 않는다.
+{%- endcomment -%}
+<style>html[data-lang="en"] .l-ko,html:not([data-lang="en"]) .l-en{display:none!important}</style>
+<script>
+(function () {
+  var d = document.documentElement, q = new URLSearchParams(location.search).get('lang'), l = q;
+  try { if (q === 'ko' || q === 'en') localStorage.setItem('lang', q); else l = localStorage.getItem('lang'); } catch (e) {}
+  if (l !== 'ko' && l !== 'en') l = /^ko\b/i.test(navigator.language || '') ? 'ko' : 'en';
+  d.dataset.lang = l; d.lang = l;
+})();
+</script>

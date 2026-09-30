@@ -1,5 +1,6 @@
 <head>
   <meta charset="UTF-8">
+  {% include component/lang-head.html %}
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -12,7 +13,7 @@
   {% if paginator.page and paginator.page != 1 %}
   <meta name="robots" content="noindex">
   {% endif %}
-  {% if page.url contains "/category" or page.url == "/about" or page.url == "/tags" or page.url == "/graph-view" %}
+  {% if page.url contains "/category" or page.url == "/about" or page.url == "/tags" %}
   <meta name="robots" content="noindex">
   {% endif %}
 

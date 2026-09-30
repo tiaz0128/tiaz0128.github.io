@@ -20,6 +20,8 @@
 #            자동재생이라 첫 화면에서 그대로 내려받는다.
 #            .mp4 를 기본으로. type 은 확장자에서 따간다.
 # sample_note:   샘플 아래 회색 한 줄. 없으면 "샘플 · 요약본 1페이지".
+# *_en:     category_en · note_en · ongoing_en · sample_note_en · links[].label_en · note_en —
+#            한영 스위치의 영어 문구(component/tr.html). 없으면 영어에서도 한국어가 선다.
 # links[].icon:  component/link-icon.html 이 아는 이름
 #                web youtube linkedin instagram github aws diagram article sheet quiz
 #                (없거나 모르는 이름이면 사슬 아이콘)
@@ -29,23 +31,42 @@
 #           이름 없이도 알아볼 아이콘이 있는 구역에만 쓸 것.
 
 - category: 유용한 정보
+  category_en: Useful
   links:
     - label: "대학생을 위한 AWS $570 리워드 프로그램"
       note: "AWS 공식 · 학생 대상 크레딧"
+      label_en: "AWS $570 rewards for university students"
+      note_en: "Official AWS · credits for students"
       url: "https://builder.aws.com/student-rewards?trk=d8ec3b19-0f37-4f8c-8c12-189f913e205c&sc_channel=el"
       icon: aws
 
+- category: 만든 것
+  category_en: Things I made
+  links:
+    - label: "CIDR 계산기"
+      note: "주소 범위를 비트로 · 캐릭터가 활로 쏴서 보여 줘요 (한국어/English)"
+      label_en: "CIDR Calculator"
+      note_en: "See an address range bit by bit · a little archer shoots the bits (English/Korean)"
+      url: "/cidr/"
+      icon: web
+
 - category: 요약본 (무료)
+  category_en: Cheat sheets (free)
   note: "움직이는 HTML or PDF 출력해서 보기"
+  note_en: "Animated HTML, or print it as a PDF"
   ongoing: "계속 추가하고 다듬는 중"
+  ongoing_en: "Growing and getting polished"
   source: resources
   sample: /assets/img/resources/cheatsheet-sample-poster.webp
   sample_video: /assets/video/cheatsheet-sample.mp4
   sample_note: "샘플 · 브라우저에서 열면 이렇게!"
+  sample_note_en: "Sample · this is how it looks in a browser!"
 
 - category: 아키텍처 추천 자료
+  category_en: Recommended architecture reads
   links:
     - label: "AWS를 사용한다면 반드시 알아야 할 네트워크 기초 지식"
+      label_en: "Network basics you must know if you use AWS (Korean)"
       note: "YouTube"
       url: "https://youtu.be/vCNexbgYmQ8"
       icon: youtube
@@ -55,6 +76,7 @@
       icon: article
     - label: "Amazon EC2로 첫 워크로드 시작하기"
       note: "YouTube · AWS Korea"
+      label_en: "Launch your first workload on Amazon EC2 (Korean)"
       url: "https://youtu.be/Mg6lLromiQM"
       icon: youtube
 
@@ -63,10 +85,13 @@
   links:
     - label: "tiaz.dev 블로그"
       note: "그림으로 풀어 쓴 개발·클라우드 글"
+      label_en: "tiaz.dev blog"
+      note_en: "Dev and cloud, explained with pictures"
       url: "/"
       icon: web
     - label: "howtodraw.cloud"
       note: "아키텍처 다이어그램 그리는 서비스"
+      note_en: "A service for drawing architecture diagrams"
       url: "https://howtodraw.cloud/guide.html"
       logo: /assets/img/howtodrawcloud.webp
     - label: "YouTube"
