@@ -1,0 +1,30 @@
+{%- comment -%}
+  언어 고르기 — CIDR 계산기(/cidr/)와 같은 모양: 지구본 · 언어 이름 · 펼침 화살표. 지금은 한국어 · English 두 개.
+  고르면 lang-switch 와 같은 일을 한다(html[data-lang], 기억, ?lang= 맞춤, langchange 이벤트).
+{%- endcomment -%}
+<label class="lang-select" title="Language">
+  <svg class="lsel-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M3.4 12h17.2M12 3.4c2.4 2.4 3.6 5.3 3.6 8.6s-1.2 6.2-3.6 8.6c-2.4-2.4-3.6-5.3-3.6-8.6S9.6 5.8 12 3.4z"/></svg>
+  <select aria-label="Language / 언어">
+    <option value="ko">한국어</option>
+    <option value="en">English</option>
+  </select>
+</label>
+<script>
+(function () {
+  document.querySelectorAll('.lang-select select:not([data-on])').forEach(function (s) {
+    s.dataset.on = '1';
+    var d = document.documentElement;
+    s.value = d.dataset.lang === 'en' ? 'en' : 'ko';
+    s.addEventListener('change', function () {
+      var l = s.value === 'en' ? 'en' : 'ko';
+      d.dataset.lang = l; d.lang = l;
+      d.classList.remove('lang-flip'); void d.offsetWidth; d.classList.add('lang-flip');
+      setTimeout(function () { d.classList.remove('lang-flip'); }, 600);
+      try { localStorage.setItem('lang', l); } catch (e) {}
+      var u = new URL(location.href);
+      if (u.searchParams.has('lang')) { u.searchParams.set('lang', l); history.replaceState(null, '', u); }
+      document.dispatchEvent(new CustomEvent('langchange', { detail: l }));
+    });
+  });
+})();
+</script>

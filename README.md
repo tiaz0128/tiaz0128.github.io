@@ -77,7 +77,7 @@ $ uv run shot.py my-sheet      # 인자 없이 돌리면 resources/ 전부
 
 ## 한영 스위치 (2026-09-30)
 
-상단 메뉴(링크 페이지는 카드 왼쪽 위)의 `EN / 한국어` 버튼이 보이는 말을 바꾼다.
+상단 메뉴의 `KO | EN` 토글(`component/lang-switch.html`)과 링크 페이지 카드 왼쪽 위의 언어 고르기(`component/lang-select.html`, CIDR 계산기와 같은 모양, 한국어 · English)가 보이는 말을 바꾼다.
 처음 볼 말은 `?lang=en|ko` → 지난번 고른 것 → 브라우저 언어 순으로 정한다.
 
 - **글의 영어판**은 `_en/<카테고리>/<같은 파일 이름>.md` 에 둔다(`_posts/` 와 같은 경로).

@@ -85,3 +85,46 @@ html.lang-flip main { animation: ls-fade .35s ease-out; }
 
   &:hover { background: rgba(255, 255, 255, .14); }
 }
+
+/* 언어 고르기(component/lang-select.html) — CIDR 계산기의 언어 버튼과 같은 모양: 얇은 밝은 테두리, 아래 2px 그림자,
+   지구본은 강조색. 링크 페이지 카드 왼쪽 위(오른쪽 위는 공유). */
+.lang-select {
+  align-items: center;
+  background: rgba(255, 255, 255, .06);
+  border: 2px solid rgba(233, 222, 196, .5);
+  border-radius: 6px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .55);
+  box-sizing: border-box;
+  color: $default-color;
+  cursor: pointer;
+  display: inline-flex;
+  gap: .35rem;
+  height: 2.5rem;
+  padding: 0 .35rem 0 .6rem;
+
+  &:hover,
+  &:focus-within { border-color: rgba(233, 222, 196, .85); }
+
+  .lsel-globe { color: $blue; flex: none; height: 1.05rem; width: 1.05rem; }
+
+  select {
+    background: transparent;
+    border: 0;
+    color: $default-shade;
+    cursor: pointer;
+    font-family: $sans-serif;
+    font-size: .85rem;
+    font-weight: 700;
+    height: 2.2rem;
+
+    &:focus { outline: none; }
+  }
+
+  option { background: #1c1d20; color: $default-shade; }
+}
+
+.hub .lang-select {
+  left: 1rem;
+  position: absolute;
+  top: 1rem;
+}
