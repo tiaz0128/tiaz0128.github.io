@@ -1,0 +1,17 @@
+<script>
+  /* 링크 페이지에서 고른 말로 도구가 열리게: 사이트 안쪽 페이지 링크(/cidr/ · /pointer/ 처럼 / 로 끝나는 것)에
+     ?lang=<지금 말> 을 붙인다. 도구들은 ?lang= 을 먼저 읽는다. 말을 바꾸면 다시 붙인다. */
+  (() => {
+    const stamp = () => {
+      const l = document.documentElement.dataset.lang || 'ko';
+      document.querySelectorAll('.hub a[href^="/"]').forEach((a) => {
+        const u = new URL(a.getAttribute('href'), location.origin);
+        if (!u.pathname.endsWith('/')) return;
+        u.searchParams.set('lang', l);
+        a.setAttribute('href', u.pathname + u.search + u.hash);
+      });
+    };
+    stamp();
+    document.addEventListener('langchange', stamp);
+  })();
+</script>
