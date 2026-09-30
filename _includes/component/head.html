@@ -19,7 +19,7 @@
 
   {% seo locale=false %}
   <meta property="og:type" content="website" />
-  <meta property="og:locale" content="ko_KR">
+  <meta property="og:locale" content="{{ page.locale | default: 'ko_KR' }}">
 
   {% if page.image %}
   {% comment %} seo-tag가 og:image / twitter:image / twitter:card를 이미 내보냈다. {% endcomment %}
