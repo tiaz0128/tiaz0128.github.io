@@ -1,0 +1,11 @@
+{%- comment -%} tr.html for a data row: `o` 의 `k`, `k_en`, `k_ja` … 을 읽는다. 예: {% include component/tr-of.html o=group k="category" %}
+  (include 인자에 o[x] 를 못 쓰므로 먼저 변수로 꺼낸다.) {%- endcomment -%}
+{%- assign tro_k = include.k -%}
+{%- assign tro_x_ko = include.o[tro_k] -%}
+{%- assign tro_x = tro_k | append: '_en' -%}{%- assign tro_x_en = include.o[tro_x] -%}
+{%- assign tro_x = tro_k | append: '_ja' -%}{%- assign tro_x_ja = include.o[tro_x] -%}
+{%- assign tro_x = tro_k | append: '_zh' -%}{%- assign tro_x_zh = include.o[tro_x] -%}
+{%- assign tro_x = tro_k | append: '_es' -%}{%- assign tro_x_es = include.o[tro_x] -%}
+{%- assign tro_x = tro_k | append: '_it' -%}{%- assign tro_x_it = include.o[tro_x] -%}
+{%- assign tro_x = tro_k | append: '_fr' -%}{%- assign tro_x_fr = include.o[tro_x] -%}
+{%- include component/tr.html ko=tro_x_ko en=tro_x_en ja=tro_x_ja zh=tro_x_zh es=tro_x_es it=tro_x_it fr=tro_x_fr -%}

@@ -2,8 +2,8 @@
     <h2 class="toc-title">Table of Contents</h2>
     
     {% if page_en %}
-    <div class="l-ko">{% include component/toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=2 h_max=2 %}</div>
-    <div class="l-en">{% include component/toc.html html=page_en.content sanitize=true class="inline_toc" id="my_toc_en" h_min=2 h_max=2 %}</div>
+    <div class="l l-ko">{% include component/toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=2 h_max=2 %}</div>
+    <div class="l l-en l-ja l-zh l-es l-it l-fr">{% include component/toc.html html=page_en.content sanitize=true class="inline_toc" id="my_toc_en" h_min=2 h_max=2 %}</div>
     {% else %}
     {% include component/toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=2 h_max=2 %}
     {% endif %}

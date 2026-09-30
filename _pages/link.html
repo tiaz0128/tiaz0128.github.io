@@ -6,6 +6,11 @@ permalink: /link/
 image: /assets/img/resources/eni-public-ip-eip.webp
 tagline: "🖼️ 그림으로 배우는 개발 &amp; 클라우드!"
 tagline_en: "🖼️ Learn dev &amp; cloud through pictures!"
+tagline_ja: "🖼️ 絵で学ぶ開発 &amp; クラウド！"
+tagline_zh: "🖼️ 用图学开发 &amp; 云！"
+tagline_es: "🖼️ ¡Aprende desarrollo y nube con dibujos!"
+tagline_it: "🖼️ Impara sviluppo e cloud con i disegni!"
+tagline_fr: "🖼️ Apprenez le dev et le cloud en images !"
 ---
 
 <div class="hub">
@@ -25,7 +30,7 @@ tagline_en: "🖼️ Learn dev &amp; cloud through pictures!"
       <img src="{{ '/assets/img/cloud.jpg' | prepend: site.baseurl }}" alt="tiaz" width="120" height="120">
     </div>
     <h1 class="hub-name">{{ page.title }}</h1>
-    <p class="hub-tagline">{% include component/tr.html ko=page.tagline en=page.tagline_en %}</p>
+    <p class="hub-tagline">{% include component/tr-of.html o=page k='tagline' %}</p>
   </header>
 
   {% for group in site.data.links %}
@@ -35,14 +40,14 @@ tagline_en: "🖼️ Learn dev &amp; cloud through pictures!"
       그냥 놓이는 자리라 이름표가 붙으면 오히려 무거워진다.
     {%- endcomment -%}
     {% unless group.display == 'icons' %}
-    <h2 class="hub-group-title">{% include component/tr.html ko=group.category en=group.category_en %}</h2>
-    {% if group.note %}<p class="hub-group-note">{% include component/tr.html ko=group.note en=group.note_en %}</p>{% endif %}
+    <h2 class="hub-group-title">{% include component/tr-of.html o=group k='category' %}</h2>
+    {% if group.note %}<p class="hub-group-note">{% include component/tr-of.html o=group k='note' %}</p>{% endif %}
     {%- comment -%}
       끝난 목록이 아니라 계속 늘어나는 서랍이라고 말하는 자리. 줄마다 붙는
       날짜가 "언제 손봤나"를 말하고, 이 알약은 "여기서 끝이 아니다"를 말한다.
       둘 다 있어야 오늘 받아 간 사람이 다시 올 이유가 생긴다.
     {%- endcomment -%}
-    {% if group.ongoing %}<p class="hub-group-live">{% include component/tr.html ko=group.ongoing en=group.ongoing_en %}</p>{% endif %}
+    {% if group.ongoing %}<p class="hub-group-live">{% include component/tr-of.html o=group k='ongoing' %}</p>{% endif %}
     {% endunless %}
 
     {% comment %} 자료실 구역은 _data/resources.yml 에서 자동으로 채운다. {% endcomment %}
@@ -72,7 +77,7 @@ tagline_en: "🖼️ Learn dev &amp; cloud through pictures!"
         <img class="hub-sample-media" src="{{ group.sample | prepend: site.baseurl }}"
              alt="요약본 한 장이 어떻게 생겼는지 보여주는 샘플" loading="lazy">
         {%- endif -%}
-        <figcaption>{% assign sn = group.sample_note | default: "샘플 · 요약본 1페이지" %}{% assign sn_en = group.sample_note_en | default: "Sample · page 1 of a cheat sheet" %}{% include component/tr.html ko=sn en=sn_en %}</figcaption>
+        <figcaption>{% include component/tr-of.html o=group k='sample_note' %}</figcaption>
       </figure>
       {% endif %}
 
@@ -102,8 +107,8 @@ tagline_en: "🖼️ Learn dev &amp; cloud through pictures!"
       {% assign href = '/resources/' | append: doc.slug | prepend: site.baseurl %}
       <div class="hub-row hub-res">
         <span class="hub-row-text">
-          <span class="hub-row-label">{% include component/tr.html ko=doc.title en=doc.title_en %}</span>
-          {% if doc.summary %}<span class="hub-row-note">{% include component/tr.html ko=doc.summary en=doc.summary_en %}</span>{% endif %}
+          <span class="hub-row-label">{% include component/tr-of.html o=doc k='title' %}</span>
+          {% if doc.summary %}<span class="hub-row-note">{% include component/tr-of.html o=doc k='summary' %}</span>{% endif %}
           <span class="hub-res-foot">
             <span class="hub-svcs">
               {%- if doc.services -%}
@@ -114,7 +119,7 @@ tagline_en: "🖼️ Learn dev &amp; cloud through pictures!"
               {% include component/link-icon.html name="sheet" %}
               {%- endif -%}
             </span>
-            {% if doc.pages %}<span class="hub-row-meta"><span class="l-ko">A4 {{ doc.pages }}장</span><span class="l-en">A4 · {{ doc.pages }} pages</span></span>{% endif %}
+            {% if doc.pages %}<span class="hub-row-meta">{% capture p_ko %}A4 {{ doc.pages }}장{% endcapture %}{% capture p_en %}A4 · {{ doc.pages }} pages{% endcapture %}{% capture p_ja %}A4 {{ doc.pages }}枚{% endcapture %}{% capture p_zh %}A4 共 {{ doc.pages }} 页{% endcapture %}{% capture p_es %}A4 · {{ doc.pages }} págs.{% endcapture %}{% capture p_it %}A4 · {{ doc.pages }} pagine{% endcapture %}{% capture p_fr %}A4 · {{ doc.pages }} pages{% endcapture %}{% include component/tr.html ko=p_ko en=p_en ja=p_ja zh=p_zh es=p_es it=p_it fr=p_fr %}</span>{% endif %}
             {%- comment -%}
               문서 표지에 박힌 것과 같은 날이다(문서 쪽은 .stamp). 받아 둔
               파일이 이번 판인지 지난 판인지는 목록에서도 알 수 있어야 한다.
@@ -133,32 +138,30 @@ tagline_en: "🖼️ Learn dev &amp; cloud through pictures!"
             {%- if doc.date and doc_at > fresh_after -%}
             <span class="hub-row-tag{% if doc.badge == 'new' %} is-new{% endif %}"><b>{% if doc.badge == 'new' %}NEW{% else %}UPDATE{% endif %}</b>{{ doc.date | date: "%Y-%m-%d" }}</span>
             {%- elsif doc.date -%}
-            <span class="hub-row-meta"><span class="l-ko">{{ doc.date | date: "%Y-%m-%d" }} 업데이트</span><span class="l-en">Updated {{ doc.date | date: "%Y-%m-%d" }}</span></span>
+            {% assign dd = doc.date | date: "%Y-%m-%d" %}<span class="hub-row-meta">{% capture u_ko %}{{ dd }} 업데이트{% endcapture %}{% capture u_en %}Updated {{ dd }}{% endcapture %}{% capture u_ja %}{{ dd }} 更新{% endcapture %}{% capture u_zh %}{{ dd }} 更新{% endcapture %}{% capture u_es %}Actualizado {{ dd }}{% endcapture %}{% capture u_it %}Aggiornato {{ dd }}{% endcapture %}{% capture u_fr %}Mis à jour le {{ dd }}{% endcapture %}{% include component/tr.html ko=u_ko en=u_en ja=u_ja zh=u_zh es=u_es it=u_it fr=u_fr %}</span>
             {%- endif -%}
           </span>
         </span>
         {%- comment -%} 손가락으로 짚는 것이라 셋 다 44px 아래로 두지 않는다. {%- endcomment -%}
-        <div class="hub-get{% if doc.slug_en %} l-ko{% endif %}">
-          <a class="hub-get-btn" href="{{ href }}.pdf" download
-             aria-label="{{ doc.title }} PDF로 받기">{% include component/link-icon.html name="download" %}PDF</a>
-          <a class="hub-get-btn" href="{{ href }}.html" download
-             aria-label="{{ doc.title }} HTML로 받기">{% include component/link-icon.html name="download" %}HTML</a>
-          <a class="hub-get-btn" href="{{ href }}.html" target="_blank" rel="noopener"
-             aria-label="{{ doc.title }} 브라우저에서 열기">{% include component/link-icon.html name="open" %}{% include component/tr.html ko="보기" en="View" %}</a>
+        {%- comment -%}
+          받기 버튼: 말마다 그 말의 판(`slugs.<말>`, resources/<slug>.html · .pdf)을 준다. 판이 없는 말은 영어판을,
+          영어판도 없으면 한국어판을 준다. 버튼 줄은 말마다 하나(.l.l-<말>), 지금 말의 줄만 보인다.
+        {%- endcomment -%}
+        {%- assign get_langs = "ko,en,ja,zh,es,it,fr" | split: "," -%}
+        {%- for gl in get_langs -%}
+        {%- if gl == 'ko' -%}{%- assign gslug = doc.slug -%}{%- else -%}{%- assign gslug = doc.slugs[gl] | default: doc.slugs.en | default: doc.slug -%}{%- endif -%}
+        {%- assign gtitle = doc.title -%}{%- assign gt_key = 'title_' | append: gl -%}{%- if doc[gt_key] -%}{%- assign gtitle = doc[gt_key] -%}{%- endif -%}
+        {%- assign ghref = '/resources/' | append: gslug | prepend: site.baseurl -%}
+        {%- case gl -%}{%- when 'ko' -%}{%- assign gview = '보기' -%}{%- when 'ja' -%}{%- assign gview = '表示' -%}{%- when 'zh' -%}{%- assign gview = '查看' -%}{%- when 'es' -%}{%- assign gview = 'Ver' -%}{%- when 'it' -%}{%- assign gview = 'Apri' -%}{%- when 'fr' -%}{%- assign gview = 'Voir' -%}{%- else -%}{%- assign gview = 'View' -%}{%- endcase %}
+        <div class="hub-get l l-{{ gl }}">
+          <a class="hub-get-btn" href="{{ ghref }}.pdf" download
+             aria-label="{{ gtitle }} · PDF">{% include component/link-icon.html name="download" %}PDF</a>
+          <a class="hub-get-btn" href="{{ ghref }}.html" download
+             aria-label="{{ gtitle }} · HTML">{% include component/link-icon.html name="download" %}HTML</a>
+          <a class="hub-get-btn" href="{{ ghref }}.html" target="_blank" rel="noopener"
+             aria-label="{{ gtitle }} · {{ gview }}">{% include component/link-icon.html name="open" %}{{ gview }}</a>
         </div>
-        {%- comment -%} 영어판(slug_en)이 있으면 영어 스위치에서는 그 파일을 준다. {%- endcomment -%}
-        {% if doc.slug_en %}
-        {% assign href_en = '/resources/' | append: doc.slug_en | prepend: site.baseurl %}
-        {% assign title_en = doc.title_en | default: doc.title %}
-        <div class="hub-get l-en">
-          <a class="hub-get-btn" href="{{ href_en }}.pdf" download
-             aria-label="Download {{ title_en }} as PDF">{% include component/link-icon.html name="download" %}PDF</a>
-          <a class="hub-get-btn" href="{{ href_en }}.html" download
-             aria-label="Download {{ title_en }} as HTML">{% include component/link-icon.html name="download" %}HTML</a>
-          <a class="hub-get-btn" href="{{ href_en }}.html" target="_blank" rel="noopener"
-             aria-label="Open {{ title_en }} in the browser">{% include component/link-icon.html name="open" %}View</a>
-        </div>
-        {% endif %}
+        {%- endfor %}
       </div>
       {% endfor %}
 
@@ -192,8 +195,8 @@ tagline_en: "🖼️ Learn dev &amp; cloud through pictures!"
           {%- endif -%}
         </span>
         <span class="hub-row-text">
-          <span class="hub-row-label">{% include component/tr.html ko=link.label en=link.label_en %}</span>
-          {% if link.note %}<span class="hub-row-note">{% include component/tr.html ko=link.note en=link.note_en %}</span>{% endif %}
+          <span class="hub-row-label">{% include component/tr-of.html o=link k='label' %}</span>
+          {% if link.note %}<span class="hub-row-note">{% include component/tr-of.html o=link k='note' %}</span>{% endif %}
         </span>
         <span class="hub-row-arrow" aria-hidden="true">{% if external %}↗{% else %}→{% endif %}</span>
       </a>

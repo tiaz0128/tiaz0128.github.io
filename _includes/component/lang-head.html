@@ -1,15 +1,17 @@
 {%- comment -%}
-  한영 스위치. 어느 말을 보일지는 그리기 전에 정한다(깜빡임 없이):
-  ?lang= → 지난번 고른 것 → 브라우저가 한국어면 ko, 아니면 en.
-  두 말을 다 가진 자리는 .l-ko / .l-en 한 쌍으로 둘 다 들고 있다(component/tr.html).
+  언어 스위치. 어느 말을 보일지는 그리기 전에 정한다(깜빡임 없이):
+  ?lang= → 지난번 고른 것 → 브라우저 말이 일곱 중 하나면 그것, 아니면 en.
+  말마다 다른 자리는 .l 에 .l-<말> 을 단 칸들로 모두 들고 있다(component/tr.html) — 지금 말의 칸만 보인다.
+  말은 ko · en · ja · zh · es · it · fr. 글처럼 한국어 · 영어뿐인 자리는 영어 칸이 다른 말도 맡는다.
   영어판이 없는 자리는 한국어만 클래스 없이 그려서, en 에서도 비지 않는다.
 {%- endcomment -%}
-<style>html[data-lang="en"] .l-ko,html:not([data-lang="en"]) .l-en{display:none!important}</style>
+<style>html[data-lang="ko"] .l:not(.l-ko),html[data-lang="en"] .l:not(.l-en),html[data-lang="ja"] .l:not(.l-ja),html[data-lang="zh"] .l:not(.l-zh),html[data-lang="es"] .l:not(.l-es),html[data-lang="it"] .l:not(.l-it),html[data-lang="fr"] .l:not(.l-fr){display:none!important}</style>
 <script>
 (function () {
   var d = document.documentElement, q = new URLSearchParams(location.search).get('lang'), l = q;
-  try { if (q === 'ko' || q === 'en') localStorage.setItem('lang', q); else l = localStorage.getItem('lang'); } catch (e) {}
-  if (l !== 'ko' && l !== 'en') l = /^ko\b/i.test(navigator.language || '') ? 'ko' : 'en';
-  d.dataset.lang = l; d.lang = l;
+  try { if (['ko', 'en', 'ja', 'zh', 'es', 'it', 'fr'].indexOf(q) >= 0) localStorage.setItem('lang', q); else l = localStorage.getItem('lang'); } catch (e) {}
+  var ok = ['ko', 'en', 'ja', 'zh', 'es', 'it', 'fr'];
+  if (ok.indexOf(l) < 0) { var n = (navigator.language || '').slice(0, 2).toLowerCase(); l = ok.indexOf(n) >= 0 ? n : 'en'; }
+  d.dataset.lang = l; d.lang = l === 'zh' ? 'zh-CN' : l;
 })();
 </script>

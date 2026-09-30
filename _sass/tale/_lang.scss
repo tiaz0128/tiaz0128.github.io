@@ -86,38 +86,57 @@ html.lang-flip main { animation: ls-fade .35s ease-out; }
   &:hover { background: rgba(255, 255, 255, .14); }
 }
 
-/* 언어 고르기(component/lang-select.html) — CIDR 계산기의 언어 버튼과 같은 모양: 얇은 밝은 테두리, 아래 2px 그림자,
-   지구본은 강조색. 링크 페이지 카드 왼쪽 위(오른쪽 위는 공유). */
+/* 언어 고르기(component/lang-select.html) — CIDR 계산기의 언어 버튼 모양(지구본 · 이름 · 화살표)을 링크 카드에 맞게.
+   <select> 의 기본 모양(윈도우 · iOS 가 덧씌우는 화살표 · 바탕 · 글꼴)을 끄고 화살표를 직접 그린다. 높이와 바탕은
+   오른쪽 위 공유 버튼(2.4rem, 반투명)과 같다. (2026-09-30: "css가 이상한데") */
 .lang-select {
   align-items: center;
-  background: rgba(255, 255, 255, .06);
-  border: 2px solid rgba(233, 222, 196, .5);
-  border-radius: 6px;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, .55);
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 999px;
   box-sizing: border-box;
   color: $default-color;
   cursor: pointer;
   display: inline-flex;
-  gap: .35rem;
-  height: 2.5rem;
-  padding: 0 .35rem 0 .6rem;
+  gap: .4rem;
+  height: 2.4rem;
+  padding: 0 .75rem 0 .7rem;
+  position: relative;
 
   &:hover,
-  &:focus-within { border-color: rgba(233, 222, 196, .85); }
+  &:focus-within { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .3); }
 
   .lsel-globe { color: $blue; flex: none; height: 1.05rem; width: 1.05rem; }
 
   select {
+    -webkit-appearance: none;
+    appearance: none;
     background: transparent;
     border: 0;
+    border-radius: 0;
     color: $default-shade;
     cursor: pointer;
-    font-family: $sans-serif;
-    font-size: .85rem;
-    font-weight: 700;
-    height: 2.2rem;
+    font: 700 .85rem/1 $sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0 1.1rem 0 0;
 
     &:focus { outline: none; }
+    &::-ms-expand { display: none; }
+  }
+
+  /* the chevron, drawn: the same on every platform */
+  &::after {
+    border-bottom: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    content: '';
+    height: .38rem;
+    pointer-events: none;
+    position: absolute;
+    right: .85rem;
+    top: calc(50% - .3rem);
+    transform: rotate(45deg);
+    width: .38rem;
   }
 
   option { background: #1c1d20; color: $default-shade; }

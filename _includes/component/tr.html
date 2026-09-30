@@ -1,1 +1,12 @@
-{%- if include.en and include.en != '' -%}<span class="l-ko">{{ include.ko }}</span><span class="l-en">{{ include.en }}</span>{%- else -%}{{ include.ko }}{%- endif -%}
+{%- comment -%}
+  두 말(이상)을 가진 자리: ko · en · ja · zh · es · it · fr 중 받은 것마다 .l.l-<말> 칸을 하나씩 낸다. 지금 말의 칸만
+  보인다(component/lang-head.html). 번역이 없는 말은 영어 칸이 대신 보이고(영어 칸에 l-<그 말>을 더 붙임), 영어도
+  없으면 한국어만 그냥 낸다.
+{%- endcomment -%}
+{%- assign tr_more = "ja,zh,es,it,fr" | split: "," -%}
+{%- if include.en and include.en != '' -%}
+{%- assign tr_miss = '' -%}
+{%- for l in tr_more -%}{%- unless include[l] and include[l] != '' -%}{%- assign tr_miss = tr_miss | append: ' l-' | append: l -%}{%- endunless -%}{%- endfor -%}
+<span class="l l-ko">{{ include.ko }}</span><span class="l l-en{{ tr_miss }}">{{ include.en }}</span>
+{%- for l in tr_more -%}{%- if include[l] and include[l] != '' -%}<span class="l l-{{ l }}">{{ include[l] }}</span>{%- endif -%}{%- endfor -%}
+{%- else -%}{{ include.ko }}{%- endif -%}

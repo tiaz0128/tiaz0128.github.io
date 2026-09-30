@@ -6,8 +6,18 @@
     if (!btn) return;
     const label = btn.querySelector('.hub-share-said');
 
+    /* 공유 링크에는 지금 고른 언어가 실린다(?lang=) — 받은 사람도 같은 말로 연다. */
+    const COPIED = { ko: '주소 복사됨', en: 'Link copied', ja: 'リンクをコピーしました', zh: '已复制链接', es: 'Enlace copiado', it: 'Link copiato', fr: 'Lien copié' };
+    const SHARE = { ko: '이 페이지 공유', en: 'Share this page', ja: 'このページを共有', zh: '分享此页', es: 'Compartir esta página', it: 'Condividi questa pagina', fr: 'Partager cette page' };
+    const cur = () => document.documentElement.dataset.lang || 'ko';
+    const aria = () => btn.setAttribute('aria-label', SHARE[cur()] || SHARE.en);
+    aria(); document.addEventListener('langchange', aria);
+
     btn.addEventListener('click', async () => {
-      const url = location.href;
+      const u = new URL(location.href);
+      u.searchParams.set('lang', cur());
+      u.hash = '';
+      const url = u.toString();
       try {
         if (navigator.share) {
           await navigator.share({ title: document.title, url });
@@ -15,7 +25,7 @@
         }
         await navigator.clipboard.writeText(url);
         btn.classList.add('is-said');
-        label.textContent = '주소 복사됨';
+        label.textContent = COPIED[cur()] || COPIED.en;
         setTimeout(() => btn.classList.remove('is-said'), 1600);
       } catch {
         /* 사용자가 공유 시트를 닫은 경우도 여기로 온다. 알릴 것 없음. */

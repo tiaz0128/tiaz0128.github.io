@@ -28,8 +28,8 @@ layout: default
 
   {%- comment -%} 영어판이 있으면 두 본문을 다 싣고 스위치가 하나만 보인다. {%- endcomment -%}
   {% if page_en %}
-  <div class="l-ko">{{ content }}</div>
-  <div class="l-en" lang="en">{{ page_en.content }}</div>
+  <div class="l l-ko">{{ content }}</div>
+  <div class="l l-en l-ja l-zh l-es l-it l-fr" lang="en">{{ page_en.content }}</div>
   {% else %}
   {{ content }}
   {% endif %}
