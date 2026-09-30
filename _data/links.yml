@@ -44,9 +44,9 @@
   category_en: Handy tools
   links:
     - label: "CIDR 계산기"
-      note: "주소 범위를 비트로 · 캐릭터가 활로 쏴서 보여 줘요 (한국어/English)"
+      note: "주소 범위를 비트로 보고, 범위 안인지 바로 확인해요 · 5개 언어"
       label_en: "CIDR Calculator"
-      note_en: "See an address range bit by bit · a little archer shoots the bits (English/Korean)"
+      note_en: "See an address range bit by bit and check any address against it · 5 languages"
       url: "/cidr/"
       icon: web
 
