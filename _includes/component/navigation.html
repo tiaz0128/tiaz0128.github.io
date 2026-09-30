@@ -1,6 +1,7 @@
 {%- comment -%}
-  탭이 다섯 개가 되면서(2026-09-30 그래프 뷰 · 링크를 빼고 한영 스위치를 더함 — 링크 페이지는 인스타 바이오로 들어오는 곳이라 메뉴에 없어도 된다) 글자만으로는 읽기가 나빠졌다. 아이콘으로 세우고
-  이름은 title/aria-label 로 남긴다 — 폭이 줄어 모바일에서도 한 줄에 든다.
+  헤더는 검색 · 언어 · 햄버거만 (2026-09-30: "메뉴가 너무 많아져서 … 검색 버튼이랑 언어 버튼만 두고 나머지는 햄버거 안에",
+  "링크 넣어주고"). 햄버거를 누르면 오른쪽 아래로 판이 열린다: 소개 · 글 · 태그 · 링크, 아이콘 + 지금 말의 이름.
+  밖을 누르거나 Esc, 항목을 누르면 닫힌다.
 {%- endcomment -%}
 <nav class="nav">
   <div class="nav-container">
@@ -8,19 +9,47 @@
       <h2 class="nav-title">{{ site.header }}</h2>
     </a>
     <ul>
-      <li><a id="about" href="{{ '/about' | prepend: site.baseurl }}" title="About" aria-label="About">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.4" r="3.9"/><path d="M4.6 20.2a7.4 7.4 0 0 1 14.8 0"/></svg>
-      </a></li>
-      <li><a href="{{ site.baseurl }}/" title="Posts" aria-label="Posts">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.4h9.6L19 8.8v10.8H5z"/><path d="M14.6 4.4v4.4H19"/><path d="M8.2 12.6h7.6M8.2 16h5"/></svg>
-      </a></li>
-      <li id="tags"><a href="{{ '/tags' | prepend: site.baseurl }}" title="Tags" aria-label="Tags">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><path d="M7 7h.01"/></svg>
-      </a></li>
       <li id="header-search"><a href="{{ '/search' | prepend: site.baseurl }}" title="Search" aria-label="Search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="M15.6 15.6L20.4 20.4"/></svg>
       </a></li>
       <li id="lang">{% include component/lang-switch.html %}</li>
+      <li class="nav-menu">
+        <button type="button" class="nav-burger" aria-expanded="false" aria-controls="nav-panel" title="Menu" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path class="b1" d="M4.5 7h15"/><path class="b2" d="M4.5 12h15"/><path class="b3" d="M4.5 17h15"/></svg>
+        </button>
+        <div class="nav-panel" id="nav-panel" hidden>
+          <a id="about" href="{{ '/about' | prepend: site.baseurl }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.4" r="3.9"/><path d="M4.6 20.2a7.4 7.4 0 0 1 14.8 0"/></svg>
+            {% include component/tr.html ko="소개" en="About" ja="紹介" zh="关于" es="Acerca de" it="Chi sono" fr="À propos" %}
+          </a>
+          <a href="{{ site.baseurl }}/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.4h9.6L19 8.8v10.8H5z"/><path d="M14.6 4.4v4.4H19"/><path d="M8.2 12.6h7.6M8.2 16h5"/></svg>
+            {% include component/tr.html ko="글" en="Posts" ja="記事" zh="文章" es="Artículos" it="Articoli" fr="Articles" %}
+          </a>
+          <a href="{{ '/tags' | prepend: site.baseurl }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><path d="M7 7h.01"/></svg>
+            {% include component/tr.html ko="태그" en="Tags" ja="タグ" zh="标签" es="Etiquetas" it="Tag" fr="Tags" %}
+          </a>
+          <a href="{{ '/link/' | prepend: site.baseurl }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.2 13.8a4.2 4.2 0 0 0 6.3.45l2.5-2.5a4.2 4.2 0 0 0-5.94-5.94l-1.43 1.42"/><path d="M13.8 10.2a4.2 4.2 0 0 0-6.3-.45l-2.5 2.5a4.2 4.2 0 0 0 5.94 5.94l1.42-1.42"/></svg>
+            {% include component/tr.html ko="링크" en="Links" ja="リンク" zh="链接" es="Enlaces" it="Link" fr="Liens" %}
+          </a>
+        </div>
+      </li>
     </ul>
   </div>
 </nav>
+<script>
+(function () {
+  var btn = document.querySelector('.nav-burger'), panel = document.getElementById('nav-panel');
+  if (!btn || !panel) return;
+  function set(open) {
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    panel.hidden = !open;
+  }
+  btn.addEventListener('click', function (e) { e.stopPropagation(); set(panel.hidden); });
+  document.addEventListener('click', function (e) { if (!panel.hidden && !panel.contains(e.target)) set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
+  panel.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+})();
+</script>

@@ -143,3 +143,72 @@ footer {
     font-size: .8rem;
   }
 }
+/* 햄버거 (2026-09-30: 헤더는 검색 · 언어 · 햄버거만). 세 줄이 눌리면 X 로 접히고, 판은 오른쪽 아래로 열린다.
+   판 안의 링크는 위의 .nav li a(네모 아이콘 버튼)를 풀어 아이콘 + 이름 한 줄로 쓴다. */
+.nav-menu { position: relative; }
+
+.nav-burger {
+  align-items: center;
+  background: none;
+  border: 0;
+  border-radius: 8px;
+  color: $default-color;
+  cursor: pointer;
+  display: flex;
+  height: 2.2rem;
+  justify-content: center;
+  margin-left: .1rem;
+  opacity: .85;
+  padding: 0;
+  width: 2.2rem;
+
+  svg { height: 1.3rem; width: 1.3rem; overflow: visible; }
+  path { transition: transform .25s ease-out, opacity .2s; transform-origin: 12px 12px; }
+
+  &:hover, &:focus-visible, &[aria-expanded="true"] { background: rgba(255, 255, 255, .09); opacity: 1; }
+  &:focus-visible { outline: 2px solid $blue; outline-offset: 2px; }
+  &[aria-expanded="true"] {
+    .b1 { transform: translateY(5px) rotate(45deg); }
+    .b2 { opacity: 0; }
+    .b3 { transform: translateY(-5px) rotate(-45deg); }
+  }
+
+  @media (max-width: 600px) { height: 2.3rem; width: 2.3rem; }
+}
+
+.nav .nav-panel {
+  background: $back-color;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 12px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .45);
+  display: grid;
+  gap: 2px;
+  min-width: 11rem;
+  padding: .4rem;
+  position: absolute;
+  right: 0;
+  top: calc(100% + .55rem);
+  animation: nav-drop .18s ease-out;
+
+  &[hidden] { display: none; }
+
+  a {
+    border-radius: 8px;
+    font-size: .95rem;
+    gap: .7rem;
+    height: auto;
+    justify-content: flex-start;
+    padding: .6rem .75rem;
+    white-space: nowrap;
+    width: auto;
+
+    svg { flex: none; height: 1.15rem; width: 1.15rem; opacity: .85; }
+  }
+}
+
+@keyframes nav-drop { from { opacity: 0; transform: translateY(-6px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-burger path { transition: none; }
+  .nav .nav-panel { animation: none; }
+}
