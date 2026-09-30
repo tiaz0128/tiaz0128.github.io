@@ -49,6 +49,12 @@
       note_en: "See an address range bit by bit and check any address against it · 7 languages"
       url: "/cidr/"
       icon: web
+    - label: "포인터 따라가기"
+      note: "C 포인터에 *를 붙이면 메모리에서 무엇을 읽는지 따라가 봐요 · 7개 언어"
+      label_en: "Pointer Walk"
+      note_en: "Follow a C pointer through memory, one * at a time · 7 languages"
+      url: "/pointer/"
+      icon: web
 
 - category: 요약본 (무료)
   category_en: Cheat sheets (free)
