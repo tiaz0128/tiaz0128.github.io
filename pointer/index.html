@@ -5,16 +5,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#15130f" />
-    <meta name="description" content="C 포인터를 역참조하면 메모리에서 무엇을 읽는지 따라가 보는 도구 · Follow a C pointer through memory" />
-    <title>포인터 따라가기</title>
+    <title>포인터 따라가기 – C 포인터·역참조를 메모리로 보기 | tiaz.dev</title>
+    <meta name="description" content="C 코드의 포인터에 *를 붙여 역참조하면 메모리에서 무엇을 읽는지 한 단계씩 보여 주는 무료 학습 도구. 주소, 리틀 엔디안, 이중·삼중 포인터, NULL과 세그폴트까지." />
+    <meta name="author" content="tiaz" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <!-- search (user, 2026-10-01): every language is this URL with ?lang=; the page keeps title · description · canonical in the chosen one (src/seo/seo.ts) -->
+    <link rel="canonical" href="https://tiaz.dev/pointer/" />
+    <link rel="alternate" hreflang="ko" href="https://tiaz.dev/pointer/?lang=ko" />
+    <link rel="alternate" hreflang="en" href="https://tiaz.dev/pointer/?lang=en" />
+    <link rel="alternate" hreflang="ja" href="https://tiaz.dev/pointer/?lang=ja" />
+    <link rel="alternate" hreflang="zh-CN" href="https://tiaz.dev/pointer/?lang=zh" />
+    <link rel="alternate" hreflang="es" href="https://tiaz.dev/pointer/?lang=es" />
+    <link rel="alternate" hreflang="it" href="https://tiaz.dev/pointer/?lang=it" />
+    <link rel="alternate" hreflang="fr" href="https://tiaz.dev/pointer/?lang=fr" />
+    <link rel="alternate" hreflang="x-default" href="https://tiaz.dev/pointer/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="tiaz.dev" />
+    <meta property="og:url" content="https://tiaz.dev/pointer/" />
+    <meta property="og:title" content="포인터 따라가기 – C 포인터·역참조를 메모리로 보기" />
+    <meta property="og:description" content="C 코드의 포인터에 *를 붙여 역참조하면 메모리에서 무엇을 읽는지 한 단계씩 보여 주는 무료 학습 도구. 주소, 리틀 엔디안, 이중·삼중 포인터, NULL과 세그폴트까지." />
+    <meta property="og:image" content="https://tiaz.dev/pointer/pointer/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="포인터 따라가기 · Pointer Walk" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="ja_JP" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    <meta property="og:locale:alternate" content="it_IT" />
+    <meta property="og:locale:alternate" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="포인터 따라가기 – C 포인터·역참조를 메모리로 보기" />
+    <meta name="twitter:description" content="C 코드의 포인터에 *를 붙여 역참조하면 메모리에서 무엇을 읽는지 한 단계씩 보여 주는 무료 학습 도구. 주소, 리틀 엔디안, 이중·삼중 포인터, NULL과 세그폴트까지." />
+    <meta name="twitter:image" content="https://tiaz.dev/pointer/pointer/og.png" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "포인터 따라가기", "alternateName": ["Pointer Walk", "ポインタをたどる", "跟着指针走", "Sigue el puntero", "Segui il puntatore", "Suivre le pointeur"], "url": "https://tiaz.dev/pointer/", "description": "Free learning tool: add * to a C pointer and watch, step by step, what it reads from memory — addresses, little-endian bytes, double and triple pointers, NULL and segmentation faults.", "applicationCategory": "DeveloperApplication", "applicationSubCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "browserRequirements": "Requires JavaScript", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "inLanguage": ["ko", "en", "ja", "zh-CN", "es", "it", "fr"], "image": "https://tiaz.dev/pointer/pointer/og.png", "screenshot": "https://tiaz.dev/pointer/pointer/og.png", "featureList": ["Variables laid out in 32-bit little-endian memory, with addresses and bytes", "Each * makes C jump to the address and read the bytes there", "Double and triple pointers, char pointers, reading an int through a char *", "Dereferencing NULL and the segmentation fault, and the compile error for one * too many", "The printf output, step-by-step notes and seven languages"], "author": {"@type": "Person", "name": "tiaz", "url": "https://tiaz.dev"}, "isPartOf": {"@type": "WebSite", "name": "tiaz.dev", "url": "https://tiaz.dev"}}</script>
     <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap" />
-    <script type="module" crossorigin src="./assets/pointer-E3MKacJG.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/pointer-zaIc1GIF.css">
+    <script type="module" crossorigin src="./assets/pointer-DCKFidye.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/pointer-DQ3sbX3V.css">
   </head>
   <body class="cm-body">
-    <div id="app"></div>
+    <div id="app">
+      <!-- what a reader without JS (and a crawler) sees; the app replaces it as it starts -->
+      <main style="max-width:560px;margin:24px auto;padding:0 16px;color:#efe6d2;font:15px/1.6 system-ui,sans-serif">
+        <h1>포인터 따라가기 · <span lang="en">Pointer Walk</span></h1>
+        <p>C 코드의 포인터에 *를 붙여 역참조하면 메모리에서 무엇을 읽는지 한 단계씩 보여 주는 무료 학습 도구. 주소, 리틀 엔디안, 이중·삼중 포인터, NULL과 세그폴트까지.</p>
+        <p lang="en">Free learning tool: add * to a C pointer and watch, step by step, what it reads from memory — addresses, little-endian bytes, double and triple pointers, NULL and segmentation faults.</p>
+        <h2>할 수 있는 것 · <span lang="en">What it does</span></h2>
+        <ul>
+          <li>int · char · 포인터 변수를 32비트 리틀 엔디안 메모리의 주소와 바이트로 보기 — <span lang="en">Variables laid out in 32-bit little-endian memory, with addresses and bytes</span></li>
+          <li>*를 하나 붙일 때마다 C가 주소를 따라 점프해 바이트를 읽음 — <span lang="en">Each * makes C jump to the address and read the bytes there</span></li>
+          <li>이중·삼중 포인터, char 포인터, int를 char *로 읽기 — <span lang="en">Double and triple pointers, char pointers, reading an int through a char *</span></li>
+          <li>NULL 역참조와 세그멘테이션 폴트, * 하나가 많을 때의 컴파일 에러 — <span lang="en">Dereferencing NULL and the segmentation fault, and the compile error for one * too many</span></li>
+          <li>printf 출력, 단계별 설명, 7개 언어 — <span lang="en">The printf output, step-by-step notes and seven languages</span></li>
+        </ul>
+        <p><a href="https://tiaz.dev/" style="color:#f2b84b">tiaz.dev</a> · <a href="https://tiaz.dev/cidr/" style="color:#f2b84b">CIDR 계산기 · CIDR Calculator</a></p>
+      </main>
+    </div>
   </body>
 </html>

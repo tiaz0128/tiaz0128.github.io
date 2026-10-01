@@ -1,0 +1,55 @@
+---
+layout: null
+permalink: /llms.txt
+---
+{%- comment -%}
+  llms.txt (https://llmstxt.org) — 이 블로그를 LLM이 읽기 좋게 소개하는 한 장. 영어로 쓴다.
+  글 · 도구 · 요약본 목록은 빌드 때 _posts · _en · _data/links.yml · _data/resources.yml 에서
+  자동으로 채운다. 새 글이나 도구를 넣어도 이 파일은 손대지 않아도 된다.
+  (_en 의 짝을 찾는 법은 component/en-of.html 과 같다.)
+{%- endcomment -%}
+# tiaz.dev
+
+> Personal tech blog by tiaz: backend, security and multi-cloud (mostly AWS), networking, Kubernetes, Python and computer-science basics, plus book notes and small interactive developer tools. Posts are written in Korean, and every post also has a full English version.
+
+- Each post page carries both versions in the same HTML; add `?lang=en` to a post URL to open it in English (for example {{ site.url }}{{ site.posts.first.url }}?lang=en).
+- Titles and descriptions below are the English versions. Dates are when a post was first published.
+- Small tools and cheat sheets are available in seven languages (Korean, English, Japanese, Chinese, Spanish, Italian, French).
+- Author: tiaz ({{ site.url }}/about, GitHub: https://github.com/{{ site.github }}). Feed: {{ site.url }}/feed.xml. Sitemap: {{ site.url }}/sitemap.xml.
+
+{%- assign tools = site.data.links | where: 'category', '유용한 도구' | first %}
+{%- if tools %}
+
+## Tools
+
+Interactive, phone-first developer tools. A short link stores the inputs and the language.
+{% for l in tools.links %}
+- [{{ l.label_en | default: l.label }}]({{ site.url }}{{ l.url }}): {{ l.note_en | default: l.note }}
+{%- endfor %}
+{%- endif %}
+
+## Cheat sheets
+
+Free animated HTML cheat sheets that also print as PDF.
+{% assign docs = site.data.resources | sort: 'order' -%}
+{% for d in docs %}
+{%- assign en_slug = d.slugs.en | default: d.slug %}
+- [{{ d.title_en | default: d.title }}]({{ site.url }}/resources/{{ en_slug }}.html): {{ d.summary_en | default: d.summary }} ({{ d.pages }} pages; PDF: {{ site.url }}/resources/{{ en_slug }}.pdf)
+{%- endfor %}
+
+## Posts
+{%- assign groups = site.posts | group_by: 'category' -%}
+{% for g in groups %}
+{%- assign cat = site.data.categories[g.name] %}
+
+### {{ cat.en | default: g.name }}
+{% for post in g.items %}
+{%- assign en_path = post.path | replace_first: '_posts/', '_en/' %}
+{%- assign en = site.en | where: 'relative_path', en_path | first %}
+- [{{ en.title | default: post.title }}]({{ site.url }}{{ post.url }}?lang=en): {{ en.description | default: post.description }} ({{ post.ins_date | default: post.date | date: '%Y-%m-%d' }})
+{%- endfor %}
+{%- endfor %}
+
+## Optional
+
+- [Links]({{ site.url }}/link): the author's link page (tools, cheat sheets, recommended reading, social accounts)

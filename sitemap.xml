@@ -2,7 +2,7 @@
 layout: null
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <!-- 블로그 포스트 URL -->
   {% assign current_time = site.time | date: '%s' %}
@@ -40,6 +40,24 @@ layout: null
       <lastmod>{{ doc.date | date_to_xmlschema }}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
+    </url>
+  {% endfor %}
+
+  <!-- 유용한 도구(_data/links.yml 의 그 구역에서 자동으로). 말마다 같은 주소에 ?lang= 이 붙고, 페이지 head 의
+       hreflang 과 같은 목록을 여기도 적는다. lastmod 는 빌드 시각(도구는 자주 고친다). -->
+  {% assign tool_group = site.data.links | where: 'category', '유용한 도구' | first %}
+  {% assign tool_langs = 'ko,en,ja,zh-CN,es,it,fr' | split: ',' %}
+  {% for tool in tool_group.links %}
+    {% assign tool_url = site.url | append: tool.url %}
+    <url>
+      <loc>{{ tool_url }}</loc>
+      <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.9</priority>
+      {% for l in tool_langs %}{% assign q = l | split: '-' | first %}
+      <xhtml:link rel="alternate" hreflang="{{ l }}" href="{{ tool_url }}?lang={{ q }}"/>
+      {% endfor %}
+      <xhtml:link rel="alternate" hreflang="x-default" href="{{ tool_url }}"/>
     </url>
   {% endfor %}
 </urlset>
