@@ -17,12 +17,24 @@
   </button>
   {% include component/lang-select.html %}
 
-  <header class="hub-profile hub-profile-small">
-    <a class="hub-avatar" href="{{ '/link/' | prepend: site.baseurl }}">
-      <img src="{{ '/assets/img/cloud.jpg' | prepend: site.baseurl }}" alt="tiaz" width="64" height="64">
-    </a>
-    <p class="hub-tagline">{% include component/tr.html ko="카드뉴스에 나온 링크" en="Links from my card news" ja="カードニュースに出てきたリンク" zh="卡片新闻里提到的链接" es="Enlaces de mis tarjetas" it="Link dalle mie schede" fr="Liens de mes cartes" %}</p>
+  {%- comment -%}
+    머리는 링크 페이지(/link/)와 똑같이 — 작가: 두 페이지의 상단 형식이 다른 게 아쉽다(2026-11-16). 태그라인은
+    링크 페이지의 머리말에서 읽어서 한 곳만 고치면 둘 다 바뀐다. 그 아래 구역 제목도 링크 페이지의 것과 같다.
+  {%- endcomment -%}
+  {%- assign hub = site.pages | where: 'permalink', '/link/' | first -%}
+  {%- assign decks_group = site.data.links | where: 'source', 'decks' | first -%}
+  <header class="hub-profile">
+    <div class="hub-avatar">
+      <img src="{{ '/assets/img/cloud.jpg' | prepend: site.baseurl }}" alt="tiaz" width="120" height="120">
+    </div>
+    <h1 class="hub-name">{{ hub.title | default: 'tiaz.dev' }}</h1>
+    <p class="hub-tagline">{% include component/tr-of.html o=hub k='tagline' %}</p>
   </header>
+
+  {%- if decks_group %}
+  <h2 class="hub-group-title">{% include component/tr-of.html o=decks_group k='category' %}</h2>
+  {%- if decks_group.note %}<p class="hub-group-note">{% include component/tr-of.html o=decks_group k='note' %}</p>{% endif %}
+  {%- endif %}
 
   {% if deck %}
   <section class="hub-group">
@@ -42,3 +54,4 @@
 
 {% include script/hub_share.html %}
 {% include script/hub_lang_links.html %}
+{% include script/hub_video.html %}

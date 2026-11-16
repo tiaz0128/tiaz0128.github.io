@@ -1,0 +1,18 @@
+<script>
+  /* 유튜브 영상 카드(component/deck.html): ▶을 누르면 그 자리에 플레이어를 들인다. 미리 띄우지 않는 이유는
+     그 include 의 주석. youtube-nocookie 는 재생 전까지 쿠키를 굽지 않는 같은 플레이어다. playsinline: 아이폰에서
+     전체화면으로 튀지 않게. */
+  (() => {
+    document.querySelectorAll('.hub-video-frame').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const f = document.createElement('iframe');
+        f.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.vid}?autoplay=1&playsinline=1&rel=0`;
+        f.title = btn.getAttribute('aria-label') || 'YouTube';
+        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        f.allowFullscreen = true;
+        f.className = 'hub-video-player';
+        btn.replaceWith(f);
+      }, { once: true });
+    });
+  })();
+</script>

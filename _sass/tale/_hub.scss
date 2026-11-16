@@ -755,17 +755,6 @@
     &-all { margin-top: 1.5rem; }
   }
 
-  /* 덱 페이지(/link/<id>/)의 머리. 주인공은 덱이라 프로필은 작게 둔다. */
-  &-profile-small {
-    padding: 1.25rem 0 1.5rem;
-
-    .hub-avatar {
-      display: block;
-      height: 64px;
-      margin-bottom: 0.7rem;
-      width: 64px;
-    }
-  }
 }
 
 /* ---- 썸네일 줄 (component/deck.html) ------------------------------------ */
@@ -813,5 +802,68 @@
     }
 
     .hub-ico-wide { width: 1.2rem; }
+  }
+}
+
+/* ---- 유튜브 영상 카드 (component/deck.html · script/hub_video.html) ------ */
+/* 링크 줄 대신 16:9 한 장 — 누르면 그 자리에서 재생된다. 아래 줄은 유튜브로 나가는 길(↗). */
+.hub {
+  &-video {
+    background: rgba(0, 0, 0, .38);
+    border: 1px solid rgba(255, 255, 255, .04);
+    border-radius: 12px;
+    margin-bottom: 0.6rem;
+    overflow: hidden;
+
+    &-frame,
+    &-player {
+      aspect-ratio: 16 / 9;
+      border: 0;
+      display: block;
+      width: 100%;
+    }
+
+    &-frame {
+      background: #000;
+      cursor: pointer;
+      padding: 0;
+      position: relative;
+
+      img {
+        display: block;
+        height: 100%;
+        margin: 0;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      &:hover .hub-video-btn,
+      &:focus .hub-video-btn { transform: translate(-50%, -50%) scale(1.08); }
+    }
+
+    &-btn {
+      @include transition(transform .2s ease-out);
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .5));
+      height: 3rem;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 4.25rem;
+
+      svg { display: block; height: 100%; width: 100%; }
+    }
+
+    &-meta {
+      align-items: center;
+      display: flex;
+      gap: 0.9rem;
+      justify-content: space-between;
+      padding: 0.7rem 0.9rem;
+      text-decoration: none;
+
+      &:hover .hub-row-arrow,
+      &:focus .hub-row-arrow { color: $blue; }
+    }
   }
 }
