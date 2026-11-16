@@ -49,7 +49,28 @@
     {%- assign vid = '' -%}
     {%- if link.url contains 'youtube.com/watch?v=' -%}{%- assign vid = link.url | split: 'v=' | last | split: '&' | first -%}
     {%- elsif link.url contains 'youtu.be/' -%}{%- assign vid = link.url | split: 'youtu.be/' | last | split: '?' | first -%}{%- endif -%}
-    {%- if vid != '' %}
+    {%- assign many = d.links | size -%}
+    {%- if vid != '' and many > 1 %}
+    {%- comment -%}
+      링크가 둘 이상이면 큰 카드가 줄줄이 서지 않게(작가: "전부 player가 나와 있으면 별로") 줄 하나로 두고,
+      누르면 그 줄 바로 아래에 플레이어가 열려 재생된다. 다른 줄을 누르면 앞의 것은 닫힌다.
+    {%- endcomment %}
+    <button class="hub-row hub-row-thumbed hub-video-row" type="button" data-vid="{{ vid }}" aria-expanded="false">
+      <span class="hub-row-thumb">
+        <img src="https://i.ytimg.com/vi/{{ vid }}/mqdefault.jpg" alt="" loading="lazy" width="320" height="180">
+        <span class="hub-video-mini" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2.3 34 .3 34 .3s-21.2 0-26.5 1.4a8.6 8.6 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.6 8.6 0 0 0 6 6C12.8 47.7 34 47.7 34 47.7s21.2 0 26.5-1.4a8.6 8.6 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#f00"/><path d="M27 34V14l18 10z" fill="#fff"/></svg></span>
+      </span>
+      <span class="hub-row-text">
+        <span class="hub-row-label">{% include component/tr-of.html o=link k='label' %}</span>
+        {% if link.note %}<span class="hub-row-note">{% include component/tr-of.html o=link k='note' %}</span>{% endif %}
+        {%- if link.card -%}
+        <span class="hub-deck-card">{% capture k_ko %}{{ link.card }}장{% endcapture %}{% capture k_en %}Card {{ link.card }}{% endcapture %}{% capture k_ja %}{{ link.card }}枚目{% endcapture %}{% capture k_zh %}第 {{ link.card }} 张{% endcapture %}{% capture k_es %}Tarjeta {{ link.card }}{% endcapture %}{% capture k_it %}Scheda {{ link.card }}{% endcapture %}{% capture k_fr %}Carte {{ link.card }}{% endcapture %}{% include component/tr.html ko=k_ko en=k_en ja=k_ja zh=k_zh es=k_es it=k_it fr=k_fr %}</span>
+        {%- endif -%}
+      </span>
+      <span class="hub-row-arrow hub-video-state" aria-hidden="true">▶</span>
+    </button>
+    {%- continue -%}
+    {%- elsif vid != '' %}
     <div class="hub-video">
       <button class="hub-video-frame" type="button" data-vid="{{ vid }}" aria-label="{{ link.label }} · ▶">
         <img src="https://i.ytimg.com/vi/{{ vid }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">

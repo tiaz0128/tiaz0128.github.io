@@ -874,3 +874,35 @@
     }
   }
 }
+
+/* 링크가 여럿인 덱의 영상 줄 — 썸네일 귀퉁이에 작은 ▶, 누르면 아래에 플레이어(script/hub_video.html). */
+.hub {
+  &-video-row {
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+    width: 100%;
+
+    &[aria-expanded="true"] {
+      border-color: rgba(237, 157, 19, .45);
+
+      .hub-video-state { color: $orange; transform: rotate(90deg); }
+    }
+  }
+
+  &-video-state { @include transition(transform .2s ease-out); }
+
+  &-video-mini {
+    height: 1.35rem;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.9rem;
+
+    svg { display: block; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .5)); height: 100%; width: 100%; }
+  }
+
+  &-video-inline { margin-top: -0.2rem; }
+}

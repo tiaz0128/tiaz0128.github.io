@@ -14,5 +14,29 @@
         btn.replaceWith(f);
       }, { once: true });
     });
+
+    /* 링크가 여럿인 덱: 줄을 누르면 그 아래에 플레이어를 열고 재생, 다시 누르면 닫는다. 한 번에 하나만. */
+    const close = (row) => {
+      row.setAttribute('aria-expanded', 'false');
+      row.nextElementSibling?.classList.contains('hub-video-inline') && row.nextElementSibling.remove();
+    };
+    document.querySelectorAll('.hub-video-row').forEach((row) => {
+      row.addEventListener('click', () => {
+        const open = row.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.hub-video-row[aria-expanded="true"]').forEach(close);
+        if (open) return;
+        const box = document.createElement('div');
+        box.className = 'hub-video hub-video-inline';
+        const f = document.createElement('iframe');
+        f.src = `https://www.youtube-nocookie.com/embed/${row.dataset.vid}?autoplay=1&playsinline=1&rel=0`;
+        f.title = row.querySelector('.hub-row-label')?.textContent.trim() || 'YouTube';
+        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        f.allowFullscreen = true;
+        f.className = 'hub-video-player';
+        box.appendChild(f);
+        row.after(box);
+        row.setAttribute('aria-expanded', 'true');
+      });
+    });
   })();
 </script>
