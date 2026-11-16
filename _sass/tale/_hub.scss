@@ -643,21 +643,25 @@
 }
 
 /* ---- 카드뉴스에 나온 링크 (component/deck.html) -------------------------- */
-/* 덱 하나가 접는 상자 하나다. 머리는 링크 줄과 같은 꼴로 두고(표지가 아이콘
-   자리에 선다) 그 아래로 링크 줄이 한 단 들여 붙는다 — 어느 줄이 어느 덱
-   것인지 선 하나로 읽히게. 인스타에서 온 사람이 찾는 건 방금 본 덱 하나라
-   가장 새 덱만 펼쳐 두고, 나머지는 표지와 제목만 보인다. */
+/* 덱 하나가 상자 하나다. 머리는 링크 줄과 같은 꼴(표지가 아이콘 자리)이고, 펼치면 같은 상자가 아래로 늘어나
+   링크가 좌우 같은 여백으로 그 안에 선다. 처음엔 안으로 들여 쓰고 왼쪽에 선을 그었는데 좌우가 어긋나 보였다
+   (작가, 2026-11-16) — 어느 링크가 어느 덱 것인지는 상자 하나가 말한다. */
 .hub {
   &-deck {
+    @include transition(border-color .2s ease-out);
+    background: rgba(0, 0, 0, .38);
+    border: 1px solid rgba(255, 255, 255, .04);
+    border-radius: 12px;
     margin-bottom: 0.6rem;
+    overflow: hidden;
     scroll-margin-top: 1rem;
 
+    &:hover { border-color: rgba(255, 255, 255, .12); }
+
+    &[open] { border-color: rgba(237, 157, 19, .35); }
+
     &-head {
-      @include transition(all .2s ease-out);
       align-items: center;
-      background: rgba(0, 0, 0, .38);
-      border: 1px solid rgba(255, 255, 255, .04);
-      border-radius: 12px;
       cursor: pointer;
       display: flex;
       gap: 0.9rem;
@@ -668,17 +672,10 @@
 
       &::-webkit-details-marker { display: none; }
 
-      &:hover,
-      &:focus-visible { border-color: $blue; }
+      &:focus-visible { outline: 2px solid $blue; outline-offset: -2px; }
     }
 
-    &[open] > &-head {
-      border-color: rgba(237, 157, 19, .35);
-    }
-
-    /* 4:5 카드의 첫 장. 아이콘 칸보다 키만 크다 — 폭이 같아야 줄의 글이
-       아래 링크 줄과 같은 선에서 시작한다. */
-    /* 3.1rem 이던 것이 "너무 작아서 효과적이지 않다"(작가, 11-16) — 카드 글씨가 얼핏 읽히는 데까지 키운다. */
+    /* 4:5 카드의 첫 장. "너무 작아서 효과적이지 않다"(작가, 11-16) — 카드 글씨가 얼핏 읽히는 데까지 키운다. */
     &-cover {
       border-radius: 8px;
       flex-shrink: 0;
@@ -689,6 +686,7 @@
       img {
         display: block;
         height: 100%;
+        margin: 0;
         object-fit: cover;
         width: 100%;
       }
@@ -711,16 +709,25 @@
 
     &[open] > &-head &-chev { transform: rotate(180deg); }
 
+    /* 펼친 안쪽: 머리 아래 가는 선 하나, 그 아래 링크들이 상자 좌우 같은 여백으로. 안쪽 줄은 상자보다 한 톤
+       밝게 — 상자 위에 또 상자가 얹힌 꼴. */
     &-links {
-      border-left: 2px solid rgba(237, 157, 19, .28);
-      margin: 0.6rem 0 0.9rem 2.3rem;
-      padding-left: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      padding: 0.6rem;
+
+      .hub-row,
+      .hub-video {
+        background: rgba(255, 255, 255, .04);
+        border-color: rgba(255, 255, 255, .05);
+        margin-bottom: 0.5rem;
+
+        &:last-child { margin-bottom: 0; }
+      }
 
       .hub-row { min-height: 3.75rem; }
     }
 
-    /* 몇 번째 장에 나왔나. 날짜 알약과 같은 곁다리 무게로 — 눈에 띌
-       것은 링크 이름이다. */
+    /* 몇 번째 장에 나왔나. 날짜 알약과 같은 곁다리 무게로 — 눈에 띌 것은 링크 이름이다. */
     &-card {
       align-self: flex-start;
       background: rgba(255, 255, 255, .05);

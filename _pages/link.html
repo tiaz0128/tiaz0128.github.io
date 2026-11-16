@@ -173,11 +173,11 @@ tagline_fr: "👻 Apprenez le dev et le cloud par des histoires !"
     {% elsif group.source == 'decks' %}
       {%- comment -%}
         카드뉴스에 나온 링크. _data/decks.json 은 howtodraw.cloud 의 `tools/card_kit.py blog` 가 덱마다의
-        links.json 에서 만든다(새 덱이 위). 인스타에서 막 넘어온 사람이 찾는 건 방금 본 덱이라 가장 새 덱만
-        펼쳐 두고 나머지는 표지와 제목만 보인다. 덱마다 /link/#<id> 와 /link/<id>/ 로 바로 갈 수 있다.
+        links.json 에서 만든다(새 덱이 위). 전부 접어 둔다(작가, 2026-11-16) — 표지와 제목이 목록 노릇을 하고,
+        /link/#<id> 로 오면 그 덱만 펼친다. 덱 하나만 보이는 /link/<id>/ 는 펼친 채다.
       {%- endcomment -%}
       {% for d in site.data.decks %}
-      {% include component/deck.html d=d open=forloop.first %}
+      {% include component/deck.html d=d %}
       {% endfor %}
 
     {% elsif group.display == 'icons' %}
