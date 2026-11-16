@@ -678,12 +678,13 @@
 
     /* 4:5 카드의 첫 장. 아이콘 칸보다 키만 크다 — 폭이 같아야 줄의 글이
        아래 링크 줄과 같은 선에서 시작한다. */
+    /* 3.1rem 이던 것이 "너무 작아서 효과적이지 않다"(작가, 11-16) — 카드 글씨가 얼핏 읽히는 데까지 키운다. */
     &-cover {
       border-radius: 8px;
       flex-shrink: 0;
-      height: 3.9rem;
+      height: 5.75rem;
       overflow: hidden;
-      width: 3.1rem;
+      width: 4.6rem;
 
       img {
         display: block;
@@ -712,7 +713,7 @@
 
     &-links {
       border-left: 2px solid rgba(237, 157, 19, .28);
-      margin: 0.6rem 0 0.9rem 1.55rem;
+      margin: 0.6rem 0 0.9rem 2.3rem;
       padding-left: 0.75rem;
 
       .hub-row { min-height: 3.75rem; }
@@ -730,6 +731,24 @@
       margin-top: 0.15rem;
       padding: 0.12rem 0.5rem;
       white-space: nowrap;
+    }
+
+    /* 덱 페이지(/link/<id>/)의 큰 표지. 스토리에서 넘어온 사람이 방금 본 그 카드를 바로 알아보게 —
+       표지가 이 페이지의 얼굴이다. 살짝 기울여 카드 한 장처럼. */
+    &-hero {
+      margin: 0 auto 1.4rem;
+      max-width: 16rem;
+      width: 72%;
+
+      img {
+        border-radius: 14px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, .45), 0 2px 8px rgba(0, 0, 0, .3);
+        display: block;
+        height: auto;
+        margin: 0;
+        transform: rotate(-2deg);
+        width: 100%;
+      }
     }
 
     /* 덱 페이지 맨 아래의 "전체 보기" 줄. 아이콘 칸이 없어 글만 선다. */

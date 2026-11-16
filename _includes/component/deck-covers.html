@@ -1,0 +1,18 @@
+{%- comment -%}
+  덱 표지 — 그 말로 내보낸 첫 장. 그 말판이 없으면 영어판, 영어판도 없으면 한국어판(tr.html 과 같은 규칙).
+  component/deck.html 이 머리의 작은 표지와 덱 페이지의 큰 표지에 같이 쓴다.
+{%- endcomment -%}
+{%- assign dc = include.d -%}
+
+      {%- assign dc_miss = '' -%}
+      {%- assign dc_more = "ja,zh,es,it,fr" | split: "," -%}
+      {%- for l in dc_more -%}{%- unless dc.covers[l] -%}{%- assign dc_miss = dc_miss | append: ' l-' | append: l -%}{%- endunless -%}{%- endfor -%}
+      {%- if dc.covers.en -%}
+      <img class="l l-ko" src="{{ dc.covers.ko | prepend: site.baseurl }}" alt="" loading="lazy" width="480" height="600">
+      <img class="l l-en{{ dc_miss }}" src="{{ dc.covers.en | prepend: site.baseurl }}" alt="" loading="lazy" width="480" height="600">
+      {%- for l in dc_more -%}{%- if dc.covers[l] -%}
+      <img class="l l-{{ l }}" src="{{ dc.covers[l] | prepend: site.baseurl }}" alt="" loading="lazy" width="480" height="600">
+      {%- endif -%}{%- endfor -%}
+      {%- else -%}
+      <img src="{{ dc.covers.ko | prepend: site.baseurl }}" alt="" loading="lazy" width="480" height="600">
+      {%- endif -%}

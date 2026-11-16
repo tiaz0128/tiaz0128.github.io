@@ -12,27 +12,21 @@
   script/hub_deck_hash.html 이 그 덱을 펼친다.
 {%- endcomment -%}
 {%- assign d = include.d -%}
+{%- comment -%}
+  include.hero: 덱 페이지(/link/<id>/)에서는 표지를 상자 위에 크게 세운다 — 스토리에서 넘어온 사람이 "그 카드뉴스"를
+  한눈에 알아보게(2026-11-16, 작가: 썸네일이 너무 작아서 효과적이지 않다). 그때 머리의 작은 표지는 뺀다.
+{%- endcomment -%}
+{%- if include.hero and d.covers.ko -%}
+<figure class="hub-deck-hero">{% include component/deck-covers.html d=d %}</figure>
+{%- endif %}
 <details class="hub-deck" id="{{ d.id }}"{% if include.open %} open{% endif %}>
   <summary class="hub-deck-head">
     {%- comment -%}
       표지는 그 말로 내보낸 첫 장이다. 그 말판이 없으면 영어판, 영어판도 없으면 한국어판이 선다(tr.html 과 같은 규칙).
     {%- endcomment -%}
-    {%- if d.covers.ko -%}
-    <span class="hub-deck-cover">
-      {%- assign deck_miss = '' -%}
-      {%- assign deck_more = "ja,zh,es,it,fr" | split: "," -%}
-      {%- for l in deck_more -%}{%- unless d.covers[l] -%}{%- assign deck_miss = deck_miss | append: ' l-' | append: l -%}{%- endunless -%}{%- endfor -%}
-      {%- if d.covers.en -%}
-      <img class="l l-ko" src="{{ d.covers.ko | prepend: site.baseurl }}" alt="" loading="lazy" width="240" height="300">
-      <img class="l l-en{{ deck_miss }}" src="{{ d.covers.en | prepend: site.baseurl }}" alt="" loading="lazy" width="240" height="300">
-      {%- for l in deck_more -%}{%- if d.covers[l] -%}
-      <img class="l l-{{ l }}" src="{{ d.covers[l] | prepend: site.baseurl }}" alt="" loading="lazy" width="240" height="300">
-      {%- endif -%}{%- endfor -%}
-      {%- else -%}
-      <img src="{{ d.covers.ko | prepend: site.baseurl }}" alt="" loading="lazy" width="240" height="300">
-      {%- endif -%}
-    </span>
-    {%- endif -%}
+    {%- unless include.hero -%}
+    {%- if d.covers.ko -%}<span class="hub-deck-cover">{% include component/deck-covers.html d=d %}</span>{%- endif -%}
+    {%- endunless -%}
     <span class="hub-row-text">
       <span class="hub-row-label">{% include component/tr-of.html o=d k='title' %}</span>
       {%- assign n = d.links | size -%}
