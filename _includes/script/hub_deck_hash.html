@@ -1,0 +1,16 @@
+<script>
+  /* /link/#<덱 id> 로 들어오면 그 덱을 펼치고 그 자리로 간다. 덱은 접는 상자(<details>)라 브라우저의 앵커
+     이동만으로는 닫힌 채 제목만 보인다. 펼치면 같은 줄에서 나머지 덱은 그대로 둔다(하나만 열기를 강제하지
+     않는다 — 두 덱을 견주어 보는 사람도 있다). */
+  (() => {
+    const open = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const el = id && document.getElementById(id);
+      if (!el || !el.classList.contains('hub-deck')) return;
+      el.open = true;
+      el.scrollIntoView({ block: 'start' });
+    };
+    open();
+    window.addEventListener('hashchange', open);
+  })();
+</script>

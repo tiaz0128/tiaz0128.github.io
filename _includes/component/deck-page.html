@@ -1,0 +1,44 @@
+{%- comment -%}
+  /link/<id>/ — 카드뉴스 한 덱의 링크만 담은 짧은 페이지. _pages/link-decks/<id>.html 이 이것 하나만 부른다
+  (그 파일들은 howtodraw.cloud 의 `tools/card_kit.py blog` 가 만든다 — 손대지 말 것).
+  스토리 링크 스티커나 DM 답장에 그 덱만 콕 집어 걸 때 쓴다. 프로필 링크(/link/)는 그대로 전체 목록이고,
+  여기서 거기로 가는 길을 맨 아래에 둔다.
+{%- endcomment -%}
+{%- assign deck = site.data.decks | where: 'id', page.deck | first -%}
+<div class="hub">
+
+  <button class="hub-share" type="button" aria-label="이 페이지 공유">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 16V3.6"/><path d="m7.6 8 4.4-4.4L16.4 8"/>
+      <path d="M5 13.5v5.1a1.9 1.9 0 0 0 1.9 1.9h10.2a1.9 1.9 0 0 0 1.9-1.9v-5.1"/>
+    </svg>
+    <span class="hub-share-said" aria-live="polite"></span>
+  </button>
+  {% include component/lang-select.html %}
+
+  <header class="hub-profile hub-profile-small">
+    <a class="hub-avatar" href="{{ '/link/' | prepend: site.baseurl }}">
+      <img src="{{ '/assets/img/cloud.jpg' | prepend: site.baseurl }}" alt="tiaz" width="64" height="64">
+    </a>
+    <p class="hub-tagline">{% include component/tr.html ko="카드뉴스에 나온 링크" en="Links from my card news" ja="カードニュースに出てきたリンク" zh="卡片新闻里提到的链接" es="Enlaces de mis tarjetas" it="Link dalle mie schede" fr="Liens de mes cartes" %}</p>
+  </header>
+
+  {% if deck %}
+  <section class="hub-group">
+    {% include component/deck.html d=deck open=true %}
+  </section>
+  {% endif %}
+
+  <a class="hub-row hub-deck-all" href="{{ '/link/' | prepend: site.baseurl }}">
+    <span class="hub-row-text">
+      <span class="hub-row-label">{% include component/tr.html ko="tiaz.dev 링크 전체 보기" en="All tiaz.dev links" ja="tiaz.dev のリンクをすべて見る" zh="查看 tiaz.dev 全部链接" es="Todos los enlaces de tiaz.dev" it="Tutti i link di tiaz.dev" fr="Tous les liens tiaz.dev" %}</span>
+      <span class="hub-row-note">{% include component/tr.html ko="지난 카드뉴스 · 도구 · 채널" en="Earlier card news · tools · channels" ja="過去のカードニュース · ツール · チャンネル" zh="以往的卡片新闻 · 工具 · 频道" es="Tarjetas anteriores · herramientas · canales" it="Schede precedenti · strumenti · canali" fr="Cartes précédentes · outils · chaînes" %}</span>
+    </span>
+    <span class="hub-row-arrow" aria-hidden="true">→</span>
+  </a>
+
+</div>
+
+{% include script/hub_share.html %}
+{% include script/hub_lang_links.html %}

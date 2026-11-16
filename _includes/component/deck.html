@@ -1,0 +1,81 @@
+{%- comment -%}
+  카드뉴스 한 덱이 건 링크들. 링크 페이지의 `source: decks` 구역(_pages/link.html)과 덱마다 하나인
+  /link/<id>/ 페이지(component/deck-page.html)가 같이 쓴다.
+  데이터는 _data/decks.json — howtodraw.cloud 의 `tools/card_kit.py blog` 가 덱 폴더의 links.json 에서 만든다.
+  여기서 고치지 말고 그쪽 links.json 을 고친 뒤 다시 내보낸다.
+
+  include.d     덱 하나 (decks.json 의 항목)
+  include.open  처음부터 펼칠지. 링크 페이지는 가장 새 덱만, 덱 페이지는 늘 펼친다.
+
+  접는 상자(<details>)인 것은 덱이 쌓여도 페이지가 덱 목록으로 길어지지 않게 하려는 것이다. 인스타에서 막
+  넘어온 사람이 찾는 건 방금 본 덱 하나라, 나머지는 표지와 제목만 보이면 된다. /link/#<id> 로 오면
+  script/hub_deck_hash.html 이 그 덱을 펼친다.
+{%- endcomment -%}
+{%- assign d = include.d -%}
+<details class="hub-deck" id="{{ d.id }}"{% if include.open %} open{% endif %}>
+  <summary class="hub-deck-head">
+    {%- comment -%}
+      표지는 그 말로 내보낸 첫 장이다. 그 말판이 없으면 영어판, 영어판도 없으면 한국어판이 선다(tr.html 과 같은 규칙).
+    {%- endcomment -%}
+    {%- if d.covers.ko -%}
+    <span class="hub-deck-cover">
+      {%- assign deck_miss = '' -%}
+      {%- assign deck_more = "ja,zh,es,it,fr" | split: "," -%}
+      {%- for l in deck_more -%}{%- unless d.covers[l] -%}{%- assign deck_miss = deck_miss | append: ' l-' | append: l -%}{%- endunless -%}{%- endfor -%}
+      {%- if d.covers.en -%}
+      <img class="l l-ko" src="{{ d.covers.ko | prepend: site.baseurl }}" alt="" loading="lazy" width="240" height="300">
+      <img class="l l-en{{ deck_miss }}" src="{{ d.covers.en | prepend: site.baseurl }}" alt="" loading="lazy" width="240" height="300">
+      {%- for l in deck_more -%}{%- if d.covers[l] -%}
+      <img class="l l-{{ l }}" src="{{ d.covers[l] | prepend: site.baseurl }}" alt="" loading="lazy" width="240" height="300">
+      {%- endif -%}{%- endfor -%}
+      {%- else -%}
+      <img src="{{ d.covers.ko | prepend: site.baseurl }}" alt="" loading="lazy" width="240" height="300">
+      {%- endif -%}
+    </span>
+    {%- endif -%}
+    <span class="hub-row-text">
+      <span class="hub-row-label">{% include component/tr-of.html o=d k='title' %}</span>
+      {%- assign n = d.links | size -%}
+      <span class="hub-row-meta">{{ d.date }} · {% capture c_ko %}링크 {{ n }}개{% endcapture %}{% capture c_en %}{{ n }} link{% if n != 1 %}s{% endif %}{% endcapture %}{% capture c_ja %}リンク {{ n }} 件{% endcapture %}{% capture c_zh %}{{ n }} 个链接{% endcapture %}{% capture c_es %}{{ n }} enlace{% if n != 1 %}s{% endif %}{% endcapture %}{% capture c_it %}{{ n }} link{% endcapture %}{% capture c_fr %}{{ n }} lien{% if n != 1 %}s{% endif %}{% endcapture %}{% include component/tr.html ko=c_ko en=c_en ja=c_ja zh=c_zh es=c_es it=c_it fr=c_fr %}</span>
+    </span>
+    <span class="hub-deck-chev" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </span>
+  </summary>
+
+  <div class="hub-deck-links">
+    {%- for link in d.links -%}
+    {%- assign external = false -%}
+    {%- if link.url contains '://' -%}{%- assign external = true -%}{%- endif %}
+    <a class="hub-row{% if link.thumb %} hub-row-thumbed{% endif %}" href="{{ link.url }}"{% if external %} target="_blank" rel="noopener"{% endif %}>
+      {%- comment -%}
+        썸네일이 있으면(카드에 실린 그 그림, 영상이면 그 영상의 썸네일) 아이콘 칸 대신 그림을 세우고 플랫폼
+        아이콘은 귀퉁이에 작게 얹는다 — 독자가 알아보는 건 카드에서 본 그림이지 유튜브 마크가 아니다.
+      {%- endcomment -%}
+      {%- if link.thumb %}
+      <span class="hub-row-thumb">
+        <img src="{{ link.thumb | prepend: site.baseurl }}" alt="" loading="lazy" width="320" height="180">
+        {%- if link.icon %}<span class="hub-row-badge">{% include component/link-icon.html name=link.icon %}</span>{% endif -%}
+      </span>
+      {%- else %}
+      <span class="hub-row-ico">
+        {%- if link.logo -%}
+        <img class="hub-ico" src="{{ link.logo | prepend: site.baseurl }}" alt="" loading="lazy">
+        {%- else -%}
+        {% include component/link-icon.html name=link.icon %}
+        {%- endif -%}
+      </span>
+      {%- endif %}
+      <span class="hub-row-text">
+        <span class="hub-row-label">{% include component/tr-of.html o=link k='label' %}</span>
+        {% if link.note %}<span class="hub-row-note">{% include component/tr-of.html o=link k='note' %}</span>{% endif %}
+        {%- comment -%} 덱의 몇 번째 장에 나왔나 — 방금 넘겨 본 장과 이어 주는 표시. {%- endcomment -%}
+        {%- if link.card -%}
+        <span class="hub-deck-card">{% capture k_ko %}{{ link.card }}장{% endcapture %}{% capture k_en %}Card {{ link.card }}{% endcapture %}{% capture k_ja %}{{ link.card }}枚目{% endcapture %}{% capture k_zh %}第 {{ link.card }} 张{% endcapture %}{% capture k_es %}Tarjeta {{ link.card }}{% endcapture %}{% capture k_it %}Scheda {{ link.card }}{% endcapture %}{% capture k_fr %}Carte {{ link.card }}{% endcapture %}{% include component/tr.html ko=k_ko en=k_en ja=k_ja zh=k_zh es=k_es it=k_it fr=k_fr %}</span>
+        {%- endif -%}
+      </span>
+      <span class="hub-row-arrow" aria-hidden="true">{% if external %}↗{% else %}→{% endif %}</span>
+    </a>
+    {%- endfor %}
+  </div>
+</details>
