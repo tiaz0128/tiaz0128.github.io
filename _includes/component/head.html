@@ -34,7 +34,9 @@
   {% endif %}
 
   <!-- CSS -->
-  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+  {%- comment -%} 빌드 시각을 붙인다: main.css 는 GitHub Pages 가 10분(앱 안 브라우저는 더 오래) 캐시해서, 배포 직후
+       새 HTML 에 지난 CSS 가 붙어 새 구역이 맨몸으로 보였다(2026-11-16, 링크 페이지의 카드뉴스 구역). {%- endcomment %}
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}?v={{ site.time | date: '%s' }}">
   
   <!-- Google Fonts -->
   <!-- Google Fonts 최적화 - preconnect 사용 -->
