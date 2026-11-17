@@ -26,5 +26,60 @@
     "thumb": "/assets/img/decks/saas-end-t7298c302d3.webp"
    }
   ]
+ },
+ {
+  "id": "ai-make-your-own",
+  "date": "2026-11-15",
+  "title": "AI 시대, 뭘 만들어 볼까",
+  "title_en": "What to make in the AI era",
+  "title_ja": "AI時代、何を作ろう",
+  "title_zh": "AI时代，做点什么好",
+  "cards": 14,
+  "covers": {
+   "ko": "/assets/img/decks/ai-make-your-own-ko.webp",
+   "en": "/assets/img/decks/ai-make-your-own-en.webp",
+   "ja": "/assets/img/decks/ai-make-your-own-ja.webp",
+   "zh": "/assets/img/decks/ai-make-your-own-zh.webp"
+  },
+  "links": [
+   {
+    "card": 8,
+    "label": "커리어해커 알렉스",
+    "label_en": "Career Hacker Alex (Korean)",
+    "note": "영상 하나에 30시간 작업하던 일을 전부 자동화한 방법",
+    "note_en": "How a 30-hour video job got fully automated",
+    "note_ja": "動画1本に30時間かかった作業をすべて自動化した方法",
+    "note_zh": "把一个视频 30 小时的活全部自动化的方法",
+    "url": "https://www.youtube.com/watch?v=ESnqYamB_NI",
+    "icon": "youtube",
+    "thumb": "/assets/img/decks/ai-make-your-own-tacdc5c5246.webp"
+   },
+   {
+    "card": 8,
+    "label": "띵지로그",
+    "label_en": "ddingji log (Korean)",
+    "note": "클로드로 만든 가장 편한 영상 편집 프로그램",
+    "note_en": "The handiest video editor, built with Claude",
+    "note_ja": "Claude で作った一番使いやすい動画編集ソフト",
+    "note_zh": "用 Claude 做的最顺手的视频剪辑程序",
+    "url": "https://www.youtube.com/watch?v=kdiozqYoil0",
+    "icon": "youtube",
+    "thumb": "/assets/img/decks/ai-make-your-own-t7ea0fc545f.webp"
+   },
+   {
+    "card": 11,
+    "label": "산사",
+    "label_en": "Sansa (a temple on the web)",
+    "label_ja": "サンサ（ウェブの中のお寺）",
+    "label_zh": "山寺（网页里的寺庙）",
+    "note": "바이브 코딩으로 혼자 만든 웹 속 절",
+    "note_en": "A web temple one person vibe-coded",
+    "note_ja": "バイブコーディングで一人が作ったウェブの寺",
+    "note_zh": "一个人用 vibe coding 做的网页寺庙",
+    "url": "https://sansatemple.com/",
+    "icon": "web",
+    "thumb": "/assets/img/decks/ai-make-your-own-t8b2ba2caaf.webp"
+   }
+  ]
  }
 ]
