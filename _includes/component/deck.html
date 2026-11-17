@@ -63,9 +63,6 @@
       <span class="hub-row-text">
         <span class="hub-row-label">{% include component/tr-of.html o=link k='label' %}</span>
         {% if link.note %}<span class="hub-row-note">{% include component/tr-of.html o=link k='note' %}</span>{% endif %}
-        {%- if link.card -%}
-        <span class="hub-deck-card">{% capture k_ko %}{{ link.card }}장{% endcapture %}{% capture k_en %}Card {{ link.card }}{% endcapture %}{% capture k_ja %}{{ link.card }}枚目{% endcapture %}{% capture k_zh %}第 {{ link.card }} 张{% endcapture %}{% capture k_es %}Tarjeta {{ link.card }}{% endcapture %}{% capture k_it %}Scheda {{ link.card }}{% endcapture %}{% capture k_fr %}Carte {{ link.card }}{% endcapture %}{% include component/tr.html ko=k_ko en=k_en ja=k_ja zh=k_zh es=k_es it=k_it fr=k_fr %}</span>
-        {%- endif -%}
       </span>
       <span class="hub-row-arrow hub-video-state" aria-hidden="true">▶</span>
     </button>
@@ -108,10 +105,6 @@
       <span class="hub-row-text">
         <span class="hub-row-label">{% include component/tr-of.html o=link k='label' %}</span>
         {% if link.note %}<span class="hub-row-note">{% include component/tr-of.html o=link k='note' %}</span>{% endif %}
-        {%- comment -%} 덱의 몇 번째 장에 나왔나 — 방금 넘겨 본 장과 이어 주는 표시. {%- endcomment -%}
-        {%- if link.card -%}
-        <span class="hub-deck-card">{% capture k_ko %}{{ link.card }}장{% endcapture %}{% capture k_en %}Card {{ link.card }}{% endcapture %}{% capture k_ja %}{{ link.card }}枚目{% endcapture %}{% capture k_zh %}第 {{ link.card }} 张{% endcapture %}{% capture k_es %}Tarjeta {{ link.card }}{% endcapture %}{% capture k_it %}Scheda {{ link.card }}{% endcapture %}{% capture k_fr %}Carte {{ link.card }}{% endcapture %}{% include component/tr.html ko=k_ko en=k_en ja=k_ja zh=k_zh es=k_es it=k_it fr=k_fr %}</span>
-        {%- endif -%}
       </span>
       <span class="hub-row-arrow" aria-hidden="true">{% if external %}↗{% else %}→{% endif %}</span>
     </a>
