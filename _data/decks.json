@@ -1,35 +1,8 @@
 [
  {
-  "id": "saas-end",
-  "date": "2026-11-15",
-  "title": "SaaS의 종말",
-  "title_en": "The end of SaaS",
-  "title_ja": "SaaSの終わり",
-  "title_zh": "SaaS的终结",
-  "cards": 15,
-  "covers": {
-   "ko": "/assets/img/decks/saas-end-ko.webp"
-  },
-  "links": [
-   {
-    "card": 3,
-    "label": "사티아 나델라 · BG2 인터뷰",
-    "label_en": "Satya Nadella on BG2",
-    "label_ja": "サティア・ナデラ · BG2 インタビュー",
-    "label_zh": "萨提亚·纳德拉 · BG2 访谈",
-    "note": "YouTube · \"업무 규칙은 에이전트로 간다\" (2024.12)",
-    "note_en": "YouTube · \"business logic moves to agents\" (Dec 2024)",
-    "note_ja": "YouTube · 「業務ロジックはエージェントへ」(2024.12)",
-    "note_zh": "YouTube ·「业务逻辑将交给智能体」(2024.12)",
-    "url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o",
-    "icon": "youtube",
-    "thumb": "/assets/img/decks/saas-end-t7298c302d3.webp"
-   }
-  ]
- },
- {
   "id": "ai-make-your-own",
   "date": "2026-11-15",
+  "published": "2026-11-17T10:05:48+0900",
   "title": "AI 시대, 뭘 만들어 볼까",
   "title_en": "What to make in the AI era",
   "title_ja": "AI時代、何を作ろう",
@@ -79,6 +52,35 @@
     "url": "https://sansatemple.com/",
     "icon": "web",
     "thumb": "/assets/img/decks/ai-make-your-own-t8b2ba2caaf.webp"
+   }
+  ]
+ },
+ {
+  "id": "saas-end",
+  "date": "2026-11-15",
+  "published": "2026-11-16T10:31:08+0900",
+  "title": "SaaS의 종말",
+  "title_en": "The end of SaaS",
+  "title_ja": "SaaSの終わり",
+  "title_zh": "SaaS的终结",
+  "cards": 15,
+  "covers": {
+   "ko": "/assets/img/decks/saas-end-ko.webp"
+  },
+  "links": [
+   {
+    "card": 3,
+    "label": "사티아 나델라 · BG2 인터뷰",
+    "label_en": "Satya Nadella on BG2",
+    "label_ja": "サティア・ナデラ · BG2 インタビュー",
+    "label_zh": "萨提亚·纳德拉 · BG2 访谈",
+    "note": "YouTube · \"업무 규칙은 에이전트로 간다\" (2024.12)",
+    "note_en": "YouTube · \"business logic moves to agents\" (Dec 2024)",
+    "note_ja": "YouTube · 「業務ロジックはエージェントへ」(2024.12)",
+    "note_zh": "YouTube ·「业务逻辑将交给智能体」(2024.12)",
+    "url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o",
+    "icon": "youtube",
+    "thumb": "/assets/img/decks/saas-end-t7298c302d3.webp"
    }
   ]
  }
