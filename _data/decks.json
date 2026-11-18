@@ -1,5 +1,48 @@
 [
  {
+  "id": "make-content",
+  "date": "2026-11-18",
+  "published": "2026-11-18T10:27:28+0900",
+  "title": "콘텐츠를 만들어 보세요",
+  "title_en": "Make some content",
+  "cards": 16,
+  "covers": {
+   "ko": "/assets/img/decks/make-content-ko.webp"
+  },
+  "links": [
+   {
+    "card": 6,
+    "label": "Vanta 채용 공고",
+    "label_en": "Vanta job posting",
+    "note": "Head of Storytelling — 기본급 $233K–$274K (마감)",
+    "note_en": "Head of Storytelling — base $233K–$274K (closed)",
+    "url": "https://builtin.com/job/head-storytelling/7891797",
+    "icon": "web",
+    "thumb": "/assets/img/decks/make-content-tb108d72028.webp"
+   },
+   {
+    "card": 12,
+    "label": "Bae in the bay",
+    "label_en": "Bae in the bay (Korean)",
+    "note": "AI 시대, 샌프란 디자이너의 생존 계획",
+    "note_en": "A San Francisco designer's survival plan for the AGI era",
+    "url": "https://www.youtube.com/watch?v=z-SxovalWZg",
+    "icon": "youtube",
+    "thumb": "/assets/img/decks/make-content-t2028a69b52.webp"
+   },
+   {
+    "card": 12,
+    "label": "이혜성의 1% 북클럽",
+    "label_en": "1% Book Club (Korean)",
+    "note": "인간만의 무기인 \"취향\" — 조수용 『비범한 평범』",
+    "note_en": "Taste, the human edge — Cho Suyong, author",
+    "url": "https://www.youtube.com/watch?v=l-pFmy_Z6Rc",
+    "icon": "youtube",
+    "thumb": "/assets/img/decks/make-content-tb510c05294.webp"
+   }
+  ]
+ },
+ {
   "id": "ai-make-your-own",
   "date": "2026-11-15",
   "published": "2026-11-17T10:05:48+0900",
