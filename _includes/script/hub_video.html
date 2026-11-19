@@ -6,7 +6,7 @@
     document.querySelectorAll('.hub-video-frame').forEach((btn) => {
       btn.addEventListener('click', () => {
         const f = document.createElement('iframe');
-        f.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.vid}?autoplay=1&playsinline=1&rel=0`;
+        f.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.vid}?autoplay=1&playsinline=1&rel=0${btn.dataset.start ? `&start=${btn.dataset.start}` : ''}`;
         f.title = btn.getAttribute('aria-label') || 'YouTube';
         f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
         f.allowFullscreen = true;
@@ -28,7 +28,7 @@
         const box = document.createElement('div');
         box.className = 'hub-video hub-video-inline';
         const f = document.createElement('iframe');
-        f.src = `https://www.youtube-nocookie.com/embed/${row.dataset.vid}?autoplay=1&playsinline=1&rel=0`;
+        f.src = `https://www.youtube-nocookie.com/embed/${row.dataset.vid}?autoplay=1&playsinline=1&rel=0${row.dataset.start ? `&start=${row.dataset.start}` : ''}`;
         f.title = row.querySelector('.hub-row-label')?.textContent.trim() || 'YouTube';
         f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
         f.allowFullscreen = true;

@@ -14,20 +14,24 @@
     "card": 3,
     "label": "EBS 다큐프라임",
     "label_en": "EBS Docuprime (Korean)",
-    "note": "알파고를 이긴 유일한 인간 이세돌의 신의 한수 — 7:14부터",
-    "note_en": "Lee Sedol, the only human to beat AlphaGo — from 7:14",
+    "note": "알파고를 이긴 유일한 인간 이세돌의 신의 한수",
+    "note_en": "Lee Sedol, the only human to beat AlphaGo",
     "url": "https://www.youtube.com/watch?v=19lZG9W6_P8&t=434s",
     "icon": "youtube",
+    "start": 434,
+    "at": "7:14",
     "thumb": "/assets/img/decks/dev-future-t475bc49e9a.webp"
    },
    {
     "card": 5,
     "label": "모두콘 2025 · 노정석",
     "label_en": "MODUCON 2025 · Jungseok Noh (Korean)",
-    "note": "기술창업 6번을 통해서 배운 AI 시대의 기회 — 19:14부터",
-    "note_en": "AI-era opportunities from six startups — from 19:14",
+    "note": "기술창업 6번을 통해서 배운 AI 시대의 기회",
+    "note_en": "AI-era opportunities from six startups",
     "url": "https://www.youtube.com/watch?v=PC36opTZ7ow&t=1154s",
     "icon": "youtube",
+    "start": 1154,
+    "at": "19:14",
     "thumb": "/assets/img/decks/dev-future-t2d4fe7ec66.webp"
    },
    {

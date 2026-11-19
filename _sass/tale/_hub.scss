@@ -905,4 +905,21 @@
   }
 
   &-video-inline { margin-top: -0.2rem; }
+
+  /* 차용한 부분이 시작하는 곳 (link.at, card_kit blog 가 url 의 t= 에서) — 제목 아래 주황 알약, 10분 넘는 영상만
+     (작가, 2026-11-19: "타임스탬프가 좀더 잘 보이면 좋을듯"). */
+  &-row-at {
+    align-self: flex-start;
+    background: $orange;
+    border-radius: 999px;
+    color: #fff;
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    margin: 0.3rem 0 0.15rem;
+    padding: 0.28rem 0.6rem;
+    width: fit-content;
+  }
 }

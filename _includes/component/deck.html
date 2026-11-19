@@ -46,6 +46,11 @@
       누르면 그 자리에 플레이어를 들인다(script/hub_video.html). 플레이어를 미리 띄우면 영상마다 1MB 가까이
       받아서 인스타 앱 안에서 페이지가 늦게 뜬다.
     {%- endcomment -%}
+    {%- comment -%}
+      `link.start` / `link.at` (card_kit blog, from the url's `t=`): where the part the card borrowed starts — a chip
+      "▶ 7:14부터" on the thumbnail, and the in-page player begins there (작가, 2026-11-19: "차용 부분이 어디서부터
+      시작하는지 … 타임스탬프가 좀 더 잘 보이게").
+    {%- endcomment -%}
     {%- assign vid = '' -%}
     {%- if link.url contains 'youtube.com/watch?v=' -%}{%- assign vid = link.url | split: 'v=' | last | split: '&' | first -%}
     {%- elsif link.url contains 'youtu.be/' -%}{%- assign vid = link.url | split: 'youtu.be/' | last | split: '?' | first -%}{%- endif -%}
@@ -55,13 +60,13 @@
       링크가 둘 이상이면 큰 카드가 줄줄이 서지 않게(작가: "전부 player가 나와 있으면 별로") 줄 하나로 두고,
       누르면 그 줄 바로 아래에 플레이어가 열려 재생된다. 다른 줄을 누르면 앞의 것은 닫힌다.
     {%- endcomment %}
-    <button class="hub-row hub-row-thumbed hub-video-row" type="button" data-vid="{{ vid }}" aria-expanded="false">
+    <button class="hub-row hub-row-thumbed hub-video-row" type="button" data-vid="{{ vid }}"{% if link.start %} data-start="{{ link.start }}"{% endif %} aria-expanded="false">
       <span class="hub-row-thumb">
         <img src="https://i.ytimg.com/vi/{{ vid }}/mqdefault.jpg" alt="" loading="lazy" width="320" height="180">
         <span class="hub-video-mini" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2.3 34 .3 34 .3s-21.2 0-26.5 1.4a8.6 8.6 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.6 8.6 0 0 0 6 6C12.8 47.7 34 47.7 34 47.7s21.2 0 26.5-1.4a8.6 8.6 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#f00"/><path d="M27 34V14l18 10z" fill="#fff"/></svg></span>
       </span>
       <span class="hub-row-text">
-        <span class="hub-row-label">{% include component/tr-of.html o=link k='label' %}</span>
+        <span class="hub-row-label">{% include component/tr-of.html o=link k='label' %}</span>{%- if link.at -%}<span class="hub-row-at">{% capture at_ko %}▶ {{ link.at }}부터{% endcapture %}{% capture at_en %}▶ from {{ link.at }}{% endcapture %}{% capture at_ja %}▶ {{ link.at }}から{% endcapture %}{% capture at_zh %}▶ 从 {{ link.at }}{% endcapture %}{% include component/tr.html ko=at_ko en=at_en ja=at_ja zh=at_zh es=at_en it=at_en fr=at_en %}</span>{%- endif -%}
         {% if link.note %}<span class="hub-row-note">{% include component/tr-of.html o=link k='note' %}</span>{% endif %}
       </span>
       <span class="hub-row-arrow hub-video-state" aria-hidden="true">▶</span>
@@ -69,13 +74,13 @@
     {%- continue -%}
     {%- elsif vid != '' %}
     <div class="hub-video">
-      <button class="hub-video-frame" type="button" data-vid="{{ vid }}" aria-label="{{ link.label }} · ▶">
+      <button class="hub-video-frame" type="button" data-vid="{{ vid }}"{% if link.start %} data-start="{{ link.start }}"{% endif %} aria-label="{{ link.label }} · ▶">
         <img src="https://i.ytimg.com/vi/{{ vid }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
         <span class="hub-video-btn" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2.3 34 .3 34 .3s-21.2 0-26.5 1.4a8.6 8.6 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.6 8.6 0 0 0 6 6C12.8 47.7 34 47.7 34 47.7s21.2 0 26.5-1.4a8.6 8.6 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#f00"/><path d="M27 34V14l18 10z" fill="#fff"/></svg></span>
       </button>
       <a class="hub-video-meta" href="{{ link.url }}" target="_blank" rel="noopener">
         <span class="hub-row-text">
-          <span class="hub-row-label">{% include component/tr-of.html o=link k='label' %}</span>
+          <span class="hub-row-label">{% include component/tr-of.html o=link k='label' %}</span>{%- if link.at -%}<span class="hub-row-at">{% capture at_ko %}▶ {{ link.at }}부터{% endcapture %}{% capture at_en %}▶ from {{ link.at }}{% endcapture %}{% capture at_ja %}▶ {{ link.at }}から{% endcapture %}{% capture at_zh %}▶ 从 {{ link.at }}{% endcapture %}{% include component/tr.html ko=at_ko en=at_en ja=at_ja zh=at_zh es=at_en it=at_en fr=at_en %}</span>{%- endif -%}
           {% if link.note %}<span class="hub-row-note">{% include component/tr-of.html o=link k='note' %}</span>{% endif %}
         </span>
         <span class="hub-row-arrow" aria-hidden="true">↗</span>
