@@ -168,8 +168,10 @@
     "note_en": "YouTube · \"business logic moves to agents\" (Dec 2024)",
     "note_ja": "YouTube · 「業務ロジックはエージェントへ」(2024.12)",
     "note_zh": "YouTube ·「业务逻辑将交给智能体」(2024.12)",
-    "url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o",
+    "url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o&t=2806s",
     "icon": "youtube",
+    "start": 2806,
+    "at": "46:46",
     "thumb": "/assets/img/decks/saas-end-t7298c302d3.webp"
    }
   ]
