@@ -61,8 +61,16 @@
     {%- endfor %}
     </div>
     <textarea class="hub-tools-text" hidden readonly>{{ copy_text | strip | escape }}</textarea>
+    {%- comment -%} 복사 아이콘 + 글. 누르면 체크 아이콘과 "복사했어요"로 2초 바뀐다(작가, 2026-11-23). {%- endcomment %}
     <button class="hub-tools-copy" type="button">
-      {% include component/tr.html ko="이름 · 설명 · 링크 전부 복사" en="Copy every name, note and link" %}
+      <span class="hub-copy-idle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        {% include component/tr.html ko="이름 · 설명 · 링크 전부 복사" en="Copy every name, note and link" %}
+      </span>
+      <span class="hub-copy-done" aria-live="polite">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        {% include component/tr.html ko="복사했어요" en="Copied" %}
+      </span>
     </button>
   </div>
   {%- else %}
@@ -178,10 +186,16 @@
     var b = e.target.closest && e.target.closest('.hub-tools-copy');
     if (!b) return;
     var t = b.parentNode.querySelector('.hub-tools-text').value;
-    var done = function () { b.classList.add('is-done'); setTimeout(function () { b.classList.remove('is-done'); }, 1600); };
-    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(done); return; }
-    var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select();
-    document.execCommand('copy'); a.remove(); done();
+    var done = function () { b.classList.add('is-done'); setTimeout(function () { b.classList.remove('is-done'); }, 2000); };
+    var legacy = function () {
+      var a = document.createElement('textarea'); a.value = t; a.setAttribute('readonly', '');
+      a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.select();
+      var ok = false; try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+      a.remove(); if (ok) done();
+    };
+    /* 클립보드 API 가 거절하면(인앱 브라우저, 권한) 예전 방식으로 — 어느 쪽이든 된 뒤에만 "복사했어요" */
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(done, legacy); return; }
+    legacy();
   });
 </script>
 {%- endunless %}

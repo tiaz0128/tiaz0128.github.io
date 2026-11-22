@@ -764,8 +764,15 @@
       padding: 0.75rem;
       width: 100%;
 
-      &.is-done { border-color: $default-tint; color: $default-tint; }
-      &.is-done::before { content: '✓ '; }
+      transition: border-color .15s ease, color .15s ease;
+
+      .hub-copy-idle, .hub-copy-done { align-items: center; display: inline-flex; gap: 0.45rem; justify-content: center; }
+      .hub-copy-done { display: none; }
+      svg { flex: none; height: 1rem; width: 1rem; }
+
+      &.is-done { border-color: #7fc9a0; color: #7fc9a0; }
+      &.is-done .hub-copy-idle { display: none; }
+      &.is-done .hub-copy-done { display: inline-flex; }
     }
 
     /* 몇 번째 장에 나왔나. 날짜 알약과 같은 곁다리 무게로 — 눈에 띌 것은 링크 이름이다. */
