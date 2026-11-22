@@ -37,14 +37,37 @@
     </span>
   </summary>
 
-  <div class="hub-deck-links">
-    {%- assign last_group = '' -%}
+  {%- if d.directory %}
+  {%- comment -%}
+    도구 목록 덱(links.json `directory`, 링크 수십 개): 줄마다 한 칸 대신 로고만 작은 정사각형 타일로 카테고리 없이
+    주르륵 — 누르면 그 도구의 페이지로 간다. 마우스를 올리면 이름 · 용도 · 유료/무료가 뜬다(data-tip, 아래 스크립트).
+    아래 버튼은 "이름 — 어떤 것 / 링크"를 텍스트로 복사한다(작가, 2026-11-23: "로고만 사각형 형태로 주르륵",
+    "카테고리 나누지 말고 전부다", "호버하면 이름이랑 쓰는거 유료인지", "복사버튼 누르면 이름이랑 어떤건지 링크").
+  {%- endcomment %}
+  <div class="hub-deck-links hub-tools">
+    {%- capture copy_text -%}
     {%- for link in d.links -%}
-    {%- comment -%} 도구 목록 덱: 카테고리(link.group)가 바뀌는 자리마다 제목 하나. {%- endcomment -%}
-    {%- if link.group and link.group != last_group %}
-    <h3 class="hub-deck-group-head">{% include component/tr-of.html o=link k='group' %}</h3>
-    {%- assign last_group = link.group -%}
-    {%- endif -%}
+{{ link.label }}{% if link.paid %} (유료){% endif %} — {{ link.note }}
+{{ link.url }}
+
+{% endfor -%}
+    {%- endcapture %}
+    <div class="hub-tool-grid">
+    {%- for link in d.links %}
+      <a class="hub-tool" href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.label }}"
+         data-name="{{ link.label | escape }}" data-note="{{ link.note | escape }}" data-paid="{% if link.paid %}유료{% else %}무료 · 오픈소스{% endif %}">
+        <img src="{{ link.logo | prepend: site.baseurl }}" alt="" loading="lazy" width="64" height="64">
+      </a>
+    {%- endfor %}
+    </div>
+    <textarea class="hub-tools-text" hidden readonly>{{ copy_text | strip | escape }}</textarea>
+    <button class="hub-tools-copy" type="button">
+      {% include component/tr.html ko="이름 · 설명 · 링크 전부 복사" en="Copy every name, note and link" %}
+    </button>
+  </div>
+  {%- else %}
+  <div class="hub-deck-links">
+    {%- for link in d.links -%}
     {%- assign external = false -%}
     {%- if link.url contains '://' -%}{%- assign external = true -%}{%- endif %}
     {%- comment -%}
@@ -121,4 +144,44 @@
     </a>
     {%- endfor %}
   </div>
+  {%- endif %}
 </details>
+{%- unless hub_tools_script_done %}
+{%- assign hub_tools_script_done = true %}
+<script>
+  /* 도구 목록 덱의 복사 버튼: 숨긴 textarea 의 글을 클립보드로 (페이지에 덱이 여럿이어도 한 번만 건다). */
+  /* 로고 타일의 말풍선: 하나만 만들어 두고 올린 타일 위에 띄운다 — 화면 가장자리에서 잘리지 않게 좌우를 맞춘다. */
+  var tip;
+  function showTip(a) {
+    if (!tip) { tip = document.createElement('div'); tip.className = 'hub-tool-tip'; document.body.appendChild(tip); }
+    tip.innerHTML = '';
+    var n = document.createElement('b'); n.textContent = a.dataset.name;
+    var p = document.createElement('span'); p.className = 'hub-tool-tip-paid' + (a.dataset.paid === '유료' ? ' is-paid' : '');
+    p.textContent = a.dataset.paid;
+    var u = document.createElement('span'); u.textContent = a.dataset.note;
+    tip.append(n, p, u);
+    tip.style.display = 'block';
+    var r = a.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    var x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), document.documentElement.clientWidth - w - 8);
+    var y = r.top - h - 8 < 8 ? r.bottom + 8 : r.top - h - 8;
+    tip.style.left = (x + window.scrollX) + 'px'; tip.style.top = (y + window.scrollY) + 'px';
+  }
+  function hideTip() { if (tip) tip.style.display = 'none'; }
+  ['mouseover', 'focusin'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) { var a = e.target.closest && e.target.closest('.hub-tool'); if (a) showTip(a); });
+  });
+  ['mouseout', 'focusout'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) { if (e.target.closest && e.target.closest('.hub-tool')) hideTip(); });
+  });
+  window.addEventListener('scroll', hideTip, { passive: true });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('.hub-tools-copy');
+    if (!b) return;
+    var t = b.parentNode.querySelector('.hub-tools-text').value;
+    var done = function () { b.classList.add('is-done'); setTimeout(function () { b.classList.remove('is-done'); }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(done); return; }
+    var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select();
+    document.execCommand('copy'); a.remove(); done();
+  });
+</script>
+{%- endunless %}

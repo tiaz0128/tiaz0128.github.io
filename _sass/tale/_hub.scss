@@ -727,17 +727,43 @@
       .hub-row { min-height: 3.75rem; }
     }
 
-    /* 도구 목록 덱(links.json `directory`)은 링크가 수십 개라 카드의 카테고리마다 제목을 단다
-       (작가, 2026-11-23: "블로그에 링크 카테고리별로 싹 다"). 첫 제목은 위 여백 없이. */
-    &-group-head {
-      color: $grey-1;
-      font-family: $sans-serif;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: .02em;
-      margin: 1rem 0.25rem 0.45rem;
+    /* 도구 목록 덱: 작은 정사각형 로고 타일을 한 격자에 주르륵 + 전부 복사 버튼. 타일은 카드의 종이색 — 검은
+       로고(OpenAI, Cursor…)도 보이게. 말풍선(.hub-tool-tip)은 body 에 붙어서 아래 최상위에 있다. */
+    .hub-tool-grid {
+      display: grid;
+      gap: 0.4rem;
+      grid-template-columns: repeat(auto-fill, 2.6rem);
+      justify-content: center;
+    }
 
-      &:first-child { margin-top: 0.2rem; }
+    .hub-tool {
+      align-items: center;
+      aspect-ratio: 1;
+      background: #fbf8f1;
+      border-radius: 0.45rem;
+      display: flex;
+      justify-content: center;
+      padding: 0.4rem;
+      transition: transform .12s ease;
+
+      &:hover, &:focus-visible { transform: translateY(-2px); }
+
+      img { height: 100%; object-fit: contain; width: 100%; }
+    }
+
+    .hub-tools-copy {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 0.6rem;
+      color: $default-color;
+      cursor: pointer;
+      font: 700 0.85rem $sans-serif;
+      margin-top: 1rem;
+      padding: 0.75rem;
+      width: 100%;
+
+      &.is-done { border-color: $default-tint; color: $default-tint; }
+      &.is-done::before { content: '✓ '; }
     }
 
     /* 몇 번째 장에 나왔나. 날짜 알약과 같은 곁다리 무게로 — 눈에 띌 것은 링크 이름이다. */
@@ -934,5 +960,31 @@
     margin: 0.3rem 0 0.15rem;
     padding: 0.28rem 0.6rem;
     width: fit-content;
+  }
+}
+
+/* 도구 목록 덱의 로고 말풍선 (component/deck.html 스크립트가 body 에 붙인다) */
+.hub-tool-tip {
+  background: #101418;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .35);
+  color: #e8e6e3;
+  display: none;
+  font: 0.75rem/1.45 $sans-serif;
+  max-width: 14rem;
+  padding: 0.45rem 0.6rem;
+  pointer-events: none;
+  position: absolute;
+  z-index: 50;
+
+  b { display: block; font-size: 0.82rem; }
+  span { display: block; }
+
+  &-paid {
+    color: #7fc9a0;
+    font-size: 0.68rem;
+    font-weight: 700;
+    &.is-paid { color: #f0b35a; }
   }
 }
