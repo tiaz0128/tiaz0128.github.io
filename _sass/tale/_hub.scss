@@ -727,6 +727,19 @@
       .hub-row { min-height: 3.75rem; }
     }
 
+    /* 도구 목록 덱(links.json `directory`)은 링크가 수십 개라 카드의 카테고리마다 제목을 단다
+       (작가, 2026-11-23: "블로그에 링크 카테고리별로 싹 다"). 첫 제목은 위 여백 없이. */
+    &-group-head {
+      color: $grey-1;
+      font-family: $sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      margin: 1rem 0.25rem 0.45rem;
+
+      &:first-child { margin-top: 0.2rem; }
+    }
+
     /* 몇 번째 장에 나왔나. 날짜 알약과 같은 곁다리 무게로 — 눈에 띌 것은 링크 이름이다. */
     &-card {
       align-self: flex-start;

@@ -38,7 +38,13 @@
   </summary>
 
   <div class="hub-deck-links">
+    {%- assign last_group = '' -%}
     {%- for link in d.links -%}
+    {%- comment -%} 도구 목록 덱: 카테고리(link.group)가 바뀌는 자리마다 제목 하나. {%- endcomment -%}
+    {%- if link.group and link.group != last_group %}
+    <h3 class="hub-deck-group-head">{% include component/tr-of.html o=link k='group' %}</h3>
+    {%- assign last_group = link.group -%}
+    {%- endif -%}
     {%- assign external = false -%}
     {%- if link.url contains '://' -%}{%- assign external = true -%}{%- endif %}
     {%- comment -%}
