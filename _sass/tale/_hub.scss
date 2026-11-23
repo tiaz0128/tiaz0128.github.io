@@ -751,6 +751,26 @@
       &:hover, &:focus-visible { transform: translateY(-2px); }
 
       img { display: block; height: 100%; margin: 0; min-width: 0; object-fit: contain; width: 100%; }   /* margin: the site's img has a 14 px bottom margin */
+
+      /* a service that has ended (links.json `ended`): grey logo under a red X */
+      &.is-ended {
+        position: relative;
+
+        img { filter: grayscale(1); opacity: .45; }
+
+        &::before, &::after {
+          background: #e0524a;
+          border-radius: 2px;
+          content: '';
+          height: 3px;
+          left: 12%;
+          position: absolute;
+          top: calc(50% - 1.5px);
+          width: 76%;
+        }
+        &::before { transform: rotate(45deg); }
+        &::after { transform: rotate(-45deg); }
+      }
     }
 
     .hub-tools-copy {
@@ -995,5 +1015,6 @@
     font-size: 0.68rem;
     font-weight: 700;
     &.is-paid { color: #f0b35a; }
+    &.is-ended { color: #ef7d76; }
   }
 }

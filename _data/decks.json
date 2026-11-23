@@ -549,7 +549,8 @@
     "note_en": "OpenAI's video generation",
     "url": "https://openai.com/sora",
     "paid": true,
-    "logo": "/assets/img/decks/opensource-stack-logo-9c20cfd406.webp"
+    "logo": "/assets/img/decks/opensource-stack-logo-9c20cfd406.webp",
+    "ended": true
    },
    {
     "card": 11,
