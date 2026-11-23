@@ -153,7 +153,9 @@
     "note_en": "packs encoded frames into an MP4 file",
     "url": "https://github.com/Vanilagy/mp4-muxer",
     "paid": false,
-    "logo": "/assets/img/decks/opensource-stack-logo-a46385ba43.webp"
+    "logo": "/assets/img/decks/opensource-stack-logo-a46385ba43.webp",
+    "ended": true,
+    "ended_note": "개발 중단 → Mediabunny"
    },
    {
     "card": 3,
@@ -199,7 +201,7 @@
     "label_en": "Demucs",
     "note": "노래에서 목소리와 반주를 따로 떼요",
     "note_en": "splits a song into voice and backing",
-    "url": "https://github.com/facebookresearch/demucs",
+    "url": "https://github.com/adefossez/demucs",
     "paid": false,
     "logo": "/assets/img/decks/opensource-stack-logo-26594378a7.webp"
    },
@@ -427,7 +429,7 @@
     "label_en": "OpenAI GPT-Image",
     "note": "도트 에셋을 그리고 누끼를 다시 그려요",
     "note_en": "draws dot assets and redraws cut-outs",
-    "url": "https://platform.openai.com/docs/guides/image-generation",
+    "url": "https://developers.openai.com/api/docs/guides/image-generation",
     "paid": true,
     "logo": "/assets/img/decks/opensource-stack-logo-ea9a30083d.webp"
    },
@@ -463,7 +465,7 @@
     "label_en": "OpenAI TTS",
     "note": "쓰기 쉬운 API, 자연스러운 영어",
     "note_en": "easy API, natural English",
-    "url": "https://platform.openai.com/docs/guides/text-to-speech",
+    "url": "https://developers.openai.com/api/docs/guides/text-to-speech",
     "paid": true,
     "logo": "/assets/img/decks/opensource-stack-logo-ea9a30083d.webp"
    },
@@ -550,7 +552,8 @@
     "url": "https://openai.com/sora",
     "paid": true,
     "logo": "/assets/img/decks/opensource-stack-logo-9c20cfd406.webp",
-    "ended": true
+    "ended": true,
+    "ended_note": "서비스 종료 · 앱 2026-04, API 2026-09"
    },
    {
     "card": 11,
@@ -694,7 +697,9 @@
     "note_en": "Google's coding agent in the terminal",
     "url": "https://github.com/google-gemini/gemini-cli",
     "paid": false,
-    "logo": "/assets/img/decks/opensource-stack-logo-5430b65506.webp"
+    "logo": "/assets/img/decks/opensource-stack-logo-5430b65506.webp",
+    "ended": true,
+    "ended_note": "종료 2026-06 → Antigravity CLI"
    },
    {
     "card": 13,

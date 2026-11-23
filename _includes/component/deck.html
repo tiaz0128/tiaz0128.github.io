@@ -47,7 +47,7 @@
   <div class="hub-deck-links hub-tools">
     {%- capture copy_text -%}
     {%- for link in d.links -%}
-{{ link.label }}{% if link.ended %} (서비스 종료){% elsif link.paid %} (유료){% endif %} — {{ link.note }}
+{{ link.label }}{% if link.ended %} ({{ link.ended_note | default: '서비스 종료' }}){% elsif link.paid %} (유료){% endif %} — {{ link.note }}
 {{ link.url }}
 
 {% endfor -%}
@@ -55,8 +55,8 @@
     <div class="hub-tool-grid">
     {%- for link in d.links %}
       {%- comment -%} 끝난 서비스(links.json `ended`)는 회색 로고에 X — 덱에 실렸던 기록은 남긴다(작가, 2026-11-23: "소라는 단종된걸로 X 표시"). {%- endcomment %}
-      <a class="hub-tool{% if link.ended %} is-ended{% endif %}" href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.label }}{% if link.ended %} (서비스 종료){% endif %}"
-         data-name="{{ link.label | escape }}" data-note="{{ link.note | escape }}"{% if link.ended %} data-ended="1"{% endif %} data-paid="{% if link.ended %}서비스 종료{% elsif link.paid %}유료{% else %}무료 · 오픈소스{% endif %}">
+      <a class="hub-tool{% if link.ended %} is-ended{% endif %}" href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.label }}{% if link.ended %} ({{ link.ended_note | default: '서비스 종료' }}){% endif %}"
+         data-name="{{ link.label | escape }}" data-note="{{ link.note | escape }}"{% if link.ended %} data-ended="1"{% endif %} data-paid="{% if link.ended %}{{ link.ended_note | default: '서비스 종료' | escape }}{% elsif link.paid %}유료{% else %}무료 · 오픈소스{% endif %}">
         <img src="{{ link.logo | prepend: site.baseurl }}" alt="" loading="lazy" width="64" height="64">
       </a>
     {%- endfor %}
