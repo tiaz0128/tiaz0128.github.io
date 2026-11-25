@@ -1,5 +1,30 @@
 [
  {
+  "id": "storytelling",
+  "date": "2026-11-25",
+  "published": "2026-11-26T00:47:42+0900",
+  "title": "저는 정보를 알려 드릴 생각이 없었어요",
+  "title_en": "I never meant to give you information",
+  "cards": 11,
+  "covers": {
+   "ko": "/assets/img/decks/storytelling-ko.webp"
+  },
+  "links": [
+   {
+    "card": 8,
+    "label": "Dan Koe",
+    "label_en": "Dan Koe",
+    "note": "The Death Of The Influencer — 9:47부터",
+    "note_en": "The Death Of The Influencer — from 9:47",
+    "url": "https://www.youtube.com/watch?v=CZ5WyfbXtH4&t=587s",
+    "icon": "youtube",
+    "start": 587,
+    "at": "9:47",
+    "thumb": "/assets/img/decks/storytelling-t670f55147e.webp"
+   }
+  ]
+ },
+ {
   "id": "opensource-stack",
   "date": "2026-11-23",
   "published": "2026-11-23T00:57:02+0900",
